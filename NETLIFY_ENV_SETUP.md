@@ -22,18 +22,21 @@ Click **Add a variable** and add these one by one:
 
 | Variable Name | Value |
 |--------------|-------|
-| `MONGODB_URI` | `mongodb+srv://javakian2025_db_user:as34gh90@cluster0.0mo64qz.mongodb.net/optical_automation?retryWrites=true&w=majority` |
+| `MONGODB_URI` | Your MongoDB connection string from `.env` file |
 | `MONGODB_DB` | `optical_automation` |
-| `JWT_SECRET` | `opauto-jwt-secret-key-2026-secure` |
-| `CLOUDINARY_CLOUD_NAME` | (your Cloudinary cloud name) |
-| `CLOUDINARY_API_KEY` | `864972923353165` |
-| `CLOUDINARY_API_SECRET` | (your Cloudinary API secret) |
+| `JWT_SECRET` | Your JWT secret from `.env` file |
+| `CLOUDINARY_CLOUD_NAME` | Your Cloudinary cloud name |
+| `CLOUDINARY_API_KEY` | Your Cloudinary API key |
+| `CLOUDINARY_API_SECRET` | Your Cloudinary API secret |
 | `SMTP_HOST` | `smtp.gmail.com` |
 | `SMTP_PORT` | `587` |
 | `SMTP_SECURE` | `false` |
-| `SMTP_USER` | `javakian2025@gmail.com` |
-| `SMTP_PASSWORD` | (your Gmail app password) |
-| `CONTACT_EMAIL` | `JamesAvakian62@yahoo.com` |
+| `SMTP_USER` | Your Gmail address |
+| `SMTP_PASSWORD` | Your Gmail app password |
+| `CONTACT_EMAIL` | Your contact email address |
+
+> [!NOTE]
+> Copy the actual values from your local `.env` file. Do NOT use placeholder text - use your real credentials in Netlify's dashboard.
 
 ### 5. Deploy Settings
 - For each variable, set the scope to **All scopes** (or choose specific deploy contexts)
