@@ -1,7 +1,5 @@
-// Set environment variables
-process.env.MONGODB_URI = 'mongodb+srv://javakian2025_db_user:as34gh90@cluster0.0mo64qz.mongodb.net/optical?retryWrites=true&w=majority';
-process.env.MONGODB_DB = 'optical_automation';
-process.env.JWT_SECRET = 'opauto-jwt-secret-key-2026-secure';
+// Load environment variables from .env file
+import 'dotenv/config';
 
 import { getUsersCollection } from '../lib/mongodb.js';
 import { hashPassword } from '../lib/auth.js';
