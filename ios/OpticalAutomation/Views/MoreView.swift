@@ -1,0 +1,167 @@
+import SwiftUI
+
+struct MoreView: View {
+    let baseURL: String
+    
+    var body: some View {
+        List {
+            Section {
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/about")
+                        .navigationTitle("About Us")
+                } label: {
+                    Label("About Us", systemImage: "info.circle.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/support")
+                        .navigationTitle("Support")
+                } label: {
+                    Label("Support", systemImage: "questionmark.circle.fill")
+                }
+            } header: {
+                Text("Company")
+            }
+            
+            Section {
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/subscription")
+                        .navigationTitle("Individual Subscription")
+                } label: {
+                    Label("Individual Subscription", systemImage: "star.circle.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/business-pricing")
+                        .navigationTitle("Business Licensing")
+                } label: {
+                    Label("Business Licensing", systemImage: "building.2.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/select-software")
+                        .navigationTitle("Select Software")
+                } label: {
+                    Label("Select Software", systemImage: "app.badge.checkmark.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/dashboard")
+                        .navigationTitle("Dashboard")
+                } label: {
+                    Label("Dashboard", systemImage: "chart.bar.fill")
+                }
+            } header: {
+                Text("Access & Subscriptions")
+            }
+            
+            Section {
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/products")
+                        .navigationTitle("Products")
+                } label: {
+                    Label("Products", systemImage: "cube.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/tech")
+                        .navigationTitle("Technology")
+                } label: {
+                    Label("Technology", systemImage: "cpu.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/domains")
+                        .navigationTitle("Domain Portfolio")
+                } label: {
+                    Label("Domain Portfolio", systemImage: "globe")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/timeline")
+                        .navigationTitle("Timeline")
+                } label: {
+                    Label("Timeline", systemImage: "calendar")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/guides")
+                        .navigationTitle("IP Guides")
+                } label: {
+                    Label("IP Guides", systemImage: "book.fill")
+                }
+            } header: {
+                Text("Resources")
+            }
+            
+            Section {
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/documents")
+                        .navigationTitle("Documents")
+                } label: {
+                    Label("Documents", systemImage: "doc.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/trademarks")
+                        .navigationTitle("Trademarks")
+                } label: {
+                    Label("Trademarks", systemImage: "shield.fill")
+                }
+            } header: {
+                Text("Documentation")
+            }
+            
+            Section {
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/terms")
+                        .navigationTitle("Terms of Use")
+                } label: {
+                    Label("Terms of Use", systemImage: "doc.text.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/privacy")
+                        .navigationTitle("Privacy Policy")
+                } label: {
+                    Label("Privacy Policy", systemImage: "hand.raised.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/content-policy")
+                        .navigationTitle("Content Policy")
+                } label: {
+                    Label("Content Policy", systemImage: "doc.badge.gearshape.fill")
+                }
+            } header: {
+                Text("Legal")
+            }
+            
+            Section {
+                HStack {
+                    Text("Version")
+                    Spacer()
+                    Text("1.1.0")
+                        .foregroundColor(.secondary)
+                }
+                
+                HStack {
+                    Text("Build")
+                    Spacer()
+                    Text("2026.1.16")
+                        .foregroundColor(.secondary)
+                }
+            } header: {
+                Text("App Info")
+            }
+        }
+        .navigationTitle("More")
+        .navigationBarTitleDisplayMode(.large)
+    }
+}
+
+#Preview {
+    NavigationStack {
+        MoreView(baseURL: "http://192.168.1.191:3000")
+    }
+}
