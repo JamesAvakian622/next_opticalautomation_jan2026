@@ -22,7 +22,7 @@ Click **Add a variable** and add these one by one:
 
 | Variable Name | Value |
 |--------------|-------|
-| `MONGODB_URI` | `mongodb+srv://javakian2025_db_user:as34gh90@cluster0.0mo64qz.mongodb.net/optical?retryWrites=true&w=majority` |
+| `MONGODB_URI` | `mongodb+srv://javakian2025_db_user:as34gh90@cluster0.0mo64qz.mongodb.net/optical_automation?retryWrites=true&w=majority` |
 | `MONGODB_DB` | `optical_automation` |
 | `JWT_SECRET` | `opauto-jwt-secret-key-2026-secure` |
 | `CLOUDINARY_CLOUD_NAME` | (your Cloudinary cloud name) |
