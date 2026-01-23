@@ -257,6 +257,154 @@ const PromptText = styled.p`
     margin-bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
+const SuccessMessage = styled(motion.div)`
+    background: ${({ theme }) => `${theme.colors.success}20`};
+    border: 1px solid ${({ theme }) => theme.colors.success};
+    border-radius: ${({ theme }) => theme.borderRadius.md};
+    padding: ${({ theme }) => theme.spacing.md};
+    color: ${({ theme }) => theme.colors.success};
+    margin-bottom: ${({ theme }) => theme.spacing.lg};
+    text-align: center;
+`;
+
+const ErrorMessage = styled(motion.div)`
+    background: ${({ theme }) => `${theme.colors.error}20`};
+    border: 1px solid ${({ theme }) => theme.colors.error};
+    border-radius: ${({ theme }) => theme.borderRadius.md};
+    padding: ${({ theme }) => theme.spacing.md};
+    color: ${({ theme }) => theme.colors.error};
+    margin-bottom: ${({ theme }) => theme.spacing.lg};
+    text-align: center;
+`;
+
+function PasswordChangeForm({ user }) {
+    const [passwordData, setPasswordData] = useState({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+    });
+    const [isChanging, setIsChanging] = useState(false);
+    const [message, setMessage] = useState({ type: '', text: '' });
+
+    const handlePasswordChange = async (e) => {
+        e.preventDefault();
+        setMessage({ type: '', text: '' });
+
+        // Validation
+        if (!passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
+            setMessage({ type: 'error', text: 'All fields are required' });
+            return;
+        }
+
+        if (passwordData.newPassword.length < 8) {
+            setMessage({ type: 'error', text: 'New password must be at least 8 characters' });
+            return;
+        }
+
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+            setMessage({ type: 'error', text: 'New passwords do not match' });
+            return;
+        }
+
+        if (passwordData.currentPassword === passwordData.newPassword) {
+            setMessage({ type: 'error', text: 'New password must be different from current password' });
+            return;
+        }
+
+        setIsChanging(true);
+
+        try {
+            const response = await fetch('/api/user/change-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: user.email,
+                    currentPassword: passwordData.currentPassword,
+                    newPassword: passwordData.newPassword
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setMessage({ type: 'success', text: 'Password changed successfully! A confirmation email has been sent.' });
+                setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+            } else {
+                setMessage({ type: 'error', text: data.error || 'Failed to change password' });
+            }
+        } catch (error) {
+            setMessage({ type: 'error', text: 'An error occurred. Please try again.' });
+        }
+
+        setIsChanging(false);
+    };
+
+    return (
+        <form onSubmit={handlePasswordChange}>
+            {message.text && (
+                message.type === 'success' ? (
+                    <SuccessMessage
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                    >
+                        {message.text}
+                    </SuccessMessage>
+                ) : (
+                    <ErrorMessage
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                    >
+                        {message.text}
+                    </ErrorMessage>
+                )
+            )}
+
+            <FormGroup>
+                <Label>Current Password</Label>
+                <Input
+                    type="password"
+                    value={passwordData.currentPassword}
+                    onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
+                    placeholder="Enter current password"
+                />
+            </FormGroup>
+
+            <FormGroup>
+                <Label>New Password</Label>
+                <Input
+                    type="password"
+                    value={passwordData.newPassword}
+                    onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
+                    placeholder="Enter new password (min 8 characters)"
+                />
+            </FormGroup>
+
+            <FormGroup>
+                <Label>Confirm New Password</Label>
+                <Input
+                    type="password"
+                    value={passwordData.confirmPassword}
+                    onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
+                    placeholder="Confirm new password"
+                />
+            </FormGroup>
+
+            <Button
+                $primary
+                type="submit"
+                disabled={isChanging}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+            >
+                <FiShield /> {isChanging ? 'Changing Password...' : 'Change Password'}
+            </Button>
+        </form>
+    );
+}
+
+
 export default function ProfilePage() {
     const { user, isAuthenticated, isLoading, logout, updateProfile } = useAuth();
     const { favorites } = useFavorites();
@@ -389,6 +537,17 @@ export default function ProfilePage() {
                             <FiSave /> Save Changes
                         </Button>
                     )}
+                </SectionCard>
+
+                <SectionCard
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15 }}
+                >
+                    <SectionTitle>
+                        <FiShield /> Change Password
+                    </SectionTitle>
+                    <PasswordChangeForm user={user} />
                 </SectionCard>
 
                 <SectionCard
