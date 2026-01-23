@@ -11,6 +11,7 @@ export function middleware(request) {
         '/api/auth/register',
         '/api/log-page',
         '/api/seed-admin',
+        '/api/health',
         '/_next',
         '/favicon.ico',
         '/opauto.ico',
