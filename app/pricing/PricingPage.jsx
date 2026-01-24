@@ -88,13 +88,15 @@ const TabButton = styled.button`
 
 
 const PricingGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: ${({ theme }) => theme.spacing.xl};
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
 
     @media (max-width: 400px) {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
     }
 `;
 
@@ -281,9 +283,9 @@ const pricingPlans = {
     web: [
         {
             name: 'Starter Website',
-            price: '$499',
+            price: '$249',
             period: 'one-time',
-            updates: '$499/mo updates',
+            updates: '$125 updates',
             description: 'Professional presence for small businesses.',
             color: '#6366f1',
             featured: false,
@@ -298,9 +300,9 @@ const pricingPlans = {
         },
         {
             name: 'Business Solution Web',
-            price: '$999',
+            price: '$750',
             period: 'one-time',
-            updates: '$499/mo updates',
+            updates: '$249/month updates',
             description: 'Advanced business features and database.',
             color: '#10B981',
             featured: true,
@@ -317,10 +319,10 @@ const pricingPlans = {
     mobile: [
         {
             name: 'Starter Mobile App',
-            price: '$499',
+            price: '$249',
             period: 'one-time',
-            updates: '$499/mo updates',
-            description: 'Single platform application framework.',
+            updates: '$125 updates',
+            description: 'Professional app for either iOS or Android.',
             color: '#EC4899',
             featured: false,
             features: [
@@ -333,27 +335,10 @@ const pricingPlans = {
             ]
         },
         {
-            name: 'iOS or Android',
-            price: '$750',
-            period: 'one-time',
-            updates: '$499/mo updates',
-            description: 'Professional app for either iOS or Android.',
-            color: '#8B5CF6',
-            featured: false,
-            features: [
-                'Native Platform Build',
-                'iOS Store or Google Play',
-                'App Store Submission',
-                'Real-time Data Sync',
-                'Cloud Backend Access',
-                'API Integration'
-            ]
-        },
-        {
             name: 'Business iOS and Android',
-            price: '$1,250',
+            price: '$499',
             period: 'one-time',
-            updates: '$499/mo updates',
+            updates: '$249 updates',
             description: 'High-performance cross-platform application.',
             color: '#06B6D4',
             featured: true,
@@ -380,6 +365,7 @@ const pricingPlans = {
                 'Website Production',
                 'iOS or Android App',
                 'Shared MERN Database',
+                'User Authentication',
                 'Cloud Image Sync',
                 'Store Submission',
                 'Multi-channel Auth'
@@ -397,6 +383,7 @@ const pricingPlans = {
                 'High-performance Web',
                 'iOS + Android Apps',
                 'Unified Dashboard',
+                'User Authentication',
                 'Real-time Syncing',
                 'Global Availability',
                 'Priority 24/7 Support'
@@ -421,7 +408,7 @@ export default function PricingPage() {
                         <Image src="/opauto.png" alt="Logo" width={40} height={40} style={{ objectFit: 'contain' }} /> Applications Production
                     </Title>
                     <Subtitle>
-                        Let us create a profitable website solution for your company.
+                        Let us create a profitable software solution for your company.
                     </Subtitle>
 
                     <TabContainer>

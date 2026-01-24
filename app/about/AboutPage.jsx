@@ -215,25 +215,25 @@ const ValueDescription = styled.p`
 const coreValues = [
     {
         title: 'Our Mission',
-        description: 'To deliver innovative solutions that empower businesses and individuals to achieve their goals through cutting-edge technology.',
+        description: 'Our mission is to deliver innovative solutions that empower both businesses and individuals to reach their full potential. We harness cutting‑edge technology not just to solve problems, but to open new possibilities—helping our customers work smarter, move faster, and achieve meaningful results. Everything we build is designed with purpose, clarity, and long‑term value in mind, ensuring that our impact extends far beyond the tools we create.',
         icon: FiTarget,
         color: '#6366f1'
     },
     {
         title: 'Our Values',
-        description: 'We believe in integrity, transparency, and putting our customers first. Every decision we make is guided by these core principles.',
+        description: 'Our values form the foundation of every decision we make. Integrity guides how we operate, transparency shapes how we communicate, and a customer‑first mindset drives how we build and support our products. These principles are not slogans—they are commitments. They define our culture, influence our strategy, and ensure that we remain accountable to the people who trust us.',
         icon: FiHeart,
         color: '#EC4899'
     },
     {
         title: 'Excellence',
-        description: 'We strive for excellence in everything we do, from the smallest detail to the biggest project. Quality is never compromised.',
+        description: 'Excellence is the standard we hold ourselves to in every aspect of our work. From the smallest detail in a user interface to the architecture behind our most complex systems, we refuse to compromise on quality. We believe that excellence is not a single achievement but a continuous pursuit—one that pushes us to refine, improve, and innovate with every project we undertake.',
         icon: FiAward,
         color: '#10B981'
     },
     {
         title: 'Community',
-        description: 'We are building a community of like-minded individuals who share our vision for a better, more connected world.',
+        description: 'We are dedicated to building a vibrant community of people who share our vision for a more connected, collaborative, and forward‑thinking world. This community is more than an audience—it is a network of creators, innovators, and problem‑solvers who inspire and support one another. By fostering meaningful relationships and encouraging open exchange, we aim to create an environment where everyone can grow, contribute, and thrive.',
         icon: FiUsers,
         color: '#F59E0B'
     }

@@ -348,37 +348,37 @@ const features = [
     {
         icon: FiCode,
         title: 'Modern Development',
-        description: 'React, Next.js, and the full MERN stack for cutting-edge web applications.',
+        description: 'Cutting-edge development using React, Next.js, and the full MERN stack to build fast, scalable, and future‑ready web applications. From dynamic frontends to robust backend architectures, every project is engineered with modern best practices and long-term maintainability in mind.',
         color: '#6366f1'
     },
     {
         icon: FiZap,
         title: 'AI-Assisted',
-        description: 'Leveraging AI tools to accelerate development and enhance code quality.',
+        description: 'Intelligent development workflows powered by AI tools to accelerate delivery, improve code quality, and streamline complex tasks. This means faster iterations, cleaner architecture, and smarter solutions tailored to your business needs.',
         color: '#F59E0B'
     },
     {
         icon: FiSmartphone,
         title: 'Responsive Design',
-        description: 'Beautiful, mobile-first designs that work perfectly on any device.',
+        description: 'Pixel-perfect, mobile‑first interfaces that adapt beautifully to any screen size. Whether on phones, tablets, or desktops, your users enjoy a seamless, intuitive experience designed for maximum engagement.',
         color: '#EC4899'
     },
     {
         icon: FiServer,
         title: 'Full-Stack Solutions',
-        description: 'Complete end-to-end development from frontend to backend and APIs.',
+        description: 'Complete end‑to‑end development covering frontend, backend, databases, and API integrations. From concept to deployment, every layer of your application is built to work together smoothly and efficiently.',
         color: '#10B981'
     },
     {
         icon: FiShield,
         title: 'Secure & Reliable',
-        description: 'Security best practices and reliable infrastructure for peace of mind.',
+        description: 'Industry‑standard security practices, hardened infrastructure, and reliable deployment pipelines that protect your data and keep your application running smoothly. Peace of mind is built into every project.',
         color: '#EF4444'
     },
     {
         icon: FiTrendingUp,
         title: 'SEO Optimized',
-        description: 'Built-in SEO optimization for maximum visibility and traffic.',
+        description: 'Search‑engine‑friendly architecture, clean semantic markup, and performance‑focused optimizations that help your site rank higher and attract more organic traffic from day one.',
         color: '#06B6D4'
     }
 ];
