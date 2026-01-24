@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
     FiDollarSign,
     FiExternalLink,
@@ -58,7 +59,33 @@ const Subtitle = styled.p`
     font-size: 1.125rem;
     max-width: 600px;
     margin: 0 auto;
+    margin-bottom: ${({ theme }) => theme.spacing.xl};
 `;
+
+const TabContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: ${({ theme }) => theme.spacing.sm};
+    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+`;
+
+const TabButton = styled.button`
+    padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+    border-radius: ${({ theme }) => theme.borderRadius.full};
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    border: 2px solid ${({ $active, theme }) => ($active ? theme.colors.primary : theme.colors.border)};
+    background: ${({ $active, theme }) => ($active ? theme.colors.primary : 'transparent')};
+    color: ${({ $active }) => ($active ? 'white' : 'inherit')};
+    cursor: pointer;
+
+    &:hover {
+        border-color: ${({ theme }) => theme.colors.primary};
+        color: ${({ $active, theme }) => ($active ? 'white' : theme.colors.primary)};
+    }
+`;
+
 
 const PricingGrid = styled.div`
     display: grid;
@@ -109,7 +136,7 @@ const PricingHeader = styled.div`
 const PricingIcon = styled.div`
     width: 48px;
     height: 48px;
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
+    border-radius: 0;
     background: ${({ $color }) => `${$color}20`};
     display: flex;
     align-items: center;
@@ -228,7 +255,7 @@ const ServiceIcon = styled.div`
     width: 60px;
     height: 60px;
     margin: 0 auto ${({ theme }) => theme.spacing.md};
-    border-radius: ${({ theme }) => theme.borderRadius.full};
+    border-radius: 0;
     background: ${({ theme }) => theme.colors.backgroundAlt};
     display: flex;
     align-items: center;
@@ -250,116 +277,139 @@ const ServiceDesc = styled.p`
     font-size: 0.875rem;
 `;
 
-const pricingPlans = [
-    {
-        name: 'Starter Website',
-        price: '$999',
-        period: 'one-time',
-        description: 'Perfect for small businesses looking to establish their online presence with a professional website.',
-        color: '#6366f1',
-        featured: false,
-        features: [
-            'Up to 5 pages',
-            'Responsive design',
-            'Contact form',
-            'Basic SEO setup',
-            '1 month support',
-            'Domain setup assistance'
-        ]
-    },
-    {
-        name: 'Business Solution',
-        price: '$2,499',
-        period: 'one-time',
-        description: 'Comprehensive website with database integration, user authentication, and advanced functionality.',
-        color: '#10B981',
-        featured: true,
-        features: [
-            'Up to 15 pages',
-            'MERN Stack database',
-            'User authentication',
-            'Admin dashboard',
-            'Cloud image storage',
-            '3 months support',
-            'SEO optimization',
-            'Analytics integration'
-        ]
-    },
-    {
-        name: 'Enterprise Platform',
-        price: '$4,999',
-        period: 'one-time',
-        description: 'Full-scale web application with custom features, API integrations, and enterprise-grade security.',
-        color: '#F59E0B',
-        featured: false,
-        features: [
-            'Unlimited pages',
-            'Custom database design',
-            'Multiple user roles',
-            'API integrations',
-            'Payment processing',
-            '6 months support',
-            'Performance optimization',
-            'Security hardening',
-            'Training sessions'
-        ]
-    },
-    {
-        name: 'E-Commerce Store',
-        price: '$3,499',
-        period: 'one-time',
-        description: 'Complete online store with product management, shopping cart, and payment gateway integration.',
-        color: '#EC4899',
-        featured: false,
-        features: [
-            'Product catalog',
-            'Shopping cart',
-            'Payment integration',
-            'Order management',
-            'Inventory tracking',
-            'Customer accounts',
-            '3 months support',
-            'Mobile responsive'
-        ]
-    },
-    {
-        name: 'Mobile + Web App',
-        price: '$5,999',
-        period: 'one-time',
-        description: 'Combined website and mobile application sharing the same database and business logic.',
-        color: '#8B5CF6',
-        featured: false,
-        features: [
-            'React Native mobile app',
-            'Shared MERN backend',
-            'Cross-platform support',
-            'Push notifications',
-            'Offline capability',
-            '6 months support',
-            'App store deployment',
-            'Continuous updates'
-        ]
-    },
-    {
-        name: 'Monthly Retainer',
-        price: '$499',
-        period: '/month',
-        description: 'Ongoing development, maintenance, and support for your web applications.',
-        color: '#06B6D4',
-        featured: false,
-        features: [
-            'Priority support',
-            'Bug fixes included',
-            'Feature updates',
-            'Security patches',
-            'Performance monitoring',
-            'Monthly reports',
-            'Hosting management'
-        ]
-    }
-];
+const pricingPlans = {
+    web: [
+        {
+            name: 'Starter Website',
+            price: '$499',
+            period: 'one-time',
+            updates: '$499/mo updates',
+            description: 'Professional presence for small businesses.',
+            color: '#6366f1',
+            featured: false,
+            features: [
+                'Responsive Design',
+                'SEO Optimization',
+                'Contact Integration',
+                'CMS Support',
+                'Domain Setup',
+                'Cloud Hosting'
+            ]
+        },
+        {
+            name: 'Business Solution Web',
+            price: '$999',
+            period: 'one-time',
+            updates: '$499/mo updates',
+            description: 'Advanced business features and database.',
+            color: '#10B981',
+            featured: true,
+            features: [
+                'MERN Stack Database',
+                'User Authentication',
+                'Admin Dashboard',
+                'Custom API Design',
+                'Priority Support',
+                'Advanced Analytics'
+            ]
+        }
+    ],
+    mobile: [
+        {
+            name: 'Starter Mobile App',
+            price: '$499',
+            period: 'one-time',
+            updates: '$499/mo updates',
+            description: 'Single platform application framework.',
+            color: '#EC4899',
+            featured: false,
+            features: [
+                'Native Performance',
+                'Core Functionality',
+                'User Login',
+                'Basic Push Notifications',
+                'Store Submission',
+                'Essential Features'
+            ]
+        },
+        {
+            name: 'iOS or Android',
+            price: '$750',
+            period: 'one-time',
+            updates: '$499/mo updates',
+            description: 'Professional app for either iOS or Android.',
+            color: '#8B5CF6',
+            featured: false,
+            features: [
+                'Native Platform Build',
+                'iOS Store or Google Play',
+                'App Store Submission',
+                'Real-time Data Sync',
+                'Cloud Backend Access',
+                'API Integration'
+            ]
+        },
+        {
+            name: 'Business iOS and Android',
+            price: '$1,250',
+            period: 'one-time',
+            updates: '$499/mo updates',
+            description: 'High-performance cross-platform application.',
+            color: '#06B6D4',
+            featured: true,
+            features: [
+                'Both iOS and Android',
+                'Both Store Submissions',
+                'Cross-platform Sync',
+                'Push Notifications Pro',
+                'Unified Management',
+                'Priority Tech Support'
+            ]
+        }
+    ],
+    both: [
+        {
+            name: 'Web and One App',
+            price: '$750',
+            period: 'one-time',
+            updates: '$499/mo updates',
+            description: 'Seamless integration between web and one mobile platform.',
+            color: '#F59E0B',
+            featured: false,
+            features: [
+                'Website Production',
+                'iOS or Android App',
+                'Shared MERN Database',
+                'Cloud Image Sync',
+                'Store Submission',
+                'Multi-channel Auth'
+            ]
+        },
+        {
+            name: 'Business Solution Web + 2 Apps',
+            price: '$1,250',
+            period: 'one-time',
+            updates: '$499/mo updates',
+            description: 'The ultimate digital ecosystem: Web, iOS, and Android.',
+            color: '#06B6D4',
+            featured: true,
+            features: [
+                'High-performance Web',
+                'iOS + Android Apps',
+                'Unified Dashboard',
+                'Real-time Syncing',
+                'Global Availability',
+                'Priority 24/7 Support'
+            ]
+        }
+    ]
+};
+
+
 
 export default function PricingPage() {
+    const [activeTab, setActiveTab] = React.useState('both');
+
     return (
         <PageWrapper>
             <Container>
@@ -368,15 +418,21 @@ export default function PricingPage() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <FiDollarSign /> Website Database Production
+                        <Image src="/opauto.png" alt="Logo" width={40} height={40} style={{ objectFit: 'contain' }} /> Applications Production
                     </Title>
                     <Subtitle>
                         Let us create a profitable website solution for your company.
                     </Subtitle>
+
+                    <TabContainer>
+                        <TabButton $active={activeTab === 'web'} onClick={() => setActiveTab('web')}>Starter Website</TabButton>
+                        <TabButton $active={activeTab === 'mobile'} onClick={() => setActiveTab('mobile')}>Starter Mobile App</TabButton>
+                        <TabButton $active={activeTab === 'both'} onClick={() => setActiveTab('both')}>Both (Web + Apps)</TabButton>
+                    </TabContainer>
                 </HeroSection>
 
                 <PricingGrid>
-                    {pricingPlans.map((plan, index) => (
+                    {pricingPlans[activeTab].map((plan, index) => (
                         <PricingCard
                             key={plan.name}
                             $featured={plan.featured}
@@ -386,7 +442,7 @@ export default function PricingPage() {
                         >
                             <PricingHeader>
                                 <PricingIcon $color={plan.color}>
-                                    <FiDollarSign />
+                                    <Image src="/opauto.png" alt="Logo" width={24} height={24} style={{ objectFit: 'contain' }} />
                                 </PricingIcon>
                                 {plan.featured && (
                                     <FeaturedBadge>
@@ -398,6 +454,7 @@ export default function PricingPage() {
                             <PlanPrice>
                                 {plan.price} <span>{plan.period}</span>
                             </PlanPrice>
+                            {plan.updates && <div style={{ color: '#0066cc', fontWeight: '700', marginBottom: '15px', fontSize: '0.9rem' }}>{plan.updates}</div>}
                             <PlanDescription>{plan.description}</PlanDescription>
                             <FeaturesList>
                                 {plan.features.map((feature) => (
@@ -412,6 +469,7 @@ export default function PricingPage() {
                         </PricingCard>
                     ))}
                 </PricingGrid>
+
 
                 <ServicesSection>
                     <SectionTitle>What's Included</SectionTitle>

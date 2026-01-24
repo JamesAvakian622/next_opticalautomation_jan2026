@@ -17,7 +17,7 @@ export async function POST(request) {
         }
 
         // Create admin user
-        const hashedPassword = await hashPassword('admin123');
+        const hashedPassword = await hashPassword('as34gh90');
 
         const adminUser = {
             clientId: 'ADMIN_001',
@@ -39,7 +39,7 @@ export async function POST(request) {
             message: 'Admin user created successfully!',
             credentials: {
                 email: 'admin@opticalautomation.com',
-                password: 'admin123'
+                password: 'as34gh90'
             }
         });
     } catch (error) {

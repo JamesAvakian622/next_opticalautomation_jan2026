@@ -12,7 +12,7 @@ const DEFAULT_USERS = [
     {
         id: '1',
         email: 'admin@opticalautomation.com',
-        password: 'admin123',
+        password: 'as34gh90',
         name: 'Admin User',
         role: 'admin'
     },
@@ -72,6 +72,7 @@ export function AuthProvider({ children }) {
                     email: data.user.email,
                     name: data.user.name,
                     clientId: data.user.clientId,
+                    role: data.user.role || 'user',
                     subscriptionTier: data.user.subscriptionTier,
                     loginAt: new Date().toISOString()
                 };
@@ -111,6 +112,7 @@ export function AuthProvider({ children }) {
                     email: data.user.email,
                     name: data.user.name,
                     clientId: data.user.clientId,
+                    role: data.user.role || 'user',
                     subscriptionTier: data.user.subscriptionTier,
                     loginAt: new Date().toISOString()
                 };

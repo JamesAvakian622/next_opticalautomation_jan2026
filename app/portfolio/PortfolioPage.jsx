@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { generateBreadcrumbJsonLd } from '@/lib/metadata';
-import FavoriteButton from '@/components/FavoriteButton';
 import {
   FiExternalLink,
   FiArrowRight,
@@ -34,7 +33,8 @@ import {
   FiPlay,
   FiMessageSquare,
   FiMapPin,
-  FiDollarSign
+  FiDollarSign,
+  FiTerminal
 } from 'react-icons/fi';
 
 // Tab Categories Data
@@ -243,7 +243,82 @@ const tabCategories = [
       }
     ]
   },
-
+  {
+    id: 'react-native',
+    label: 'React Native',
+    icon: FiSmartphone,
+    color: 'linear-gradient(135deg, #61DAFB 0%, #0070F3 100%)',
+    projects: [
+      {
+        id: 'rn-ecommerce',
+        title: 'Mobile Commerce App',
+        category: 'React Native iOS/Android App',
+        description: 'Native mobile shopping experience with cross-platform performance, optimized for both iOS and Android.',
+        detailedDescription: 'This React Native application delivers a high-performance shopping experience with native-like UI components. It features a robust state management system, offline support for browsing, and integration with native device features like biometric authentication and push notifications.',
+        icon: FiShoppingCart,
+        color: '#61DAFB',
+        website: 'https://example-rn-ecommerce.com'
+      },
+      {
+        id: 'rn-health',
+        title: 'Pulse Health Tracker',
+        category: 'React Native iOS/Android App',
+        description: 'Health and wellness tracking application with real-time health data visualization and native health kit integration.',
+        detailedDescription: 'Pulse provides users with a comprehensive view of their wellness by integrating with Apple HealthKit and Google Fit. The app uses React Native\'s bridge to access native health APIs while maintaining a single codebase for both platforms.',
+        icon: FiHeart,
+        color: '#E91E63',
+        website: 'https://example-rn-health.com'
+      },
+      {
+        id: 'rn-rideshare',
+        title: 'RideShare Connect',
+        category: 'React Native iOS/Android App',
+        description: 'Location-based ride sharing platform with real-time mapping, driver tracking, and secure payment processing.',
+        detailedDescription: 'RideShare Connect leverages advanced mapping libraries for sub-second location updates. It includes a sophisticated dispatching algorithm, in-app messaging between drivers and riders, and a secure payment portal supporting major digital wallets.',
+        icon: FiMapPin,
+        color: '#10B981',
+        website: 'https://example-rn-rideshare.com'
+      }
+    ]
+  },
+  {
+    id: 'python',
+    label: 'Python',
+    icon: FiTerminal,
+    color: 'linear-gradient(135deg, #3776AB 0%, #FFD43B 100%)',
+    projects: [
+      {
+        id: 'python-ai',
+        title: 'DataInsight AI',
+        category: 'Python AI/ML Solution',
+        description: 'Advanced machine learning platform for predictive analytics and automated data processing using Python and TensorFlow.',
+        detailedDescription: 'DataInsight AI processes massive datasets to provide actionable business predictions. Built with Python, it utilizes Spark for data processing and PyTorch for model training, delivering 98% accuracy in market trend forecasting.',
+        icon: FiPieChart,
+        color: '#3776AB',
+        website: 'https://example-python-ai.com'
+      },
+      {
+        id: 'python-automation',
+        title: 'Automation Engine',
+        category: 'Python Automation Tool',
+        description: 'Enterprise workflow automation suite designed to streamline repetitive tasks and improve operational efficiency.',
+        detailedDescription: 'This Python-based automation engine integrates with legacy systems and modern APIs to automate complex workflows. It features a visual task builder, scheduled executions, and comprehensive logging for auditing and compliance.',
+        icon: FiZap,
+        color: '#F59E0B',
+        website: 'https://example-python-automation.com'
+      },
+      {
+        id: 'python-api',
+        title: 'Backend API Pro',
+        category: 'Python Backend Service',
+        description: 'High-performance RESTful API service built with FastAPI, providing sub-millisecond response times for global applications.',
+        detailedDescription: 'Backend API Pro is an enterprise-grade service designed for extreme scalability. It utilizes FastAPI and PostgreSQL with Redis caching to handle millions of requests daily, supporting core services for multiple frontend platforms.',
+        icon: FiServer,
+        color: '#14B8A6',
+        website: 'https://example-python-api.com'
+      }
+    ]
+  }
 ];
 
 // Tab Styled Components
@@ -829,239 +904,6 @@ const BackToTop = styled(Link)`
   }
 `;
 
-const projects = [
-  {
-    id: 'e-commerce-platform',
-    title: 'DollarDimeStore E-Commerce Store',
-    category: 'Retail Web Application',
-    description: 'Full-featured online shopping platform of items and item detail. We employ MERN database and Cloudinary for image storage server access. It has a cart, checkout, and payment integration.',
-    detailedDescription: 'DollarDimeStore represents our flagship e-commerce solution, built from the ground up using the MERN stack (MongoDB, Express.js, React, Node.js) with Cloudinary integration for seamless image management. This comprehensive retail platform features a fully responsive product catalog with advanced filtering and search capabilities, a dynamic shopping cart with persistent storage, secure user authentication with JWT tokens, and a streamlined checkout process with multiple payment gateway options. The admin dashboard provides real-time inventory management, order tracking, sales analytics, and customer relationship tools. We implemented server-side rendering for optimal SEO performance and lightning-fast page loads, ensuring customers enjoy a smooth shopping experience across all devices.',
-    icon: FiShoppingCart,
-    color: '#6366f1',
-    website: 'https://example-ecommerce.com'
-  },
-  {
-    id: 'e-commerce-platform2',
-    title: 'Checkered Flag E-Commerce Store',
-    category: 'Retail Web Application',
-    description: 'Full-featured online shopping platform of items and item detail. We employ MERN database and Cloudinary for image storage server access. It has a cart, checkout, and payment integration.',
-    detailedDescription: 'Checkered Flag E-Commerce Store is a specialized automotive parts and accessories marketplace designed for racing enthusiasts and automotive professionals. Built on our proven MERN architecture with Cloudinary powering the extensive product image galleries, this platform features vehicle-specific part matching, compatibility checking, and detailed specification sheets for each product. The system includes a robust inventory management system that tracks stock levels across multiple warehouses, automated reorder notifications, and integration with major shipping carriers for real-time delivery estimates. Customer accounts feature order history, wishlist functionality, and personalized recommendations based on vehicle profiles and browsing behavior.',
-    icon: FiShoppingCart,
-    color: '#6366f1',
-    website: 'https://example-ecommerce.com'
-  },
-  {
-    id: 'real-estate2',
-    title: 'RealtyManager Real Estate App',
-    category: 'Productivity',
-    description: 'Comprehensive MERN database with Cloudinary image server for marketing American state, county, and city property. It features Theme control, favorite marking, and a pdf print output.',
-    detailedDescription: 'RealtyManager is an enterprise-grade real estate management platform designed to streamline property marketing across the United States. The application leverages MongoDB for its flexible document structure, perfectly suited for storing diverse property data across different states, counties, and cities. Cloudinary integration enables high-resolution property photography with automatic optimization for web delivery. Key features include interactive map-based property search, advanced filtering by location hierarchy, customizable dark/light themes for user preference, a robust favorites system for saving and comparing properties, and professional PDF generation for property listings and comparative market analyses. The platform supports multi-user access with role-based permissions for agents, brokers, and administrators.',
-    icon: FiLayout,
-    color: '#e3cf19ff',
-    website: 'https://example-tasks.com'
-  },
-  {
-    id: 'task-management',
-    title: 'TaskMaster Management App',
-    category: 'Productivity',
-    description: 'Comprehensive three year task tracking system with calendars, reminders, and team collaboration and task pdf print output.',
-    detailedDescription: 'TaskMaster is a sophisticated project and task management application engineered for individuals and teams who need to plan and track work across extended timeframes. The three-year planning horizon sets TaskMaster apart, enabling long-term project roadmapping alongside daily task management. Features include multiple calendar views (day, week, month, year), customizable reminder systems with email and push notifications, team collaboration tools with real-time updates, file attachments, and comment threads. The PDF export functionality generates professional task reports, project summaries, and Gantt chart visualizations for stakeholder presentations. Built with React and styled-components, the interface is clean, intuitive, and fully responsive for mobile task management on the go.',
-    icon: FiLayout,
-    color: '#10B981',
-    website: 'https://example-tasks.com'
-  },
-  {
-    id: 'social-network',
-    title: 'Social Network',
-    category: 'Social Media',
-    description: 'Modern social platform with real-time messaging, posts, and user interactions.',
-    detailedDescription: 'Our Social Network platform demonstrates the full capabilities of real-time web application development using WebSocket technology for instant messaging and live updates. Users can create rich media posts with images, videos, and formatted text, engage with content through likes, comments, and shares, and build connections through friend requests and follower systems. The messaging system supports both one-on-one conversations and group chats with read receipts and typing indicators. Privacy controls allow users to manage post visibility, block unwanted contacts, and control notification preferences. The platform includes content moderation tools, reporting systems, and admin dashboards for community management. Built for scalability, the architecture supports thousands of concurrent users with minimal latency.',
-    icon: FiUsers,
-    color: '#EC4899',
-    website: 'https://example-social.com'
-  },
-  {
-    id: 'developer-portfolio',
-    title: 'Developer Portfolio',
-    category: 'Personal Branding',
-    description: 'Stunning portfolio showcase for creative professionals and developers.',
-    detailedDescription: 'The Developer Portfolio template represents the pinnacle of personal branding websites, designed to help developers and creative professionals showcase their work in the most compelling way possible. Built with Next.js and Framer Motion, the portfolio features smooth page transitions, scroll-triggered animations, and interactive project showcases that captivate visitors. The template includes sections for project galleries with filterable categories, an about page with timeline-based experience display, a skills section with animated proficiency indicators, a blog integration for sharing technical insights, and a contact form with spam protection. SEO is baked in with structured data, optimized meta tags, and automatic sitemap generation. The design is fully customizable through a theme configuration file, allowing developers to match their personal brand colors and typography.',
-    icon: FiCode,
-    color: '#8B5CF6',
-    website: 'https://example-portfolio.com'
-  },
-  {
-    id: 'personal-dashboard',
-    title: 'My Personal Organizer',
-    category: 'Business Intelligence',
-    description: 'Real-time data visualization dashboard with charts, graphs, and reporting.',
-    detailedDescription: 'My Personal Organizer is a comprehensive personal productivity suite that brings together task management, goal tracking, and data visualization in one elegant interface. The dashboard presents an at-a-glance view of your day with upcoming tasks, calendar events, and progress toward personal goals. Interactive charts built with Chart.js display trends in productivity, habit tracking data, and custom metrics you define. Features include a notes system with rich text editing, a bookmark manager for organizing web resources, a journal for daily reflections, and a finance tracker for budgeting and expense categorization. The responsive design ensures the dashboard is equally functional on desktop monitors and mobile devices, keeping you organized wherever you are.',
-    icon: FiPieChart,
-    color: '#F59E0B',
-    website: 'https://example-dashboard.com'
-  },
-  {
-    id: 'business-dashboard',
-    title: 'My Business Organizer',
-    category: 'Business Intelligence',
-    description: 'Real-time data visualization dashboard with charts, graphs, and reporting.',
-    detailedDescription: 'My Business Organizer extends our personal dashboard concept into a full-featured business intelligence platform suitable for small to medium enterprises. The system aggregates data from multiple sources including sales platforms, marketing tools, and financial software to present unified business metrics. Key features include customizable KPI widgets, automated report generation with scheduled email delivery, team performance tracking, client relationship management, and invoice tracking. The dashboard supports multiple user accounts with role-based access control, ensuring employees see only the data relevant to their responsibilities. Real-time updates keep all stakeholders informed of business performance, while historical data analysis tools help identify trends and inform strategic decisions.',
-    icon: FiPieChart,
-    color: '#F59E0B',
-    website: 'https://example-dashboard.com'
-  },
-  {
-    id: 'photo-gallery',
-    title: 'Photo Gallery',
-    category: 'Media',
-    description: 'Beautiful image gallery with lightbox, albums, and cloud storage integration.',
-    detailedDescription: 'The Photo Gallery application provides photographers and visual artists with a stunning platform to showcase and organize their work. Built with performance in mind, the gallery implements lazy loading, responsive images with automatic srcset generation, and WebP format support for optimal loading times. The masonry-style layout dynamically arranges images for visual impact, while the lightbox viewer supports keyboard navigation, swipe gestures, and EXIF data display. Album organization features allow grouping photos by event, date, or custom categories. Cloud storage integration with services like Cloudinary or AWS S3 ensures reliable image hosting with CDN delivery. For professional photographers, the platform includes client proofing features, watermarking options, and secure download links for purchased images.',
-    icon: FiCamera,
-    color: '#EF4444',
-    website: 'https://example-gallery.com'
-  },
-  {
-    id: 'music-streaming',
-    title: 'Music Streaming',
-    category: 'Entertainment',
-    description: 'Audio streaming platform with playlists, artist pages, and personalized recommendations.',
-    detailedDescription: 'Our Music Streaming platform showcases advanced audio streaming capabilities with a user experience rivaling major music services. The application features gapless audio playback, queue management, and crossfade between tracks for uninterrupted listening. Users can create and share playlists, follow their favorite artists, and discover new music through algorithmic recommendations powered by listening history analysis. Artist pages include biographies, discographies, and upcoming event listings. The audio player supports background playback on mobile devices, lock screen controls, and Bluetooth device integration. For independent artists and labels, the platform includes an upload portal, streaming analytics, and royalty tracking. The backend handles high-concurrency streaming with adaptive bitrate delivery based on network conditions.',
-    icon: FiMusic,
-    color: '#14B8A6',
-    website: 'https://example-music.com'
-  },
-  {
-    id: 'learning-platform',
-    title: 'Learning Platform',
-    category: 'Education',
-    description: 'Online learning management system with courses, quizzes, and progress tracking.',
-    detailedDescription: 'The Learning Platform is a comprehensive Learning Management System (LMS) designed to deliver engaging educational content to students of all ages. Course creators can build structured curricula with video lessons, reading materials, interactive exercises, and assessments. The platform supports multiple question types including multiple choice, fill-in-the-blank, matching, and essay questions with rubric-based grading. Progress tracking provides students with visual indicators of completion and mastery, while instructors receive detailed analytics on student engagement and performance. Features include discussion forums for peer learning, live virtual classroom integration, certificate generation upon course completion, and mobile apps for learning on the go. The platform supports SCORM content import for organizations migrating from legacy LMS systems.',
-    icon: FiBook,
-    color: '#3B82F6',
-    website: 'https://example-learning.com'
-  },
-  {
-    id: 'restaurant-food',
-    title: 'Restaurant Food Delivery Tracker',
-    category: 'Hospitality',
-    description: 'Real-time package tracking system with maps, notifications, and delivery estimates.',
-    detailedDescription: 'The Restaurant Food Delivery Tracker provides restaurants and their customers with complete visibility into the delivery process from kitchen to doorstep. The system integrates with restaurant POS systems to automatically capture orders and estimated preparation times. Once food leaves the restaurant, real-time GPS tracking shows customers exactly where their delivery is on an interactive map. Push notifications alert customers to status changes including order confirmation, preparation complete, out for delivery, and approaching arrival. For restaurant managers, the dashboard displays all active deliveries, driver locations, and delivery time analytics to optimize operations. Driver apps include turn-by-turn navigation, order details, and customer contact options. The platform supports multiple delivery zones with dynamic pricing based on distance and demand.',
-    icon: FiTruck,
-    color: '#F97316',
-    website: 'https://example-delivery.com'
-  },
-  {
-    id: 'fitness-app',
-    title: 'Fitness Tracker',
-    category: 'Health & Fitness',
-    description: 'Workout planning and fitness tracking app with progress charts and goal setting.',
-    detailedDescription: 'The Fitness Tracker application empowers users to take control of their health and fitness journey with comprehensive workout planning and progress monitoring tools. The exercise library includes hundreds of movements with video demonstrations, muscle group targeting, and equipment requirements. Users can follow pre-built workout programs or create custom routines tailored to their goals. The tracking system logs sets, reps, weight, and rest times with automatic progression suggestions based on performance trends. Progress charts visualize strength gains, body measurements, and workout consistency over time. Integration with wearable devices and health apps allows automatic syncing of steps, heart rate, and calorie data. Social features enable workout sharing, friendly competitions, and accountability partnerships to keep users motivated.',
-    icon: FiHeart,
-    color: '#DC2626',
-    website: 'https://example-fitness.com'
-  },
-  {
-    id: 'cloud-storage',
-    title: 'Cloud Storage',
-    category: 'Utility',
-    description: 'Secure file storage and sharing platform with encryption and team folders.',
-    detailedDescription: 'Our Cloud Storage solution provides individuals and businesses with secure, reliable file storage accessible from anywhere. Files are encrypted both in transit and at rest using AES-256 encryption, ensuring complete data protection. The intuitive interface supports drag-and-drop uploads, folder organization, and powerful search across all stored content including full-text search within documents. Sharing features include password-protected links, expiration dates, and download tracking. Team accounts benefit from shared folders with granular permission controls, activity logs for compliance, and storage quota management. File versioning automatically maintains previous versions with one-click restoration. Mobile apps provide offline access to favorited files with automatic sync when connectivity returns. Business plans include admin consoles, SSO integration, and data residency options for regulatory compliance.',
-    icon: FiCloud,
-    color: '#0EA5E9',
-    website: 'https://example-cloud.com'
-  },
-  {
-    id: 'cms-platform',
-    title: 'CMS Platform',
-    category: 'Content Management',
-    description: 'Flexible content management system for blogs, news sites, and corporate websites.',
-    detailedDescription: 'The CMS Platform delivers enterprise-grade content management capabilities with the ease of use that content creators demand. The block-based editor allows assembling beautiful pages from pre-designed components without touching code, while developers can create custom blocks for organization-specific needs. Content types are fully customizable, supporting everything from simple blog posts to complex product catalogs with custom fields and relationships. The media library provides organized asset management with automatic image optimization and responsive image generation. Multi-language support enables content translation workflows for global audiences. Publishing features include scheduled posts, revision history, approval workflows, and content staging environments. SEO tools provide real-time feedback on content optimization with meta tag management and automatic sitemap generation.',
-    icon: FiMonitor,
-    color: '#5b06eeff',
-    website: 'https://example-cms.com'
-  },
-  {
-    id: 'mobile-banking',
-    title: 'Mobile Banking',
-    category: 'Finance',
-    description: 'Secure mobile banking interface with transactions, transfers, and account management.',
-    detailedDescription: 'The Mobile Banking application demonstrates our capability to develop secure, user-friendly financial applications that meet rigorous industry standards. The interface provides customers with instant access to account balances, transaction history, and detailed statements. Transfer functionality supports internal transfers, external bank transfers, and recurring payment scheduling. Bill pay features include payee management, payment reminders, and eBill integration. Security measures include biometric authentication, transaction notifications, card lock functionality, and suspicious activity detection. The app provides ATM and branch locators with real-time availability information. Personal financial management tools help users track spending by category, set budgets, and work toward savings goals. Push notifications keep users informed of account activity, payment due dates, and security alerts.',
-    icon: FiSmartphone,
-    color: '#2563EB',
-    website: 'https://example-banking.com'
-  },
-  {
-    id: 'travel-booking',
-    title: 'Travel Booking',
-    category: 'Travel & Tourism',
-    description: 'Comprehensive travel booking platform for flights, hotels, and vacation packages.',
-    detailedDescription: 'The Travel Booking platform provides travelers with a one-stop solution for planning and booking complete trips. Flight search aggregates results from multiple airlines with flexible date options and fare comparison. Hotel inventory includes properties ranging from budget accommodations to luxury resorts with detailed amenity listings, photo galleries, and verified guest reviews. The platform supports vacation package bundling for flights, hotels, and car rentals with package discounts. Itinerary management keeps all trip details organized with confirmation numbers, check-in times, and important contact information. Travel alerts notify users of flight changes, gate assignments, and destination weather updates. The loyalty program rewards frequent bookers with points redeemable for travel credits. Concierge features provide destination guides, activity recommendations, and restaurant reservations.',
-    icon: FiGlobe,
-    color: '#b27608ff',
-    website: 'https://example-travel.com'
-  },
-  {
-    id: 'stock-trading',
-    title: 'Stock Trading',
-    category: 'Investment',
-    description: 'Real-time stock trading platform with charts, portfolio tracking, and market news.',
-    detailedDescription: 'The Stock Trading platform provides investors with professional-grade tools for market analysis and trade execution. Real-time quotes stream directly to the interface with bid/ask spreads, volume indicators, and price change calculations. Advanced charting capabilities include multiple timeframes, technical indicators, drawing tools, and chart pattern recognition. Portfolio tracking displays holdings with real-time valuation, gain/loss calculations, and allocation breakdowns. The order system supports market orders, limit orders, stop-losses, and conditional orders with pre and after-hours trading options. News integration delivers company announcements, earnings reports, and market-moving headlines. Watchlists help users monitor potential investments with customizable alerts for price targets and volume spikes. Educational resources help novice investors understand market concepts and develop trading strategies.',
-    icon: FiTrendingUp,
-    color: '#16A34A',
-    website: 'https://example-trading.com'
-  },
-  {
-    id: 'smart-home',
-    title: 'Smart Home Hub',
-    category: 'IoT',
-    description: 'IoT control center for smart home devices, automation, and energy monitoring.',
-    detailedDescription: 'The Smart Home Hub serves as the central command center for connected home devices, bringing disparate smart home ecosystems together in one unified interface. Device support includes smart lighting, thermostats, door locks, security cameras, garage doors, and appliances from major manufacturers. The automation engine enables creating complex routines triggered by time, location, device state, or external conditions like weather. Energy monitoring tracks electricity consumption by device and time period, identifying opportunities for efficiency improvements. Security features include real-time camera feeds, motion alerts, and integration with professional monitoring services. The interface is optimized for wall-mounted tablets, smartphones, and voice assistants. Scenes allow one-tap activation of multiple devices for scenarios like "Movie Night" or "Good Morning." Family accounts support individual preferences and parental controls for children access.',
-    icon: FiZap,
-    color: '#FBBF24',
-    website: 'https://example-smarthome.com'
-  },
-  {
-    id: 'design-system',
-    title: 'Design System',
-    category: 'UI/UX',
-    description: 'Comprehensive component library and design system for enterprise applications.',
-    detailedDescription: 'Our Design System represents a complete solution for organizations seeking consistency and efficiency in their digital product development. The component library includes over 50 React components ranging from basic elements like buttons and inputs to complex patterns like data tables, navigation systems, and modal dialogs. Each component is fully accessible following WCAG 2.1 guidelines, responsive across all device sizes, and themeable through a centralized token system. Documentation includes interactive examples, API references, usage guidelines, and copy-paste code snippets. The design token system defines colors, typography, spacing, and motion in a platform-agnostic format exportable to CSS, Sass, iOS, and Android. Figma design files mirror the code components exactly, ensuring seamless designer-developer handoffs. Version management and changelog documentation help teams stay current with library updates.',
-    icon: FiLayers,
-    color: '#A855F7',
-    website: 'https://example-designsystem.com'
-  },
-  {
-    id: 'api-platform',
-    title: 'API Platform',
-    category: 'Developer Tools',
-    description: 'API management platform with documentation, testing, and analytics features.',
-    detailedDescription: 'The API Platform provides development teams with comprehensive tools for designing, documenting, testing, and monitoring their APIs. The documentation generator creates beautiful, interactive API docs from OpenAPI specifications with try-it-now functionality for immediate testing. The mock server enables frontend development to proceed before backend implementation is complete. Testing tools support automated test suites, environment management, and CI/CD integration for continuous API validation. Analytics track endpoint usage, response times, error rates, and consumer behavior patterns. Rate limiting and API key management protect endpoints from abuse while enabling controlled access for third-party developers. The developer portal provides self-service onboarding for API consumers with account management, usage dashboards, and support ticket submission.',
-    icon: FiDatabase,
-    color: '#0D9488',
-    website: 'https://example-api.com'
-  },
-  {
-    id: 'restaurant-pos',
-    title: 'Restaurant POS',
-    category: 'Hospitality',
-    description: 'Point of sale system for restaurants with menu management and order processing.',
-    detailedDescription: 'The Restaurant POS system streamlines front-of-house and back-of-house operations for restaurants of all sizes. The intuitive touchscreen interface enables rapid order entry with modifier support, special instructions, and course timing. Table management visualizes the dining room layout with real-time status indicators for seating, ordering, and check stages. Kitchen display integration eliminates paper tickets with prioritized order queuing and preparation timing. Payment processing supports splits by item or guest, tip suggestions, and multiple tender types. Menu management allows real-time updates to pricing, descriptions, and availability with automatic 86ing when inventory runs low. Reporting covers sales by category, server performance, and peak hour analysis. Integration with accounting software and payroll systems reduces administrative overhead and ensures accurate financial tracking.',
-    icon: FiLayout,
-    color: '#DB2777',
-    website: 'https://example-restaurant.com'
-  },
-  {
-    id: 'good-day-music',
-    title: 'GoodDayMusic.com',
-    category: 'Musical Instrument Retail',
-    description: 'An eCommerce website for marketing guitar, bass, drums, audio, and audio gear.',
-    detailedDescription: 'GoodDayMusic.com is a comprehensive eCommerce platform built on Wix, designed for music enthusiasts and professional musicians alike. The store features an extensive catalog of guitars, bass instruments, drum kits, and audio gear with detailed product specifications and high-quality media galleries. The platform provides an intuitive shopping experience with category filtering, search functionality, and product comparison tools. Each instrument category showcases products from leading brands with rich imagery, demonstration videos, and customer reviews. Built with Wix\'s powerful eCommerce capabilities, the site offers secure checkout, multiple payment options, and reliable shipping integration. The media gallery feature allows customers to view instruments from multiple angles and watch demo videos before making a purchase decision.',
-    icon: FiMusic,
-    color: '#1DB954',
-    website: 'http://www.GoodDayMusic.com'
-  }
-];
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -1082,6 +924,8 @@ const itemVariants = {
 export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState('react-nextjs');
 
+  const activeCategory = tabCategories.find(cat => cat.id === activeTab);
+
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'Portfolio', path: '/portfolio' }
@@ -1095,20 +939,18 @@ export default function PortfolioPage() {
     url: 'https://opticalautomation.com/portfolio',
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: projects.map((project, index) => ({
+      itemListElement: tabCategories.flatMap(cat => cat.projects).map((project, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         item: {
           '@type': 'CreativeWork',
           name: project.title,
           description: project.description,
-          url: `https://opticalautomation.com/portfolio/${project.id}`
+          url: `https://opticalautomation.com/portfolio#${project.id}`
         }
       }))
     }
   };
-
-  const activeCategory = tabCategories.find(cat => cat.id === activeTab);
 
   return (
     <PageWrapper>
@@ -1206,81 +1048,6 @@ export default function PortfolioPage() {
           </AnimatePresence>
         </TabContentWrapper>
       </TabSection>
-
-
-      <ContentSection>
-        <Container>
-          <PortfolioGrid
-            as={motion.div}
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {projects.map((project, index) => (
-              <PortfolioCard
-                key={`${project.id}-${index}`}
-                variants={itemVariants}
-                $accentColor={project.color}
-              >
-                <CardHeader>
-                  <CardIcon $color={project.color}>
-                    <project.icon />
-                  </CardIcon>
-                  <FavoriteButton item={project} />
-                </CardHeader>
-                <CardTitle>{project.title}</CardTitle>
-                <CardCategory>{project.category}</CardCategory>
-                <CardDescription>{project.description}</CardDescription>
-                <CardLinks>
-                  <CardLink href={`#detail-${index}`}>
-                    Details <FiArrowRight />
-                  </CardLink>
-                  <ExternalLink
-                    href={project.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FiExternalLink /> Visit
-                  </ExternalLink>
-                </CardLinks>
-              </PortfolioCard>
-            ))}
-          </PortfolioGrid>
-        </Container>
-      </ContentSection>
-
-      <DetailsSection>
-        <Container>
-          <DetailsSectionTitle>Project Details</DetailsSectionTitle>
-          <DetailsSectionSubtitle>
-            Learn more about each project, the technologies used, and the problems we solved.
-          </DetailsSectionSubtitle>
-
-          {projects.map((project, index) => (
-            <DetailItem
-              key={`detail-${project.id}-${index}`}
-              id={`detail-${index}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.02 }}
-            >
-              <DetailHeader>
-                <DetailIcon $color={project.color}>
-                  <project.icon />
-                </DetailIcon>
-                <div>
-                  <DetailTitle>{project.title}</DetailTitle>
-                  <DetailCategory>{project.category}</DetailCategory>
-                </div>
-              </DetailHeader>
-              <DetailParagraph>{project.detailedDescription}</DetailParagraph>
-              <BackToTop href="#top">↑ Back to Portfolio</BackToTop>
-            </DetailItem>
-          ))}
-        </Container>
-      </DetailsSection>
     </PageWrapper>
   );
 }

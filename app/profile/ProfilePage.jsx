@@ -13,7 +13,13 @@ import {
     FiSave,
     FiLogOut,
     FiHeart,
-    FiSettings
+    FiSettings,
+    FiPrinter,
+    FiSearch,
+    FiList,
+    FiActivity,
+    FiStar,
+    FiCheck
 } from 'react-icons/fi';
 import { useAuth } from '@/contexts/AuthContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
@@ -33,388 +39,298 @@ const Container = styled.div`
     margin: 0 auto;
 `;
 
-const ProfileHeader = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xxl};
-    text-align: center;
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
+const DashboardWrapper = styled.div`
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 `;
 
-const Avatar = styled.div`
-    width: 100px;
-    height: 100px;
-    margin: 0 auto ${({ theme }) => theme.spacing.lg};
-    border-radius: 50%;
-    background: ${({ theme }) => theme.colors.gradient};
+const DashboardHeader = styled.div`
+    background: #f1f1f1;
+    padding: 15px 25px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-        font-size: 3rem;
-        color: white;
-    }
-`;
-
-const UserName = styled.h1`
-    font-size: 2rem;
-    margin-bottom: ${({ theme }) => theme.spacing.xs};
-    color: ${({ theme }) => theme.colors.text};
-`;
-
-const UserEmail = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-
-    svg {
-        font-size: 1rem;
-    }
-`;
-
-const UserMeta = styled.div`
-    display: flex;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.xl};
-    margin-top: ${({ theme }) => theme.spacing.lg};
-    flex-wrap: wrap;
-`;
-
-const MetaItem = styled.div`
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.875rem;
-
-    svg {
-        color: ${({ theme }) => theme.colors.primary};
-    }
-`;
-
-const RoleBadge = styled.span`
-    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.md};
-    background: ${({ $isAdmin, theme }) =>
-        $isAdmin ? theme.colors.gradient : `${theme.colors.primary}20`};
-    color: ${({ $isAdmin, theme }) => ($isAdmin ? 'white' : theme.colors.primary)};
-    border-radius: ${({ theme }) => theme.borderRadius.full};
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-`;
-
-const SectionCard = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xl};
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
-`;
-
-const SectionHeader = styled.div`
-    display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
+    align-items: center;
+    border-bottom: 1px solid #ccc;
 `;
 
-const SectionTitle = styled.h2`
-    font-size: 1.5rem;
-    color: ${({ theme }) => theme.colors.text};
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-
-    svg {
-        color: ${({ theme }) => theme.colors.primary};
+const AccountTitle = styled.h2`
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #444;
+    
+    span {
+        font-weight: 400;
+        font-size: 0.85rem;
+        margin-left: 8px;
+        color: #0066cc;
+        cursor: pointer;
+        
+        &:hover {
+            text-decoration: underline;
+        }
     }
 `;
 
-const EditButton = styled.button`
+const AccountStatus = styled.div`
+    font-size: 0.95rem;
+    color: #333;
+    
+    strong {
+        font-weight: 700;
+    }
+`;
+
+const TabBar = styled.div`
+    display: flex;
+    background: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    overflow-x: auto;
+`;
+
+const TabButton = styled.button`
+    padding: 15px 25px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: ${({ $active }) => ($active ? '#004a80' : '#0066cc')};
+    background: ${({ $active }) => ($active ? '#e1effa' : 'transparent')};
+    border: none;
+    border-right: 1px solid #ddd;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    
+    &:hover {
+        background: ${({ $active }) => ($active ? '#e1effa' : '#f0f0f0')};
+    }
+    
+    ${({ $active }) => $active && `
+        border-bottom: 3px solid #004a80;
+    `}
+`;
+
+const TabContent = styled.div`
+    padding: 30px;
+    min-height: 400px;
+`;
+
+const SummaryActions = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+`;
+
+const PrintLink = styled.button`
+    background: none;
+    border: none;
+    color: #0066cc;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border-radius: ${({ theme }) => theme.borderRadius.md};
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 0.875rem;
-    transition: all 0.3s ease;
-
+    cursor: pointer;
+    
     &:hover {
-        background: ${({ theme }) => theme.colors.primary};
-        color: white;
+        text-decoration: underline;
     }
 `;
 
-const FormGroup = styled.div`
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
-`;
-
-const Label = styled.label`
-    display: block;
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
-    color: ${({ theme }) => theme.colors.text};
-    font-weight: 500;
-`;
-
-const Input = styled.input`
-    width: 100%;
-    padding: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border: 2px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 1rem;
-    transition: all 0.3s ease;
-
-    &:focus {
-        outline: none;
-        border-color: ${({ theme }) => theme.colors.primary};
-    }
-
-    &:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-    }
-`;
-
-const StatsGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: ${({ theme }) => theme.spacing.md};
-`;
-
-const StatItem = styled.div`
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    padding: ${({ theme }) => theme.spacing.lg};
-    text-align: center;
-`;
-
-const StatValue = styled.div`
-    font-size: 2rem;
+const ContentTitle = styled.h3`
+    font-size: 1.2rem;
     font-weight: 700;
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #cc6600;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
 `;
 
-const StatLabel = styled.div`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.875rem;
-    margin-top: ${({ theme }) => theme.spacing.xs};
+const InfoBox = styled.div`
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
 `;
 
-const ActionButtons = styled.div`
+const LabelValue = styled.div`
     display: flex;
-    gap: ${({ theme }) => theme.spacing.md};
-    flex-wrap: wrap;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    
+    .label {
+        font-weight: 700;
+        width: 150px;
+        color: #555;
+    }
+    
+    .value {
+        color: #333;
+    }
 `;
 
-const Button = styled(motion.button)`
-    flex: 1;
-    min-width: 150px;
-    padding: ${({ theme }) => theme.spacing.md};
-    background: ${({ $danger, $primary, theme }) =>
-        $danger ? theme.colors.error : $primary ? theme.colors.gradient : theme.colors.backgroundAlt};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    color: ${({ $danger, $primary }) => ($danger || $primary ? 'white' : 'inherit')};
+const ActionBtn = styled.button`
+    background: ${({ $primary }) => ($primary ? '#0066cc' : '#f1f1f1')};
+    color: ${({ $primary }) => ($primary ? 'white' : '#333')};
+    border: 1px solid ${({ $primary }) => ($primary ? '#004a80' : '#ccc')};
+    padding: 8px 16px;
+    border-radius: 4px;
     font-weight: 600;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    transition: all 0.3s ease;
-
+    gap: 8px;
+    margin-right: 10px;
+    
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+        background: ${({ $primary }) => ($primary ? '#004a80' : '#e0e0e0')};
     }
 `;
 
-const LoginPrompt = styled(motion.div)`
-    text-align: center;
-    padding: ${({ theme }) => theme.spacing.xxl};
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
+const PricingGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 10px;
 `;
 
-const PromptTitle = styled.h2`
-    font-size: 1.5rem;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    color: ${({ theme }) => theme.colors.text};
+const PricingCard = styled.div`
+    background: white;
+    border: 2px solid ${({ $featured }) => ($featured ? '#0066cc' : '#eee')};
+    border-radius: 8px;
+    padding: 25px;
+    position: relative;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    ${({ $featured }) => $featured && `
+        &::after {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0066cc;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+    `}
 `;
 
-const PromptText = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
+const PriceTitle = styled.h4`
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: 700;
 `;
 
-const SuccessMessage = styled(motion.div)`
-    background: ${({ theme }) => `${theme.colors.success}20`};
-    border: 1px solid ${({ theme }) => theme.colors.success};
-    border-radius: ${({ theme }) => theme.borderRadius.md};
-    padding: ${({ theme }) => theme.spacing.md};
-    color: ${({ theme }) => theme.colors.success};
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
-    text-align: center;
+const PriceValue = styled.div`
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #004a80;
+    margin: 15px 0;
+    
+    span {
+        font-size: 1rem;
+        color: #666;
+        font-weight: 400;
+        margin-left: 4px;
+    }
 `;
 
-const ErrorMessage = styled(motion.div)`
-    background: ${({ theme }) => `${theme.colors.error}20`};
-    border: 1px solid ${({ theme }) => theme.colors.error};
-    border-radius: ${({ theme }) => theme.borderRadius.md};
-    padding: ${({ theme }) => theme.spacing.md};
-    color: ${({ theme }) => theme.colors.error};
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
-    text-align: center;
+const PriceDetail = styled.div`
+    font-size: 0.9rem;
+    color: #dd6600;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 `;
 
-function PasswordChangeForm({ user }) {
-    const [passwordData, setPasswordData] = useState({
-        currentPassword: '',
-        newPassword: '',
-        confirmPassword: ''
-    });
-    const [isChanging, setIsChanging] = useState(false);
-    const [message, setMessage] = useState({ type: '', text: '' });
+const PricingFeature = styled.div`
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    color: #555;
+    
+    svg {
+        color: #10b981;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+`;
 
-    const handlePasswordChange = async (e) => {
-        e.preventDefault();
-        setMessage({ type: '', text: '' });
 
-        // Validation
-        if (!passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
-            setMessage({ type: 'error', text: 'All fields are required' });
-            return;
-        }
-
-        if (passwordData.newPassword.length < 8) {
-            setMessage({ type: 'error', text: 'New password must be at least 8 characters' });
-            return;
-        }
-
-        if (passwordData.newPassword !== passwordData.confirmPassword) {
-            setMessage({ type: 'error', text: 'New passwords do not match' });
-            return;
-        }
-
-        if (passwordData.currentPassword === passwordData.newPassword) {
-            setMessage({ type: 'error', text: 'New password must be different from current password' });
-            return;
-        }
-
-        setIsChanging(true);
-
-        try {
-            const response = await fetch('/api/user/change-password', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: user.email,
-                    currentPassword: passwordData.currentPassword,
-                    newPassword: passwordData.newPassword
-                }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                setMessage({ type: 'success', text: 'Password changed successfully! A confirmation email has been sent.' });
-                setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
-            } else {
-                setMessage({ type: 'error', text: data.error || 'Failed to change password' });
-            }
-        } catch (error) {
-            setMessage({ type: 'error', text: 'An error occurred. Please try again.' });
-        }
-
-        setIsChanging(false);
-    };
-
+function SummaryTab({ user, onEdit, onLogout }) {
     return (
-        <form onSubmit={handlePasswordChange}>
-            {message.text && (
-                message.type === 'success' ? (
-                    <SuccessMessage
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                    >
-                        {message.text}
-                    </SuccessMessage>
-                ) : (
-                    <ErrorMessage
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                    >
-                        {message.text}
-                    </ErrorMessage>
-                )
-            )}
+        <div>
+            <SummaryActions>
+                <PrintLink onClick={() => window.print()}>
+                    <FiPrinter /> Print Account Summary
+                </PrintLink>
+            </SummaryActions>
 
-            <FormGroup>
-                <Label>Current Password</Label>
-                <Input
-                    type="password"
-                    value={passwordData.currentPassword}
-                    onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
-                    placeholder="Enter current password"
-                />
-            </FormGroup>
+            <ContentTitle>Summary</ContentTitle>
 
-            <FormGroup>
-                <Label>New Password</Label>
-                <Input
-                    type="password"
-                    value={passwordData.newPassword}
-                    onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
-                    placeholder="Enter new password (min 8 characters)"
-                />
-            </FormGroup>
+            <InfoBox>
+                <LabelValue>
+                    <div className="label">Name:</div>
+                    <div className="value">{user?.name}</div>
+                </LabelValue>
+                <LabelValue>
+                    <div className="label">Email:</div>
+                    <div className="value">{user?.email}</div>
+                </LabelValue>
+                <LabelValue>
+                    <div className="label">Client ID:</div>
+                    <div className="value">{user?.clientId || 'N/A'}</div>
+                </LabelValue>
+                <LabelValue>
+                    <div className="label">Account Type:</div>
+                    <div className="value">{user?.role === 'admin' ? 'Administrator' : 'Standard User'}</div>
+                </LabelValue>
+                <LabelValue>
+                    <div className="label">Subscription:</div>
+                    <div className="value" style={{ textTransform: 'capitalize' }}>{user?.subscriptionTier || 'Individual'}</div>
+                </LabelValue>
+            </InfoBox>
 
-            <FormGroup>
-                <Label>Confirm New Password</Label>
-                <Input
-                    type="password"
-                    value={passwordData.confirmPassword}
-                    onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
-                    placeholder="Confirm new password"
-                />
-            </FormGroup>
-
-            <Button
-                $primary
-                type="submit"
-                disabled={isChanging}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-            >
-                <FiShield /> {isChanging ? 'Changing Password...' : 'Change Password'}
-            </Button>
-        </form>
+            <div style={{ display: 'flex' }}>
+                <ActionBtn $primary onClick={onEdit}>
+                    <FiEdit2 size={14} /> Edit Profile
+                </ActionBtn>
+                <ActionBtn onClick={onLogout}>
+                    <FiLogOut size={14} /> Log Out
+                </ActionBtn>
+            </div>
+        </div>
     );
 }
 
 
 export default function ProfilePage() {
     const { user, isAuthenticated, isLoading, logout, updateProfile } = useAuth();
-    const { favorites } = useFavorites();
     const router = useRouter();
+    const [activeTab, setActiveTab] = useState('summary');
     const [isEditing, setIsEditing] = useState(false);
-    const [formData, setFormData] = useState({ name: '', email: '' });
+    const [formData, setFormData] = useState({ name: '' });
 
     React.useEffect(() => {
         if (user) {
-            setFormData({ name: user.name, email: user.email });
+            setFormData({ name: user.name });
         }
     }, [user]);
 
@@ -429,178 +345,188 @@ export default function ProfilePage() {
     };
 
     if (isLoading) {
-        return (
-            <PageWrapper>
-                <Container>
-                    <ProfileHeader>
-                        <p>Loading...</p>
-                    </ProfileHeader>
-                </Container>
-            </PageWrapper>
-        );
+        return <PageWrapper><Container>Loading...</Container></PageWrapper>;
     }
 
     if (!isAuthenticated) {
         return (
             <PageWrapper>
                 <Container>
-                    <LoginPrompt
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                    >
-                        <Avatar>
-                            <FiUser />
-                        </Avatar>
-                        <PromptTitle>Not Logged In</PromptTitle>
-                        <PromptText>
-                            Please log in to view your profile and account settings.
-                        </PromptText>
-                        <Button
-                            $primary
-                            onClick={() => router.push('/login')}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                        >
-                            <FiUser /> Login / Register
-                        </Button>
-                    </LoginPrompt>
+                    <div style={{ textAlign: 'center', padding: '50px' }}>
+                        <h2>Please log in to view your account</h2>
+                        <ActionBtn $primary onClick={() => router.push('/login')} style={{ margin: '20px auto' }}>
+                            Go to Login
+                        </ActionBtn>
+                    </div>
                 </Container>
             </PageWrapper>
         );
     }
 
+    const tabs = [
+        { id: 'summary', label: 'Account Summary' },
+        { id: 'pricing', label: 'Website Pricing' },
+        { id: 'activity', label: 'Account Activity' },
+        { id: 'recommendations', label: 'Recommendations' },
+        { id: 'lists', label: 'Saved Lists' },
+        { id: 'searches', label: 'Saved Searches' }
+    ];
+
     return (
         <PageWrapper>
             <Container>
-                <ProfileHeader
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                >
-                    <Avatar>
-                        <FiUser />
-                    </Avatar>
-                    <UserName>{user.name}</UserName>
-                    <UserEmail>
-                        <FiMail /> {user.email}
-                    </UserEmail>
-                    <UserMeta>
-                        <MetaItem>
-                            <FiCalendar />
-                            Joined {new Date(user.loginAt).toLocaleDateString()}
-                        </MetaItem>
-                        <RoleBadge $isAdmin={user.role === 'admin'}>
-                            {user.role}
-                        </RoleBadge>
-                    </UserMeta>
-                </ProfileHeader>
+                <DashboardWrapper>
+                    <DashboardHeader>
+                        <AccountTitle>
+                            {user.name.toUpperCase()}'s ACCOUNT <span onClick={handleLogout}>(Log Out)</span>
+                        </AccountTitle>
+                        <AccountStatus>
+                            Status: <strong>Good</strong>
+                        </AccountStatus>
+                    </DashboardHeader>
 
-                <SectionCard
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                >
-                    <SectionHeader>
-                        <SectionTitle>
-                            <FiSettings /> Account Settings
-                        </SectionTitle>
-                        <EditButton onClick={() => setIsEditing(!isEditing)}>
-                            {isEditing ? <FiSave /> : <FiEdit2 />}
-                            {isEditing ? 'Cancel' : 'Edit'}
-                        </EditButton>
-                    </SectionHeader>
+                    <TabBar>
+                        {tabs.map(tab => (
+                            <TabButton
+                                key={tab.id}
+                                $active={activeTab === tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                            >
+                                {tab.label}
+                            </TabButton>
+                        ))}
+                    </TabBar>
 
-                    <FormGroup>
-                        <Label>Display Name</Label>
-                        <Input
-                            type="text"
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            disabled={!isEditing}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Email Address</Label>
-                        <Input
-                            type="email"
-                            value={formData.email}
-                            disabled
-                        />
-                    </FormGroup>
+                    <TabContent>
+                        {activeTab === 'summary' && !isEditing && (
+                            <SummaryTab
+                                user={user}
+                                onEdit={() => setIsEditing(true)}
+                                onLogout={handleLogout}
+                            />
+                        )}
 
-                    {isEditing && (
-                        <Button
-                            $primary
-                            onClick={handleSave}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                        >
-                            <FiSave /> Save Changes
-                        </Button>
-                    )}
-                </SectionCard>
+                        {activeTab === 'summary' && isEditing && (
+                            <div>
+                                <ContentTitle>Edit Profile</ContentTitle>
+                                <InfoBox>
+                                    <div style={{ marginBottom: '20px' }}>
+                                        <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700' }}>Display Name</label>
+                                        <input
+                                            value={formData.name}
+                                            onChange={(e) => setFormData({ name: e.target.value })}
+                                            style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
+                                        />
+                                    </div>
+                                    <div style={{ marginBottom: '20px' }}>
+                                        <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700' }}>Email (Locked)</label>
+                                        <input
+                                            value={user.email}
+                                            disabled
+                                            style={{ width: '100%', padding: '10px', border: '1px solid #eee', background: '#f9f9f9', borderRadius: '4px', cursor: 'not-allowed' }}
+                                        />
+                                    </div>
+                                </InfoBox>
+                                <div style={{ display: 'flex' }}>
+                                    <ActionBtn $primary onClick={handleSave}>Save Changes</ActionBtn>
+                                    <ActionBtn onClick={() => setIsEditing(false)}>Cancel</ActionBtn>
+                                </div>
+                            </div>
+                        )}
 
-                <SectionCard
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 }}
-                >
-                    <SectionTitle>
-                        <FiShield /> Change Password
-                    </SectionTitle>
-                    <PasswordChangeForm user={user} />
-                </SectionCard>
+                        {activeTab === 'pricing' && (
+                            <div>
+                                <ContentTitle>Website Database Production Pricing</ContentTitle>
+                                <p style={{ color: '#666', marginBottom: '25px' }}>Tailored solutions for your digital ecosystem. Each plan includes continuous support and updates.</p>
 
-                <SectionCard
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                >
-                    <SectionTitle>
-                        <FiHeart /> Activity
-                    </SectionTitle>
-                    <StatsGrid>
-                        <StatItem>
-                            <StatValue>{favorites.length}</StatValue>
-                            <StatLabel>Favorites</StatLabel>
-                        </StatItem>
-                        <StatItem>
-                            <StatValue>1</StatValue>
-                            <StatLabel>Sessions</StatLabel>
-                        </StatItem>
-                        <StatItem>
-                            <StatValue>{user.role === 'admin' ? 'Full' : 'Standard'}</StatValue>
-                            <StatLabel>Access Level</StatLabel>
-                        </StatItem>
-                    </StatsGrid>
-                </SectionCard>
+                                <PricingGrid>
+                                    <PricingCard>
+                                        <PriceTitle>Website Only</PriceTitle>
+                                        <PriceValue>$499 <span>One-time</span></PriceValue>
+                                        <PriceDetail><FiShield /> $499/mo Monthly Updates</PriceDetail>
+                                        <PricingFeature><FiCheck /> Full SEO Optimization</PricingFeature>
+                                        <PricingFeature><FiCheck /> Responsive Web Design</PricingFeature>
+                                        <PricingFeature><FiCheck /> Secure Hosting & CDN</PricingFeature>
+                                        <PricingFeature><FiCheck /> Database Integration</PricingFeature>
+                                    </PricingCard>
 
-                <SectionCard
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                >
-                    <SectionTitle>
-                        <FiShield /> Account Actions
-                    </SectionTitle>
-                    <ActionButtons>
-                        <Button
-                            onClick={() => router.push('/favorites')}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                        >
-                            <FiHeart /> View Favorites
-                        </Button>
-                        <Button
-                            $danger
-                            onClick={handleLogout}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                        >
-                            <FiLogOut /> Sign Out
-                        </Button>
-                    </ActionButtons>
-                </SectionCard>
+                                    <PricingCard $featured>
+                                        <PriceTitle>Website + 1 App</PriceTitle>
+                                        <PriceValue>$750 <span>One-time</span></PriceValue>
+                                        <PriceDetail><FiShield /> $499/mo Monthly Updates</PriceDetail>
+                                        <PricingFeature><FiCheck /> iOS or Android Mobile App</PricingFeature>
+                                        <PricingFeature><FiCheck /> App Store Store Submission</PricingFeature>
+                                        <PricingFeature><FiCheck /> Real-time Data Sync</PricingFeature>
+                                        <PricingFeature><FiCheck /> Push Notifications</PricingFeature>
+                                    </PricingCard>
+
+                                    <PricingCard>
+                                        <PriceTitle>Website + 2 Apps</PriceTitle>
+                                        <PriceValue>$1,250 <span>One-time</span></PriceValue>
+                                        <PriceDetail><FiShield /> $499/mo Monthly Updates</PriceDetail>
+                                        <PricingFeature><FiCheck /> iOS & Android Mobile Apps</PricingFeature>
+                                        <PricingFeature><FiCheck /> Store Submissions Included</PricingFeature>
+                                        <PricingFeature><FiCheck /> Multi-platform Analytics</PricingFeature>
+                                        <PricingFeature><FiCheck /> Priority Technical Support</PricingFeature>
+                                    </PricingCard>
+                                </PricingGrid>
+                            </div>
+                        )}
+
+                        {activeTab === 'activity' && (
+                            <div>
+                                <ContentTitle>Account Activity</ContentTitle>
+                                <p style={{ color: '#666' }}>Recent account activity and log-ins will appear here.</p>
+                                <InfoBox>
+                                    <div style={{ fontSize: '0.9rem' }}>
+                                        <strong>Last Login:</strong> {new Date(user.loginAt).toLocaleString()}
+                                    </div>
+                                </InfoBox>
+                            </div>
+                        )}
+
+                        {activeTab === 'recommendations' && (
+                            <div>
+                                <ContentTitle>Recommendations</ContentTitle>
+                                <p style={{ color: '#666' }}>Personalized software and tool recommendations based on your usage.</p>
+                                <InfoBox>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <FiStar color="#cc6600" />
+                                        <span>Check out our newest AI tools in the Portfolio section!</span>
+                                    </div>
+                                </InfoBox>
+                            </div>
+                        )}
+
+                        {activeTab === 'lists' && (
+                            <div>
+                                <ContentTitle>Saved Lists</ContentTitle>
+                                <p style={{ color: '#666' }}>Your bookmarks and saved software configurations.</p>
+                                <InfoBox>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <FiList color="#0066cc" />
+                                        <span>You haven't saved any lists yet.</span>
+                                    </div>
+                                </InfoBox>
+                            </div>
+                        )}
+
+                        {activeTab === 'searches' && (
+                            <div>
+                                <ContentTitle>Saved Searches</ContentTitle>
+                                <p style={{ color: '#666' }}>Quickly access your frequent searches and filters.</p>
+                                <InfoBox>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <FiSearch color="#555" />
+                                        <span>No saved searches found.</span>
+                                    </div>
+                                </InfoBox>
+                            </div>
+                        )}
+                    </TabContent>
+                </DashboardWrapper>
             </Container>
         </PageWrapper>
     );
 }
+

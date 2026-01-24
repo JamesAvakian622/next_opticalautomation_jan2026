@@ -23,7 +23,7 @@ const FooterContent = styled.div`
 
 const FooterTop = styled.div`
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: ${({ theme }) => theme.spacing.xl};
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
 
@@ -33,46 +33,47 @@ const FooterTop = styled.div`
 
     @media (max-width: 600px) {
         grid-template-columns: 1fr;
-        text-align: left;
+        text-align: center;
     }
 `;
 
-const BrandSection = styled.div``;
+const BrandSection = styled.div`
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: ${({ theme }) => theme.spacing.xl};
+`;
 
 const LogoLink = styled(Link)`
-    display: inline-flex;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.sm};
+    gap: ${({ theme }) => theme.spacing.md};
     margin-bottom: ${({ theme }) => theme.spacing.md};
-
-    @media (max-width: 600px) {
-        justify-content: flex-start;
-    }
 `;
 
 const LogoImage = styled.div`
-    width: 50px;
-    height: 50px;
+    width: 150px;
+    height: 150px;
     position: relative;
-    border-radius: ${({ theme }) => theme.borderRadius.md};
+    border-radius: 0;
     overflow: hidden;
 `;
 
 const CompanyName = styled.span`
-    font-size: 1.25rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: ${({ theme }) => theme.colors.text};
 `;
 
 const BrandDescription = styled.p`
     color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.875rem;
+    font-size: 0.95rem;
     line-height: 1.6;
-    max-width: 300px;
-
-    @media (max-width: 600px) {
-        max-width: 100%;
-    }
+    max-width: 600px;
+    margin: 0 auto;
 `;
 
 const FooterSection = styled.div``;
@@ -117,8 +118,28 @@ const FooterBottom = styled.div`
 
 const Copyright = styled.p`
     color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     margin: 0;
+`;
+
+const LegalDisclaimer = styled.p`
+    color: ${({ theme }) => theme.colors.textSecondary};
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin-bottom: ${({ theme }) => theme.spacing.sm};
+    max-width: 800px;
+    opacity: 0.8;
+`;
+
+const BottomCreditWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    @media (max-width: 600px) {
+        align-items: center;
+        text-align: center;
+    }
 `;
 
 const SocialSection = styled.div`
@@ -155,28 +176,41 @@ const socialLinks = [
   { name: 'GitHub', href: 'https://github.com/opticalautomation', icon: FiGithub }
 ];
 
-const navigationLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/tech', label: 'Technology' },
-  { href: '/products', label: 'Products' },
+const portfolioLinks = [
+  { href: '/portfolio', label: 'All Projects' },
+  { href: '/portfolio#react-nextjs', label: 'React / Next.js' },
+  { href: '/portfolio#mern', label: 'MERN Stack' },
+  { href: '/portfolio#swiftui', label: 'SwiftUI' },
+  { href: '/portfolio#react-native', label: 'React Native' },
+  { href: '/portfolio#python', label: 'Python' }
+];
+
+const technologyLinks = [
+  { href: '/tech#react', label: 'Frontend' },
+  { href: '/tech#nodejs', label: 'Backend' },
+  { href: '/tech#mongodb', label: 'Database' },
+  { href: '/tech#fullstack', label: 'Full-Stack' },
+  { href: '/tech#ai-agentic', label: 'AI Agentic' },
+  { href: '/timeline', label: 'Timeline' }
+];
+
+const productsLinks = [
+  { href: '/deskview', label: 'DeskView' },
+  { href: '/products', label: 'E-Commerce' },
+  { href: '/products', label: 'Automotive' },
+  { href: '/products', label: 'Business' },
+  { href: '/products', label: 'Finance' },
+  { href: '/products', label: 'Scheduling' }
+];
+
+const resourcesLinks = [
+  { href: '/about', label: 'About Us' },
   { href: '/pricing', label: 'Pricing' },
-  { href: '/documents', label: 'Documents' }
-];
-
-const legalLinks = [
-  { href: '/terms', label: 'Terms of Use' },
-  { href: '/privacy', label: 'Privacy Policy' },
-  { href: '/content-policy', label: 'Content Policy' },
-  { href: '/trademarks', label: 'Trademarks' },
+  { href: '/documents', label: 'Documents' },
+  { href: '/guides', label: 'Guides' },
+  { href: '/forgot-password', label: 'Password Reset' },
+  { href: '/support', label: 'Support' },
   { href: '/sitemap', label: 'Site Map' }
-];
-
-const supportLinks = [
-  { href: '/support', label: 'Technical Support' },
-  { href: '/support#faq', label: 'FAQ' },
-  { href: '/support#contact', label: 'Contact Us' },
-  { href: '/login', label: 'Login / Register' }
 ];
 
 export default function Footer() {
@@ -200,15 +234,14 @@ export default function Footer() {
             </LogoLink>
             <BrandDescription>
               Cutting-edge shared MERN website and mobile app information system solutions using AI-assisted development deployment by modern technologies. Transform your ideas into powerful digital experiences with our talent and experience.
-
             </BrandDescription>
           </BrandSection>
 
           <FooterSection>
-            <SectionTitle>Navigation</SectionTitle>
+            <SectionTitle>Portfolio</SectionTitle>
             <FooterLinks>
-              {navigationLinks.map((link) => (
-                <FooterLinkItem key={link.href}>
+              {portfolioLinks.map((link) => (
+                <FooterLinkItem key={link.label}>
                   <FooterLink href={link.href}>{link.label}</FooterLink>
                 </FooterLinkItem>
               ))}
@@ -216,10 +249,10 @@ export default function Footer() {
           </FooterSection>
 
           <FooterSection>
-            <SectionTitle>Support</SectionTitle>
+            <SectionTitle>Technology</SectionTitle>
             <FooterLinks>
-              {supportLinks.map((link) => (
-                <FooterLinkItem key={link.href}>
+              {technologyLinks.map((link) => (
+                <FooterLinkItem key={link.label}>
                   <FooterLink href={link.href}>{link.label}</FooterLink>
                 </FooterLinkItem>
               ))}
@@ -227,10 +260,21 @@ export default function Footer() {
           </FooterSection>
 
           <FooterSection>
-            <SectionTitle>Legal</SectionTitle>
+            <SectionTitle>Products</SectionTitle>
             <FooterLinks>
-              {legalLinks.map((link) => (
-                <FooterLinkItem key={link.href}>
+              {productsLinks.map((link) => (
+                <FooterLinkItem key={link.label}>
+                  <FooterLink href={link.href}>{link.label}</FooterLink>
+                </FooterLinkItem>
+              ))}
+            </FooterLinks>
+          </FooterSection>
+
+          <FooterSection>
+            <SectionTitle>Resources</SectionTitle>
+            <FooterLinks>
+              {resourcesLinks.map((link) => (
+                <FooterLinkItem key={link.label}>
                   <FooterLink href={link.href}>{link.label}</FooterLink>
                 </FooterLinkItem>
               ))}
@@ -239,9 +283,15 @@ export default function Footer() {
         </FooterTop>
 
         <FooterBottom>
-          <Copyright>
-            © {currentYear} Optical Automation, LLC. All rights reserved.
-          </Copyright>
+          <BottomCreditWrapper>
+            <LegalDisclaimer>
+              All trademarks, product names, and logos are the property of their respective owners.
+              Unauthorized reproduction or distribution of any material on this site is prohibited.
+            </LegalDisclaimer>
+            <Copyright>
+              © {currentYear} Optical Automation, LLC. All rights reserved.
+            </Copyright>
+          </BottomCreditWrapper>
 
           <SocialSection>
             {socialLinks.map((social) => (

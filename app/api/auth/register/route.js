@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getUsersCollection } from '@/lib/mongodb';
-import { hashPassword, generateClientId, isValidEmail, validatePassword } from '@/lib/auth';
+import { hashPassword, generateClientId, isValidEmail, validatePassword, generateToken } from '@/lib/auth';
 
 export async function POST(request) {
     try {
@@ -60,7 +60,6 @@ export async function POST(request) {
         const result = await users.insertOne(newUser);
 
         // Generate token for auto-login
-        const { generateToken } = require('@/lib/auth');
         const token = generateToken(
             result.insertedId.toString(),
             newUser.email,

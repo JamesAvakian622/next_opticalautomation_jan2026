@@ -40,11 +40,14 @@ import {
     FiPackage,
     FiBarChart2,
     FiCalendar,
-    FiUsers
+    FiUsers,
+    FiZap,
+    FiTerminal
 } from 'react-icons/fi';
 import { useTheme } from './ThemeProvider';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import { useAuth } from '@/contexts/AuthContext';
+import { UserButton as ClerkUserButton, useUser } from '@clerk/nextjs';
 
 // Mega Menu Data
 const megaMenuData = {
@@ -59,7 +62,8 @@ const megaMenuData = {
                     { href: '/portfolio#react-nextjs', label: 'React / Next.js', icon: FiCode, desc: 'Modern web applications' },
                     { href: '/portfolio#mern', label: 'MERN Stack', icon: FiDatabase, desc: 'MongoDB applications' },
                     { href: '/portfolio#swiftui', label: 'SwiftUI', icon: FiSmartphone, desc: 'iOS applications' },
-
+                    { href: '/portfolio#react-native', label: 'React Native', icon: FiSmartphone, desc: 'Mobile solutions' },
+                    { href: '/portfolio#python', label: 'Python', icon: FiZap, desc: 'AI & Automation' }
                 ]
             },
             {
@@ -87,11 +91,19 @@ const megaMenuData = {
             {
                 title: 'Frontend',
                 links: [
-                    { href: '/tech#react', label: 'Next.js', icon: FiLayers, desc: 'React framework' },
-                    { href: '/tech#styling', label: 'StyledComponents & TailwindCSS', icon: FiPackage, desc: 'CSS-in-JS styling' },
-                    { href: '/tech#uiux', label: 'UI / UX Design', icon: FiLayout, desc: 'User experience design' },
-                    { href: '/tech#seo', label: 'SEO Optimization', icon: FiTrendingUp, desc: 'Search engine ranking' },
+                    { href: '/tech#react', label: 'React.JS / Next.JS', icon: FiCode, desc: 'Advanced UI frameworks' },
+                    { href: '/tech#reactnative', label: 'ReactNative', icon: FiSmartphone, desc: 'Mobile app development' },
+                    { href: '/tech#python', label: 'Python', icon: FiTerminal, desc: 'AI & Data solutions' },
                     { href: '/tech#ai-agentic', label: 'AI Agentic Development', icon: FiCpu, desc: 'AI-powered coding' }
+                ]
+            },
+            {
+                title: 'Foundational',
+                links: [
+                    { href: '/tech#styling', label: 'CSS & StyledComponents', icon: FiPackage, desc: 'CSS-in-JS styling' },
+                    { href: '/tech#styling', label: 'TailwindCSS', icon: FiZap, desc: 'Utility-first CSS' },
+                    { href: '/tech#uiux', label: 'UI / UX Design', icon: FiLayout, desc: 'User experience design' },
+                    { href: '/tech#seo', label: 'SEO Optimization', icon: FiTrendingUp, desc: 'Search engine ranking' }
                 ]
             },
             {
@@ -107,8 +119,7 @@ const megaMenuData = {
                 title: 'Mobile',
                 links: [
                     { href: '/tech#fullstack', label: 'SwiftUI', icon: FiSmartphone, desc: 'iOS development' },
-                    { href: '/tech#reactnative', label: 'ReactNative', icon: FiSmartphone, desc: 'Swift and Android development' },
-
+                    { href: '/tech#reactnative', label: 'ReactNative', icon: FiSmartphone, desc: 'Cross-platform apps' }
                 ]
             },
             {
@@ -137,7 +148,8 @@ const megaMenuData = {
                 links: [
                     { href: '/products', label: 'Automotive', icon: FiTruck, desc: 'Corvette & racing' },
                     { href: '/products', label: 'Business', icon: FiTrendingUp, desc: 'Enterprise tools' },
-                    { href: '/products', label: 'Finance', icon: FiDollarSign, desc: 'Investment & tracking' }
+                    { href: '/products', label: 'Finance', icon: FiDollarSign, desc: 'Investment & tracking' },
+                    { href: '/products', label: 'Telecommunications', icon: FiPhone, desc: 'communications Information' }
                 ]
             },
             {
@@ -179,6 +191,28 @@ const megaMenuData = {
                     { href: '/content-policy', label: 'Content Policy', icon: FiShield, desc: 'Content guidelines' },
                     { href: '/trademarks', label: 'Trademarks', icon: FiAward, desc: 'Brand guidelines' },
                     { href: '/sitemap', label: 'Site Map', icon: FiGrid, desc: 'Browse all pages' }
+                ]
+            }
+        ]
+    },
+    administrative: {
+        title: 'Admin',
+        icon: FiShield,
+        isAdminOnly: true,
+        sections: [
+            {
+                title: 'System Management',
+                links: [
+                    { href: '/admin/accounts', label: 'User Accounts', icon: FiUsers, desc: 'Manage platform users' },
+                    { href: '/api/analytics', label: 'Analytics', icon: FiBarChart2, desc: 'System performance' },
+                    { href: '/settings', label: 'Global Settings', icon: FiSettings, desc: 'Configure platform' }
+                ]
+            },
+            {
+                title: 'Infrastructure',
+                links: [
+                    { href: '/admin/logs', label: 'Server Logs', icon: FiTerminal, desc: 'View raw logs' },
+                    { href: '/admin/health', label: 'Health Check', icon: FiZap, desc: 'Monitor status' }
                 ]
             }
         ]
@@ -231,7 +265,7 @@ const LogoImage = styled.div`
     width: 40px;
     height: 40px;
     position: relative;
-    border-radius: ${({ theme }) => theme.borderRadius.md};
+    border-radius: 0;
     overflow: hidden;
 `;
 
@@ -610,6 +644,7 @@ export default function Navigation() {
     const { isDark, toggleTheme } = useTheme();
     const { favorites } = useFavorites();
     const { user, isAuthenticated } = useAuth();
+    const { isSignedIn } = useUser();
     const navRef = useRef(null);
 
     // Handle scroll
@@ -669,19 +704,21 @@ export default function Navigation() {
                             Home
                         </SimpleNavLink>
 
-                        {Object.entries(megaMenuData).map(([key, menu]) => (
-                            <NavItem key={key}>
-                                <NavLink
-                                    onClick={() => toggleMenu(key)}
-                                    $isActive={activeMenu === key}
-                                    $isOpen={activeMenu === key}
-                                >
-                                    <menu.icon />
-                                    {menu.title}
-                                    <FiChevronDown className="chevron" />
-                                </NavLink>
-                            </NavItem>
-                        ))}
+                        {Object.entries(megaMenuData)
+                            .filter(([_, menu]) => !menu.isAdminOnly || (isAuthenticated && user?.role === 'admin'))
+                            .map(([key, menu]) => (
+                                <NavItem key={key}>
+                                    <NavLink
+                                        onClick={() => toggleMenu(key)}
+                                        $isActive={activeMenu === key}
+                                        $isOpen={activeMenu === key}
+                                    >
+                                        <menu.icon />
+                                        {menu.title}
+                                        <FiChevronDown className="chevron" />
+                                    </NavLink>
+                                </NavItem>
+                            ))}
                     </NavLinks>
 
                     <NavActions>
@@ -714,16 +751,22 @@ export default function Navigation() {
                             {isDark ? <FiSun /> : <FiMoon />}
                         </ActionButton>
 
-                        <UserButton
-                            as={Link}
-                            href={isAuthenticated ? '/profile' : '/login'}
-                            $isLoggedIn={isAuthenticated}
-                            title={isAuthenticated ? user?.name : 'Login'}
-                            aria-label={isAuthenticated ? 'Profile' : 'Login'}
-                            onClick={() => setActiveMenu(null)}
-                        >
-                            {isAuthenticated ? <FiUser /> : <FiLogIn />}
-                        </UserButton>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            {isSignedIn ? (
+                                <ClerkUserButton afterSignOutUrl="/" />
+                            ) : (
+                                <UserButton
+                                    as={Link}
+                                    href={isAuthenticated ? '/profile' : '/login'}
+                                    $isLoggedIn={isAuthenticated}
+                                    title={isAuthenticated ? user?.name : 'Login'}
+                                    aria-label={isAuthenticated ? 'Profile' : 'Login'}
+                                    onClick={() => setActiveMenu(null)}
+                                >
+                                    {isAuthenticated ? <FiUser /> : <FiLogIn />}
+                                </UserButton>
+                            )}
+                        </div>
 
                         <MobileMenuButton
                             onClick={() => setMobileMenuOpen(true)}
@@ -797,59 +840,66 @@ export default function Navigation() {
                                         style={{ objectFit: 'contain' }}
                                     />
                                 </LogoImage>
-                                <LogoText>Optical Automation</LogoText>
+                                <LogoText style={{ display: 'block' }}>Optical Automation</LogoText>
                             </LogoLink>
-                            <ActionButton
-                                onClick={() => setMobileMenuOpen(false)}
-                                aria-label="Close menu"
-                            >
+                            <ActionButton onClick={() => setMobileMenuOpen(false)}>
                                 <FiX />
                             </ActionButton>
                         </MobileMenuHeader>
 
                         <MobileNavLinks>
                             <MobileNavLink href="/" onClick={() => setMobileMenuOpen(false)}>
-                                <FiHome />
-                                Home
+                                <FiHome /> Home
                             </MobileNavLink>
 
-                            {Object.entries(megaMenuData).map(([key, menu]) => (
-                                <MobileNavItem key={key}>
-                                    <MobileNavButton
-                                        onClick={() => toggleMobileMenu(key)}
-                                        $isOpen={mobileActiveMenu === key}
-                                    >
-                                        <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                            <menu.icon />
-                                            {menu.title}
-                                        </span>
-                                        <FiChevronDown className="chevron" />
-                                    </MobileNavButton>
-
-                                    <AnimatePresence>
-                                        {mobileActiveMenu === key && (
-                                            <MobileSubMenu
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: 'auto' }}
-                                                exit={{ opacity: 0, height: 0 }}
-                                            >
-                                                {menu.sections.flatMap(section =>
-                                                    section.links.map((link, idx) => (
-                                                        <MobileSubLink
-                                                            key={idx}
-                                                            href={link.href}
-                                                            onClick={() => setMobileMenuOpen(false)}
-                                                        >
-                                                            <link.icon />
-                                                            {link.label}
-                                                        </MobileSubLink>
-                                                    ))
-                                                )}
-                                            </MobileSubMenu>
-                                        )}
-                                    </AnimatePresence>
-                                </MobileNavItem>
-                            ))}
+                            {Object.entries(megaMenuData)
+                                .filter(([_, menu]) => !menu.isAdminOnly || (isAuthenticated && user?.role === 'admin'))
+                                .map(([key, menu]) => (
+                                    <MobileNavItem key={key}>
+                                        <MobileNavButton
+                                            onClick={() => toggleMobileMenu(key)}
+                                            $isOpen={mobileActiveMenu === key}
+                                        >
+                                            <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                                <menu.icon /> {menu.title}
+                                            </span>
+                                            <FiChevronDown className="chevron" />
+                                        </MobileNavButton>
+                                        <AnimatePresence>
+                                            {mobileActiveMenu === key && (
+                                                <MobileSubMenu
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: 'auto', opacity: 1 }}
+                                                    exit={{ height: 0, opacity: 0 }}
+                                                >
+                                                    {menu.sections.map((section, idx) => (
+                                                        <div key={idx} style={{ marginBottom: '16px' }}>
+                                                            <div style={{
+                                                                fontSize: '0.7rem',
+                                                                fontWeight: '700',
+                                                                textTransform: 'uppercase',
+                                                                color: 'rgba(255,255,255,0.4)',
+                                                                marginBottom: '8px',
+                                                                paddingLeft: '12px'
+                                                            }}>
+                                                                {section.title}
+                                                            </div>
+                                                            {section.links.map((link, linkIdx) => (
+                                                                <MobileSubLink
+                                                                    key={linkIdx}
+                                                                    href={link.href}
+                                                                    onClick={() => setMobileMenuOpen(false)}
+                                                                >
+                                                                    <link.icon /> {link.label}
+                                                                </MobileSubLink>
+                                                            ))}
+                                                        </div>
+                                                    ))}
+                                                </MobileSubMenu>
+                                            )}
+                                        </AnimatePresence>
+                                    </MobileNavItem>
+                                ))}
 
                             <MobileMenuDivider />
 

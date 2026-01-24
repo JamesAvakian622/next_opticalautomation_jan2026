@@ -187,7 +187,7 @@ const ValueCard = styled(motion.div)`
 const ValueIcon = styled.div`
     width: 60px;
     height: 60px;
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
+    border-radius: 0;
     background: ${({ $color }) => `${$color}20`};
     display: flex;
     align-items: center;

@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { FiMail, FiLock, FiUser, FiArrowRight, FiEye, FiEyeOff } from 'react-icons/fi';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import { SignInButton, useUser } from '@clerk/nextjs';
+import { FcGoogle } from 'react-icons/fc';
 
 const PageWrapper = styled.div`
     min-height: calc(100vh - 70px);
@@ -165,6 +167,51 @@ const SuccessMessage = styled(ErrorMessage)`
     color: ${({ theme }) => theme.colors.success};
 `;
 
+const Divider = styled.div`
+    display: flex;
+    align-items: center;
+    margin: ${({ theme }) => theme.spacing.xl} 0;
+    color: ${({ theme }) => theme.colors.textSecondary};
+    font-size: 0.85rem;
+
+    &::before, &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: ${({ theme }) => theme.colors.border};
+    }
+
+    &::before { margin-right: ${({ theme }) => theme.spacing.md}; }
+    &::after { margin-left: ${({ theme }) => theme.spacing.md}; }
+`;
+
+const GoogleButton = styled.button`
+    width: 100%;
+    padding: ${({ theme }) => theme.spacing.md};
+    background: white;
+    border: 1px solid ${({ theme }) => theme.colors.border};
+    border-radius: ${({ theme }) => theme.borderRadius.lg};
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: ${({ theme }) => theme.spacing.sm};
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: #f8f9fa;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    svg {
+        font-size: 1.5rem;
+    }
+`;
+
+
 const DemoCredentials = styled.div`
     margin-top: ${({ theme }) => theme.spacing.lg};
     padding: ${({ theme }) => theme.spacing.md};
@@ -249,6 +296,15 @@ export default function LoginPage() {
                     </Tab>
                 </TabContainer>
 
+                <SignInButton mode="modal">
+                    <GoogleButton>
+                        <FcGoogle /> Continue with Google
+                    </GoogleButton>
+                </SignInButton>
+
+                <Divider>or use email</Divider>
+
+
                 <Form onSubmit={handleSubmit}>
                     {!isLogin && (
                         <InputGroup>
@@ -302,6 +358,20 @@ export default function LoginPage() {
                             {showPassword ? <FiEyeOff /> : <FiEye />}
                         </PasswordToggle>
                     </InputGroup>
+
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-8px' }}>
+                        <Link
+                            href="/forgot-password"
+                            style={{
+                                fontSize: '0.85rem',
+                                color: 'var(--primary)',
+                                textDecoration: 'none',
+                                opacity: 0.8
+                            }}
+                        >
+                            Forgot Password?
+                        </Link>
+                    </div>
 
                     {error && (
                         <ErrorMessage

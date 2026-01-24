@@ -11,7 +11,9 @@ import {
   FiCpu,
   FiGlobe,
   FiZap,
-  FiBox
+  FiBox,
+  FiSmartphone,
+  FiTerminal
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -378,6 +380,36 @@ const technologies = [
       '• Secure authentication and data authorization',
       '• Performance-tuned retrieval and caching',
       'We build reliable backends that power everything from simple websites to complex enterprise applications.',
+    ],
+  },
+  {
+    id: 'reactnative',
+    icon: FiSmartphone,
+    title: 'React Native',
+    color: '#61DAFB',
+    description: [
+      'We develop high-performance cross-platform mobile applications using React Native.',
+      'Mobile development benefits:',
+      '• Single codebase for both iOS and Android platforms',
+      '• Native-like performance and smooth animations',
+      '• Access to native device APIs through powerful bridges',
+      '• Rapid development and deployment cycles',
+      'React Native allows us to deliver high-quality mobile experiences with greater efficiency and speed.',
+    ],
+  },
+  {
+    id: 'python',
+    icon: FiTerminal,
+    title: 'Python, AI, & Automation',
+    color: '#3776AB',
+    description: [
+      'Our data-centric solutions and automation tools are powered by the versatility of Python.',
+      'Python application areas:',
+      '• Advanced machine learning and AI model integration',
+      '• Scalable data processing and analytics pipelines',
+      '• Enterprise-level task automation and scripting',
+      '• High-performance backend services with FastAPI',
+      'Python\'s rich ecosystem makes it our primary choice for complex data challenges and intelligent automation.',
     ],
   },
 ];

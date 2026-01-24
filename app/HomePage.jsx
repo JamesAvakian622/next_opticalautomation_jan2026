@@ -73,7 +73,7 @@ const HeroLogo = styled(motion.div)`
     width: 120px;
     height: 120px;
     position: relative;
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
+    border-radius: 0;
     overflow: hidden;
     box-shadow: 0 20px 60px ${({ theme }) => theme.colors.shadow};
     flex-shrink: 0;
@@ -407,6 +407,12 @@ const quickLinks = [
         icon: FiFileText,
         title: 'Documents',
         description: 'Resources & guides'
+    },
+    {
+        href: '/forgot-password',
+        icon: FiShield,
+        title: 'Password Reset',
+        description: 'Recover your account'
     }
 ];
 

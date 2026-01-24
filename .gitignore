@@ -48,3 +48,6 @@ Thumbs.db
 *.swo
 .vercel
 .env*.local
+
+# clerk configuration (can include secrets)
+/.clerk/

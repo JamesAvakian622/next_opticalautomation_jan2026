@@ -17,7 +17,7 @@ async function seedAdminUser() {
         }
 
         // Create admin user
-        const hashedPassword = await hashPassword('admin123');
+        const hashedPassword = await hashPassword('as34gh90');
 
         const adminUser = {
             clientId: 'ADMIN_001',
@@ -35,7 +35,7 @@ async function seedAdminUser() {
         await users.insertOne(adminUser);
         console.log('✅ Admin user created successfully!');
         console.log('Email: admin@opticalautomation.com');
-        console.log('Password: admin123');
+        console.log('Password: as34gh90');
 
         process.exit(0);
     } catch (error) {

@@ -290,26 +290,6 @@ const documents = [
         color: '#10B981'
     },
     {
-        id: 3,
-        title: 'Brand Guidelines',
-        category: 'Design',
-        description: 'Official brand guidelines including logos, colors, and typography standards.',
-        fileType: 'PDF',
-        fileSize: '8.1 MB',
-        date: '2024-11-20',
-        color: '#EC4899'
-    },
-    {
-        id: 4,
-        title: 'Security Whitepaper',
-        category: 'Technical',
-        description: 'Detailed overview of our security practices, protocols, and compliance standards.',
-        fileType: 'PDF',
-        fileSize: '1.8 MB',
-        date: '2024-10-15',
-        color: '#F59E0B'
-    },
-    {
         id: 5,
         title: 'Project Proposal Template',
         category: 'Templates',
@@ -318,16 +298,6 @@ const documents = [
         fileSize: '156 KB',
         date: '2024-12-10',
         color: '#8B5CF6'
-    },
-    {
-        id: 6,
-        title: 'Client Onboarding Checklist',
-        category: 'Guides',
-        description: 'Step-by-step checklist for smooth client onboarding process.',
-        fileType: 'PDF',
-        fileSize: '540 KB',
-        date: '2024-11-30',
-        color: '#06B6D4'
     },
     {
         id: 7,
@@ -340,13 +310,23 @@ const documents = [
         color: '#10B981'
     },
     {
-        id: 8,
-        title: 'Service Level Agreement',
+        id: 23,
+        title: 'Master Service Agreement',
         category: 'Legal',
-        description: 'Standard SLA template outlining service commitments and guarantees.',
+        description: 'Comprehensive legal document covering Terms of Use, Content Policy, and Privacy Policy for all Optical Automation services.',
         fileType: 'PDF',
-        fileSize: '890 KB',
-        date: '2024-09-15',
+        fileSize: '1.4 MB',
+        date: '2025-01-24',
+        color: '#EF4444'
+    },
+    {
+        id: 24,
+        title: 'Intellectual Property Rights',
+        category: 'Legal',
+        description: 'Official documentation regarding our Copyrights, Trademarks, and the protection of proprietary technology and designs.',
+        fileType: 'PDF',
+        fileSize: '1.1 MB',
+        date: '2025-01-24',
         color: '#EF4444'
     },
     {
@@ -422,16 +402,6 @@ const documents = [
         color: '#10B981'
     },
     {
-        id: 16,
-        title: 'Infrastructure Overview',
-        category: 'Technical',
-        description: 'High-level architectural diagram and description of our cloud infrastructure and scaling capabilities.',
-        fileType: 'PDF',
-        fileSize: '3.4 MB',
-        date: '2024-11-15',
-        color: '#6366f1'
-    },
-    {
         id: 17,
         title: 'Deployment Guide',
         category: 'Technical',
@@ -452,14 +422,34 @@ const documents = [
         color: '#8B5CF6'
     },
     {
-        id: 19,
-        title: 'Risk Assessment Matrix',
-        category: 'Templates',
-        description: 'Comprehensive template for identifying, analyzing, and mitigating project and operational risks.',
-        fileType: 'XLSX',
-        fileSize: '240 KB',
-        date: '2024-10-20',
-        color: '#F59E0B'
+        id: 20,
+        title: 'Agentic AI Development',
+        category: 'Design',
+        description: 'Architectural standards and best practices for building autonomous AI agents and integrated agentic workflows.',
+        fileType: 'PDF',
+        fileSize: '3.8 MB',
+        date: '2025-01-20',
+        color: '#6366f1'
+    },
+    {
+        id: 21,
+        title: 'eCommerce Solutions',
+        category: 'Design',
+        description: 'Comprehensive design patterns for high-conversion eCommerce platforms, including checkout optimization and product discovery.',
+        fileType: 'PDF',
+        fileSize: '5.2 MB',
+        date: '2025-01-22',
+        color: '#10B981'
+    },
+    {
+        id: 22,
+        title: 'Mobile App Development',
+        category: 'Design',
+        description: 'Universal design principles for iOS and Android applications, focusing on native performance and user engagement.',
+        fileType: 'PDF',
+        fileSize: '4.5 MB',
+        date: '2025-01-24',
+        color: '#EC4899'
     }
 ];
 

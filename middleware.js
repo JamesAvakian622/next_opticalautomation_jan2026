@@ -1,52 +1,47 @@
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from 'next/server';
 
-export function middleware(request) {
-    const { pathname } = request.nextUrl;
+const isPublicRoute = createRouteMatcher([
+    '/',
+    '/login(.*)',
+    '/register(.*)',
+    '/api/auth/(.*)',
+    '/api/log-page',
+    '/api/seed-admin',
+    '/api/health',
+    '/about(.*)',
+    '/pricing(.*)',
+    '/portfolio(.*)',
+    '/tech(.*)',
+    '/products(.*)',
+    '/documents(.*)',
+    '/guides(.*)',
+    '/support(.*)',
+    '/sitemap(.*)',
+    '/terms(.*)',
+    '/privacy(.*)',
+    '/content-policy(.*)',
+    '/trademarks(.*)',
+    '/forgot-password(.*)',
+    '/opauto.ico',
+    '/opauto.png'
+]);
 
-    // Public paths that don't require authentication
-    const publicPaths = [
-        '/login',
-        '/register',
-        '/api/auth/login',
-        '/api/auth/register',
-        '/api/log-page',
-        '/api/seed-admin',
-        '/api/health',
-        '/_next',
-        '/favicon.ico',
-        '/opauto.ico',
-        '/opauto.png',
-        '/OpAuto1.png'
-    ];
-
-    // Check if the path is public
-    const isPublicPath = publicPaths.some(path => pathname.startsWith(path));
-
-    if (isPublicPath) {
-        return NextResponse.next();
+export default clerkMiddleware((auth, request) => {
+    if (!isPublicRoute(request)) {
+        const { userId } = auth();
+        if (!userId) {
+            const signInUrl = new URL('/login', request.url);
+            return NextResponse.redirect(signInUrl);
+        }
     }
-
-    // Check for authentication token in cookies
-    const token = request.cookies.get('token')?.value;
-
-    if (!token) {
-        // Redirect to login with the original URL as a redirect parameter
-        const loginUrl = new URL('/login', request.url);
-        loginUrl.searchParams.set('redirect', pathname);
-        return NextResponse.redirect(loginUrl);
-    }
-
-    return NextResponse.next();
-}
+});
 
 export const config = {
     matcher: [
-        /*
-         * Match all request paths except:
-         * - _next/static (static files)
-         * - _next/image (image optimization files)
-         * - favicon.ico (favicon file)
-         */
-        '/((?!_next/static|_next/image|favicon.ico).*)',
+        // Skip Next.js internals and all static files, unless found in search params
+        '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+        // Always run for API routes
+        '/(api|trpc)(.*)',
     ],
 };

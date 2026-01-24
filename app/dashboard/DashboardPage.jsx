@@ -326,6 +326,15 @@ export default function DashboardPage() {
                         <WelcomeSubtitle>
                             Manage your software subscriptions and selections
                         </WelcomeSubtitle>
+                        {user?.role === 'admin' && (
+                            <ActionButton
+                                $variant="primary"
+                                style={{ marginTop: '20px', background: 'rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255, 255, 255, 0.3)' }}
+                                onClick={() => router.push('/admin/accounts')}
+                            >
+                                <FiShield /> Admin Portal
+                            </ActionButton>
+                        )}
                     </WelcomeSection>
 
                     <StatsGrid>
