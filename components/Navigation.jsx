@@ -50,174 +50,33 @@ import { useAuth } from '@/contexts/AuthContext';
 import { UserButton as ClerkUserButton, useUser } from '@clerk/nextjs';
 
 // Mega Menu Data
-const megaMenuData = {
-    portfolio: {
-        title: 'Portfolio',
-        icon: FiGrid,
-        sections: [
-            {
-                title: 'Technologies',
-                links: [
-                    { href: '/portfolio', label: 'All Projects', icon: FiGrid, desc: 'View complete portfolio' },
-                    { href: '/portfolio#react-nextjs', label: 'React / Next.js', icon: FiCode, desc: 'Modern web applications' },
-                    { href: '/portfolio#mern', label: 'MERN Stack', icon: FiDatabase, desc: 'MongoDB applications' },
-                    { href: '/portfolio#swiftui', label: 'SwiftUI', icon: FiSmartphone, desc: 'iOS applications' },
-                    { href: '/portfolio#react-native', label: 'React Native', icon: FiSmartphone, desc: 'Mobile solutions' },
-                    { href: '/portfolio#python', label: 'Python', icon: FiZap, desc: 'AI & Automation' }
-                ]
-            },
-            {
-                title: 'Project Types',
-                links: [
-                    { href: '/portfolio', label: 'E-Commerce', icon: FiShoppingCart, desc: 'Online stores' },
-                    { href: '/portfolio', label: 'Dashboards', icon: FiBarChart2, desc: 'Analytics & admin' },
-                    { href: '/portfolio', label: 'Mobile Apps', icon: FiSmartphone, desc: 'IOS MongoDB applications' },
-                    { href: '/portfolio', label: 'Enterprise', icon: FiServer, desc: 'Business solutions' }
-                ]
-            },
-            {
-                title: 'Featured',
-                featured: true,
-                links: [
-                    { href: '/domains', label: 'Domain Portfolio', icon: FiGlobe, desc: '33+ premium domains', highlight: true }
-                ]
-            }
-        ]
-    },
-    technology: {
-        title: 'Technology',
-        icon: FiCpu,
-        sections: [
-            {
-                title: 'Frontend',
-                links: [
-                    { href: '/tech#react', label: 'React.JS / Next.JS', icon: FiCode, desc: 'Advanced UI frameworks' },
-                    { href: '/tech#reactnative', label: 'ReactNative', icon: FiSmartphone, desc: 'Mobile app development' },
-                    { href: '/tech#python', label: 'Python', icon: FiTerminal, desc: 'AI & Data solutions' },
-                    { href: '/tech#ai-agentic', label: 'AI Agentic Development', icon: FiCpu, desc: 'AI-powered coding' }
-                ]
-            },
-            {
-                title: 'Foundational',
-                links: [
-                    { href: '/tech#styling', label: 'CSS & StyledComponents', icon: FiPackage, desc: 'CSS-in-JS styling' },
-                    { href: '/tech#styling', label: 'TailwindCSS', icon: FiZap, desc: 'Utility-first CSS' },
-                    { href: '/tech#uiux', label: 'UI / UX Design', icon: FiLayout, desc: 'User experience design' },
-                    { href: '/tech#seo', label: 'SEO Optimization', icon: FiTrendingUp, desc: 'Search engine ranking' }
-                ]
-            },
-            {
-                title: 'Backend',
-                links: [
-                    { href: '/tech#nodejs', label: 'Node.js', icon: FiServer, desc: 'Server runtime' },
-                    { href: '/tech#nodejs', label: 'Express', icon: FiServer, desc: 'Web framework' },
-                    { href: '/tech#mongodb', label: 'MERN / MongoDB', icon: FiDatabase, desc: 'NoSQL database' },
-                    { href: '/tech#fullstack', label: 'Full-Stack Development', icon: FiLayers, desc: 'End-to-end solutions' }
-                ]
-            },
-            {
-                title: 'Mobile',
-                links: [
-                    { href: '/tech#fullstack', label: 'SwiftUI', icon: FiSmartphone, desc: 'iOS development' },
-                    { href: '/tech#reactnative', label: 'ReactNative', icon: FiSmartphone, desc: 'Cross-platform apps' }
-                ]
-            },
-            {
-                title: 'History',
-                links: [
-                    { href: '/timeline', label: 'Timeline', icon: FiCalendar, desc: 'Software evolution 2013-2026' }
-                ]
-            }
-        ]
-    },
-    products: {
-        title: 'Products',
-        icon: FiGlobe,
-        sections: [
-            {
-                title: 'Platforms',
-                links: [
-                    { href: '/products', label: 'All Products', icon: FiGlobe, desc: 'View all platforms' },
-                    { href: '/deskview', label: 'DeskView', icon: FiLayout, desc: 'Dashboard Information' },
-                    { href: '/products', label: 'Web Apps', icon: FiCode, desc: 'Browser-based solutions' },
-                    { href: '/products', label: 'Mobile Apps', icon: FiSmartphone, desc: 'IOS MongoDB applications' }
-                ]
-            },
-            {
-                title: 'Industries',
-                links: [
-                    { href: '/products', label: 'Automotive', icon: FiTruck, desc: 'Corvette & racing' },
-                    { href: '/products', label: 'Business', icon: FiTrendingUp, desc: 'Enterprise tools' },
-                    { href: '/products', label: 'Finance', icon: FiDollarSign, desc: 'Investment & tracking' },
-                    { href: '/products', label: 'Telecommunications', icon: FiPhone, desc: 'communications Information' }
-                ]
-            },
-            {
-                title: 'Solutions',
-                links: [
-                    { href: '/subscription', label: 'Access', icon: FiDollarSign, desc: 'Individual, Silver, and Gold' },
-                    { href: '/business-pricing', label: 'Business Licensing', icon: FiUsers, desc: 'Multi-user pricing' },
-                    { href: '/products', label: 'E-Commerce', icon: FiShoppingCart, desc: 'Online stores' },
-                    { href: '/products', label: 'Scheduling', icon: FiCalendar, desc: 'Booking systems' }
-                ]
-            }
-        ]
-    },
-    resources: {
-        title: 'Resources',
-        icon: FiFileText,
-        sections: [
-            {
-                title: 'Documentation',
-                links: [
-                    { href: '/documents', label: 'All Documents', icon: FiFileText, desc: 'Browse resources' },
-                    { href: '/guides', label: 'IP Guides', icon: FiBook, desc: 'Appendices A, B, C' }
-                ]
-            },
-            {
-                title: 'Company',
-                links: [
-                    { href: '/about', label: 'About Us', icon: FiAward, desc: 'Our Mission' },
-                    { href: '/pricing', label: 'Pricing', icon: FiDollarSign, desc: 'Plans & pricing' },
-                    { href: '/accounts', label: 'Accounts', icon: FiUser, desc: 'Customer Information' },
-                    { href: '/support', label: 'Support', icon: FiPhone, desc: 'Get help' }
-                ]
-            },
-            {
-                title: 'Legal',
-                links: [
-                    { href: '/terms', label: 'Terms of Service', icon: FiShield, desc: 'Usage terms' },
-                    { href: '/privacy', label: 'Privacy Policy', icon: FiShield, desc: 'Data protection' },
-                    { href: '/content-policy', label: 'Content Policy', icon: FiShield, desc: 'Content guidelines' },
-                    { href: '/trademarks', label: 'Trademarks', icon: FiAward, desc: 'Brand guidelines' },
-                    { href: '/sitemap', label: 'Site Map', icon: FiGrid, desc: 'Browse all pages' }
-                ]
-            }
-        ]
-    },
-    administrative: {
-        title: 'Admin',
-        icon: FiShield,
-        isAdminOnly: true,
-        sections: [
-            {
-                title: 'System Management',
-                links: [
-                    { href: '/admin/accounts', label: 'User Accounts', icon: FiUsers, desc: 'Manage platform users' },
-                    { href: '/api/analytics', label: 'Analytics', icon: FiBarChart2, desc: 'System performance' },
-                    { href: '/settings', label: 'Global Settings', icon: FiSettings, desc: 'Configure platform' }
-                ]
-            },
-            {
-                title: 'Infrastructure',
-                links: [
-                    { href: '/admin/logs', label: 'Server Logs', icon: FiTerminal, desc: 'View raw logs' },
-                    { href: '/admin/health', label: 'Health Check', icon: FiZap, desc: 'Monitor status' }
-                ]
-            }
-        ]
-    }
+import megaMenuDataRaw from '../data/megaMenu.json';
+
+// Icon Map
+const iconMap = {
+    FiSun, FiMoon, FiPrinter, FiHeart, FiUser, FiMenu, FiX, FiLogIn,
+    FiHome, FiGrid, FiCpu, FiGlobe, FiFileText, FiPhone, FiChevronDown,
+    FiCode, FiDatabase, FiSmartphone, FiServer, FiLayers, FiLayout,
+    FiShoppingCart, FiTruck, FiDollarSign, FiBook, FiSettings, FiMail,
+    FiHelpCircle, FiShield, FiAward, FiTrendingUp, FiPackage,
+    FiBarChart2, FiCalendar, FiUsers, FiZap, FiTerminal
 };
+
+// Process menu data to include actual icon components
+const megaMenuData = Object.entries(megaMenuDataRaw).reduce((acc, [key, section]) => {
+    acc[key] = {
+        ...section,
+        icon: iconMap[section.icon] || FiGrid, // Fallback icon
+        sections: section.sections.map(subSection => ({
+            ...subSection,
+            links: subSection.links.map(link => ({
+                ...link,
+                icon: iconMap[link.icon] || FiGrid // Fallback icon
+            }))
+        }))
+    };
+    return acc;
+}, {});
 
 // Styled Components
 const Nav = styled.nav`

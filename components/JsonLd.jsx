@@ -8,7 +8,10 @@ import {
     generateFAQJsonLd,
     generateWebPageJsonLd,
     generateBreadcrumbJsonLd,
-    generateSoftwareApplicationJsonLd
+    generateSoftwareApplicationJsonLd,
+    generateArticleJsonLd,
+    generateProductJsonLd,
+    generatePersonJsonLd
 } from '@/lib/metadata';
 
 export default function JsonLd({ type = 'organization', data }) {
@@ -38,6 +41,15 @@ export default function JsonLd({ type = 'organization', data }) {
             break;
         case 'softwareApplication':
             jsonLdData = data || generateSoftwareApplicationJsonLd();
+            break;
+        case 'article':
+            jsonLdData = data ? generateArticleJsonLd(data) : null;
+            break;
+        case 'product':
+            jsonLdData = data ? generateProductJsonLd(data) : null;
+            break;
+        case 'person':
+            jsonLdData = generatePersonJsonLd();
             break;
         default:
             jsonLdData = generateOrganizationJsonLd();
