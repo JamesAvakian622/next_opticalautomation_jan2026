@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import {
     FiGlobe,
     FiExternalLink,
@@ -24,10 +25,11 @@ import {
     FiHeart,
     FiBriefcase,
     FiDatabase,
-    FiSearch,
     FiLock,
-    FiGrid
+    FiGrid,
+    FiMonitor
 } from 'react-icons/fi';
+import WhoisLookup from '@/components/WhoisLookup';
 
 // Domain Data
 const domains = [
@@ -405,6 +407,114 @@ const domains = [
         icon: FiMusic,
         color: '#1DB954',
         website: 'http://www.GoodDayMusic.com'
+    },
+    {
+        id: 35,
+        name: 'My1.im',
+        status: 'active',
+        category: 'Dashboard',
+        description: 'Centralized dashboard platform for managing applications and digital assets.',
+        technologies: ['React', 'Next.js', 'API Integration'],
+        features: ['Application Hub', 'Unified Dashboard', 'Asset Management'],
+        icon: FiGrid,
+        color: '#06B6D4',
+        website: 'http://www.My1.im'
+    },
+    {
+        id: 36,
+        name: 'MyDeskView.com',
+        status: 'active',
+        category: 'Productivity',
+        description: 'Personalized desk and workspace visualization and management tool.',
+        technologies: ['React', 'Three.js', 'Node.js'],
+        features: ['3D Workspace', 'Task Integration', 'Productivity Tools'],
+        icon: FiMonitor,
+        color: '#6366f1',
+        website: 'http://www.MyDeskView.com'
+    },
+    {
+        id: 37,
+        name: 'HouseOfWebs.com',
+        status: 'active',
+        category: 'Web Development',
+        description: 'Comprehensive network of web properties and development resources.',
+        technologies: ['React', 'Next.js', 'MongoDB'],
+        features: ['Website Portfolio', 'Development Services', 'Resource Hub'],
+        icon: FiGlobe,
+        color: '#EC4899',
+        website: 'http://www.HouseOfWebs.com'
+    },
+    {
+        id: 38,
+        name: 'JimsEshop.com',
+        status: 'ready',
+        category: 'eCommerce',
+        description: 'Bespoke eCommerce solution for specialized product lines.',
+        technologies: ['Next.js', 'Stripe', 'MongoDB'],
+        features: ['Online Store', 'Inventory Management', 'Payment Processing'],
+        icon: FiShoppingCart,
+        color: '#10B981',
+        website: 'http://www.JimsEshop.com'
+    },
+    {
+        id: 39,
+        name: 'Hi5.im',
+        status: 'active',
+        category: 'Dashboard',
+        description: 'Interactive dashboard and social hub for the My1 network.',
+        technologies: ['React', 'Real-time', 'API'],
+        features: ['Social Integration', 'Network Dashboard', 'Interactive Tools'],
+        icon: FiActivity,
+        color: '#F59E0B',
+        website: 'http://www.Hi5.im'
+    },
+    {
+        id: 40,
+        name: 'CoolJimmyCorvette.com',
+        status: 'active',
+        category: 'Automotive',
+        description: 'Dedicated platform for the Cool Jimmy Corvette collection and enthusiast community.',
+        technologies: ['React', 'CMS', 'Gallery'],
+        features: ['Vehicle Showroom', 'Event Coverage', 'Community Forum'],
+        icon: FiTruck,
+        color: '#DC2626',
+        website: 'http://www.CoolJimmyCorvette.com'
+    },
+    {
+        id: 41,
+        name: 'ShopperLady.com',
+        status: 'active',
+        category: 'eCommerce',
+        description: 'Curated shopping destination featuring lifestyle products and recommendations.',
+        technologies: ['React', 'Affiliate Integration', 'CMS'],
+        features: ['Product Reviews', 'Shopping Guides', 'Curated Lists'],
+        icon: FiShoppingCart,
+        color: '#DB2777',
+        website: 'http://www.ShopperLady.com'
+    },
+    {
+        id: 42,
+        name: 'ShopperLadyToday.com',
+        status: 'active',
+        category: 'eCommerce',
+        description: 'Daily deals and trending products from the Shopper Lady network.',
+        technologies: ['Next.js', 'Real-time Updates', 'API'],
+        features: ['Daily Deals', 'Trending Items', 'Flash Sales'],
+        icon: FiActivity,
+        color: '#F97316',
+        website: 'http://www.ShopperLadyToday.com'
+    },
+    {
+        id: 43,
+        name: 'TheBrandedSeries.com',
+        status: 'active',
+        category: 'Technology',
+        description: 'Technical series and documentation focusing on branded software solutions.',
+        technologies: ['React', 'CMS', 'Documentation Framework'],
+        features: ['Technical Articles', 'Case Studies', 'Brand Showcase'],
+        icon: FiCode,
+        color: '#4F46E5',
+        website: 'http://www.TheBrandedSeries.com'
     }
 ];
 
@@ -419,7 +529,7 @@ const filterCategories = [
 
 // Styled Components
 const PageWrapper = styled.div`
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh-70px);
 `;
 
 const HeroSection = styled.section`
@@ -453,14 +563,36 @@ const HeroContent = styled.div`
     z-index: 1;
 `;
 
+
+
+const LogoWrapper = styled(motion.div)`
+    width: 60px;
+    height: 60px;
+    position: relative;
+    border-radius: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    @media (max-width: 768px) {
+        width: 40px;
+        height: 40px;
+    }
+`;
+
 const PageTitle = styled(motion.h1)`
     font-size: 3.5rem;
     color: white;
     margin-bottom: ${({ theme }) => theme.spacing.lg};
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: ${({ theme }) => theme.spacing.md};
 
     @media (max-width: 768px) {
         font-size: 2.5rem;
+        flex-direction: column;
     }
 `;
 
@@ -477,180 +609,180 @@ const Subtitle = styled(motion.p)`
 `;
 
 const StatsRow = styled(motion.div)`
-    display: flex;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.xl};
-    margin-top: ${({ theme }) => theme.spacing.xl};
-    flex-wrap: wrap;
+display: flex;
+justify-content: center;
+gap: ${({ theme }) => theme.spacing.xl};
+margin-top: ${({ theme }) => theme.spacing.xl};
+flex-wrap: wrap;
 `;
 
 const StatItem = styled.div`
-    text-align: center;
-    color: white;
+text-align: center;
+color: white;
 `;
 
 const StatValue = styled.div`
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: ${({ theme }) => theme.spacing.xs};
+font-size: 2.5rem;
+font-weight: 800;
+margin-bottom: ${({ theme }) => theme.spacing.xs};
 
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
+@media(max-width: 768px) {
+    font-size: 2rem;
+}
 `;
 
 const StatLabel = styled.div`
-    font-size: 0.875rem;
-    opacity: 0.9;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+font-size: 0.875rem;
+opacity: 0.9;
+text-transform: uppercase;
+letter-spacing: 0.1em;
 `;
 
 const FilterSection = styled.section`
-    padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.lg};
-    background: ${({ theme }) => theme.colors.surface};
-    position: sticky;
-    top: 70px;
-    z-index: 10;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.lg};
+background: ${({ theme }) => theme.colors.surface};
+position: sticky;
+top: 70px;
+z-index: 10;
+border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const FilterContainer = styled.div`
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    flex-wrap: wrap;
+max-width: 1400px;
+margin: 0 auto;
+display: flex;
+justify-content: center;
+gap: ${({ theme }) => theme.spacing.sm};
+flex-wrap: wrap;
 `;
 
 const FilterButton = styled(motion.button)`
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
-    background: ${props => props.$isActive ? props.theme.colors.gradient : props.theme.colors.background};
-    color: ${props => props.$isActive ? 'white' : props.theme.colors.text};
-    border: 1px solid ${props => props.$isActive ? 'transparent' : props.theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+display: flex;
+align-items: center;
+gap: ${({ theme }) => theme.spacing.sm};
+padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
+background: ${props => props.$isActive ? props.theme.colors.gradient : props.theme.colors.background};
+color: ${props => props.$isActive ? 'white' : props.theme.colors.text};
+border: 1px solid ${props => props.$isActive ? 'transparent' : props.theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+font-size: 0.9rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
 
     svg {
-        font-size: 1rem;
-    }
+    font-size: 1rem;
+}
 
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
-    }
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+}
 
-    @media (max-width: 600px) {
-        padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-        font-size: 0.8rem;
-    }
+@media(max-width: 600px) {
+    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+    font-size: 0.8rem;
+}
 `;
 
 const ContentSection = styled.section`
-    padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.lg};
-    background: ${({ theme }) => theme.colors.background};
+padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.lg};
+background: ${({ theme }) => theme.colors.background};
 
-    @media (max-width: 768px) {
-        padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.md};
-    }
+@media(max-width: 768px) {
+    padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.md};
+}
 `;
 
 const Container = styled.div`
-    max-width: 1400px;
-    margin: 0 auto;
+max-width: 1400px;
+margin: 0 auto;
 `;
 
 const DomainsGrid = styled(motion.div)`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: ${({ theme }) => theme.spacing.lg};
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: ${({ theme }) => theme.spacing.lg};
 
-    @media (max-width: 1100px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
+@media(max-width: 1100px) {
+    grid-template-columns: repeat(2, 1fr);
+}
 
-    @media (max-width: 700px) {
-        grid-template-columns: 1fr;
-    }
+@media(max-width: 700px) {
+    grid-template-columns: 1fr;
+}
 `;
 
 const DomainCard = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.lg};
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.lg};
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+position: relative;
+overflow: hidden;
 
     &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: ${props => props.$accentColor || 'linear-gradient(135deg, #6366f1 0%, #ec4899 100%)'};
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: ${props => props.$accentColor || 'linear-gradient(135deg, #6366f1 0%, #ec4899 100%)'};
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
     &:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 25px 50px ${({ theme }) => theme.colors.shadow};
-        border-color: ${props => props.$accentColor || props.theme.colors.primary};
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px ${({ theme }) => theme.colors.shadow};
+    border-color: ${props => props.$accentColor || props.theme.colors.primary};
 
         &::before {
-            transform: scaleX(1);
-        }
+        transform: scaleX(1);
     }
+}
 `;
 
 const CardHeader = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const CardIcon = styled.div`
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: ${props => props.$color || 'linear-gradient(135deg, #6366f1 0%, #ec4899 100%)'};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    transition: transform 0.3s ease;
+width: 56px;
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: center;
+background: ${props => props.$color || 'linear-gradient(135deg, #6366f1 0%, #ec4899 100%)'};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+transition: transform 0.3s ease;
 
-    ${DomainCard}:hover & {
-        transform: scale(1.1) rotate(-5deg);
+    ${DomainCard}: hover & {
+    transform: scale(1.1) rotate(- 5deg);
     }
 
     svg {
-        font-size: 1.5rem;
-        color: white;
-    }
+    font-size: 1.5rem;
+    color: white;
+}
 `;
 
 const StatusBadge = styled.span`
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
-    border-radius: ${({ theme }) => theme.borderRadius.full};
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+display: inline-flex;
+align-items: center;
+gap: 4px;
+padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+border-radius: ${({ theme }) => theme.borderRadius.full};
+font-size: 0.7rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.05em;
     
     ${props => {
         switch (props.$status) {
@@ -680,85 +812,87 @@ const StatusBadge = styled.span`
                     color: #6B7280;
                 `;
         }
-    }}
+    }
+    }
 
     svg {
-        font-size: 0.75rem;
-    }
+    font-size: 0.75rem;
+}
 `;
 
 const DomainName = styled.h3`
-    font-size: 1.25rem;
-    margin: 0 0 ${({ theme }) => theme.spacing.xs};
-    color: ${({ theme }) => theme.colors.text};
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    transition: color 0.3s ease;
+font-size: 1.25rem;
+margin: 0 0 ${({ theme }) => theme.spacing.xs};
+color: ${({ theme }) => theme.colors.text};
+display: flex;
+align-items: center;
+gap: ${({ theme }) => theme.spacing.sm};
+transition: color 0.3s ease;
 
-    ${DomainCard}:hover & {
-        color: ${({ theme }) => theme.colors.primary};
+    ${DomainCard}: hover & {
+    color: ${({ theme }) => theme.colors.primary};
     }
 
     svg {
-        font-size: 0.875rem;
-        opacity: 0.5;
-    }
+    font-size: 0.875rem;
+    opacity: 0.5;
+}
 `;
 
 const CategoryLabel = styled.span`
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: ${({ theme }) => theme.colors.textSecondary};
-    display: block;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+font-size: 0.75rem;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: ${({ theme }) => theme.colors.textSecondary};
+display: block;
+margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const Description = styled.p`
-    font-size: 0.9rem;
-    color: ${({ theme }) => theme.colors.textSecondary};
-    line-height: 1.7;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+font-size: 0.9rem;
+color: ${({ theme }) => theme.colors.textSecondary};
+line-height: 1.7;
+margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const TechStack = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: ${({ theme }) => theme.spacing.xs};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+display: flex;
+flex-wrap: wrap;
+gap: ${({ theme }) => theme.spacing.xs};
+margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const TechBadge = styled.span`
-    padding: 4px 8px;
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border-radius: ${({ theme }) => theme.borderRadius.sm};
-    font-size: 0.7rem;
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-weight: 500;
+padding: 4px 8px;
+background: ${({ theme }) => theme.colors.backgroundAlt};
+border-radius: ${({ theme }) => theme.borderRadius.sm};
+font-size: 0.7rem;
+color: ${({ theme }) => theme.colors.textSecondary};
+font-weight: 500;
 `;
 
 const FeaturesList = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: ${({ theme }) => theme.spacing.xs};
+display: flex;
+flex-wrap: wrap;
+gap: ${({ theme }) => theme.spacing.xs};
 `;
 
 const FeatureTag = styled.span`
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
-    background: ${props => `${props.$color}15`};
-    color: ${props => props.$color};
-    border-radius: ${({ theme }) => theme.borderRadius.full};
-    font-size: 0.7rem;
-    font-weight: 600;
+display: inline-flex;
+align-items: center;
+gap: 4px;
+padding: 4px 10px;
+background: ${props => `${props.$color}15`};
+color: ${props => props.$color};
+border-radius: ${({ theme }) => theme.borderRadius.full};
+font-size: 0.7rem;
+font-weight: 600;
 
     svg {
-        font-size: 0.65rem;
-    }
+    font-size: 0.65rem;
+}
 `;
+
 
 const NoResults = styled.div`
     text-align: center;
@@ -848,6 +982,15 @@ export default function DomainsPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
+                        <LogoWrapper>
+                            <Image
+                                src="/opauto.png"
+                                alt="Optical Automation"
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                priority
+                            />
+                        </LogoWrapper>
                         Domain Portfolio
                     </PageTitle>
                     <Subtitle
@@ -866,7 +1009,9 @@ export default function DomainsPage() {
                     >
                         <StatItem>
                             <StatValue>{stats.total}</StatValue>
-                            <StatLabel>Total Domains</StatLabel>
+                            <StatLabel>
+                                Optical Automation Domains
+                            </StatLabel>
                         </StatItem>
                         <StatItem>
                             <StatValue>{stats.active}</StatValue>
@@ -970,8 +1115,15 @@ export default function DomainsPage() {
                             </NoResults>
                         )}
                     </AnimatePresence>
+
+                    <div style={{ marginTop: '4rem' }}>
+                        <WhoisLookup
+                            placeholder="Check domain availability (e.g. example.com)"
+                            buttonText="Lookup Record"
+                        />
+                    </div>
                 </Container>
             </ContentSection>
-        </PageWrapper>
+        </PageWrapper >
     );
 }

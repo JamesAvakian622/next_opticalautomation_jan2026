@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { FiUser, FiPackage, FiDollarSign, FiEdit, FiLogOut, FiCheckCircle, FiClock } from 'react-icons/fi';
+import { FiUser, FiPackage, FiDollarSign, FiEdit, FiLogOut, FiCheckCircle, FiClock, FiCreditCard } from 'react-icons/fi';
 import { softwareData } from '@/lib/softwareData';
 
 const PageWrapper = styled.div`
@@ -235,12 +235,49 @@ const InfoValue = styled.span`
     font-weight: 600;
 `;
 
+const Input = styled.input`
+    padding: 8px 12px;
+    border: 1px solid ${({ theme }) => theme.colors.border};
+    border-radius: ${({ theme }) => theme.borderRadius.md};
+    background: ${({ theme }) => theme.colors.backgroundAlt};
+    color: ${({ theme }) => theme.colors.text};
+    font-size: 0.875rem;
+    width: 250px;
+    
+    &:focus {
+        outline: none;
+        border-color: ${({ theme }) => theme.colors.primary};
+    }
+`;
+
+const Select = styled.select`
+    padding: 8px 12px;
+    border: 1px solid ${({ theme }) => theme.colors.border};
+    border-radius: ${({ theme }) => theme.borderRadius.md};
+    background: ${({ theme }) => theme.colors.backgroundAlt};
+    color: ${({ theme }) => theme.colors.text};
+    font-size: 0.875rem;
+    width: 250px;
+
+    &:focus {
+        outline: none;
+        border-color: ${({ theme }) => theme.colors.primary};
+    }
+`;
+
 export default function DashboardPage() {
     const router = useRouter();
     const [user, setUser] = useState(null);
     const [selectedApps, setSelectedApps] = useState([]);
     const [loading, setLoading] = useState(true);
     const [maxAllowed, setMaxAllowed] = useState(0);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editForm, setEditForm] = useState({
+        clientId: '',
+        name: '',
+        email: '',
+        subscriptionTier: 'individual'
+    });
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -253,6 +290,12 @@ export default function DashboardPage() {
 
         const parsedUser = JSON.parse(userData);
         setUser(parsedUser);
+        setEditForm({
+            clientId: parsedUser.clientId || '',
+            name: parsedUser.name || '',
+            email: parsedUser.email || '',
+            subscriptionTier: parsedUser.subscriptionTier || 'individual'
+        });
 
         const limits = {
             individual: 10,
@@ -263,6 +306,23 @@ export default function DashboardPage() {
 
         fetchSelections(token);
     }, [router]);
+
+    const handleSaveProfile = () => {
+        const updatedUser = { ...user, ...editForm };
+        setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser)); // Update local storage
+
+        // Update maxAllowed based on new tier
+        const limits = {
+            individual: 10,
+            silver: 28,
+            gold: 40
+        };
+        setMaxAllowed(limits[editForm.subscriptionTier] || 10);
+
+        setIsEditing(false);
+        // In a real app, we would make an API call to update the user in the database here
+    };
 
     const fetchSelections = async (token) => {
         try {
@@ -289,18 +349,25 @@ export default function DashboardPage() {
         router.push('/');
     };
 
-    const getTierPrice = () => {
-        const prices = {
-            individual: 0,
-            silver: 25,
-            gold: 35
-        };
-        return prices[user?.subscriptionTier] || 0;
+    const getTierDetails = (count) => {
+        let price = '0.00';
+        if (count >= 21) {
+            price = '30.00';
+            return { tier: 'gold', label: 'GOLD TIER', price };
+        }
+        if (count >= 11) {
+            price = '15.00';
+            return { tier: 'silver', label: 'SILVER TIER', price };
+        }
+
+        // Individual Tier (0-10)
+        // Interpret "0 to five titles $10 max" as $2/title capped at $10.
+        // This effectively covers 6-10 as well at $10 flat.
+        price = Math.min(count * 2.00, 10.00).toFixed(2);
+        return { tier: 'individual', label: 'INDIVIDUAL TIER', price };
     };
 
-    const getSelectedSoftware = () => {
-        return softwareData.filter(app => selectedApps.includes(app.id));
-    };
+    const tierDetails = getTierDetails(selectedApps.length);
 
     if (loading) {
         return (
@@ -311,6 +378,10 @@ export default function DashboardPage() {
             </PageWrapper>
         );
     }
+
+    const getSelectedSoftware = () => {
+        return softwareData.filter(app => selectedApps.includes(app.id));
+    };
 
     const selectedSoftware = getSelectedSoftware();
 
@@ -349,8 +420,8 @@ export default function DashboardPage() {
                             <StatInfo>
                                 <StatLabel>Subscription Tier</StatLabel>
                                 <StatValue>
-                                    <TierBadge $tier={user?.subscriptionTier}>
-                                        {user?.subscriptionTier?.toUpperCase()}
+                                    <TierBadge $tier={tierDetails.tier}>
+                                        {tierDetails.tier.charAt(0).toUpperCase() + tierDetails.tier.slice(1)} Tier
                                     </TierBadge>
                                 </StatValue>
                             </StatInfo>
@@ -366,7 +437,7 @@ export default function DashboardPage() {
                             </StatIcon>
                             <StatInfo>
                                 <StatLabel>Selected Apps</StatLabel>
-                                <StatValue>{selectedApps.length} / {maxAllowed}</StatValue>
+                                <StatValue>{selectedApps.length}</StatValue>
                             </StatInfo>
                         </StatCard>
 
@@ -379,8 +450,15 @@ export default function DashboardPage() {
                                 <FiDollarSign />
                             </StatIcon>
                             <StatInfo>
-                                <StatLabel>Annual Cost</StatLabel>
-                                <StatValue>${getTierPrice()}</StatValue>
+                                <StatLabel>Purchase Amount</StatLabel>
+                                <StatValue>${tierDetails.price}</StatValue>
+                                <ActionButton
+                                    $variant="primary"
+                                    style={{ marginTop: '8px', fontSize: '0.8rem', padding: '4px 12px' }}
+                                    onClick={() => alert('Redirecting to Stripe Checkout for $' + tierDetails.price)}
+                                >
+                                    <FiCreditCard /> Purchase
+                                </ActionButton>
                             </StatInfo>
                         </StatCard>
 
@@ -466,30 +544,81 @@ export default function DashboardPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <InfoRow>
-                            <InfoLabel>Client ID</InfoLabel>
-                            <InfoValue>{user?.clientId}</InfoValue>
-                        </InfoRow>
-                        <InfoRow>
-                            <InfoLabel>Email</InfoLabel>
-                            <InfoValue>{user?.email}</InfoValue>
-                        </InfoRow>
-                        <InfoRow>
-                            <InfoLabel>Name</InfoLabel>
-                            <InfoValue>{user?.name}</InfoValue>
-                        </InfoRow>
-                        <InfoRow>
-                            <InfoLabel>Subscription Tier</InfoLabel>
-                            <InfoValue>
-                                <TierBadge $tier={user?.subscriptionTier}>
-                                    {user?.subscriptionTier?.toUpperCase()}
-                                </TierBadge>
-                            </InfoValue>
-                        </InfoRow>
-                        <InfoRow>
-                            <InfoLabel>Status</InfoLabel>
-                            <InfoValue>{user?.subscriptionStatus === 'trial' ? 'Free Trial (30 days)' : 'Active'}</InfoValue>
-                        </InfoRow>
+                        {isEditing ? (
+                            <>
+                                <InfoRow>
+                                    <InfoLabel>Client ID</InfoLabel>
+                                    <Input
+                                        type="text"
+                                        value={editForm.clientId}
+                                        onChange={(e) => setEditForm({ ...editForm, clientId: e.target.value })}
+                                    />
+                                </InfoRow>
+                                <InfoRow>
+                                    <InfoLabel>Email</InfoLabel>
+                                    <Input
+                                        type="email"
+                                        value={editForm.email}
+                                        onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                                    />
+                                </InfoRow>
+                                <InfoRow>
+                                    <InfoLabel>Name</InfoLabel>
+                                    <Input
+                                        type="text"
+                                        value={editForm.name}
+                                        onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                                    />
+                                </InfoRow>
+                                <InfoRow>
+                                    <InfoLabel>Subscription Tier</InfoLabel>
+                                    <Select
+                                        value={editForm.subscriptionTier}
+                                        onChange={(e) => setEditForm({ ...editForm, subscriptionTier: e.target.value })}
+                                    >
+                                        <option value="individual">Individual</option>
+                                        <option value="silver">Silver</option>
+                                        <option value="gold">Gold</option>
+                                    </Select>
+                                </InfoRow>
+                                <div style={{ display: 'flex', gap: '10px', marginTop: '20px', justifyContent: 'flex-end' }}>
+                                    <ActionButton onClick={() => setIsEditing(false)} style={{ background: 'transparent' }}>Cancel</ActionButton>
+                                    <ActionButton $variant="primary" onClick={handleSaveProfile}>Save Changes</ActionButton>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <InfoRow>
+                                    <InfoLabel>Client ID</InfoLabel>
+                                    <InfoValue>{user?.clientId}</InfoValue>
+                                </InfoRow>
+                                <InfoRow>
+                                    <InfoLabel>Email</InfoLabel>
+                                    <InfoValue>{user?.email}</InfoValue>
+                                </InfoRow>
+                                <InfoRow>
+                                    <InfoLabel>Name</InfoLabel>
+                                    <InfoValue>{user?.name}</InfoValue>
+                                </InfoRow>
+                                <InfoRow>
+                                    <InfoLabel>Subscription Tier</InfoLabel>
+                                    <InfoValue>
+                                        <TierBadge $tier={user?.subscriptionTier}>
+                                            {user?.subscriptionTier?.charAt(0).toUpperCase() + user?.subscriptionTier?.slice(1)} Tier
+                                        </TierBadge>
+                                    </InfoValue>
+                                </InfoRow>
+                                <InfoRow>
+                                    <InfoLabel>Status</InfoLabel>
+                                    <InfoValue>{user?.subscriptionStatus === 'trial' ? 'Free Trial (30 days)' : 'Active'}</InfoValue>
+                                </InfoRow>
+                                <div style={{ marginTop: '20px', textAlign: 'right' }}>
+                                    <ActionButton onClick={() => setIsEditing(true)}>
+                                        <FiEdit /> Edit Profile
+                                    </ActionButton>
+                                </div>
+                            </>
+                        )}
                     </AccountInfo>
                 </Section>
             </Container>

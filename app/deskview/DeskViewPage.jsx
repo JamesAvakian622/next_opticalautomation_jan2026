@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -38,114 +39,130 @@ const HeroSection = styled.div`
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
 `;
 
-const Title = styled(motion.h1)`
-    font-size: 3rem;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.md};
 
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
+
+const LogoWrapper = styled(motion.div)`
+width: 60px;
+height: 60px;
+position: relative;
+border - radius: 0;
+overflow: hidden;
+flex - shrink: 0;
+
+@media(max - width: 768px) {
+    width: 40px;
+    height: 40px;
+}
+`;
+
+const Title = styled(motion.h1)`
+font - size: 3rem;
+margin - bottom: ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.gradient};
+-webkit - background - clip: text;
+-webkit - text - fill - color: transparent;
+background - clip: text;
+display: inline - flex;
+align - items: center;
+gap: ${({ theme }) => theme.spacing.md};
+
+@media(max - width: 768px) {
+    font - size: 2rem;
+}
 `;
 
 const Subtitle = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.125rem;
-    max-width: 600px;
-    margin: 0 auto;
+color: ${({ theme }) => theme.colors.textSecondary};
+font - size: 1.125rem;
+max - width: 600px;
+margin: 0 auto;
 `;
 
 const IntroSection = styled(motion.section)`
-    max-width: 900px;
-    margin: 0 auto ${({ theme }) => theme.spacing.xxl};
-    text-align: center;
+max - width: 900px;
+margin: 0 auto ${({ theme }) => theme.spacing.xxl};
+text - align: center;
 `;
 
 const SectionSubtitle = styled.h3`
-    font-size: 1.5rem;
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
-    font-weight: 500;
+font - size: 1.5rem;
+color: ${({ theme }) => theme.colors.text};
+margin - bottom: ${({ theme }) => theme.spacing.lg};
+font - weight: 500;
 `;
 
 const DescriptionParagraph = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.05rem;
-    line-height: 1.8;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    text-align: left;
+color: ${({ theme }) => theme.colors.textSecondary};
+font - size: 1.05rem;
+line - height: 1.8;
+margin - bottom: ${({ theme }) => theme.spacing.md};
+text - align: left;
     
-    &:last-child {
-        margin-bottom: 0;
-    }
+    &: last - child {
+    margin - bottom: 0;
+}
 `;
 
 const SoftwareGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: ${({ theme }) => theme.spacing.md};
-    margin: ${({ theme }) => theme.spacing.xl} 0;
-    text-align: left;
+display: grid;
+grid - template - columns: repeat(auto - fill, minmax(200px, 1fr));
+gap: ${({ theme }) => theme.spacing.md};
+margin: ${({ theme }) => theme.spacing.xl} 0;
+text - align: left;
 `;
 
 const FeaturedSection = styled.div`
-    display: flex;
-    gap: ${({ theme }) => theme.spacing.xxl};
-    align-items: flex-start;
-    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+display: flex;
+gap: ${({ theme }) => theme.spacing.xxl};
+align - items: flex - start;
+margin - bottom: ${({ theme }) => theme.spacing.xxl};
 
-    @media (max-width: 1024px) {
-        flex-direction: column;
-        align-items: center;
-    }
+@media(max - width: 1024px) {
+    flex - direction: column;
+    align - items: center;
+}
 `;
 
 const FeaturedCardWrapper = styled.div`
-    flex: 0 0 400px;
-    max-width: 100%;
+flex: 0 0 400px;
+max - width: 100 %;
 
-    @media (max-width: 1024px) {
-        flex: 1;
-        width: 100%;
-        max-width: 500px;
-    }
+@media(max - width: 1024px) {
+    flex: 1;
+    width: 100 %;
+    max - width: 500px;
+}
 `;
 
 const ScreenshotWrapper = styled(motion.div)`
-    flex: 1;
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    overflow: hidden;
-    box-shadow: 0 20px 40px ${({ theme }) => theme.colors.shadow};
-    border: 1px solid ${({ theme }) => theme.colors.border};
+flex: 1;
+border - radius: ${({ theme }) => theme.borderRadius.xl};
+overflow: hidden;
+box - shadow: 0 20px 40px ${({ theme }) => theme.colors.shadow};
+border: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const ScreenshotImage = styled.img`
-    width: 100%;
-    height: auto;
-    display: block;
+width: 100 %;
+height: auto;
+display: block;
 `;
 
 const SoftwareItem = styled.div`
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 0.95rem;
+display: flex;
+align - items: center;
+gap: ${({ theme }) => theme.spacing.sm};
+color: ${({ theme }) => theme.colors.text};
+font - size: 0.95rem;
     
     svg {
-        color: ${({ theme }) => theme.colors.success};
-        font-size: 1.1em;
-    }
+    color: ${({ theme }) => theme.colors.success};
+    font - size: 1.1em;
+}
 `;
 
 const ProductsGrid = styled.div`
-    display: grid;
+display: grid;
 grid - template - columns: repeat(auto - fill, minmax(350px, 1fr));
 gap: ${({ theme }) => theme.spacing.xl};
 margin - bottom: ${({ theme }) => theme.spacing.xxl};
@@ -244,22 +261,22 @@ margin - bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
 const VisitLink = styled.a`
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-    margin-top: ${({ theme }) => theme.spacing.lg};
-    background: ${({ theme }) => theme.colors.gradient};
-    color: white;
-    border-radius: ${({ theme }) => theme.borderRadius.md};
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+display: inline - flex;
+align - items: center;
+gap: 6px;
+padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+margin - top: ${({ theme }) => theme.spacing.lg};
+background: ${({ theme }) => theme.colors.gradient};
+color: white;
+border - radius: ${({ theme }) => theme.borderRadius.md};
+font - size: 0.875rem;
+font - weight: 500;
+transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
-    }
+    transform: translateY(-2px);
+    box - shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+}
 `;
 
 const ServicesSection = styled.div`
@@ -400,7 +417,16 @@ export default function DeskViewPage() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <FiGlobe /> The DeskView Series
+                        <LogoWrapper>
+                            <Image
+                                src="/opauto.png"
+                                alt="Optical Automation"
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                priority
+                            />
+                        </LogoWrapper>
+                        The DeskView Series
                     </Title>
                     <Subtitle>
                         Dashboard Information and Website Items
@@ -467,11 +493,11 @@ export default function DeskViewPage() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    Visit Site <FiExternalLink />
-                                </VisitLink>
+                                    Visit Site < FiExternalLink />
+                                </VisitLink >
                             )}
-                        </ProductCard>
-                    </FeaturedCardWrapper>
+                        </ProductCard >
+                    </FeaturedCardWrapper >
 
                     <ScreenshotWrapper
                         initial={{ opacity: 0, x: 20 }}
@@ -483,7 +509,7 @@ export default function DeskViewPage() {
                             alt="MyDeskView Dashboard Interface"
                         />
                     </ScreenshotWrapper>
-                </FeaturedSection>
+                </FeaturedSection >
 
                 <FeaturedSection>
                     <ScreenshotWrapper

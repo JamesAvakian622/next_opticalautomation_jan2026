@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -34,329 +35,347 @@ const Badge = styled.span`
     margin-bottom: 20px;
 `;
 
+
+const LogoWrapper = styled(motion.div)`
+width: 60px;
+height: 60px;
+position: relative;
+border-radius: 0;
+overflow: hidden;
+flex-shrink: 0;
+
+@media(max-width: 768px) {
+    width: 40px;
+    height: 40px;
+}
+`;
+
 const Title = styled.h1`
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: 15px;
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+font-size: 2.5rem;
+font-weight: 700;
+color: ${ ({ theme }) => theme.colors.text };
+margin-bottom: 15px;
+background: ${ ({ theme }) => theme.colors.gradient };
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+display: inline-flex;
+align-items: center;
+gap: 15px;
 `;
 
 const Subtitle = styled.p`
-    font-size: 1.1rem;
-    color: ${({ theme }) => theme.colors.textSecondary};
-    max-width: 700px;
-    margin: 0 auto;
+font-size: 1.1rem;
+color: ${ ({ theme }) => theme.colors.textSecondary };
+max-width: 700px;
+margin: 0 auto;
 `;
 
 const TabContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
+display: flex;
+justify-content: center;
+gap: 10px;
+margin-bottom: 40px;
+flex-wrap: wrap;
 `;
 
 const TabButton = styled.button`
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    border: 2px solid ${({ $active, theme }) => $active ? theme.colors.primary : theme.colors.border};
-    background: ${({ $active, theme }) => $active ? theme.colors.primary : 'transparent'};
-    color: ${({ $active, theme }) => $active ? '#fff' : theme.colors.text};
-    cursor: pointer;
-    transition: all 0.3s ease;
+display: flex;
+align-items: center;
+gap: 8px;
+padding: 12px 24px;
+border-radius: 12px;
+font-weight: 600;
+font-size: 1rem;
+border: 2px solid ${ ({ $active, theme }) => $active ? theme.colors.primary : theme.colors.border };
+background: ${ ({ $active, theme }) => $active ? theme.colors.primary : 'transparent' };
+color: ${ ({ $active, theme }) => $active ? '#fff' : theme.colors.text };
+cursor: pointer;
+transition: all 0.3s ease;
 
     &:hover {
-        border-color: ${({ theme }) => theme.colors.primary};
-        background: ${({ $active, theme }) => $active ? theme.colors.primary : `${theme.colors.primary}10`};
-    }
+    border-color: ${ ({ theme }) => theme.colors.primary };
+    background: ${ ({ $active, theme }) => $active ? theme.colors.primary : `${theme.colors.primary}10` };
+}
 
     svg {
-        font-size: 1.2rem;
-    }
+    font-size: 1.2rem;
+}
 `;
 
 const ContentSection = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border-radius: 20px;
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    padding: 40px;
-    margin-bottom: 30px;
+background: ${ ({ theme }) => theme.colors.surface };
+border-radius: 20px;
+border: 1px solid ${ ({ theme }) => theme.colors.border };
+padding: 40px;
+margin-bottom: 30px;
 `;
 
 const SectionTitle = styled.h2`
-    font-size: 1.8rem;
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+font-size: 1.8rem;
+color: ${ ({ theme }) => theme.colors.text };
+margin-bottom: 30px;
+display: flex;
+align-items: center;
+gap: 15px;
 
     svg {
-        color: ${({ theme }) => theme.colors.primary};
-    }
+    color: ${ ({ theme }) => theme.colors.primary };
+}
 `;
 
 const SlideGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 20px;
 `;
 
 const SlideCard = styled.div`
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border-radius: 16px;
-    padding: 25px;
-    border-left: 4px solid ${({ $color }) => $color || '#6366f1'};
-    transition: all 0.3s ease;
+background: ${ ({ theme }) => theme.colors.backgroundAlt };
+border-radius: 16px;
+padding: 25px;
+border-left: 4px solid ${ ({ $color }) => $color || '#6366f1' };
+transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 30px ${({ theme }) => theme.colors.shadow};
-    }
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px ${ ({ theme }) => theme.colors.shadow };
+}
 `;
 
 const SlideNumber = styled.span`
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: ${({ $color }) => $color || '#6366f1'};
-    color: #fff;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-bottom: 12px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 32px;
+height: 32px;
+background: ${ ({ $color }) => $color || '#6366f1' };
+color: #fff;
+border-radius: 8px;
+font-weight: 700;
+font-size: 0.9rem;
+margin-bottom: 12px;
 `;
 
 const SlideTitle = styled.h3`
-    font-size: 1.1rem;
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: 12px;
+font-size: 1.1rem;
+color: ${ ({ theme }) => theme.colors.text };
+margin-bottom: 12px;
 `;
 
 const SlidePoints = styled.ul`
-    list-style: none;
-    padding: 0;
-    margin: 0;
+list-style: none;
+padding: 0;
+margin: 0;
 `;
 
 const SlidePoint = styled.li`
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 8px 0;
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.1rem;
-    line-height: 1.6;
+display: flex;
+align-items: flex-start;
+gap: 10px;
+padding: 8px 0;
+color: ${ ({ theme }) => theme.colors.textSecondary };
+font-size: 1.1rem;
+line-height: 1.6;
 
     svg {
-        color: ${({ $color }) => $color || '#6366f1'};
-        font-size: 0.5rem;
-        margin-top: 8px;
-        flex-shrink: 0;
-    }
+    color: ${ ({ $color }) => $color || '#6366f1' };
+    font-size: 0.5rem;
+    margin-top: 8px;
+    flex-shrink: 0;
+}
 `;
 
 const PartSection = styled.div`
-    margin-bottom: 40px;
+margin-bottom: 40px;
 `;
 
 const PartHeader = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
-    padding: 20px;
-    background: ${({ $gradient }) => $gradient || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'};
-    border-radius: 16px;
-    color: #fff;
+display: flex;
+align-items: center;
+gap: 15px;
+margin-bottom: 25px;
+padding: 20px;
+background: ${ ({ $gradient }) => $gradient || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' };
+border-radius: 16px;
+color: #fff;
 `;
 
 const PartIcon = styled.div`
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.2);
-    border-radius: 12px;
-    font-size: 1.5rem;
+width: 50px;
+height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(255, 255, 255, 0.2);
+border-radius: 12px;
+font-size: 1.5rem;
 `;
 
 const PartTitle = styled.div`
     h3 {
-        font-size: 1.3rem;
-        font-weight: 700;
-        margin-bottom: 4px;
-    }
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
     span {
-        font-size: 0.85rem;
-        opacity: 0.8;
-    }
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
 `;
 
 const ChapterList = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+display: flex;
+flex-direction: column;
+gap: 15px;
 `;
 
 const ChapterCard = styled.div`
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border-radius: 12px;
-    padding: 20px;
-    border-left: 4px solid ${({ $color }) => $color || '#6366f1'};
+background: ${ ({ theme }) => theme.colors.backgroundAlt };
+border-radius: 12px;
+padding: 20px;
+border-left: 4px solid ${ ({ $color }) => $color || '#6366f1' };
 `;
 
 const ChapterHeader = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 15px;
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 15px;
 `;
 
 const ChapterNum = styled.span`
-    background: ${({ $color }) => `${$color}30` || '#6366f130'};
-    color: ${({ $color }) => $color || '#6366f1'};
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
+background: ${ ({ $color }) => `${$color}30` || '#6366f130' };
+color: ${ ({ $color }) => $color || '#6366f1' };
+padding: 4px 12px;
+border-radius: 20px;
+font-size: 0.75rem;
+font-weight: 700;
 `;
 
 const ChapterTitle = styled.h4`
-    font-size: 1.05rem;
-    color: ${({ theme }) => theme.colors.text};
-    flex: 1;
+font-size: 1.05rem;
+color: ${ ({ theme }) => theme.colors.text };
+flex: 1;
 `;
 
 const ChapterPages = styled.span`
-    font-size: 0.75rem;
-    color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 0.75rem;
+color: ${ ({ theme }) => theme.colors.textSecondary };
 `;
 
 const TopicGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 20px;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 8px 20px;
 
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-    }
+@media(max-width: 768px) {
+    grid-template-columns: 1fr;
+}
 `;
 
 const TopicItem = styled.div`
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 1.15rem;
-    color: ${({ theme }) => theme.colors.textSecondary};
-    padding: 6px 0;
-    line-height: 1.6;
+display: flex;
+align-items: flex-start;
+gap: 10px;
+font-size: 1.15rem;
+color: ${ ({ theme }) => theme.colors.textSecondary };
+padding: 6px 0;
+line-height: 1.6;
 
     svg {
-        color: ${({ $color }) => $color || '#6366f1'};
-        font-size: 0.5rem;
-        margin-top: 8px;
-        flex-shrink: 0;
-    }
+    color: ${ ({ $color }) => $color || '#6366f1' };
+    font-size: 0.5rem;
+    margin-top: 8px;
+    flex-shrink: 0;
+}
 `;
 
 const TimelineSection = styled.div`
-    position: relative;
-    padding-left: 30px;
+position: relative;
+padding-left: 30px;
 `;
 
 const TimelineLine = styled.div`
-    position: absolute;
-    left: 8px;
-    top: 10px;
-    bottom: 10px;
-    width: 3px;
-    background: ${({ theme }) => theme.colors.gradient};
-    border-radius: 2px;
+position: absolute;
+left: 8px;
+top: 10px;
+bottom: 10px;
+width: 3px;
+background: ${ ({ theme }) => theme.colors.gradient };
+border-radius: 2px;
 `;
 
 const TimelineItem = styled.div`
-    position: relative;
-    padding: 15px 0;
+position: relative;
+padding: 15px 0;
 `;
 
 const TimelineDot = styled.div`
-    position: absolute;
-    left: -26px;
-    top: 20px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: ${({ $color }) => $color || '#6366f1'};
-    border: 3px solid ${({ theme }) => theme.colors.surface};
+position: absolute;
+left: -26px;
+top: 20px;
+width: 14px;
+height: 14px;
+border-radius: 50%;
+background: ${ ({ $color }) => $color || '#6366f1' };
+border: 3px solid ${ ({ theme }) => theme.colors.surface };
 `;
 
 const TimelineLabel = styled.div`
-    font-weight: 700;
-    color: ${({ $color }) => $color || '#6366f1'};
-    font-size: 1.2rem;
-    margin-bottom: 8px;
+font-weight: 700;
+color: ${ ({ $color }) => $color || '#6366f1' };
+font-size: 1.2rem;
+margin-bottom: 8px;
 `;
 
 const TimelineContent = styled.div`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.1rem;
-    line-height: 1.7;
+color: ${ ({ theme }) => theme.colors.textSecondary };
+font-size: 1.1rem;
+line-height: 1.7;
 `;
 
 const DefinitionCard = styled.div`
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-left: 4px solid ${({ $safe }) => $safe ? '#10b981' : '#ef4444'};
+background: ${ ({ theme }) => theme.colors.backgroundAlt };
+border-radius: 12px;
+padding: 20px;
+margin-bottom: 15px;
+border-left: 4px solid ${ ({ $safe }) => $safe ? '#10b981' : '#ef4444' };
 `;
 
 const DefinitionTitle = styled.h4`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1rem;
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 1rem;
+color: ${ ({ theme }) => theme.colors.text };
+margin-bottom: 12px;
 
     svg {
-        color: ${({ $safe }) => $safe ? '#10b981' : '#ef4444'};
-    }
+    color: ${ ({ $safe }) => $safe ? '#10b981' : '#ef4444' };
+}
 `;
 
 const DefinitionList = styled.ul`
-    list-style: none;
-    padding: 0;
-    margin: 0;
+list-style: none;
+padding: 0;
+margin: 0;
 `;
 
 const DefinitionItem = styled.li`
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 8px 0;
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.1rem;
-    line-height: 1.6;
+display: flex;
+align-items: flex-start;
+gap: 10px;
+padding: 8px 0;
+color: ${ ({ theme }) => theme.colors.textSecondary };
+font-size: 1.1rem;
+line-height: 1.6;
 
     svg {
-        color: ${({ $safe }) => $safe ? '#10b981' : '#ef4444'};
-        font-size: 1rem;
-        margin-top: 4px;
-    }
+    color: ${ ({ $safe }) => $safe ? '#10b981' : '#ef4444' };
+    font-size: 1rem;
+    margin-top: 4px;
+}
 `;
 
 // Data for Appendix A - Slide Deck
@@ -455,7 +474,18 @@ export default function GuidesPage() {
             <Container>
                 <Header>
                     <Badge><FiBook /> IP GUIDES</Badge>
-                    <Title>Intellectual Property Guides</Title>
+                    <Title>
+                        <LogoWrapper>
+                            <Image
+                                src="/opauto.png"
+                                alt="Optical Automation"
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                priority
+                            />
+                        </LogoWrapper>
+                        Technology Updates
+                    </Title>
                     <Subtitle>Comprehensive resources for understanding and protecting your intellectual property in the age of no-code and AI development.</Subtitle>
                 </Header>
 
@@ -471,7 +501,7 @@ export default function GuidesPage() {
                     </TabButton>
                 </TabContainer>
 
-                {/* Appendix A - Slide Deck */}
+                {/* Appendix A-Slide Deck */}
                 {activeTab === 'appendix-a' && (
                     <ContentSection initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                         <SectionTitle><FiLayout /> Appendix A — Presentation Slide Deck Outline</SectionTitle>
@@ -493,7 +523,7 @@ export default function GuidesPage() {
                     </ContentSection>
                 )}
 
-                {/* Appendix B - Book Outline */}
+                {/* Appendix B-Book Outline */}
                 {activeTab === 'appendix-b' && (
                     <ContentSection initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                         <SectionTitle><FiBook /> Appendix B — Complete Book Outline</SectionTitle>
@@ -529,7 +559,7 @@ export default function GuidesPage() {
                     </ContentSection>
                 )}
 
-                {/* Appendix C - Plan & Definitions */}
+                {/* Appendix C-Plan & Definitions */}
                 {activeTab === 'appendix-c' && (
                     <ContentSection initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                         <SectionTitle><FiFileText /> Appendix C — Maintenance Plan & Copyright Definitions</SectionTitle>

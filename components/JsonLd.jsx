@@ -48,8 +48,17 @@ export default function JsonLd({ type = 'organization', data }) {
         case 'product':
             jsonLdData = data ? generateProductJsonLd(data) : null;
             break;
-        case 'person':
+        case 'social':
             jsonLdData = generatePersonJsonLd();
+            break;
+        case 'video':
+            jsonLdData = data ? generateVideoJsonLd(data) : null;
+            break;
+        case 'techArticle':
+            jsonLdData = data ? generateTechArticleJsonLd(data) : null;
+            break;
+        case 'event':
+            jsonLdData = data ? generateEventJsonLd(data) : null;
             break;
         default:
             jsonLdData = generateOrganizationJsonLd();

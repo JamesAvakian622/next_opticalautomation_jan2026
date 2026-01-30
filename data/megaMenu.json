@@ -7,37 +7,31 @@
         "title": "Technologies",
         "links": [
           {
-            "href": "/portfolio",
-            "label": "All Projects",
-            "icon": "FiGrid",
-            "desc": "View complete portfolio"
-          },
-          {
-            "href": "/portfolio#react-nextjs",
-            "label": "React / Next.js",
+            "href": "/tech#nextjs",
+            "label": "Next.JS",
             "icon": "FiCode",
             "desc": "Modern web applications"
           },
           {
-            "href": "/portfolio#mern",
+            "href": "/tech#mongodb",
             "label": "MERN Stack",
             "icon": "FiDatabase",
             "desc": "MongoDB applications"
           },
           {
-            "href": "/portfolio#swiftui",
+            "href": "/tech#swiftui",
             "label": "SwiftUI",
             "icon": "FiSmartphone",
             "desc": "iOS applications"
           },
           {
-            "href": "/portfolio#react-native",
+            "href": "/tech#reactnative",
             "label": "React Native",
             "icon": "FiSmartphone",
             "desc": "Mobile solutions"
           },
           {
-            "href": "/portfolio#python",
+            "href": "/tech#python",
             "label": "Python",
             "icon": "FiZap",
             "desc": "AI & Automation"
@@ -48,25 +42,25 @@
         "title": "Project Types",
         "links": [
           {
-            "href": "/portfolio",
+            "href": "/portfolio#nextjs-ecommerce",
             "label": "E-Commerce",
             "icon": "FiShoppingCart",
             "desc": "Online stores"
           },
           {
-            "href": "/portfolio",
+            "href": "/portfolio#react-dashboard",
             "label": "Dashboards",
             "icon": "FiBarChart2",
             "desc": "Analytics & admin"
           },
           {
-            "href": "/portfolio",
+            "href": "/portfolio#swift-fitness",
             "label": "Mobile Apps",
             "icon": "FiSmartphone",
             "desc": "IOS MongoDB applications"
           },
           {
-            "href": "/portfolio",
+            "href": "/portfolio#mern-crm",
             "label": "Enterprise",
             "icon": "FiServer",
             "desc": "Business solutions"
@@ -96,8 +90,8 @@
         "title": "Frontend",
         "links": [
           {
-            "href": "/tech#react",
-            "label": "React.JS / Next.JS",
+            "href": "/tech#nextjs",
+            "label": "Next.js",
             "icon": "FiCode",
             "desc": "Advanced UI frameworks"
           },
@@ -114,10 +108,10 @@
             "desc": "AI & Data solutions"
           },
           {
-            "href": "/tech#ai-agentic",
+            "href": "/tech#ai",
             "label": "AI Agentic Development",
             "icon": "FiCpu",
-            "desc": "AI-powered coding"
+            "desc": "System wide development"
           }
         ]
       },
@@ -137,7 +131,7 @@
             "desc": "Utility-first CSS"
           },
           {
-            "href": "/tech#uiux",
+            "href": "/tech#design",
             "label": "UI / UX Design",
             "icon": "FiLayout",
             "desc": "User experience design"
@@ -183,7 +177,7 @@
         "title": "Mobile",
         "links": [
           {
-            "href": "/tech#fullstack",
+            "href": "/tech#swiftui",
             "label": "SwiftUI",
             "icon": "FiSmartphone",
             "desc": "iOS development"
@@ -287,6 +281,12 @@
             "desc": "Multi-user pricing"
           },
           {
+            "href": "/pricing",
+            "label": "Pricing",
+            "icon": "FiDollarSign",
+            "desc": "Products"
+          },
+          {
             "href": "/products",
             "label": "E-Commerce",
             "icon": "FiShoppingCart",
@@ -310,10 +310,22 @@
         "title": "Documentation",
         "links": [
           {
+            "href": "/product-videos",
+            "label": "Product Videos",
+            "icon": "FiVideo",
+            "desc": "Product and Company Videos"
+          },
+          {
             "href": "/documents",
             "label": "All Documents",
             "icon": "FiFileText",
             "desc": "Browse resources"
+          },
+          {
+            "href": "/questions",
+            "label": "Questions & Answers",
+            "icon": "FiHelpCircle",
+            "desc": "FAQ & Support"
           },
           {
             "href": "/guides",
@@ -333,12 +345,6 @@
             "desc": "Our Mission"
           },
           {
-            "href": "/pricing",
-            "label": "Pricing",
-            "icon": "FiDollarSign",
-            "desc": "Plans & pricing"
-          },
-          {
             "href": "/accounts",
             "label": "Accounts",
             "icon": "FiUser",
@@ -356,22 +362,28 @@
         "title": "Legal",
         "links": [
           {
-            "href": "/terms",
-            "label": "Terms of Service",
+            "href": "https://jovial-sunflower-4cf4bd.netlify.app/terms-of-use",
+            "label": "Terms of Use",
             "icon": "FiShield",
             "desc": "Usage terms"
           },
           {
-            "href": "/privacy",
+            "href": "https://jovial-sunflower-4cf4bd.netlify.app/content-policy",
             "label": "Privacy Policy",
             "icon": "FiShield",
             "desc": "Data protection"
           },
           {
-            "href": "/content-policy",
+            "href": "https://jovial-sunflower-4cf4bd.netlify.app/privacy-policy",
             "label": "Content Policy",
             "icon": "FiShield",
             "desc": "Content guidelines"
+          },
+          {
+            "href": "https://jovial-sunflower-4cf4bd.netlify.app/cookie-policy",
+            "label": "Cookie Policy",
+            "icon": "FiShield",
+            "desc": "Cookie usage"
           },
           {
             "href": "/trademarks",

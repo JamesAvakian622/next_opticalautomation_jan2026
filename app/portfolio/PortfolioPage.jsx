@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -41,7 +42,7 @@ import {
 const tabCategories = [
   {
     id: 'react-nextjs',
-    label: 'ReactJS / NextJS',
+    label: 'Next.JS',
     icon: FiCode,
     color: 'linear-gradient(135deg, #61DAFB 0%, #0070F3 100%)',
     projects: [
@@ -245,7 +246,7 @@ const tabCategories = [
   },
   {
     id: 'react-native',
-    label: 'React Native',
+    label: 'Android',
     icon: FiSmartphone,
     color: 'linear-gradient(135deg, #61DAFB 0%, #0070F3 100%)',
     projects: [
@@ -565,7 +566,7 @@ const PageWrapper = styled.div`
 `;
 
 const HeroSection = styled.section`
-  padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.lg};
+  padding: 180px ${({ theme }) => theme.spacing.lg} ${({ theme }) => theme.spacing.xxl};
   background: ${({ theme }) => theme.colors.gradient};
   text-align: center;
   position: relative;
@@ -584,7 +585,7 @@ const HeroSection = styled.section`
   }
 
   @media (max-width: 768px) {
-    padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.md};
+    padding: 140px ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
   }
 `;
 
@@ -595,10 +596,38 @@ const HeroContent = styled.div`
   z-index: 1;
 `;
 
+const HeroHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing.xl};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
+
+  @media (max-width: 768px) {
+    gap: ${({ theme }) => theme.spacing.md};
+    flex-direction: column;
+  }
+`;
+
+const HeroLogo = styled(motion.div)`
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 20px 60px ${({ theme }) => theme.colors.shadow};
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 80px;
+    height: 80px;
+  }
+`;
+
 const PageTitle = styled(motion.h1)`
   font-size: 3.5rem;
   color: white;
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
+  margin-bottom: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
@@ -931,6 +960,53 @@ export default function PortfolioPage() {
     { name: 'Portfolio', path: '/portfolio' }
   ]);
 
+  useEffect(() => {
+    const handleHashNavigation = () => {
+      const hash = window.location.hash.replace('#', '');
+
+      if (!hash) {
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      // Check if hash matches a category
+      const matchingCategory = tabCategories.find(cat => cat.id === hash);
+      if (matchingCategory) {
+        setActiveTab(hash);
+        // Scroll to tabs section after a brief delay to ensure render
+        setTimeout(() => {
+          const tabsSection = document.getElementById('portfolio-tabs');
+          if (tabsSection) {
+            tabsSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+        return;
+      }
+
+      // Check if hash matches a project
+      for (const cat of tabCategories) {
+        const matchingProject = cat.projects.find(p => p.id === hash);
+        if (matchingProject) {
+          setActiveTab(cat.id);
+          // Scroll to project after tab switch and render
+          setTimeout(() => {
+            const projectElement = document.getElementById(hash);
+            if (projectElement) {
+              projectElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }, 100);
+          return;
+        }
+      }
+    };
+
+    handleHashNavigation();
+
+    // Add event listener for hash changes
+    window.addEventListener('hashchange', handleHashNavigation);
+    return () => window.removeEventListener('hashchange', handleHashNavigation);
+  }, []);
+
   const portfolioJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -964,13 +1040,28 @@ export default function PortfolioPage() {
       />
       <HeroSection id="top">
         <HeroContent>
-          <PageTitle
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Our Portfolio
-          </PageTitle>
+          <HeroHeader>
+            <HeroLogo
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Image
+                src="/opauto.png"
+                alt="Optical Automation"
+                fill
+                style={{ objectFit: 'contain' }}
+                priority
+              />
+            </HeroLogo>
+            <PageTitle
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Portfolio
+            </PageTitle>
+          </HeroHeader>
           <Subtitle
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -983,7 +1074,7 @@ export default function PortfolioPage() {
       </HeroSection>
 
       {/* Technology Tab Section */}
-      <TabSection>
+      <TabSection id="portfolio-tabs">
         <TabSectionTitle>Projects by Technology</TabSectionTitle>
         <TabSectionSubtitle>
           Browse our diverse portfolio of applications built with modern information technology frameworks and technologies
@@ -995,7 +1086,10 @@ export default function PortfolioPage() {
               key={category.id}
               $isActive={activeTab === category.id}
               $activeColor={category.color}
-              onClick={() => setActiveTab(category.id)}
+              onClick={() => {
+                setActiveTab(category.id);
+                document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -1018,6 +1112,7 @@ export default function PortfolioPage() {
                 {activeCategory.projects.map((project, index) => (
                   <TabProjectCard
                     key={project.id}
+                    id={project.id}
                     $accentColor={project.color}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}

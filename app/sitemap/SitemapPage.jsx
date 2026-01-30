@@ -17,7 +17,9 @@ import {
     FiLock,
     FiBookOpen,
     FiMap,
-    FiAward
+    FiAward,
+    FiBook,
+    FiVideo
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -177,11 +179,20 @@ const siteMapData = [
         title: 'Legal',
         icon: FiShield,
         links: [
-            { href: '/terms', label: 'Terms of Use', icon: FiShield },
-            { href: '/privacy', label: 'Privacy Policy', icon: FiLock },
-            { href: '/content-policy', label: 'Content Policy', icon: FiBookOpen },
+            { href: 'https://jovial-sunflower-4cf4bd.netlify.app/terms-of-use', label: 'Terms of Use', icon: FiShield },
+            { href: 'https://jovial-sunflower-4cf4bd.netlify.app/content-policy', label: 'Privacy Policy', icon: FiLock },
+            { href: 'https://jovial-sunflower-4cf4bd.netlify.app/privacy-policy', label: 'Content Policy', icon: FiBookOpen },
+            { href: 'https://jovial-sunflower-4cf4bd.netlify.app/cookie-policy', label: 'Cookie Policy', icon: FiFileText },
             { href: '/trademarks', label: 'Trademarks', icon: FiAward },
             { href: '/sitemap', label: 'Site Map', icon: FiMap }
+        ]
+    },
+    {
+        title: 'Resources',
+        icon: FiFileText,
+        links: [
+            { href: '/product-videos', label: 'Company Product Videos', icon: FiVideo },
+            { href: '/guides', label: 'IP Guides', icon: FiBook }
         ]
     }
 ];

@@ -42,12 +42,14 @@ import {
     FiCalendar,
     FiUsers,
     FiZap,
-    FiTerminal
+    FiTerminal,
+    FiVideo
 } from 'react-icons/fi';
 import { useTheme } from './ThemeProvider';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserButton as ClerkUserButton, useUser } from '@clerk/nextjs';
+import WhoisLookup from './WhoisLookup';
 
 // Mega Menu Data
 import megaMenuDataRaw from '../data/megaMenu.json';
@@ -59,7 +61,7 @@ const iconMap = {
     FiCode, FiDatabase, FiSmartphone, FiServer, FiLayers, FiLayout,
     FiShoppingCart, FiTruck, FiDollarSign, FiBook, FiSettings, FiMail,
     FiHelpCircle, FiShield, FiAward, FiTrendingUp, FiPackage,
-    FiBarChart2, FiCalendar, FiUsers, FiZap, FiTerminal
+    FiBarChart2, FiCalendar, FiUsers, FiZap, FiTerminal, FiVideo
 };
 
 // Process menu data to include actual icon components
@@ -237,8 +239,10 @@ const MegaMenuSection = styled.div`
     ${({ $featured, theme }) => $featured && `
         background: ${theme.colors.gradient};
         border-radius: ${theme.borderRadius.xl};
-        padding: ${theme.spacing.lg};
+        padding: ${theme.spacing.md};
         color: white;
+        align-self: start;
+        height: fit-content;
     `}
 `;
 
@@ -257,7 +261,7 @@ const MegaMenuSectionTitle = styled.h4`
 const MegaMenuLinks = styled.div`
     display: flex;
     flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.xs};
+    gap: ${({ theme }) => theme.spacing.md};
 `;
 
 const MegaMenuLink = styled(Link)`
@@ -672,6 +676,15 @@ export default function Navigation() {
                                                 </MegaMenuLink>
                                             ))}
                                         </MegaMenuLinks>
+                                        {section.featured && (
+                                            <div style={{ marginTop: '1rem' }}>
+                                                <WhoisLookup
+                                                    placeholder="Domain search..."
+                                                    buttonText="GO"
+                                                    compact={true}
+                                                />
+                                            </div>
+                                        )}
                                     </MegaMenuSection>
                                 ))}
                             </MegaMenuInner>

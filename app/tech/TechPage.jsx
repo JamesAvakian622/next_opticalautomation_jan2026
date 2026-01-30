@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -13,7 +14,9 @@ import {
   FiZap,
   FiBox,
   FiSmartphone,
-  FiTerminal
+  FiTerminal,
+  FiTrendingUp,
+  FiSearch
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -43,6 +46,35 @@ const HeroSection = styled.section`
     padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.md};
   }
 `;
+
+const HeroHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xl};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
+
+  @media (max-width: 768px) {
+    gap: ${({ theme }) => theme.spacing.md};
+    flex-direction: column;
+    text-align: center;
+  }
+`;
+
+const HeroLogo = styled(motion.div)`
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 20px 60px ${({ theme }) => theme.colors.shadow};
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 80px;
+    height: 80px;
+  }
+`;
+
 
 const HeroContent = styled.div`
   max-width: 900px;
@@ -331,6 +363,7 @@ const technologies = [
       'We embrace the future of software engineering through AI-human collaboration and automation.',
       'Development methodology:',
       '• AI-assisted code generation and optimization',
+      '• All system files dev for Next.JS website, SEO utilities, SwiftUI iOS, and ReactNative Android.',
       '• Automated debugging and performance analysis',
       '• Accelerated delivery timelines for complex features',
       '• Enhanced code quality through AI-powered reviews',
@@ -398,6 +431,21 @@ const technologies = [
     ],
   },
   {
+    id: 'swiftui',
+    icon: FiSmartphone,
+    title: 'SwiftUI',
+    color: '#007AFF',
+    description: [
+      'Apple Computer language for computer and handheld devices as a modern UI framework for fast, consistent, and premium mobile apps. Apps require submission at Apple App Store.',
+      'Key Benefits:',
+      '• Faster development with clean, declarative code',
+      '• One design system for iOS, macOS, watchOS, and more',
+      '• Modern visuals with smooth animations and dynamic layouts',
+      '• Predictable, state‑driven architecture for lower maintenance',
+      '• Future‑ready and aligned with Apple’s long‑term direction',
+    ],
+  },
+  {
     id: 'python',
     icon: FiTerminal,
     title: 'Python, AI, & Automation',
@@ -410,6 +458,22 @@ const technologies = [
       '• Enterprise-level task automation and scripting',
       '• High-performance backend services with FastAPI',
       'Python\'s rich ecosystem makes it our primary choice for complex data challenges and intelligent automation.',
+    ],
+  },
+  {
+    id: 'seo',
+    icon: FiTrendingUp,
+    title: 'SEO & Meta Data',
+    color: '#10B981',
+    description: [
+      'We implement advanced SEO strategies utilizing standard JSON, JSON-LD, and modern libraries.',
+      'Our optimization stack includes:',
+      '• JSON-LD structured data for rich search results',
+      '• Dynamic Metatags management for social sharing',
+      '• React Helmet Async for dynamic head management',
+      '• Open Graph and Twitter Card integration',
+      '• Semantic HTML structure for accessibility',
+      'Ensuring your application is perfectly indexed, discoverable, and stands out in search results.',
     ],
   },
 ];
@@ -449,17 +513,51 @@ const itemVariants = {
 };
 
 export default function TechPage() {
+  React.useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        setTimeout(() => {
+          const element = document.querySelector(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
+
+    handleHashScroll();
+  }, []);
+
   return (
     <PageWrapper>
       <HeroSection>
         <HeroContent>
-          <PageTitle
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Our Technology Stack
-          </PageTitle>
+          <HeroHeader>
+            <HeroLogo
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Image
+                src="/opauto.png"
+                alt="Optical Automation"
+                fill
+                style={{ objectFit: 'contain' }}
+                priority
+              />
+            </HeroLogo>
+            <PageTitle
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ marginBottom: 0 }}
+            >
+              Our Technology Stack
+            </PageTitle>
+          </HeroHeader>
           <Subtitle
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

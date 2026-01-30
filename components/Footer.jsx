@@ -9,7 +9,7 @@ import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiGithub } from 'react-
 const FooterWrapper = styled.footer`
     background: ${({ theme }) => theme.colors.surface};
     border-top: 1px solid ${({ theme }) => theme.colors.border};
-    padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.lg};
+    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.lg};
 
     @media print {
         display: none;
@@ -23,9 +23,13 @@ const FooterContent = styled.div`
 
 const FooterTop = styled.div`
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: ${({ theme }) => theme.spacing.xl};
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
+
+    @media (max-width: 1100px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
 
     @media (max-width: 900px) {
         grid-template-columns: 1fr 1fr;
@@ -50,13 +54,14 @@ const LogoLink = styled(Link)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.md};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+    gap: 0;
+    margin-bottom: -60px;
+    margin-top: -30px;
 `;
 
 const LogoImage = styled.div`
-    width: 150px;
-    height: 150px;
+    width: 300px;
+    height: 300px;
     position: relative;
     border-radius: 0;
     overflow: hidden;
@@ -103,6 +108,16 @@ const FooterLink = styled(Link)`
     }
 `;
 
+const ExternalFooterLink = styled.a`
+    color: ${({ theme }) => theme.colors.textSecondary};
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: ${({ theme }) => theme.colors.primary};
+    }
+`;
+
 const FooterBottom = styled.div`
     display: flex;
     justify-content: space-between;
@@ -126,7 +141,7 @@ const LegalDisclaimer = styled.p`
     color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 0.75rem;
     line-height: 1.5;
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
+    margin-bottom: ${({ theme }) => theme.spacing.lg};
     max-width: 800px;
     opacity: 0.8;
 `;
@@ -170,10 +185,11 @@ const SocialLink = styled.a`
 `;
 
 const socialLinks = [
-  { name: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61585668745327', icon: FiFacebook },
-  { name: 'Twitter', href: 'https://x.com/javakian2025', icon: FiTwitter },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/optical-automation/posts/?feedView=all', icon: FiLinkedin },
-  { name: 'GitHub', href: 'https://github.com/opticalautomation', icon: FiGithub }
+  { name: 'Facebook', href: 'https://www.Facebook.com/james.avakian.9', icon: FiFacebook },
+  { name: 'X', href: 'https://twitter.com/JamesAvaki4763', icon: FiTwitter },
+  { name: 'LinkedIn', href: 'https://www.LinkedIn.com/in/james-l-avakian-13500713/', icon: FiLinkedin },
+  { name: 'GitHub', href: 'https://www.github.com/jamesvakian62', icon: FiGithub },
+  { name: 'Instagram', href: 'https://www.Instagram.com/jamesavakian/', icon: FiInstagram }
 ];
 
 const portfolioLinks = [
@@ -207,10 +223,18 @@ const resourcesLinks = [
   { href: '/about', label: 'About Us' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/documents', label: 'Documents' },
+  { href: '/videos', label: 'Videos' },
   { href: '/guides', label: 'Guides' },
   { href: '/forgot-password', label: 'Password Reset' },
   { href: '/support', label: 'Support' },
   { href: '/sitemap', label: 'Site Map' }
+];
+
+const policyLinks = [
+  { href: 'https://jovial-sunflower-4cf4bd.netlify.app/terms-of-use', label: 'Terms of Use' },
+  { href: 'https://jovial-sunflower-4cf4bd.netlify.app/privacy-policy', label: 'Content Policy' },
+  { href: 'https://jovial-sunflower-4cf4bd.netlify.app/content-policy', label: 'Privacy Policy' },
+  { href: 'https://jovial-sunflower-4cf4bd.netlify.app/cookie-policy', label: 'Cookie Policy' }
 ];
 
 export default function Footer() {
@@ -230,10 +254,9 @@ export default function Footer() {
                   style={{ objectFit: 'contain' }}
                 />
               </LogoImage>
-              <CompanyName>Optical Automation</CompanyName>
             </LogoLink>
             <BrandDescription>
-              Cutting-edge shared MERN website and mobile app information system solutions using AI-assisted development deployment by modern technologies. Transform your ideas into powerful digital experiences with our talent and experience.
+              We are a software development company that produces app applications Websites, Mobile Apps, and Database system networks. These products are developed by AI process Agents for high performance, fast display, and efficient access according to American Industry Standards.
             </BrandDescription>
           </BrandSection>
 
@@ -280,13 +303,23 @@ export default function Footer() {
               ))}
             </FooterLinks>
           </FooterSection>
+
+          <FooterSection>
+            <SectionTitle>Policies</SectionTitle>
+            <FooterLinks>
+              {policyLinks.map((link) => (
+                <FooterLinkItem key={link.label}>
+                  <ExternalFooterLink href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</ExternalFooterLink>
+                </FooterLinkItem>
+              ))}
+            </FooterLinks>
+          </FooterSection>
         </FooterTop>
 
         <FooterBottom>
           <BottomCreditWrapper>
             <LegalDisclaimer>
-              All trademarks, product names, and logos are the property of their respective owners.
-              Unauthorized reproduction or distribution of any material on this site is prohibited.
+              All trademarks, product names, and logos are the property of their respective owners. Optical Automation, LLC owns all developed software as intellectual property protected by U.S. Copyright and Trademarks. Unauthorized reproduction or distribution of any material on this site is prohibited.
             </LegalDisclaimer>
             <Copyright>
               © {currentYear} Optical Automation, LLC. All rights reserved.

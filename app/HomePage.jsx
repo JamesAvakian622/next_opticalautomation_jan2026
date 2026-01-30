@@ -53,14 +53,19 @@ const HeroSection = styled.section`
 const HeroContent = styled.div`
     max-width: 1200px;
     margin: 0;
-    text-align: left;
+    text-align: center;
     position: relative;
     z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const HeroHeader = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: ${({ theme }) => theme.spacing.xl};
     margin-bottom: ${({ theme }) => theme.spacing.xl};
 
@@ -70,8 +75,8 @@ const HeroHeader = styled.div`
 `;
 
 const HeroLogo = styled(motion.div)`
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     position: relative;
     border-radius: 0;
     overflow: hidden;
@@ -79,23 +84,23 @@ const HeroLogo = styled(motion.div)`
     flex-shrink: 0;
 
     @media (max-width: 768px) {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
     }
 `;
 
 const HeroTitle = styled(motion.h1)`
-    font-size: 4rem;
+    font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 0;
     line-height: 1.1;
 
     @media (max-width: 768px) {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     @media (max-width: 480px) {
-        font-size: 2rem;
+        font-size: 1.75rem;
     }
 `;
 
@@ -109,7 +114,7 @@ const GradientText = styled.span`
 const HeroSubtitle = styled(motion.p)`
     font-size: 1.25rem;
     color: ${({ theme }) => theme.colors.textSecondary};
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 0 ${({ theme }) => theme.spacing.xl};
     line-height: 1.7;
 
@@ -121,7 +126,7 @@ const HeroSubtitle = styled(motion.p)`
 const HeroButtons = styled(motion.div)`
     display: flex;
     gap: ${({ theme }) => theme.spacing.md};
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
 `;
 
@@ -451,9 +456,10 @@ export default function HomePage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
                     >
-                        A software development production company that uses Artificial Intelligence
-                        first with SEO Optimization and Full Stack performance. Transform your
-                        ideas into powerful digital experiences with our talent and experience.
+                        We are a software development production company that uses Artificial Intelligence
+                        to find information, research code, and use artificial intelligence for SEO Optimization
+                        and Full Stack website, database, and mobile app performance as a system of all files.
+                        We transform your ideas into powerful digital experiences with our talent and experience.
                     </HeroSubtitle>
 
                     <HeroButtons

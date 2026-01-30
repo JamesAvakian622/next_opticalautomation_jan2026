@@ -1,5 +1,31 @@
 import ProjectDetailPage from './ProjectDetailPage';
 
+// Required for static export - pre-render all portfolio project pages
+export async function generateStaticParams() {
+    return [
+        { id: 'e-commerce-platform' },
+        { id: 'task-management' },
+        { id: 'social-network' },
+        { id: 'developer-portfolio' },
+        { id: 'data-dashboard' },
+        { id: 'photo-gallery' },
+        { id: 'music-streaming' },
+        { id: 'learning-platform' },
+        { id: 'real-estate' },
+        { id: 'delivery-tracking' },
+        { id: 'fitness-app' },
+        { id: 'cloud-storage' },
+        { id: 'cms-platform' },
+        { id: 'mobile-banking' },
+        { id: 'travel-booking' },
+        { id: 'stock-trading' },
+        { id: 'smart-home' },
+        { id: 'design-system' },
+        { id: 'api-platform' },
+        { id: 'restaurant-pos' }
+    ];
+}
+
 export async function generateMetadata({ params }) {
     const projectTitles = {
         'e-commerce-platform': 'E-Commerce Platform',

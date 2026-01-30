@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import {
     FiUser,
     FiMail,
@@ -58,56 +59,70 @@ const DashboardHeader = styled.div`
     border-bottom: 1px solid #ccc;
 `;
 
+
+
+const LogoWrapper = styled.div`
+width: 32px;
+height: 32px;
+position: relative;
+border - radius: 0;
+overflow: hidden;
+flex - shrink: 0;
+margin - right: 12px;
+`;
+
 const AccountTitle = styled.h2`
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin: 0;
-    color: #444;
+font - size: 1.2rem;
+font - weight: 700;
+margin: 0;
+color: #444;
+display: flex;
+align - items: center;
     
     span {
-        font-weight: 400;
-        font-size: 0.85rem;
-        margin-left: 8px;
-        color: #0066cc;
-        cursor: pointer;
+    font - weight: 400;
+    font - size: 0.85rem;
+    margin - left: 8px;
+    color: #0066cc;
+    cursor: pointer;
         
         &:hover {
-            text-decoration: underline;
-        }
+        text - decoration: underline;
     }
+}
 `;
 
 const AccountStatus = styled.div`
-    font-size: 0.95rem;
-    color: #333;
+font - size: 0.95rem;
+color: #333;
     
     strong {
-        font-weight: 700;
-    }
+    font - weight: 700;
+}
 `;
 
 const TabBar = styled.div`
-    display: flex;
-    background: #f9f9f9;
-    border-bottom: 1px solid #ddd;
-    overflow-x: auto;
+display: flex;
+background: #f9f9f9;
+border - bottom: 1px solid #ddd;
+overflow - x: auto;
 `;
 
 const TabButton = styled.button`
-    padding: 15px 25px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: ${({ $active }) => ($active ? '#004a80' : '#0066cc')};
-    background: ${({ $active }) => ($active ? '#e1effa' : 'transparent')};
-    border: none;
-    border-right: 1px solid #ddd;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
+padding: 15px 25px;
+font - size: 0.95rem;
+font - weight: 500;
+color: ${({ $active }) => ($active ? '#004a80' : '#0066cc')};
+background: ${({ $active }) => ($active ? '#e1effa' : 'transparent')};
+border: none;
+border - right: 1px solid #ddd;
+cursor: pointer;
+white - space: nowrap;
+transition: all 0.2s;
     
     &:hover {
-        background: ${({ $active }) => ($active ? '#e1effa' : '#f0f0f0')};
-    }
+    background: ${({ $active }) => ($active ? '#e1effa' : '#f0f0f0')};
+}
     
     ${({ $active }) => $active && `
         border-bottom: 3px solid #004a80;
@@ -115,125 +130,125 @@ const TabButton = styled.button`
 `;
 
 const TabContent = styled.div`
-    padding: 30px;
-    min-height: 400px;
+padding: 30px;
+min - height: 400px;
 `;
 
 const SummaryActions = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 15px;
+display: flex;
+justify - content: flex - end;
+margin - bottom: 15px;
 `;
 
 const PrintLink = styled.button`
-    background: none;
-    border: none;
-    color: #0066cc;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
+background: none;
+border: none;
+color: #0066cc;
+font - size: 0.85rem;
+display: flex;
+align - items: center;
+gap: 6px;
+cursor: pointer;
     
     &:hover {
-        text-decoration: underline;
-    }
+    text - decoration: underline;
+}
 `;
 
 const ContentTitle = styled.h3`
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #cc6600;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
+font - size: 1.2rem;
+font - weight: 700;
+color: #cc6600;
+margin - bottom: 20px;
+border - bottom: 1px solid #eee;
+padding - bottom: 10px;
 `;
 
 const InfoBox = styled.div`
-    background: #fdfdfd;
-    border: 1px solid #eee;
-    padding: 20px;
-    border-radius: 4px;
-    margin-bottom: 20px;
+background: #fdfdfd;
+border: 1px solid #eee;
+padding: 20px;
+border - radius: 4px;
+margin - bottom: 20px;
 `;
 
 const LabelValue = styled.div`
-    display: flex;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
+display: flex;
+margin - bottom: 15px;
+font - size: 0.95rem;
     
     .label {
-        font-weight: 700;
-        width: 150px;
-        color: #555;
-    }
+    font - weight: 700;
+    width: 150px;
+    color: #555;
+}
     
     .value {
-        color: #333;
-    }
+    color: #333;
+}
 `;
 
 const ActionBtn = styled.button`
-    background: ${({ $primary }) => ($primary ? '#0066cc' : '#f1f1f1')};
-    color: ${({ $primary }) => ($primary ? 'white' : '#333')};
-    border: 1px solid ${({ $primary }) => ($primary ? '#004a80' : '#ccc')};
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-right: 10px;
+background: ${({ $primary }) => ($primary ? '#0066cc' : '#f1f1f1')};
+color: ${({ $primary }) => ($primary ? 'white' : '#333')};
+border: 1px solid ${({ $primary }) => ($primary ? '#004a80' : '#ccc')};
+padding: 8px 16px;
+border - radius: 4px;
+font - weight: 600;
+cursor: pointer;
+display: flex;
+align - items: center;
+gap: 8px;
+margin - right: 10px;
     
     &:hover {
-        background: ${({ $primary }) => ($primary ? '#004a80' : '#e0e0e0')};
-    }
+    background: ${({ $primary }) => ($primary ? '#004a80' : '#e0e0e0')};
+}
 `;
 
 const ProductsGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+display: grid;
+grid - template - columns: repeat(auto - fill, minmax(300px, 1fr));
+gap: 20px;
 `;
 
 const ProductCard = styled.div`
-    border: 1px solid #eee;
-    padding: 15px;
-    border-radius: 4px;
-    background: #fff;
+border: 1px solid #eee;
+padding: 15px;
+border - radius: 4px;
+background: #fff;
     
     h4 {
-        margin: 0 0 10px 0;
-        color: #004a80;
-    }
+    margin: 0 0 10px 0;
+    color: #004a80;
+}
     
     p {
-        font-size: 0.85rem;
-        color: #666;
-        margin-bottom: 10px;
-    }
+    font - size: 0.85rem;
+    color: #666;
+    margin - bottom: 10px;
+}
 `;
 
 const PricingGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 10px;
+display: grid;
+grid - template - columns: repeat(auto - fit, minmax(280px, 1fr));
+gap: 25px;
+margin - top: 10px;
 `;
 
 const PricingCard = styled.div`
-    background: white;
-    border: 2px solid ${({ $featured }) => ($featured ? '#0066cc' : '#eee')};
-    border-radius: 8px;
-    padding: 25px;
-    position: relative;
-    transition: transform 0.3s ease;
+background: white;
+border: 2px solid ${({ $featured }) => ($featured ? '#0066cc' : '#eee')};
+border - radius: 8px;
+padding: 25px;
+position: relative;
+transition: transform 0.3s ease;
     
     &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
+    transform: translateY(-5px);
+    box - shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
     
     ${({ $featured }) => $featured && `
         &::after {
@@ -254,49 +269,49 @@ const PricingCard = styled.div`
 `;
 
 const PriceTitle = styled.h4`
-    font-size: 1.1rem;
-    color: #333;
-    margin-bottom: 5px;
-    font-weight: 700;
+font - size: 1.1rem;
+color: #333;
+margin - bottom: 5px;
+font - weight: 700;
 `;
 
 const PriceValue = styled.div`
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #004a80;
-    margin: 15px 0;
+font - size: 2.5rem;
+font - weight: 800;
+color: #004a80;
+margin: 15px 0;
     
     span {
-        font-size: 1rem;
-        color: #666;
-        font-weight: 400;
-        margin-left: 4px;
-    }
+    font - size: 1rem;
+    color: #666;
+    font - weight: 400;
+    margin - left: 4px;
+}
 `;
 
 const PriceDetail = styled.div`
-    font-size: 0.9rem;
-    color: #dd6600;
-    font-weight: 700;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+font - size: 0.9rem;
+color: #dd6600;
+font - weight: 700;
+margin - bottom: 20px;
+display: flex;
+align - items: center;
+gap: 6px;
 `;
 
 const PricingFeature = styled.div`
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 12px;
-    font-size: 0.85rem;
-    color: #555;
+display: flex;
+align - items: flex - start;
+gap: 10px;
+margin - bottom: 12px;
+font - size: 0.85rem;
+color: #555;
     
     svg {
-        color: #10b981;
-        flex-shrink: 0;
-        margin-top: 2px;
-    }
+    color: #10b981;
+    flex - shrink: 0;
+    margin - top: 2px;
+}
 `;
 
 
@@ -363,6 +378,15 @@ export default function AccountsPage() {
                 <DashboardWrapper>
                     <DashboardHeader>
                         <AccountTitle>
+                            <LogoWrapper>
+                                <Image
+                                    src="/opauto.png"
+                                    alt="Optical Automation"
+                                    fill
+                                    style={{ objectFit: 'contain' }}
+                                    priority
+                                />
+                            </LogoWrapper>
                             {user.name.toUpperCase()}'s ACCOUNT <span onClick={handleLogout}>(Log Out)</span>
                         </AccountTitle>
                         <AccountStatus>
@@ -476,24 +500,26 @@ export default function AccountsPage() {
                                             <h4>{p.name}</h4>
                                             <p>{p.description}</p>
                                             <a href={`https://${p.url}`} target="_blank" style={{ color: '#0066cc', fontSize: '0.85rem' }}>Visit <FiExternalLink size={12} /></a>
-                                        </ProductCard>
+                                        </ProductCard >
                                     ))}
-                                </ProductsGrid>
-                            </div>
+                                </ProductsGrid >
+                            </div >
                         )}
 
                         {/* Other tabs follow the same simple layout as ProfilePage */}
-                        {['recommendations', 'lists', 'searches'].includes(activeTab) && (
-                            <div>
-                                <ContentTitle>{tabs.find(t => t.id === activeTab).label}</ContentTitle>
-                                <InfoBox>
-                                    <p style={{ color: '#666' }}>No entries found for this section.</p>
-                                </InfoBox>
-                            </div>
-                        )}
-                    </TabContent>
-                </DashboardWrapper>
-            </Container>
-        </PageWrapper>
+                        {
+                            ['recommendations', 'lists', 'searches'].includes(activeTab) && (
+                                <div>
+                                    <ContentTitle>{tabs.find(t => t.id === activeTab).label}</ContentTitle>
+                                    <InfoBox>
+                                        <p style={{ color: '#666' }}>No entries found for this section.</p>
+                                    </InfoBox>
+                                </div>
+                            )
+                        }
+                    </TabContent >
+                </DashboardWrapper >
+            </Container >
+        </PageWrapper >
     );
 }

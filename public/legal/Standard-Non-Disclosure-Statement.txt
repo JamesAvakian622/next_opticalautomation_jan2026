@@ -1,0 +1,16 @@
+🔒 Standard Non‑Disclosure Statement (General Use)
+
+Confidentiality Obligation
+The Receiving Party agrees to treat all information disclosed by the Disclosing Party—whether written, verbal, digital, or otherwise—as strictly confidential. This includes technical data, business strategies, financial information, product designs, intellectual property, and any other material identified or reasonably understood to be confidential. The Receiving Party will not share, distribute, or permit access to this information without prior written consent from the Disclosing Party.
+
+Permitted Use
+Confidential information may be used solely for the purpose of evaluating, developing, or performing the business relationship between the parties. No other use is permitted, and the Receiving Party will take all reasonable measures to prevent unauthorized access, disclosure, or misuse.
+
+Exclusions
+Confidential information does not include material that is already publicly available, independently developed without reference to the disclosed information, lawfully obtained from a third party without confidentiality obligations, or required to be disclosed by law or court order. In such cases, the Receiving Party will provide prompt notice to the Disclosing Party when legally permissible.
+
+Return or Destruction
+Upon request or termination of discussions, the Receiving Party will promptly return or destroy all confidential materials, including copies, summaries, and derivative works, and will certify completion of this process if requested.
+
+No License or Ownership Transfer
+Disclosure of confidential information does not grant any license, ownership rights, or permissions beyond those explicitly stated. All intellectual property remains the sole property of the Disclosing Party.

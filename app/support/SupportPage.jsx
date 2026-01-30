@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -18,7 +19,7 @@ import {
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh-70px);
     padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.lg};
     background: ${({ theme }) => theme.colors.background};
 
@@ -37,325 +38,344 @@ const HeroSection = styled.div`
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
 `;
 
-const Title = styled(motion.h1)`
-    font-size: 3rem;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
+
+const LogoWrapper = styled(motion.div)`
+width: 60px;
+height: 60px;
+position: relative;
+border-radius: 0;
+overflow: hidden;
+flex-shrink: 0;
+
+@media(max-width: 768px) {
+    width: 40px;
+    height: 40px;
+}
+`;
+
+const Title = styled(motion.h1)`
+font-size: 3rem;
+margin-bottom: ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.gradient};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+display: inline-flex;
+align-items: center;
+gap: ${({ theme }) => theme.spacing.md};
+
+@media(max-width: 768px) {
+    font-size: 2rem;
+}
 `;
 
 const Subtitle = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.125rem;
-    max-width: 600px;
-    margin: 0 auto;
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 1.125rem;
+max-width: 600px;
+margin: 0 auto;
 `;
 
 const ContactCards = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: ${({ theme }) => theme.spacing.lg};
-    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: ${({ theme }) => theme.spacing.lg};
+margin-bottom: ${({ theme }) => theme.spacing.xxl};
 `;
 
 const ContactCard = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xl};
-    text-align: center;
-    transition: all 0.3s ease;
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.xl};
+text-align: center;
+transition: all 0.3s ease;
 
     &:hover {
-        border-color: ${({ theme }) => theme.colors.primary};
-        transform: translateY(-4px);
-    }
+    border-color: ${({ theme }) => theme.colors.primary};
+    transform: translateY(-4px);
+}
 `;
 
 const CardIcon = styled.div`
-    width: 60px;
-    height: 60px;
-    margin: 0 auto ${({ theme }) => theme.spacing.md};
-    border-radius: ${({ theme }) => theme.borderRadius.full};
-    background: ${({ theme }) => theme.colors.gradient};
-    display: flex;
-    align-items: center;
-    justify-content: center;
+width: 60px;
+height: 60px;
+margin: 0 auto ${({ theme }) => theme.spacing.md};
+border-radius: ${({ theme }) => theme.borderRadius.full};
+background: ${({ theme }) => theme.colors.gradient};
+display: flex;
+align-items: center;
+justify-content: center;
 
     svg {
-        font-size: 1.5rem;
-        color: white;
-    }
+    font-size: 1.5rem;
+    color: white;
+}
 `;
 
 const CardTitle = styled.h3`
-    font-size: 1.25rem;
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
-    color: ${({ theme }) => theme.colors.text};
+font-size: 1.25rem;
+margin-bottom: ${({ theme }) => theme.spacing.sm};
+color: ${({ theme }) => theme.colors.text};
 `;
 
 const CardInfo = styled.p`
-    color: ${({ theme }) => theme.colors.primary};
-    font-weight: 500;
+color: ${({ theme }) => theme.colors.primary};
+font-weight: 500;
 `;
 
 const CardSubInfo = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.875rem;
-    margin-top: ${({ theme }) => theme.spacing.xs};
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 0.875rem;
+margin-top: ${({ theme }) => theme.spacing.xs};
 `;
 
 const ContentGrid = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: ${({ theme }) => theme.spacing.xxl};
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: ${({ theme }) => theme.spacing.xxl};
 
-    @media (max-width: 900px) {
-        grid-template-columns: 1fr;
-    }
+@media(max-width: 900px) {
+    grid-template-columns: 1fr;
+}
 `;
 
 const FAQSection = styled.div`
-    scroll-margin-top: 100px;
+scroll-margin-top: 100px;
 `;
 
 const SectionTitle = styled.h2`
-    font-size: 2rem;
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
-    color: ${({ theme }) => theme.colors.text};
+font-size: 2rem;
+margin-bottom: ${({ theme }) => theme.spacing.xl};
+color: ${({ theme }) => theme.colors.text};
 `;
 
 const FAQItem = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    overflow: hidden;
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+margin-bottom: ${({ theme }) => theme.spacing.md};
+overflow: hidden;
 `;
 
 const FAQQuestion = styled.button`
-    width: 100%;
-    padding: ${({ theme }) => theme.spacing.lg};
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-    color: ${({ theme }) => theme.colors.text};
-    font-weight: 600;
-    font-size: 1rem;
+width: 100 %;
+padding: ${({ theme }) => theme.spacing.lg};
+display: flex;
+justify-content: space-between;
+align-items: center;
+text-align: left;
+color: ${({ theme }) => theme.colors.text};
+font-weight: 600;
+font-size: 1rem;
 
     svg {
-        color: ${({ theme }) => theme.colors.primary};
-        flex-shrink: 0;
-    }
+    color: ${({ theme }) => theme.colors.primary};
+    flex-shrink: 0;
+}
 `;
 
 const FAQAnswer = styled(motion.div)`
-    padding: 0 ${({ theme }) => theme.spacing.lg} ${({ theme }) => theme.spacing.lg};
-    color: ${({ theme }) => theme.colors.textSecondary};
-    line-height: 1.7;
+padding: 0 ${({ theme }) => theme.spacing.lg} ${({ theme }) => theme.spacing.lg};
+color: ${({ theme }) => theme.colors.textSecondary};
+line-height: 1.7;
 `;
 
 const ContactForm = styled.form`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xl};
-    scroll-margin-top: 100px;
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.xl};
+scroll-margin-top: 100px;
 `;
 
 const FormGroup = styled.div`
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
+margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
 const Label = styled.label`
-    display: block;
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
-    color: ${({ theme }) => theme.colors.text};
-    font-weight: 500;
+display: block;
+margin-bottom: ${({ theme }) => theme.spacing.sm};
+color: ${({ theme }) => theme.colors.text};
+font-weight: 500;
 `;
 
 const Input = styled.input`
-    width: 100%;
-    padding: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border: 2px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 1rem;
-    transition: all 0.3s ease;
+width: 100 %;
+padding: ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.backgroundAlt};
+border: 2px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+color: ${({ theme }) => theme.colors.text};
+font-size: 1rem;
+transition: all 0.3s ease;
 
     &:focus {
-        outline: none;
-        border-color: ${({ theme }) => theme.colors.primary};
-    }
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary};
+}
 `;
 
 const TextArea = styled.textarea`
-    width: 100%;
-    padding: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border: 2px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 1rem;
-    min-height: 150px;
-    resize: vertical;
-    transition: all 0.3s ease;
+width: 100 %;
+padding: ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.backgroundAlt};
+border: 2px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+color: ${({ theme }) => theme.colors.text};
+font-size: 1rem;
+min-height: 150px;
+resize: vertical;
+transition: all 0.3s ease;
 
     &:focus {
-        outline: none;
-        border-color: ${({ theme }) => theme.colors.primary};
-    }
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary};
+}
 `;
 
 const SubmitButton = styled(motion.button)`
-    width: 100%;
-    padding: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.gradient};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    transition: all 0.3s ease;
+width: 100 %;
+padding: ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.gradient};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+color: white;
+font-size: 1rem;
+font-weight: 600;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: ${({ theme }) => theme.spacing.sm};
+transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px ${({ theme }) => theme.colors.shadow};
-    }
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px ${({ theme }) => theme.colors.shadow};
+}
 
     &:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-    }
+    opacity: 0.7;
+    cursor: not-allowed;
+}
 `;
 
 const SuccessMessage = styled(motion.div)`
-    background: ${({ theme }) => `${theme.colors.success}20`};
-    border: 1px solid ${({ theme }) => theme.colors.success};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    padding: ${({ theme }) => theme.spacing.lg};
-    text-align: center;
-    color: ${({ theme }) => theme.colors.success};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.sm};
+background: ${({ theme }) => `${theme.colors.success}20`};
+border: 1px solid ${({ theme }) => theme.colors.success};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+padding: ${({ theme }) => theme.spacing.lg};
+text-align: center;
+color: ${({ theme }) => theme.colors.success};
+display: flex;
+align-items: center;
+justify-content: center;
+gap: ${({ theme }) => theme.spacing.sm};
 
     svg {
-        font-size: 1.25rem;
-    }
+    font-size: 1.25rem;
+}
 `;
 
 const ErrorMessage = styled(motion.div)`
-    background: ${({ theme }) => `${theme.colors.error || '#ef4444'}20`};
-    border: 1px solid ${({ theme }) => theme.colors.error || '#ef4444'};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    padding: ${({ theme }) => theme.spacing.lg};
-    text-align: center;
-    color: ${({ theme }) => theme.colors.error || '#ef4444'};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
+background: ${({ theme }) => `${theme.colors.error || '#ef4444'}20`};
+border: 1px solid ${({ theme }) => theme.colors.error || '#ef4444'};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+padding: ${({ theme }) => theme.spacing.lg};
+text-align: center;
+color: ${({ theme }) => theme.colors.error || '#ef4444'};
+display: flex;
+align-items: center;
+justify-content: center;
+gap: ${({ theme }) => theme.spacing.sm};
+margin-bottom: ${({ theme }) => theme.spacing.lg};
 
     svg {
-        font-size: 1.25rem;
-    }
+    font-size: 1.25rem;
+}
 `;
 
 const ChatOverlay = styled(motion.div)`
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: ${({ theme }) => theme.spacing.lg};
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1000;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: ${({ theme }) => theme.spacing.lg};
 `;
 
 const ChatModal = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    width: 100%;
-    max-width: 450px;
-    max-height: 600px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.xl};
+width: 100 %;
+max-width: 450px;
+max-height: 600px;
+display: flex;
+flex-direction: column;
+overflow: hidden;
 `;
 
 const ChatHeader = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: ${({ theme }) => theme.spacing.lg};
-    background: ${({ theme }) => theme.colors.gradient};
-    color: white;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: ${({ theme }) => theme.spacing.lg};
+background: ${({ theme }) => theme.colors.gradient};
+color: white;
 `;
 
 const ChatTitle = styled.h3`
-    font-size: 1.125rem;
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.sm};
+font-size: 1.125rem;
+display: flex;
+align-items: center;
+gap: ${({ theme }) => theme.spacing.sm};
 
     svg {
-        font-size: 1.25rem;
-    }
+    font-size: 1.25rem;
+}
 `;
 
 const ChatCloseButton = styled.button`
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
+width: 32px;
+height: 32px;
+border-radius: 50 %;
+background: rgba(255, 255, 255, 0.2);
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+border: none;
+cursor: pointer;
+transition: all 0.3s ease;
 
     &:hover {
-        background: rgba(255, 255, 255, 0.3);
-    }
+    background: rgba(255, 255, 255, 0.3);
+}
 `;
 
 const ChatMessages = styled.div`
-    flex: 1;
-    padding: ${({ theme }) => theme.spacing.lg};
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.md};
-    min-height: 300px;
-    max-height: 400px;
+flex: 1;
+padding: ${({ theme }) => theme.spacing.lg};
+overflow-y: auto;
+display: flex;
+flex-direction: column;
+gap: ${({ theme }) => theme.spacing.md};
+min-height: 300px;
+max-height: 400px;
 `;
 
 const ChatMessage = styled.div`
-    max-width: 80%;
-    padding: ${({ theme }) => theme.spacing.md};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    line-height: 1.5;
-    font-size: 0.9rem;
+max-width: 80 %;
+padding: ${({ theme }) => theme.spacing.md};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+line-height: 1.5;
+font-size: 0.9rem;
 
     ${({ $from, theme }) => $from === 'bot' ? `
         background: ${theme.colors.backgroundAlt};
@@ -371,47 +391,47 @@ const ChatMessage = styled.div`
 `;
 
 const ChatInputContainer = styled.div`
-    display: flex;
-    gap: ${({ theme }) => theme.spacing.sm};
-    padding: ${({ theme }) => theme.spacing.lg};
-    border-top: 1px solid ${({ theme }) => theme.colors.border};
+display: flex;
+gap: ${({ theme }) => theme.spacing.sm};
+padding: ${({ theme }) => theme.spacing.lg};
+border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const ChatInput = styled.input`
-    flex: 1;
-    padding: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 0.9rem;
+flex: 1;
+padding: ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.backgroundAlt};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+color: ${({ theme }) => theme.colors.text};
+font-size: 0.9rem;
 
     &:focus {
-        outline: none;
-        border-color: ${({ theme }) => theme.colors.primary};
-    }
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary};
+}
 `;
 
 const ChatSendButton = styled.button`
-    width: 44px;
-    height: 44px;
-    background: ${({ theme }) => theme.colors.gradient};
-    border: none;
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
+width: 44px;
+height: 44px;
+background: ${({ theme }) => theme.colors.gradient};
+border: none;
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+transition: all 0.3s ease;
 
     &:hover {
-        transform: scale(1.05);
-    }
+    transform: scale(1.05);
+}
 
     svg {
-        font-size: 1rem;
-    }
+    font-size: 1rem;
+}
 `;
 
 const faqs = [
@@ -521,6 +541,15 @@ export default function SupportPage() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
+                        <LogoWrapper>
+                            <Image
+                                src="/opauto.png"
+                                alt="Optical Automation"
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                priority
+                            />
+                        </LogoWrapper>
                         Technical Support
                     </Title>
                     <Subtitle>

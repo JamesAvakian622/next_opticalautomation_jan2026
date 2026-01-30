@@ -139,14 +139,14 @@ export default function CookieConsent() {
         >
           <Content>
             <Title>
-              <svg 
-                width="20" 
-                height="20" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               >
                 <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
@@ -171,7 +171,7 @@ export default function CookieConsent() {
             </ButtonGroup>
             <Links>
               <a href="/privacy">Privacy Policy</a>
-              <a href="/terms">Terms of Service</a>
+              <a href="/terms">Terms of Use</a>
             </Links>
           </Content>
         </ConsentBanner>

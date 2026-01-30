@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -26,194 +27,218 @@ const Header = styled.div`
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
 `;
 
-const Title = styled(motion.h1)`
-    font-size: 3rem;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
+
+const LogoWrapper = styled(motion.div)`
+width: 60px;
+height: 60px;
+position: relative;
+border - radius: 0;
+overflow: hidden;
+flex - shrink: 0;
+
+@media(max - width: 768px) {
+    width: 40px;
+    height: 40px;
+}
+`;
+
+const Title = styled(motion.h1)`
+font - size: 3rem;
+margin - bottom: ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.gradient};
+-webkit - background - clip: text;
+-webkit - text - fill - color: transparent;
+background - clip: text;
+display: inline - flex;
+align - items: center;
+gap: ${({ theme }) => theme.spacing.md};
+
+@media(max - width: 768px) {
+    font - size: 2rem;
+    flex - direction: column;
+}
 `;
 
 const Subtitle = styled.p`
-    font-size: 1.25rem;
-    color: ${({ theme }) => theme.colors.textSecondary};
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
+font - size: 1.25rem;
+color: ${({ theme }) => theme.colors.textSecondary};
+margin - bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
 const Badge = styled(motion.div)`
-    display: inline-block;
-    background: ${({ theme }) => theme.colors.gradient};
-    color: white;
-    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
-    border-radius: ${({ theme }) => theme.borderRadius.full};
-    font-weight: 600;
-    font-size: 1rem;
+display: inline - block;
+background: ${({ theme }) => theme.colors.gradient};
+color: white;
+padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
+border - radius: ${({ theme }) => theme.borderRadius.full};
+font - weight: 600;
+font - size: 1rem;
 `;
 
 const PricingGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: ${({ theme }) => theme.spacing.xl};
-    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+display: grid;
+grid - template - columns: repeat(auto - fit, minmax(320px, 1fr));
+gap: ${({ theme }) => theme.spacing.xl};
+margin - bottom: ${({ theme }) => theme.spacing.xxl};
 
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-    }
+@media(max - width: 768px) {
+    grid - template - columns: 1fr;
+}
 `;
 
 const PricingCard = styled(motion.div)`
-    background: ${({ theme, $featured }) =>
-        $featured ? `${theme.colors.primary}10` : theme.colors.surface};
-    border: 2px solid ${({ theme, $featured }) =>
-        $featured ? theme.colors.primary : theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xxl};
-    position: relative;
-    transition: all 0.3s ease;
+background: ${({ theme, $featured }) =>
+        $featured ? `${theme.colors.primary}10` : theme.colors.surface
+    };
+border: 2px solid ${({ theme, $featured }) =>
+        $featured ? theme.colors.primary : theme.colors.border
+    };
+border - radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.xxl};
+position: relative;
+transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
-    }
+    transform: translateY(-8px);
+    box - shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
+}
 `;
 
 const FeaturedBadge = styled.div`
-    position: absolute;
-    top: -12px;
-    right: ${({ theme }) => theme.spacing.lg};
-    background: ${({ theme }) => theme.colors.gradient};
-    color: white;
-    padding: 4px 16px;
-    border-radius: ${({ theme }) => theme.borderRadius.full};
-    font-size: 0.875rem;
-    font-weight: 600;
+position: absolute;
+top: -12px;
+right: ${({ theme }) => theme.spacing.lg};
+background: ${({ theme }) => theme.colors.gradient};
+color: white;
+padding: 4px 16px;
+border - radius: ${({ theme }) => theme.borderRadius.full};
+font - size: 0.875rem;
+font - weight: 600;
 `;
 
 const TierName = styled.h2`
-    font-size: 2rem;
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+font - size: 2rem;
+color: ${({ theme }) => theme.colors.text};
+margin - bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const PriceSection = styled.div`
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
+margin - bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
 const Price = styled.div`
-    font-size: 3rem;
-    font-weight: 700;
-    color: ${({ theme }) => theme.colors.primary};
-    margin-bottom: ${({ theme }) => theme.spacing.xs};
+font - size: 3rem;
+font - weight: 700;
+color: ${({ theme }) => theme.colors.primary};
+margin - bottom: ${({ theme }) => theme.spacing.xs};
 
     span {
-        font-size: 1.25rem;
-        color: ${({ theme }) => theme.colors.textSecondary};
-    }
+    font - size: 1.25rem;
+    color: ${({ theme }) => theme.colors.textSecondary};
+}
 `;
 
 const PriceDescription = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.875rem;
+color: ${({ theme }) => theme.colors.textSecondary};
+font - size: 0.875rem;
 `;
 
 const FeaturesList = styled.ul`
-    list-style: none;
-    padding: 0;
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
+list - style: none;
+padding: 0;
+margin - bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
 const Feature = styled.li`
-    display: flex;
-    align-items: flex-start;
-    gap: ${({ theme }) => theme.spacing.sm};
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    line-height: 1.6;
+display: flex;
+align - items: flex - start;
+gap: ${({ theme }) => theme.spacing.sm};
+color: ${({ theme }) => theme.colors.text};
+margin - bottom: ${({ theme }) => theme.spacing.md};
+line - height: 1.6;
 
     svg {
-        color: ${({ theme }) => theme.colors.success};
-        flex-shrink: 0;
-        margin-top: 2px;
-    }
+    color: ${({ theme }) => theme.colors.success};
+    flex - shrink: 0;
+    margin - top: 2px;
+}
 `;
 
 const CTAButton = styled.button`
-    width: 100%;
-    padding: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme, $primary }) =>
-        $primary ? theme.colors.gradient : theme.colors.backgroundAlt};
-    color: ${({ $primary }) => $primary ? 'white' : 'inherit'};
-    border: ${({ theme, $primary }) =>
-        $primary ? 'none' : `2px solid ${theme.colors.border}`};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    font-weight: 600;
-    font-size: 1.125rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+width: 100 %;
+padding: ${({ theme }) => theme.spacing.md};
+background: ${({ theme, $primary }) =>
+        $primary ? theme.colors.gradient : theme.colors.backgroundAlt
+    };
+color: ${({ $primary }) => $primary ? 'white' : 'inherit'};
+border: ${({ theme, $primary }) =>
+        $primary ? 'none' : `2px solid ${theme.colors.border}`
+    };
+border - radius: ${({ theme }) => theme.borderRadius.lg};
+font - weight: 600;
+font - size: 1.125rem;
+cursor: pointer;
+transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px ${({ theme }) => theme.colors.shadow};
-        background: ${({ theme }) => theme.colors.gradient};
-        color: white;
-    }
+    transform: translateY(-2px);
+    box - shadow: 0 8px 20px ${({ theme }) => theme.colors.shadow};
+    background: ${({ theme }) => theme.colors.gradient};
+    color: white;
+}
 `;
 
 const InfoSection = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xxl};
-    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border - radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.xxl};
+margin - bottom: ${({ theme }) => theme.spacing.xxl};
 `;
 
 const InfoTitle = styled.h3`
-    font-size: 1.5rem;
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+font - size: 1.5rem;
+color: ${({ theme }) => theme.colors.text};
+margin - bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const InfoText = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    line-height: 1.8;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+color: ${({ theme }) => theme.colors.textSecondary};
+line - height: 1.8;
+margin - bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const ComparisonTable = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xl};
-    overflow-x: auto;
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border - radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.xl};
+overflow - x: auto;
 `;
 
 const Table = styled.table`
-    width: 100%;
-    border-collapse: collapse;
+width: 100 %;
+border - collapse: collapse;
 
-    th, td {
-        padding: ${({ theme }) => theme.spacing.md};
-        text-align: left;
-        border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-    }
+th, td {
+    padding: ${({ theme }) => theme.spacing.md};
+    text - align: left;
+    border - bottom: 1px solid ${({ theme }) => theme.colors.border};
+}
 
     th {
-        color: ${({ theme }) => theme.colors.primary};
-        font-weight: 600;
-    }
+    color: ${({ theme }) => theme.colors.primary};
+    font - weight: 600;
+}
 
     td {
-        color: ${({ theme }) => theme.colors.text};
-    }
+    color: ${({ theme }) => theme.colors.text};
+}
 
-    tr:last-child td {
-        border-bottom: none;
-    }
+tr: last - child td {
+    border - bottom: none;
+}
 `;
 
 const deskViewSeries = [
@@ -242,6 +267,15 @@ export default function BusinessPricingPage() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
+                        <LogoWrapper>
+                            <Image
+                                src="/opauto.png"
+                                alt="Optical Automation"
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                priority
+                            />
+                        </LogoWrapper>
                         Business Licensing & Multi-User Pricing
                     </Title>
                     <Subtitle>

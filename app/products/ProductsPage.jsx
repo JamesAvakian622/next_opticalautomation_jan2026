@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -14,7 +15,7 @@ import {
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh-70px);
     padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.lg};
     background: ${({ theme }) => theme.colors.background};
 
@@ -33,196 +34,214 @@ const HeroSection = styled.div`
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
 `;
 
-const Title = styled(motion.h1)`
-    font-size: 3rem;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.md};
 
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
+
+const LogoWrapper = styled(motion.div)`
+width: 60px;
+height: 60px;
+position: relative;
+border-radius: 0;
+overflow: hidden;
+flex-shrink: 0;
+
+@media(max-width: 768px) {
+    width: 40px;
+    height: 40px;
+}
+`;
+
+const Title = styled(motion.h1)`
+font-size: 3rem;
+margin-bottom: ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.gradient};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+display: inline-flex;
+align-items: center;
+gap: ${({ theme }) => theme.spacing.md};
+
+@media(max-width: 768px) {
+    font-size: 2rem;
+}
 `;
 
 const Subtitle = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.125rem;
-    max-width: 600px;
-    margin: 0 auto;
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 1.125rem;
+max-width: 600px;
+margin: 0 auto;
 `;
 
 const ProductsGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: ${({ theme }) => theme.spacing.xl};
-    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+gap: ${({ theme }) => theme.spacing.xl};
+margin-bottom: ${({ theme }) => theme.spacing.xxl};
 
-    @media (max-width: 400px) {
-        grid-template-columns: 1fr;
-    }
+@media(max-width: 400px) {
+    grid-template-columns: 1fr;
+}
 `;
 
 const ProductCard = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xl};
-    transition: all 0.3s ease;
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.xl};
+transition: all 0.3s ease;
 
     &:hover {
-        border-color: ${({ theme }) => theme.colors.primary};
-        transform: translateY(-4px);
-        box-shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
-    }
+    border-color: ${({ theme }) => theme.colors.primary};
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
+}
 `;
 
 const ProductHeader = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const ProductIcon = styled.div`
-    width: 48px;
-    height: 48px;
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    background: ${({ $color }) => `${$color}20`};
-    display: flex;
-    align-items: center;
-    justify-content: center;
+width: 48px;
+height: 48px;
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+background: ${({ $color }) => `${$color}20`};
+display: flex;
+align-items: center;
+justify-content: center;
 
     svg {
-        font-size: 1.5rem;
-        color: ${({ $color }) => $color};
-    }
+    font-size: 1.5rem;
+    color: ${({ $color }) => $color};
+}
 `;
 
 const StatusBadge = styled.span`
-    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
-    background: ${({ $active, theme }) =>
-        $active ? `${theme.colors.success}20` : `${theme.colors.warning}20`};
-    color: ${({ $active, theme }) =>
-        $active ? theme.colors.success : theme.colors.warning};
-    border-radius: ${({ theme }) => theme.borderRadius.full};
-    font-size: 0.75rem;
-    font-weight: 600;
+padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+background: ${({ $active, theme }) =>
+        $active ? `${theme.colors.success}20` : `${theme.colors.warning}20`
+    };
+color: ${({ $active, theme }) =>
+        $active ? theme.colors.success : theme.colors.warning
+    };
+border-radius: ${({ theme }) => theme.borderRadius.full};
+font-size: 0.75rem;
+font-weight: 600;
 `;
 
 const ProductName = styled.h3`
-    font-size: 1.25rem;
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: ${({ theme }) => theme.spacing.xs};
+font-size: 1.25rem;
+color: ${({ theme }) => theme.colors.text};
+margin-bottom: ${({ theme }) => theme.spacing.xs};
 `;
 
 const ProductUrl = styled.p`
-    color: ${({ theme }) => theme.colors.primary};
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+color: ${({ theme }) => theme.colors.primary};
+font-size: 0.875rem;
+font-weight: 500;
+margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const ProductDescription = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 0.9rem;
+line-height: 1.6;
+margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
 const FeaturesList = styled.ul`
-    list-style: none;
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
+list-style: none;
+margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
 const FeatureItem = styled.li`
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.875rem;
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
+display: flex;
+align-items: center;
+gap: ${({ theme }) => theme.spacing.sm};
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 0.875rem;
+margin-bottom: ${({ theme }) => theme.spacing.sm};
 
     svg {
-        color: ${({ theme }) => theme.colors.success};
-        flex-shrink: 0;
-    }
+    color: ${({ theme }) => theme.colors.success};
+    flex-shrink: 0;
+}
 `;
 
 const VisitLink = styled.a`
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.gradient};
-    color: white;
-    border-radius: ${({ theme }) => theme.borderRadius.md};
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+display: inline-flex;
+align-items: center;
+gap: 6px;
+padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.gradient};
+color: white;
+border-radius: ${({ theme }) => theme.borderRadius.md};
+font-size: 0.875rem;
+font-weight: 500;
+transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
-    }
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+}
 `;
 
 const ServicesSection = styled.div`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xxl};
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.xxl};
 `;
 
 const SectionTitle = styled.h2`
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+font-size: 2rem;
+text-align: center;
+margin-bottom: ${({ theme }) => theme.spacing.xl};
+background: ${({ theme }) => theme.colors.gradient};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
 `;
 
 const ServicesGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: ${({ theme }) => theme.spacing.lg};
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: ${({ theme }) => theme.spacing.lg};
 `;
 
 const ServiceItem = styled(motion.div)`
-    text-align: center;
-    padding: ${({ theme }) => theme.spacing.lg};
+text-align: center;
+padding: ${({ theme }) => theme.spacing.lg};
 `;
 
 const ServiceIcon = styled.div`
-    width: 60px;
-    height: 60px;
-    margin: 0 auto ${({ theme }) => theme.spacing.md};
-    border-radius: ${({ theme }) => theme.borderRadius.full};
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    display: flex;
-    align-items: center;
-    justify-content: center;
+width: 60px;
+height: 60px;
+margin: 0 auto ${({ theme }) => theme.spacing.md};
+border-radius: ${({ theme }) => theme.borderRadius.full};
+background: ${({ theme }) => theme.colors.backgroundAlt};
+display: flex;
+align-items: center;
+justify-content: center;
 
     svg {
-        font-size: 1.5rem;
-        color: ${({ theme }) => theme.colors.primary};
-    }
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme.colors.primary};
+}
 `;
 
 const ServiceTitle = styled.h4`
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
+color: ${({ theme }) => theme.colors.text};
+margin-bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
 const ServiceDesc = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.875rem;
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 0.875rem;
 `;
 
 const products = [
@@ -285,7 +304,16 @@ export default function ProductsPage() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <FiGlobe /> Products
+                        <LogoWrapper>
+                            <Image
+                                src="/opauto.png"
+                                alt="Optical Automation"
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                priority
+                            />
+                        </LogoWrapper>
+                        Products
                     </Title>
                     <Subtitle>
                         Explore the ecosystem of Optical Automation domains and services
@@ -324,12 +352,12 @@ export default function ProductsPage() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    Visit Site <FiExternalLink />
-                                </VisitLink>
+                                    Visit Site < FiExternalLink />
+                                </VisitLink >
                             )}
-                        </ProductCard>
+                        </ProductCard >
                     ))}
-                </ProductsGrid>
+                </ProductsGrid >
 
                 <ServicesSection>
                     <SectionTitle>Product Services</SectionTitle>
@@ -380,7 +408,7 @@ export default function ProductsPage() {
                         </ServiceItem>
                     </ServicesGrid>
                 </ServicesSection>
-            </Container>
-        </PageWrapper>
+            </Container >
+        </PageWrapper >
     );
 }

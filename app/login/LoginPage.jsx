@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { FiMail, FiLock, FiUser, FiArrowRight, FiEye, FiEyeOff } from 'react-icons/fi';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import { SignInButton, useUser } from '@clerk/nextjs';
+import { SignInButton, useUser, SignedIn, SignedOut } from '@clerk/nextjs';
 import { FcGoogle } from 'react-icons/fc';
 
 const PageWrapper = styled.div`
@@ -296,11 +296,18 @@ export default function LoginPage() {
                     </Tab>
                 </TabContainer>
 
-                <SignInButton mode="modal">
-                    <GoogleButton>
-                        <FcGoogle /> Continue with Google
+                <SignedOut>
+                    <SignInButton mode="modal">
+                        <GoogleButton>
+                            <FcGoogle /> Continue with Google
+                        </GoogleButton>
+                    </SignInButton>
+                </SignedOut>
+                <SignedIn>
+                    <GoogleButton onClick={() => router.push('/select-software')}>
+                        <FcGoogle /> Continue to Dashboard
                     </GoogleButton>
-                </SignInButton>
+                </SignedIn>
 
                 <Divider>or use email</Divider>
 

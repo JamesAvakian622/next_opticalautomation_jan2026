@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiCheck, FiX, FiSave, FiAlertCircle, FiCheckCircle, FiHome } from 'react-icons/fi';
+import { FiCheck, FiX, FiSave, FiAlertCircle, FiCheckCircle, FiHome, FiCreditCard } from 'react-icons/fi';
 import { softwareByCategory, categories } from '@/lib/softwareData';
 import { useRouter } from 'next/navigation';
 
@@ -324,11 +324,8 @@ export default function SelectSoftwarePage() {
         if (selectedApps.includes(appId)) {
             setSelectedApps(selectedApps.filter(id => id !== appId));
         } else {
-            if (selectedApps.length >= maxAllowed) {
-                setSaveStatus({ success: false, message: `You can only select ${maxAllowed} apps with your ${user?.subscriptionTier} tier` });
-                setTimeout(() => setSaveStatus(null), 3000);
-                return;
-            }
+            // In Store mode, we allow selecting more than the limit, 
+            // the dashboard will handle tier upgrades or charges.
             setSelectedApps([...selectedApps, appId]);
         }
     };
@@ -336,8 +333,7 @@ export default function SelectSoftwarePage() {
     const selectAll = () => {
         const allAppIds = Object.values(softwareByCategory)
             .flat()
-            .map(app => app.id)
-            .slice(0, maxAllowed);
+            .map(app => app.id);
         setSelectedApps(allAppIds);
     };
 
@@ -374,13 +370,19 @@ export default function SelectSoftwarePage() {
         }
     };
 
+    const getTierDetails = (count) => {
+        if (count >= 21) return { tier: 'gold', label: 'GOLD TIER' };
+        if (count >= 11) return { tier: 'silver', label: 'SILVER TIER' };
+        return { tier: 'individual', label: 'INDIVIDUAL TIER' };
+    };
+
+    const currentTier = getTierDetails(selectedApps.length);
+
     const getTierPrice = () => {
-        const prices = {
-            individual: 0,
-            silver: 25,
-            gold: 35
-        };
-        return prices[user?.subscriptionTier] || 0;
+        const count = selectedApps.length;
+        if (count >= 21) return '30.00';
+        if (count >= 11) return '15.00';
+        return Math.min(count * 2.00, 10.00).toFixed(2);
     };
 
     if (loading) {
@@ -393,7 +395,7 @@ export default function SelectSoftwarePage() {
         );
     }
 
-    const isAtLimit = selectedApps.length >= maxAllowed;
+    const isAtLimit = false; // Limits removed for Store mode
 
     return (
         <PageWrapper>
@@ -403,15 +405,21 @@ export default function SelectSoftwarePage() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        Select Your Software
+                        Software Store
                     </Title>
                     <TierBadge
-                        $tier={user?.subscriptionTier}
+                        $tier={currentTier.tier}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                     >
-                        {user?.subscriptionTier?.toUpperCase()} TIER
+                        {currentTier.label}
                     </TierBadge>
+                    <div style={{ marginTop: '20px' }}>
+                        <h3 style={{ color: 'white', fontSize: '1.2rem', marginBottom: '8px' }}>Tier Pricing, Software Titles, $ 2.00 each</h3>
+                        <p style={{ color: 'white', fontSize: '1.1rem', margin: '4px 0' }}>Individual 0 to 5 titles, ($10 max)</p>
+                        <p style={{ color: 'white', fontSize: '1.1rem', margin: '4px 0' }}>Silver Tier, 11 to 20 titles, ($15 max)</p>
+                        <p style={{ color: 'white', fontSize: '1.1rem', margin: '4px 0' }}>Gold Tier, 21 to 44 titles, ($30 max)</p>
+                    </div>
                 </Header>
 
                 <SelectionCounter
@@ -420,7 +428,7 @@ export default function SelectSoftwarePage() {
                     animate={{ opacity: 1, y: 0 }}
                 >
                     <CounterText>
-                        <span>{selectedApps.length}</span> of {maxAllowed} apps selected
+                        <span>{selectedApps.length}</span> titles selected
                     </CounterText>
                     {isAtLimit && <FiAlertCircle size={24} color="#ff6b6b" />}
                 </SelectionCounter>
@@ -432,7 +440,7 @@ export default function SelectSoftwarePage() {
                     </ActionButton>
                     <ActionButton onClick={selectAll} disabled={isAtLimit}>
                         <FiCheckCircle />
-                        Select All ({maxAllowed})
+                        Select All (44) Titles
                     </ActionButton>
                     <ActionButton onClick={clearAll} $variant="danger">
                         <FiX />
@@ -441,6 +449,14 @@ export default function SelectSoftwarePage() {
                     <ActionButton onClick={saveSelections} $variant="primary" disabled={saving}>
                         <FiSave />
                         {saving ? 'Saving...' : 'Save Selections'}
+                    </ActionButton>
+                    <ActionButton
+                        onClick={() => alert(`Redirecting to Stripe Checkout for $${getTierPrice()}`)}
+                        $variant="primary"
+                        style={{ background: '#10b981' }}
+                    >
+                        <FiCreditCard />
+                        Purchase
                     </ActionButton>
                 </ActionButtons>
 
@@ -501,7 +517,7 @@ export default function SelectSoftwarePage() {
                     <h2 style={{ marginBottom: '1rem' }}>Subscription Summary</h2>
                     <PriceRow>
                         <span>Subscription Tier:</span>
-                        <span>{user?.subscriptionTier?.toUpperCase()}</span>
+                        <span>{currentTier.label}</span>
                     </PriceRow>
                     <PriceRow>
                         <span>Selected Applications:</span>

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -31,185 +32,200 @@ const HeroSection = styled.div`
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
 `;
 
-const Title = styled(motion.h1)`
-    font-size: 3rem;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.md};
 
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
+const LogoWrapper = styled(motion.div)`
+width: 60px;
+height: 60px;
+position: relative;
+border-radius: 0;
+overflow: hidden;
+flex-shrink: 0;
+
+@media(max-width: 768px) {
+    width: 40px;
+    height: 40px;
+}
+`;
+
+const Title = styled(motion.h1)`
+font-size: 3rem;
+margin-bottom: ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.gradient};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+display: inline-flex;
+align-items: center;
+gap: ${({ theme }) => theme.spacing.md};
+
+@media(max-width: 768px) {
+    font-size: 2rem;
+}
 `;
 
 const TitleIcon = styled.span`
-    font-size: 2.5rem;
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+font-size: 2.5rem;
+background: ${({ theme }) => theme.colors.gradient};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
 
-    @media (max-width: 768px) {
-        font-size: 1.75rem;
-    }
+@media(max-width: 768px) {
+    font-size: 1.75rem;
+}
 `;
 
 const Subtitle = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.125rem;
-    max-width: 600px;
-    margin: 0;
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 1.125rem;
+max-width: 600px;
+margin: 0;
 `;
 
 /* Mission Statement Section */
 const MissionSection = styled(motion.section)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xxl};
-    margin-bottom: ${({ theme }) => theme.spacing.xxl};
-    position: relative;
-    overflow: hidden;
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.xxl};
+margin-bottom: ${({ theme }) => theme.spacing.xxl};
+position: relative;
+overflow: hidden;
 
     &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: ${({ theme }) => theme.colors.gradient};
-    }
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: ${({ theme }) => theme.colors.gradient};
+}
 
-    @media (max-width: 768px) {
-        padding: ${({ theme }) => theme.spacing.xl};
-    }
+@media(max-width: 768px) {
+    padding: ${({ theme }) => theme.spacing.xl};
+}
 `;
 
 const MissionTitle = styled.h2`
-    font-size: 2rem;
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.md};
+font-size: 2rem;
+margin-bottom: ${({ theme }) => theme.spacing.xl};
+background: ${({ theme }) => theme.colors.gradient};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+display: flex;
+align-items: center;
+gap: ${({ theme }) => theme.spacing.md};
 
     svg {
-        color: ${({ theme }) => theme.colors.primary};
-    }
+    color: ${({ theme }) => theme.colors.primary};
+}
 
-    @media (max-width: 768px) {
-        font-size: 1.5rem;
-    }
+@media(max-width: 768px) {
+    font-size: 1.5rem;
+}
 `;
 
 const MissionParagraph = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 1.1rem;
+line-height: 1.8;
+margin-bottom: ${({ theme }) => theme.spacing.lg};
 
-    &:last-child {
-        margin-bottom: 0;
-    }
+    &: last-child {
+    margin-bottom: 0;
+}
 
-    @media (max-width: 768px) {
-        font-size: 1rem;
-        line-height: 1.7;
-    }
+@media(max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.7;
+}
 `;
 
 /* Core Values Section */
 const ValuesSection = styled.section`
-    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+margin-bottom: ${({ theme }) => theme.spacing.xxl};
 `;
 
 const SectionTitle = styled.h2`
-    font-size: 2rem;
-    text-align: left;
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+font-size: 2rem;
+text-align: left;
+margin-bottom: ${({ theme }) => theme.spacing.xl};
+background: ${({ theme }) => theme.colors.gradient};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
 `;
 
 const ValuesGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: ${({ theme }) => theme.spacing.xl};
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: ${({ theme }) => theme.spacing.xl};
 
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-    }
+@media(max-width: 768px) {
+    grid-template-columns: 1fr;
+}
 `;
 
 const ValueCard = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xl};
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.xl};
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
 
     &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: ${({ $color }) => $color};
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-    }
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: ${({ $color }) => $color};
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
 
     &:hover {
-        border-color: ${({ theme }) => theme.colors.primary};
-        transform: translateY(-4px);
-        box-shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
+    border-color: ${({ theme }) => theme.colors.primary};
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
 
         &::before {
-            transform: scaleX(1);
-        }
+        transform: scaleX(1);
     }
+}
 `;
 
 const ValueIcon = styled.div`
-    width: 60px;
-    height: 60px;
-    border-radius: 0;
-    background: ${({ $color }) => `${$color}20`};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+width: 60px;
+height: 60px;
+border-radius: 0;
+background: ${({ $color }) => `${$color}20`};
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: ${({ theme }) => theme.spacing.md};
 
     svg {
-        font-size: 1.75rem;
-        color: ${({ $color }) => $color};
-    }
+    font-size: 1.75rem;
+    color: ${({ $color }) => $color};
+}
 `;
 
 const ValueTitle = styled.h3`
-    font-size: 1.25rem;
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
+font-size: 1.25rem;
+color: ${({ theme }) => theme.colors.text};
+margin-bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
 const ValueDescription = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.95rem;
-    line-height: 1.6;
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 0.95rem;
+line-height: 1.6;
 `;
 
 const coreValues = [
@@ -248,11 +264,19 @@ export default function AboutPage() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <TitleIcon><FiTrendingUp /></TitleIcon>
+                        <LogoWrapper>
+                            <Image
+                                src="/opauto.png"
+                                alt="Optical Automation"
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                priority
+                            />
+                        </LogoWrapper>
                         About Us
                     </Title>
                     <Subtitle>
-                        Discover our journey, mission, and the values that drive everything we do.
+                        Discover our mission and the artistic and scientific values that drive everything we do.
                     </Subtitle>
                 </HeroSection>
 

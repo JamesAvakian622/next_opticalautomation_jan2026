@@ -237,7 +237,7 @@ export default function TermsPage() {
                 >
                     <SectionTitle>9. Revisions</SectionTitle>
                     <Paragraph>
-                        The Company may revise these terms of use at any time without notice. By using this website you are agreeing to be bound by the current version of these terms of service.
+                        The Company may revise these terms of use at any time without notice. By using this website you are agreeing to be bound by the current version of these terms of use.
                     </Paragraph>
                 </Section>
 

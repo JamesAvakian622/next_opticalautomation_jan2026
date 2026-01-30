@@ -85,69 +85,69 @@ const Separator = styled(FiChevronRight)`
 `;
 
 const routeLabels = {
-    'tech': 'Technology',
-    'about': 'About Us',
-    'contact': 'Contact',
-    'pricing': 'Pricing',
-    'support': 'Support',
-    'privacy': 'Privacy Policy',
-    'terms': 'Terms of Service',
-    'products': 'Products',
-    'documents': 'Documents',
-    'sitemap': 'Site Map',
-    'timeline': 'Timeline',
-    'trademarks': 'Trademarks',
-    'content-policy': 'Content Policy',
-    'favorites': 'Favorites',
-    'login': 'Login',
-    'profile': 'Profile',
-    'domains': 'Domains',
-    'portfolio': 'Portfolio'
+  'tech': 'Technology',
+  'about': 'About Us',
+  'contact': 'Contact',
+  'pricing': 'Pricing',
+  'support': 'Support',
+  'privacy': 'Privacy Policy',
+  'terms': 'Terms of Use',
+  'products': 'Products',
+  'documents': 'Documents',
+  'sitemap': 'Site Map',
+  'timeline': 'Timeline',
+  'trademarks': 'Trademarks',
+  'content-policy': 'Content Policy',
+  'favorites': 'Favorites',
+  'login': 'Login',
+  'profile': 'Profile',
+  'domains': 'Domains',
+  'portfolio': 'Portfolio'
 };
 
 const Breadcrumbs = () => {
-    const pathname = usePathname();
+  const pathname = usePathname();
 
-    // Don't show on home page
-    if (pathname === '/') return null;
+  // Don't show on home page
+  if (pathname === '/') return null;
 
-    const pathSegments = pathname.split('/').filter(Boolean);
+  const pathSegments = pathname.split('/').filter(Boolean);
 
-    const crumbs = [
-        { label: 'Home', href: '/', icon: <FiHome /> },
-        ...pathSegments.map((segment, index) => {
-            const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
-            const label = routeLabels[segment] || segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
-            return { label, href };
-        })
-    ];
+  const crumbs = [
+    { label: 'Home', href: '/', icon: <FiHome /> },
+    ...pathSegments.map((segment, index) => {
+      const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
+      const label = routeLabels[segment] || segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+      return { label, href };
+    })
+  ];
 
-    return (
-        <BreadcrumbNav aria-label="Breadcrumb">
-            <BreadcrumbList>
-                {crumbs.map((crumb, index) => {
-                    const isLast = index === crumbs.length - 1;
+  return (
+    <BreadcrumbNav aria-label="Breadcrumb">
+      <BreadcrumbList>
+        {crumbs.map((crumb, index) => {
+          const isLast = index === crumbs.length - 1;
 
-                    return (
-                        <BreadcrumbItem key={crumb.href}>
-                            {index > 0 && <Separator aria-hidden="true" />}
-                            {isLast ? (
-                                <CurrentPage aria-current="page">
-                                    {index === 0 && crumb.icon}
-                                    {crumb.label}
-                                </CurrentPage>
-                            ) : (
-                                <BreadcrumbLink href={crumb.href}>
-                                    {index === 0 && crumb.icon}
-                                    {crumb.label}
-                                </BreadcrumbLink>
-                            )}
-                        </BreadcrumbItem>
-                    );
-                })}
-            </BreadcrumbList>
-        </BreadcrumbNav>
-    );
+          return (
+            <BreadcrumbItem key={crumb.href}>
+              {index > 0 && <Separator aria-hidden="true" />}
+              {isLast ? (
+                <CurrentPage aria-current="page">
+                  {index === 0 && crumb.icon}
+                  {crumb.label}
+                </CurrentPage>
+              ) : (
+                <BreadcrumbLink href={crumb.href}>
+                  {index === 0 && crumb.icon}
+                  {crumb.label}
+                </BreadcrumbLink>
+              )}
+            </BreadcrumbItem>
+          );
+        })}
+      </BreadcrumbList>
+    </BreadcrumbNav>
+  );
 };
 
 export default Breadcrumbs;

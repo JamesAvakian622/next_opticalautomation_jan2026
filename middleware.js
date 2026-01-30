@@ -31,7 +31,10 @@ const isPublicRoute = createRouteMatcher([
 export default clerkMiddleware((auth, request) => {
     if (!isPublicRoute(request)) {
         const { userId } = auth();
-        if (!userId) {
+        // Check for custom auth token
+        const customToken = request.cookies.get('token')?.value;
+
+        if (!userId && !customToken) {
             const signInUrl = new URL('/login', request.url);
             return NextResponse.redirect(signInUrl);
         }

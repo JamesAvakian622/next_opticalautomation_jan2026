@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    output: 'export',
     reactStrictMode: true,
     compiler: {
         styledComponents: true
@@ -12,7 +13,7 @@ const nextConfig = {
                 pathname: '/**'
             }
         ],
-        unoptimized: false
+        unoptimized: true
     }
 };
 

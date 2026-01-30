@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -35,237 +36,255 @@ const HeroSection = styled.div`
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
 `;
 
-const Title = styled(motion.h1)`
-    font-size: 3rem;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.gradient};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.md};
 
-    @media (max-width: 768px) {
-        font-size: 2rem;
-    }
+const LogoWrapper = styled(motion.div)`
+width: 60px;
+height: 60px;
+position: relative;
+border-radius: 0;
+overflow: hidden;
+flex-shrink: 0;
+
+@media(max-width: 768px) {
+    width: 40px;
+    height: 40px;
+}
+`;
+
+const Title = styled(motion.h1)`
+font-size: 3rem;
+margin-bottom: ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.colors.gradient};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+display: inline-flex;
+align-items: center;
+gap: ${({ theme }) => theme.spacing.md};
+
+@media(max-width: 768px) {
+    font-size: 2rem;
+}
 `;
 
 const Subtitle = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.125rem;
-    max-width: 600px;
-    margin: 0 auto;
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 1.125rem;
+max-width: 600px;
+margin: 0 auto;
 `;
 
 const SearchBar = styled.div`
-    display: flex;
-    gap: ${({ theme }) => theme.spacing.md};
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
-    flex-wrap: wrap;
+display: flex;
+gap: ${({ theme }) => theme.spacing.md};
+margin-bottom: ${({ theme }) => theme.spacing.xl};
+flex-wrap: wrap;
 
-    @media (max-width: 600px) {
-        flex-direction: column;
-    }
+@media(max-width: 600px) {
+    flex-direction: column;
+}
 `;
 
 const SearchInput = styled.div`
-    flex: 1;
-    position: relative;
-    min-width: 200px;
+flex: 1;
+position: relative;
+min-width: 200px;
 
     svg {
-        position: absolute;
-        left: ${({ theme }) => theme.spacing.md};
-        top: 50%;
-        transform: translateY(-50%);
-        color: ${({ theme }) => theme.colors.textSecondary};
-    }
+    position: absolute;
+    left: ${({ theme }) => theme.spacing.md};
+    top: 50%;
+    transform: translateY(-50%);
+    color: ${({ theme }) => theme.colors.textSecondary};
+}
 `;
 
 const Input = styled.input`
-    width: 100%;
-    padding: ${({ theme }) => theme.spacing.md};
-    padding-left: calc(${({ theme }) => theme.spacing.md} * 3);
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 1rem;
-    transition: all 0.3s ease;
+width: 100%;
+padding: ${({ theme }) => theme.spacing.md};
+padding-left: calc(${({ theme }) => theme.spacing.md} * 3);
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+color: ${({ theme }) => theme.colors.text};
+font-size: 1rem;
+transition: all 0.3s ease;
 
     &:focus {
-        outline: none;
-        border-color: ${({ theme }) => theme.colors.primary};
-    }
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary};
+}
 `;
 
 const FilterSelect = styled.select`
-    padding: ${({ theme }) => theme.spacing.md};
-    padding-right: ${({ theme }) => theme.spacing.xl};
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 1rem;
-    cursor: pointer;
-    min-width: 150px;
+padding: ${({ theme }) => theme.spacing.md};
+padding-right: ${({ theme }) => theme.spacing.xl};
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+color: ${({ theme }) => theme.colors.text};
+font-size: 1rem;
+cursor: pointer;
+min-width: 150px;
 
     &:focus {
-        outline: none;
-        border-color: ${({ theme }) => theme.colors.primary};
-    }
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary};
+}
 `;
 
 const CategoriesNav = styled.div`
-    display: flex;
-    gap: ${({ theme }) => theme.spacing.sm};
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
-    flex-wrap: wrap;
-    justify-content: center;
+display: flex;
+gap: ${({ theme }) => theme.spacing.sm};
+margin-bottom: ${({ theme }) => theme.spacing.xl};
+flex-wrap: wrap;
+justify-content: center;
 `;
 
 const CategoryButton = styled.button`
-    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
-    background: ${({ $active, theme }) =>
-        $active ? theme.colors.gradient : theme.colors.surface};
-    border: 1px solid ${({ $active, theme }) =>
-        $active ? 'transparent' : theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.full};
-    color: ${({ $active }) => ($active ? 'white' : 'inherit')};
-    font-weight: 500;
-    transition: all 0.3s ease;
+padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
+background: ${({ $active, theme }) =>
+        $active ? theme.colors.gradient : theme.colors.surface
+    };
+border: 1px solid ${({ $active, theme }) =>
+        $active ? 'transparent' : theme.colors.border
+    };
+border-radius: ${({ theme }) => theme.borderRadius.full};
+color: ${({ $active }) => ($active ? 'white' : 'inherit')};
+font-weight: 500;
+transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
-    }
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+}
 `;
 
 const DocumentsGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: ${({ theme }) => theme.spacing.lg};
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+gap: ${({ theme }) => theme.spacing.lg};
 
-    @media (max-width: 400px) {
-        grid-template-columns: 1fr;
-    }
+@media(max-width: 400px) {
+    grid-template-columns: 1fr;
+}
 `;
 
 const DocumentCard = styled(motion.div)`
-    background: ${({ theme }) => theme.colors.surface};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.xl};
-    padding: ${({ theme }) => theme.spacing.xl};
-    transition: all 0.3s ease;
+background: ${({ theme }) => theme.colors.surface};
+border: 1px solid ${({ theme }) => theme.colors.border};
+border-radius: ${({ theme }) => theme.borderRadius.xl};
+padding: ${({ theme }) => theme.spacing.xl};
+transition: all 0.3s ease;
 
     &:hover {
-        border-color: ${({ theme }) => theme.colors.primary};
-        transform: translateY(-4px);
-        box-shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
-    }
+    border-color: ${({ theme }) => theme.colors.primary};
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
+}
 `;
 
 const DocumentHeader = styled.div`
-    display: flex;
-    align-items: flex-start;
-    gap: ${({ theme }) => theme.spacing.md};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+display: flex;
+align-items: flex-start;
+gap: ${({ theme }) => theme.spacing.md};
+margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const DocumentIcon = styled.div`
-    width: 48px;
-    height: 48px;
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    background: ${({ $color }) => `${$color}20`};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+width: 48px;
+height: 48px;
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+background: ${({ $color }) => `${$color}20`};
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
 
     svg {
-        font-size: 1.5rem;
-        color: ${({ $color }) => $color};
-    }
+    font-size: 1.5rem;
+    color: ${({ $color }) => $color};
+}
 `;
 
 const DocumentInfo = styled.div`
-    flex: 1;
+flex: 1;
 `;
 
 const DocumentTitle = styled.h3`
-    font-size: 1.125rem;
-    color: ${({ theme }) => theme.colors.text};
-    margin-bottom: ${({ theme }) => theme.spacing.xs};
+font-size: 1.125rem;
+color: ${({ theme }) => theme.colors.text};
+margin-bottom: ${({ theme }) => theme.spacing.xs};
 `;
 
 const DocumentMeta = styled.div`
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.md};
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.75rem;
+display: flex;
+align-items: center;
+gap: ${({ theme }) => theme.spacing.md};
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 0.75rem;
 `;
 
 const MetaItem = styled.span`
-    display: flex;
-    align-items: center;
-    gap: 4px;
+display: flex;
+align-items: center;
+gap: 4px;
 
     svg {
-        font-size: 0.875rem;
-    }
+    font-size: 0.875rem;
+}
 `;
 
 const DocumentCategory = styled.span`
-    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
-    background: ${({ theme }) => theme.colors.backgroundAlt};
-    border-radius: ${({ theme }) => theme.borderRadius.sm};
-    font-size: 0.75rem;
-    color: ${({ theme }) => theme.colors.primary};
-    font-weight: 500;
+padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+background: ${({ theme }) => theme.colors.backgroundAlt};
+border-radius: ${({ theme }) => theme.borderRadius.sm};
+font-size: 0.75rem;
+color: ${({ theme }) => theme.colors.primary};
+font-weight: 500;
 `;
 
 const DocumentDescription = styled.p`
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin: ${({ theme }) => theme.spacing.md} 0;
+color: ${({ theme }) => theme.colors.textSecondary};
+font-size: 0.9rem;
+line-height: 1.6;
+margin: ${({ theme }) => theme.spacing.md} 0;
 `;
 
 const DocumentActions = styled.div`
-    display: flex;
-    gap: ${({ theme }) => theme.spacing.sm};
+display: flex;
+gap: ${({ theme }) => theme.spacing.sm};
 `;
 
 const ActionButton = styled.button`
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-    background: ${({ $primary, theme }) =>
-        $primary ? theme.colors.gradient : theme.colors.backgroundAlt};
-    color: ${({ $primary }) => ($primary ? 'white' : 'inherit')};
-    border-radius: ${({ theme }) => theme.borderRadius.md};
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+flex: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+background: ${({ $primary, theme }) =>
+        $primary ? theme.colors.gradient : theme.colors.backgroundAlt
+    };
+color: ${({ $primary }) => ($primary ? 'white' : 'inherit')};
+border-radius: ${({ theme }) => theme.borderRadius.md};
+font-size: 0.875rem;
+font-weight: 500;
+transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-2px);
-    }
+    transform: translateY(-2px);
+}
 
     svg {
-        font-size: 1rem;
-    }
+    font-size: 1rem;
+}
 `;
 
 const EmptyState = styled.div`
-    text-align: center;
-    padding: ${({ theme }) => theme.spacing.xxl};
-    color: ${({ theme }) => theme.colors.textSecondary};
+text-align: center;
+padding: ${({ theme }) => theme.spacing.xxl};
+color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const documents = [
@@ -327,6 +346,16 @@ const documents = [
         fileType: 'PDF',
         fileSize: '1.1 MB',
         date: '2025-01-24',
+        color: '#EF4444'
+    },
+    {
+        id: 34,
+        title: 'Standard Non-Disclosure Statement',
+        category: 'Legal',
+        description: 'Standard Non-Disclosure Statement (General Use). The Receiving Party agrees to treat all information disclosed by the Disclosing Party as strictly confidential.',
+        fileType: 'TXT',
+        fileSize: '3 KB',
+        date: '2026-01-26',
         color: '#EF4444'
     },
     {
@@ -450,6 +479,105 @@ const documents = [
         fileSize: '4.5 MB',
         date: '2025-01-24',
         color: '#EC4899'
+    },
+    {
+        id: 25,
+        title: 'MongoDB Database Read-Write Between ReactJS Website and Apple SwiftUI Apps',
+        category: 'Technical',
+        description: 'In-depth analysis of data synchronization techniques between web and mobile ecosystems using MongoDB.',
+        fileType: 'PDF',
+        fileSize: '3.2 MB',
+        date: '2025-01-25',
+        color: '#10B981',
+        author: 'Avakian, J. L.'
+    },
+    {
+        id: 26,
+        title: 'My One Universe, Technical Description and Usage',
+        category: 'Technical',
+        description: 'Architectural overview and functional guide for the My One Universe integrated information system.',
+        fileType: 'PDF',
+        fileSize: '4.8 MB',
+        date: '2025-01-25',
+        color: '#6366f1',
+        author: 'Avakian, J. L.'
+    },
+    {
+        id: 27,
+        title: 'LogView, A MERN Application Website Accounting App',
+        category: 'Technical',
+        description: 'Detailed documentation of the LogView accounting platform, covering MERN stack implementation and data modeling.',
+        fileType: 'PDF',
+        fileSize: '2.9 MB',
+        date: '2025-01-25',
+        color: '#8B5CF6',
+        author: 'Avakian, J. L.'
+    },
+    {
+        id: 28,
+        title: 'An International Marvel – MyTelephonePhonebook.com',
+        category: 'Technical',
+        description: 'Case study on the development and scaling of a global contact management platform.',
+        fileType: 'PDF',
+        fileSize: '3.5 MB',
+        date: '2025-01-25',
+        color: '#0EA5E9',
+        author: 'Avakian, J. L.'
+    },
+    {
+        id: 29,
+        title: 'The Importance of Responsive Web Design Websites',
+        category: 'Design',
+        description: 'Technical exploration of responsive design principles and their impact on user experience and SEO.',
+        fileType: 'PDF',
+        fileSize: '1.8 MB',
+        date: '2025-01-25',
+        color: '#EC4899',
+        author: 'Avakian, J. L.'
+    },
+    {
+        id: 30,
+        title: 'The Benefits of eCommerce Websites',
+        category: 'Design',
+        description: 'Analysis of eCommerce business models, technical requirements, and growth opportunities.',
+        fileType: 'PDF',
+        fileSize: '2.2 MB',
+        date: '2025-01-25',
+        color: '#10B981',
+        author: 'Avakian, J. L.'
+    },
+    {
+        id: 31,
+        title: 'Website Product Marketing, Price, and Planning',
+        category: 'Company',
+        description: 'Strategic guide to digital product positioning, pricing strategies, and marketing planning.',
+        fileType: 'PPTX',
+        fileSize: '5.6 MB',
+        date: '2025-01-25',
+        color: '#F59E0B',
+        author: 'Avakian, J. L.'
+    },
+    {
+        id: 32,
+        title: 'James L. Avakian, Software Developer',
+        category: 'Company',
+        description: 'Professional summary and technical portfolio of James L. Avakian, showcasing key achievements and expertise.',
+        fileType: 'PDF',
+        fileSize: '2.1 MB',
+        date: '2025-01-25',
+        color: '#6366f1',
+        author: 'Avakian, J. L.'
+    },
+    {
+        id: 33,
+        title: 'Agentic AI Software Development',
+        category: 'Technical',
+        description: 'Advanced exploration of autonomous AI agent architectures and their integration into modern software workflows.',
+        fileType: 'PPTX',
+        fileSize: '4.2 MB',
+        date: '2025-01-25',
+        color: '#14B8A6',
+        author: 'Avakian, J. L.'
     }
 ];
 
@@ -481,7 +609,16 @@ export default function DocumentsPage() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <FiFileText /> Documents
+                        <LogoWrapper>
+                            <Image
+                                src="/opauto.png"
+                                alt="Optical Automation"
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                priority
+                            />
+                        </LogoWrapper>
+                        Documents
                     </Title>
                     <Subtitle>
                         Access guides, templates, technical documentation, and resources
@@ -551,7 +688,7 @@ export default function DocumentsPage() {
                                     <ActionButton
                                         onClick={() => {
                                             if (doc.isRequest) {
-                                                window.location.href = `/support?subject=Document Request: ${doc.title}#contact`;
+                                                window.location.href = `/ support ? subject = Document Request: ${doc.title} #contact`;
                                             }
                                         }}
                                     >
@@ -560,7 +697,7 @@ export default function DocumentsPage() {
                                     {doc.isRequest ? (
                                         <ActionButton
                                             $primary
-                                            onClick={() => window.location.href = `/support?subject=Document Request: ${doc.title}#contact`}
+                                            onClick={() => window.location.href = `/ support ? subject = Document Request: ${doc.title} #contact`}
                                         >
                                             <FiMail /> Request via Email
                                         </ActionButton>
