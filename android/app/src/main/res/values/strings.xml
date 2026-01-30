@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Optical Automation</string>
+    <string name="title_activity_main">Optical Automation</string>
+    <string name="package_name">com.opticalautomation.app</string>
+    <string name="custom_url_scheme">com.opticalautomation.app</string>
+</resources>

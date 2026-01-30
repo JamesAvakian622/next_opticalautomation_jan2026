@@ -1,51 +1,68 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from 'next/server';
 
-const isPublicRoute = createRouteMatcher([
+const publicRoutes = [
     '/',
-    '/login(.*)',
-    '/register(.*)',
-    '/api/auth/(.*)',
+    '/login',
+    '/register',
+    '/api/auth',
     '/api/log-page',
     '/api/seed-admin',
     '/api/health',
-    '/about(.*)',
-    '/pricing(.*)',
-    '/portfolio(.*)',
-    '/tech(.*)',
-    '/products(.*)',
-    '/documents(.*)',
-    '/guides(.*)',
-    '/support(.*)',
+    '/about',
+    '/pricing',
+    '/portfolio',
+    '/tech',
+    '/products',
+    '/documents',
+    '/guides',
+    '/support',
     '/api/contact',
-    '/sitemap(.*)',
-    '/terms(.*)',
-    '/privacy(.*)',
-    '/content-policy(.*)',
-    '/trademarks(.*)',
-    '/forgot-password(.*)',
+    '/sitemap',
+    '/terms',
+    '/privacy',
+    '/content-policy',
+    '/trademarks',
+    '/forgot-password',
     '/opauto.ico',
     '/opauto.png'
-]);
+];
 
-export default clerkMiddleware((auth, request) => {
-    if (!isPublicRoute(request)) {
-        const { userId } = auth();
-        // Check for custom auth token
-        const customToken = request.cookies.get('token')?.value;
+function isPublicRoute(pathname) {
+    return publicRoutes.some(route =>
+        pathname === route || pathname.startsWith(route + '/')
+    );
+}
 
-        if (!userId && !customToken) {
-            const signInUrl = new URL('/login', request.url);
-            return NextResponse.redirect(signInUrl);
-        }
+export function middleware(request) {
+    const { pathname } = request.nextUrl;
+
+    // Skip static files and Next.js internals
+    if (
+        pathname.startsWith('/_next') ||
+        pathname.includes('.') ||
+        pathname.startsWith('/api/')
+    ) {
+        return NextResponse.next();
     }
-});
+
+    // Allow public routes
+    if (isPublicRoute(pathname)) {
+        return NextResponse.next();
+    }
+
+    // Check for custom auth token
+    const token = request.cookies.get('token')?.value;
+
+    if (!token) {
+        const signInUrl = new URL('/login', request.url);
+        return NextResponse.redirect(signInUrl);
+    }
+
+    return NextResponse.next();
+}
 
 export const config = {
     matcher: [
-        // Skip Next.js internals and all static files, unless found in search params
         '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-        // Always run for API routes
-        '/(api|trpc)(.*)',
     ],
 };

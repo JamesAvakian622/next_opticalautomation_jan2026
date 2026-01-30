@@ -1,5 +1,4 @@
 import { Inter } from 'next/font/google';
-import { ClerkProvider } from '@clerk/nextjs';
 import ClientLayout from './ClientLayout';
 import {
     generatePageMetadata,
@@ -30,35 +29,33 @@ export default function RootLayout({ children }) {
     const softwareAppJsonLd = generateSoftwareApplicationJsonLd();
 
     return (
-        <ClerkProvider>
-            <html lang="en" className={inter.variable}>
-                <head>
-                    <link rel="icon" href="/opauto.ico" type="image/x-icon" />
-                    <link rel="icon" href="/opauto.png" type="image/png" />
-                    <link rel="apple-touch-icon" href="/opauto.png" />
-                    <link rel="canonical" href="https://opticalautomation.com" />
-                </head>
-                <body>
-                    <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-                    />
-                    <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-                    />
-                    <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd) }}
-                    />
-                    <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppJsonLd) }}
-                    />
+        <html lang="en" className={inter.variable}>
+            <head>
+                <link rel="icon" href="/opauto.ico" type="image/x-icon" />
+                <link rel="icon" href="/opauto.png" type="image/png" />
+                <link rel="apple-touch-icon" href="/opauto.png" />
+                <link rel="canonical" href="https://opticalautomation.com" />
+            </head>
+            <body>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd) }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppJsonLd) }}
+                />
 
-                    <ClientLayout>{children}</ClientLayout>
-                </body>
-            </html>
-        </ClerkProvider>
+                <ClientLayout>{children}</ClientLayout>
+            </body>
+        </html>
     );
 }

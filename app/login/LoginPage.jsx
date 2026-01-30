@@ -7,8 +7,6 @@ import Link from 'next/link';
 import { FiMail, FiLock, FiUser, FiArrowRight, FiEye, FiEyeOff } from 'react-icons/fi';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import { SignInButton, useUser, SignedIn, SignedOut } from '@clerk/nextjs';
-import { FcGoogle } from 'react-icons/fc';
 
 const PageWrapper = styled.div`
     min-height: calc(100vh - 70px);
@@ -185,31 +183,7 @@ const Divider = styled.div`
     &::after { margin-left: ${({ theme }) => theme.spacing.md}; }
 `;
 
-const GoogleButton = styled.button`
-    width: 100%;
-    padding: ${({ theme }) => theme.spacing.md};
-    background: white;
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-    color: #333;
-    font-size: 1rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    transition: all 0.3s ease;
 
-    &:hover {
-        background: #f8f9fa;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    svg {
-        font-size: 1.5rem;
-    }
-`;
 
 
 const DemoCredentials = styled.div`
@@ -296,20 +270,7 @@ export default function LoginPage() {
                     </Tab>
                 </TabContainer>
 
-                <SignedOut>
-                    <SignInButton mode="modal">
-                        <GoogleButton>
-                            <FcGoogle /> Continue with Google
-                        </GoogleButton>
-                    </SignInButton>
-                </SignedOut>
-                <SignedIn>
-                    <GoogleButton onClick={() => router.push('/select-software')}>
-                        <FcGoogle /> Continue to Dashboard
-                    </GoogleButton>
-                </SignedIn>
 
-                <Divider>or use email</Divider>
 
 
                 <Form onSubmit={handleSubmit}>

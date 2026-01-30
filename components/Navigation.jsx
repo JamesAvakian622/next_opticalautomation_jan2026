@@ -48,7 +48,7 @@ import {
 import { useTheme } from './ThemeProvider';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import { useAuth } from '@/contexts/AuthContext';
-import { UserButton as ClerkUserButton, useUser } from '@clerk/nextjs';
+
 import WhoisLookup from './WhoisLookup';
 
 // Mega Menu Data
@@ -507,7 +507,6 @@ export default function Navigation() {
     const { isDark, toggleTheme } = useTheme();
     const { favorites } = useFavorites();
     const { user, isAuthenticated } = useAuth();
-    const { isSignedIn } = useUser();
     const navRef = useRef(null);
 
     // Handle scroll
@@ -614,22 +613,16 @@ export default function Navigation() {
                             {isDark ? <FiSun /> : <FiMoon />}
                         </ActionButton>
 
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            {isSignedIn ? (
-                                <ClerkUserButton afterSignOutUrl="/" />
-                            ) : (
-                                <UserButton
-                                    as={Link}
-                                    href={isAuthenticated ? '/profile' : '/login'}
-                                    $isLoggedIn={isAuthenticated}
-                                    title={isAuthenticated ? user?.name : 'Login'}
-                                    aria-label={isAuthenticated ? 'Profile' : 'Login'}
-                                    onClick={() => setActiveMenu(null)}
-                                >
-                                    {isAuthenticated ? <FiUser /> : <FiLogIn />}
-                                </UserButton>
-                            )}
-                        </div>
+                        <UserButton
+                            as={Link}
+                            href={isAuthenticated ? '/profile' : '/login'}
+                            $isLoggedIn={isAuthenticated}
+                            title={isAuthenticated ? user?.name : 'Login'}
+                            aria-label={isAuthenticated ? 'Profile' : 'Login'}
+                            onClick={() => setActiveMenu(null)}
+                        >
+                            {isAuthenticated ? <FiUser /> : <FiLogIn />}
+                        </UserButton>
 
                         <MobileMenuButton
                             onClick={() => setMobileMenuOpen(true)}
