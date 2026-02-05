@@ -79,7 +79,9 @@ export function AuthProvider({ children }) {
                 setUser(userData);
                 localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(userData));
                 localStorage.setItem('token', data.token);
-                return { success: true, user: userData };
+                // Also set cookie on client-side so middleware can read it
+                document.cookie = `token=${data.token}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
+                return { success: true, user: userData, token: data.token };
             }
 
             return { success: false, error: data.error || 'Login failed' };
@@ -119,7 +121,9 @@ export function AuthProvider({ children }) {
                 setUser(userData);
                 localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(userData));
                 localStorage.setItem('token', data.token);
-                return { success: true, user: userData };
+                // Also set cookie on client-side so middleware can read it
+                document.cookie = `token=${data.token}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
+                return { success: true, user: userData, token: data.token };
             }
 
             return { success: false, error: data.error || 'Registration failed' };

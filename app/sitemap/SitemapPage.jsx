@@ -194,6 +194,17 @@ const siteMapData = [
             { href: '/product-videos', label: 'Company Product Videos', icon: FiVideo },
             { href: '/guides', label: 'IP Guides', icon: FiBook }
         ]
+    },
+    {
+        title: 'Products',
+        icon: FiGlobe,
+        links: [
+            { href: '/deskview', label: 'MyDeskView', icon: FiGlobe },
+            { href: '/products', label: 'All Products', icon: FiGlobe },
+            { href: '/pricing', label: 'Pricing', icon: FiGlobe },
+            { href: '/subscription', label: 'Subscription Access', icon: FiGlobe },
+            { href: '/business-pricing', label: 'Business Licensing', icon: FiGlobe }
+        ]
     }
 ];
 

@@ -222,7 +222,8 @@ export default function LoginPage() {
                 const result = await login(formData.email, formData.password);
                 if (result.success) {
                     setSuccess('Login successful! Redirecting...');
-                    setTimeout(() => router.push('/select-software'), 1500);
+                    // Use a full page reload to ensure cookie is sent with request
+                    window.location.href = '/select-software';
                 } else {
                     setError(result.error);
                 }
@@ -235,7 +236,8 @@ export default function LoginPage() {
                 const result = await register(formData.email, formData.password, formData.name);
                 if (result.success) {
                     setSuccess('Account created! Redirecting...');
-                    setTimeout(() => router.push('/select-software'), 1500);
+                    // Use a full page reload to ensure cookie is sent with request
+                    window.location.href = '/select-software';
                 } else {
                     setError(result.error);
                 }

@@ -218,7 +218,7 @@
           },
           {
             "href": "/deskview",
-            "label": "DeskView",
+            "label": "MyDeskView",
             "icon": "FiLayout",
             "desc": "Dashboard Information"
           },
@@ -256,6 +256,12 @@
             "label": "Finance",
             "icon": "FiDollarSign",
             "desc": "Investment & tracking"
+          },
+          {
+            "href": "/learnSkills365",
+            "label": "LearnSkills365",
+            "icon": "FiBook",
+            "desc": "Educational learning platform"
           },
           {
             "href": "/products",
@@ -359,6 +365,29 @@
         ]
       },
       {
+        "title": "More Resources",
+        "links": [
+          {
+            "href": "/glossary",
+            "label": "Glossary",
+            "icon": "FiList",
+            "desc": "Technology terms A-Z"
+          },
+          {
+            "href": "/trademarks",
+            "label": "Trademarks",
+            "icon": "FiAward",
+            "desc": "Brand guidelines"
+          },
+          {
+            "href": "/sitemap",
+            "label": "Site Map",
+            "icon": "FiGrid",
+            "desc": "Browse all pages"
+          }
+        ]
+      },
+      {
         "title": "Legal",
         "links": [
           {
@@ -384,18 +413,6 @@
             "label": "Cookie Policy",
             "icon": "FiShield",
             "desc": "Cookie usage"
-          },
-          {
-            "href": "/trademarks",
-            "label": "Trademarks",
-            "icon": "FiAward",
-            "desc": "Brand guidelines"
-          },
-          {
-            "href": "/sitemap",
-            "label": "Site Map",
-            "icon": "FiGrid",
-            "desc": "Browse all pages"
           }
         ]
       }

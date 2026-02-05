@@ -163,26 +163,17 @@ const LinkDisplay = styled.div`
     word-break: break-all;
 `;
 
+
 const videos = [
     {
         title: "Optical Automation, Mission Statement 2026",
         author: "J.L. Avakian",
-        url: "https://biteable.com/watch/4531363/cda30e5828be7aa21757feb47a90aa80"
-    },
-    {
-        title: "Video Index",
-        author: "J.L. Avakian",
-        url: "http://www.My1Apps.com"
+        url: "/oa2026.mp4"
     },
     {
         title: "Pinterest",
         author: "J.L. Avakian",
         url: "https://www.pinterest.com/jamesavakian/my-product-videos/"
-    },
-    {
-        title: "Optical Automation",
-        author: "J.L. Avakian",
-        url: "https://biteable.com/watch/3035980/b7b7c1a2ea14509b9b6e152036949f15"
     },
     {
         title: "Optical Automation, Mission Statement 2023",
@@ -200,27 +191,17 @@ const videos = [
         url: "https://biteable.com/watch/3714125/a539e52ce6ef052bf12e4ce7deb2d60e"
     },
     {
-        title: "MyOneUniverse, Videos",
-        author: "J.L. Avakian",
-        url: "https://biteable.com/watch/3097407/594a720b62bae68b534951d25eb0dbd3"
-    },
-    {
         title: "AmericaDiscovered",
         author: "J.L. Avakian",
         url: "https://biteable.com/watch/3081382/4ca1b6f98216d3de312e043e19c7e477"
     },
     {
-        title: "ShopperLady",
-        author: "J.L. Avakian",
-        url: "https://biteable.com/watch/3036301/9daa88c0c742444f8edb2a1fd4961fdf"
-    },
-    {
-        title: "MyPersonalOrganizer",
+        title: "PersonalOrganizer",
         author: "J.L. Avakian",
         url: "https://biteable.com/watch/3036416/d13a69fe6ecd6b46d67bfbf36500ceb4"
     },
     {
-        title: "MyBusinessOrganizer",
+        title: "BusinessOrganizer",
         author: "J.L. Avakian",
         url: "https://biteable.com/watch/3039291/459a747027c6b92a0e5b3ca30f1ce2d2"
     },

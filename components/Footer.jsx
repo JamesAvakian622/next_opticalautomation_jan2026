@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiGithub } from 'react-icons/fi';
+import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiGithub, FiArrowUp } from 'react-icons/fi';
 
 const FooterWrapper = styled.footer`
     background: ${({ theme }) => theme.colors.surface};
@@ -139,11 +139,12 @@ const Copyright = styled.p`
 
 const LegalDisclaimer = styled.p`
     color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 0.75rem;
-    line-height: 1.5;
+    font-size: 0.9rem;
+    line-height: 1.6;
     margin-bottom: ${({ theme }) => theme.spacing.lg};
-    max-width: 800px;
-    opacity: 0.8;
+    max-width: 600px;
+    text-align: left;
+    opacity: 0.9;
 `;
 
 const BottomCreditWrapper = styled.div`
@@ -154,6 +155,68 @@ const BottomCreditWrapper = styled.div`
     @media (max-width: 600px) {
         align-items: center;
         text-align: center;
+    }
+`;
+
+const FooterBrandingSection = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: ${({ theme }) => theme.spacing.md};
+    margin-bottom: ${({ theme }) => theme.spacing.lg};
+    padding-bottom: ${({ theme }) => theme.spacing.lg};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const SmallLogoWrapper = styled.div`
+    width: 50px;
+    height: 50px;
+    position: relative;
+    flex-shrink: 0;
+`;
+
+const FooterBrandName = styled.span`
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.text};
+    background: ${({ theme }) => theme.colors.gradient};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+`;
+
+const ScrollToTopButton = styled.button`
+    position: fixed;
+    bottom: ${({ theme }) => theme.spacing.xl};
+    right: ${({ theme }) => theme.spacing.xl};
+    width: 48px;
+    height: 48px;
+    border-radius: ${({ theme }) => theme.borderRadius.full};
+    background: ${({ theme }) => theme.colors.gradient};
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+    transition: all 0.3s ease;
+    z-index: 999;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px ${({ theme }) => theme.colors.shadow};
+    }
+
+    svg {
+        font-size: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        bottom: ${({ theme }) => theme.spacing.lg};
+        right: ${({ theme }) => theme.spacing.lg};
+        width: 44px;
+        height: 44px;
     }
 `;
 
@@ -211,7 +274,7 @@ const technologyLinks = [
 ];
 
 const productsLinks = [
-  { href: '/deskview', label: 'DeskView' },
+  { href: '/deskview', label: 'MyDeskView' },
   { href: '/products', label: 'E-Commerce' },
   { href: '/products', label: 'Automotive' },
   { href: '/products', label: 'Business' },
@@ -239,6 +302,13 @@ const policyLinks = [
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   return (
     <FooterWrapper>
@@ -318,6 +388,17 @@ export default function Footer() {
 
         <FooterBottom>
           <BottomCreditWrapper>
+            <FooterBrandingSection>
+              <SmallLogoWrapper>
+                <Image
+                  src="/opauto.png"
+                  alt="OA Logo"
+                  fill
+                  style={{ objectFit: 'contain' }}
+                />
+              </SmallLogoWrapper>
+              <FooterBrandName>Optical Automation</FooterBrandName>
+            </FooterBrandingSection>
             <LegalDisclaimer>
               All trademarks, product names, and logos are the property of their respective owners. Optical Automation, LLC owns all developed software as intellectual property protected by U.S. Copyright and Trademarks. Unauthorized reproduction or distribution of any material on this site is prohibited.
             </LegalDisclaimer>
@@ -341,6 +422,10 @@ export default function Footer() {
           </SocialSection>
         </FooterBottom>
       </FooterContent>
+
+      <ScrollToTopButton onClick={scrollToTop} aria-label="Scroll to top">
+        <FiArrowUp />
+      </ScrollToTopButton>
     </FooterWrapper>
   );
 }

@@ -5,16 +5,16 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import {
-    FiMonitor,
-    FiFolder,
-    FiBookOpen,
-    FiVideo,
-    FiLink,
-    FiLayout,
-    FiMousePointer,
-    FiTool,
-    FiDatabase,
-    FiArrowRight
+  FiMonitor,
+  FiFolder,
+  FiBookOpen,
+  FiVideo,
+  FiLink,
+  FiLayout,
+  FiMousePointer,
+  FiTool,
+  FiDatabase,
+  FiArrowRight
 } from 'react-icons/fi';
 
 const InfoSection = styled.section`
@@ -147,111 +147,111 @@ const CardLink = styled(Link)`
 `;
 
 const infoItems = [
-    {
-        icon: FiMonitor,
-        title: 'DeskView Apps',
-        description: 'Organize your personal and business life with powerful desktop applications, including MyDeskView, Personal Organizer, and Business Organizer.',
-        href: '/products',
-        color: '#3b82f6'
-    },
-    {
-        icon: FiFolder,
-        title: 'Media Management',
-        description: 'Manage photo albums, music collections, and multimedia content effortlessly within your unified digital space.',
-        href: '/products',
-        color: '#ec4899'
-    },
-    {
-        icon: FiBookOpen,
-        title: 'Learning Tools',
-        description: 'Interactive quizzes and flash cards to enhance your learning experience and knowledge retention.',
-        href: '/products',
-        color: '#f59e0b'
-    },
-    {
-        icon: FiVideo,
-        title: 'Teleprompter',
-        description: 'Professional teleprompter with customizable speed and display options for presentations and video creation.',
-        href: '/products',
-        color: '#ef4444'
-    },
-    {
-        icon: FiLink,
-        title: 'Link Organization',
-        description: 'Keep your important resources organized and accessible with advanced link management and dual-column layouts.',
-        href: '/products',
-        color: '#8b5cf6'
-    },
-    {
-        icon: FiLayout,
-        title: 'Modern Design Solutions',
-        description: 'Websites that adapt seamlessly to different screen sizes and devices, providing a premium user experience.',
-        href: '/tech',
-        color: '#06b6d4'
-    },
-    {
-        icon: FiMousePointer,
-        title: 'Intuitive Operation',
-        description: 'Software that feels natural from the first click, designed to flow with your expectations and enhance efficiency.',
-        href: '/tech',
-        color: '#10b981'
-    },
-    {
-        icon: FiTool,
-        title: 'Practical Information',
-        description: 'Access essential tools and resources designed to simplify everyday tasks and decision-making.',
-        href: '/documents',
-        color: '#6366f1'
-    },
-    {
-        icon: FiDatabase,
-        title: 'Record Keeping',
-        description: 'Maintain comprehensive records and documentation with organized storage and easy retrieval systems.',
-        href: '/documents',
-        color: '#4b5563'
-    }
+  {
+    icon: FiMonitor,
+    title: 'MyDeskView Apps',
+    description: 'Organize your personal and business life with powerful desktop applications, including MyDeskView, Personal Organizer, and Business Organizer.',
+    href: '/products',
+    color: '#3b82f6'
+  },
+  {
+    icon: FiFolder,
+    title: 'Media Management',
+    description: 'Manage photo albums, music collections, and multimedia content effortlessly within your unified digital space.',
+    href: '/products',
+    color: '#ec4899'
+  },
+  {
+    icon: FiBookOpen,
+    title: 'Learning Tools',
+    description: 'Interactive quizzes and flash cards to enhance your learning experience and knowledge retention.',
+    href: '/products',
+    color: '#f59e0b'
+  },
+  {
+    icon: FiVideo,
+    title: 'Teleprompter',
+    description: 'Professional teleprompter with customizable speed and display options for presentations and video creation.',
+    href: '/products',
+    color: '#ef4444'
+  },
+  {
+    icon: FiLink,
+    title: 'Link Organization',
+    description: 'Keep your important resources organized and accessible with advanced link management and dual-column layouts.',
+    href: '/products',
+    color: '#8b5cf6'
+  },
+  {
+    icon: FiLayout,
+    title: 'Modern Design Solutions',
+    description: 'Websites that adapt seamlessly to different screen sizes and devices, providing a premium user experience.',
+    href: '/tech',
+    color: '#06b6d4'
+  },
+  {
+    icon: FiMousePointer,
+    title: 'Intuitive Operation',
+    description: 'Software that feels natural from the first click, designed to flow with your expectations and enhance efficiency.',
+    href: '/tech',
+    color: '#10b981'
+  },
+  {
+    icon: FiTool,
+    title: 'Practical Information',
+    description: 'Access essential tools and resources designed to simplify everyday tasks and decision-making.',
+    href: '/documents',
+    color: '#6366f1'
+  },
+  {
+    icon: FiDatabase,
+    title: 'Record Keeping',
+    description: 'Maintain comprehensive records and documentation with organized storage and easy retrieval systems.',
+    href: '/documents',
+    color: '#4b5563'
+  }
 ];
 
 const InfoCards = () => {
-    return (
-        <InfoSection>
-            <SectionContainer>
-                <SectionHeader>
-                    <SectionTitle
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        Digital Solutions & Services
-                    </SectionTitle>
-                    <SectionSubtitle>
-                        Explore our diverse range of specialized software and professional development tools.
-                    </SectionSubtitle>
-                </SectionHeader>
+  return (
+    <InfoSection>
+      <SectionContainer>
+        <SectionHeader>
+          <SectionTitle
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Digital Solutions & Services
+          </SectionTitle>
+          <SectionSubtitle>
+            Explore our diverse range of specialized software and professional development tools.
+          </SectionSubtitle>
+        </SectionHeader>
 
-                <InfoGrid>
-                    {infoItems.map((item, index) => (
-                        <InfoCard
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                        >
-                            <IconWrapper $color={item.color}>
-                                <item.icon />
-                            </IconWrapper>
-                            <CardTitle>{item.title}</CardTitle>
-                            <CardDescription>{item.description}</CardDescription>
-                            <CardLink href={item.href}>
-                                Explore <FiArrowRight />
-                            </CardLink>
-                        </InfoCard>
-                    ))}
-                </InfoGrid>
-            </SectionContainer>
-        </InfoSection>
-    );
+        <InfoGrid>
+          {infoItems.map((item, index) => (
+            <InfoCard
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <IconWrapper $color={item.color}>
+                <item.icon />
+              </IconWrapper>
+              <CardTitle>{item.title}</CardTitle>
+              <CardDescription>{item.description}</CardDescription>
+              <CardLink href={item.href}>
+                Explore <FiArrowRight />
+              </CardLink>
+            </InfoCard>
+          ))}
+        </InfoGrid>
+      </SectionContainer>
+    </InfoSection>
+  );
 };
 
 export default InfoCards;

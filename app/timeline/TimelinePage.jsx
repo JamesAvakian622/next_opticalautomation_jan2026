@@ -162,101 +162,102 @@ const Header = styled.div`
 
 
 const LogoWrapper = styled(motion.div)`
-width: 60px;
-height: 60px;
-position: relative;
-border - radius: 0;
-overflow: hidden;
-flex - shrink: 0;
-display: inline - block;
-vertical - align: middle;
-margin - right: 20px;
+    width: 60px;
+    height: 60px;
+    position: relative;
+    border-radius: 0;
+    overflow: hidden;
+    flex-shrink: 0;
 
-@media(max - width: 768px) {
-    width: 40px;
-    height: 40px;
-    margin - right: 0;
-    margin - bottom: 10px;
-    display: block;
-    margin - left: auto;
-    margin - right: auto;
-}
+    @media (max-width: 768px) {
+        width: 50px;
+        height: 50px;
+    }
 `;
 
 const Title = styled(motion.h1)`
-font - size: clamp(2.5rem, 5vw, 4rem);
-font - weight: 800;
-background: linear - gradient(135deg, #6366f1 0 %, #ec4899 50 %, #8b5cf6 100 %);
--webkit - background - clip: text;
--webkit - text - fill - color: transparent;
-background - clip: text;
-margin - bottom: 20px;
-line - height: 1.2;
-display: flex;
-align - items: center;
-justify - content: center;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
 
-@media(max - width: 768px) {
-    flex - direction: column;
-}
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
 `;
 
 const Subtitle = styled(motion.p)`
-font - size: clamp(1.1rem, 2vw, 1.5rem);
-color: rgba(255, 255, 255, 0.7);
-max - width: 800px;
-margin: 0 auto;
-line - height: 1.6;
+    font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
 `;
 
 const TimelineContainer = styled.div`
-position: relative;
-padding: 40px 0;
+    position: relative;
+    padding: 40px 0;
+    max-width: 900px;
+    margin: 0 auto;
 `;
 
 const TimelineLine = styled.div`
-position: absolute;
-left: 50 %;
-top: 0;
-bottom: 0;
-width: 4px;
-background: linear - gradient(180deg,
-    transparent 0 %,
-    rgba(99, 102, 241, 0.5) 10 %,
-    rgba(99, 102, 241, 0.5) 90 %,
-    transparent 100 %
+    position: absolute;
+    left: 100px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(99, 102, 241, 0.5) 10%,
+        rgba(99, 102, 241, 0.5) 90%,
+        transparent 100%
     );
-transform: translateX(-50 %);
+    z-index: 1;
 
-@media(max - width: 768px) {
-    left: 30px;
-}
+    @media (max-width: 768px) {
+        left: 70px;
+    }
 `;
 
 const TimelineItem = styled(motion.div)`
-position: relative;
-margin - bottom: 80px;
-display: flex;
-align - items: center;
-justify - content: ${({ $index }) => $index % 2 === 0 ? 'flex-start' : 'flex-end'};
+    position: relative;
+    margin-bottom: 80px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-left: 20px;
 
-@media(max - width: 768px) {
-    justify - content: flex - start;
-    padding - left: 80px;
-}
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 20px;
+        gap: 20px;
+    }
 `;
 
 const TimelineContent = styled(motion.div)`
-width: 45 %;
-background: rgba(255, 255, 255, 0.05);
-backdrop - filter: blur(20px);
-border: 1px solid rgba(255, 255, 255, 0.1);
-border - radius: 24px;
-padding: 32px;
-cursor: pointer;
-transition: all 0.4s cubic - bezier(0.4, 0, 0.2, 1);
-position: relative;
-overflow: hidden;
+    flex: 1;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 32px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
 
     ${({ $highlight }) => $highlight && `
         background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
@@ -265,55 +266,55 @@ overflow: hidden;
     `}
 
     &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear - gradient(135deg, ${({ $color }) => $color} 20 0 %, transparent 100 %);
-opacity: 0;
-transition: opacity 0.4s ease;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, ${({ $color }) => $color}20 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
     }
 
     &:hover {
-    transform: translateY(-8px) scale(1.02);
-    border - color: ${({ $color }) => $color};
-    box - shadow: 0 20px 60px ${({ $color }) => $color} 40;
+        transform: translateY(-8px) scale(1.02);
+        border-color: ${({ $color }) => $color};
+        box-shadow: 0 20px 60px ${({ $color }) => $color}40;
 
         &::before {
-        opacity: 1;
+            opacity: 1;
+        }
     }
-}
 
-@media(max - width: 768px) {
-    width: calc(100 % - 80px);
-}
+    @media (max-width: 768px) {
+        width: 100%;
+        max-width: none;
+    }
 `;
 
-const TimelineYear = styled.div`
-position: absolute;
-left: 50 %;
-transform: translateX(-50 %);
-background: ${({ $color }) => $color};
-color: white;
-padding: 16px 32px;
-border - radius: 50px;
-font - weight: 800;
-font - size: 1.5rem;
-box - shadow:
-0 8px 32px ${({ $color }) => $color} 80,
-    0 0 40px ${({ $color }) => $color} 60,
-        inset 0 2px 4px rgba(255, 255, 255, 0.3);
-z - index: 2;
-white - space: nowrap;
-letter - spacing: 0.05em;
-border: 2px solid rgba(255, 255, 255, 0.3);
 
-@media(max - width: 768px) {
-    left: 30px;
-    transform: translateX(-50 %);
-}
+const TimelineYear = styled.div`
+    background: ${({ $color }) => $color};
+    color: ${({ theme }) => theme.colors.background === '#0a0a0a' || theme.colors.background === '#0f172a' ? '#000000' : '#ffffff'};
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.75rem;
+    box-shadow:
+        0 8px 32px ${({ $color }) => $color}80,
+        0 0 40px ${({ $color }) => $color}60,
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    z-index: 2;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+        padding: 14px 28px;
+    }
 `;
 
 const TimelineIcon = styled.div`
@@ -343,6 +344,7 @@ border: 4px solid #0f172a;
 `;
 
 const ContentHeader = styled.div`
+margin - top: 40px;
 margin - bottom: 16px;
 `;
 
@@ -474,14 +476,14 @@ export default function TimelinePage() {
                                 priority
                             />
                         </LogoWrapper>
-                        Timeline of Major Internet Software Milestones
+                        Timeline of Internet Software Milestones
                     </Title>
                     <Subtitle
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        From React.js to Google Antigravity and beyond
+                        Cross-platform Developer Production Software From React.js to Google Antigravity and Beyond
                     </Subtitle>
                 </Header>
 
@@ -501,14 +503,11 @@ export default function TimelinePage() {
                                 {item.year}
                             </TimelineYear>
 
-                            <TimelineIcon $color={item.color}>
-                                <item.icon />
-                            </TimelineIcon>
-
                             <TimelineContent
                                 $color={item.color}
                                 $highlight={item.highlight}
-                                onClick={() => toggleItem(index)}
+                                onMouseEnter={() => setExpandedItem(index)}
+                                onMouseLeave={() => setExpandedItem(null)}
                                 whileHover={{ scale: 1.02 }}
                             >
                                 <ContentHeader>

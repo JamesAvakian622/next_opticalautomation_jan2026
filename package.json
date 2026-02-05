@@ -11,13 +11,16 @@
     "build:mobile": "next build",
     "cap:sync": "npx cap sync",
     "android": "npx cap open android",
-    "android:build": "npm run build:mobile && npx cap sync android"
+    "android:build": "npm run build:mobile && npx cap sync android",
+    "seed-users": "node scripts/seed-users.js",
+    "manage-users": "node scripts/manage-users.js"
   },
   "dependencies": {
     "@capacitor/android": "^8.0.2",
     "@capacitor/cli": "^8.0.2",
     "@capacitor/core": "^8.0.2",
     "@clerk/nextjs": "^6.36.10",
+    "@emotion/is-prop-valid": "^1.4.0",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "framer-motion": "^12.24.10",

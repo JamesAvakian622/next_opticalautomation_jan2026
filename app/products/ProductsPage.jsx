@@ -255,7 +255,7 @@ const products = [
     },
     {
         name: 'Client Portal',
-        url: 'portal.opticalautomation.com',
+        url: 'www.JamesAvakian.com',
         description: 'Secure client portal for project management, file sharing, and communication.',
         color: '#10B981',
         active: true,
@@ -266,32 +266,27 @@ const products = [
         url: 'docs.opticalautomation.com',
         description: 'Technical documentation, API references, and development guides.',
         color: '#F59E0B',
-        active: true,
+        active: false,
+        status: 'pending',
         features: ['API Docs', 'Tutorials', 'Code Examples', 'Version History']
     },
-    {
-        name: 'Analytics Dashboard',
-        url: 'analytics.opticalautomation.com',
-        description: 'Real-time analytics and performance monitoring for client applications.',
-        color: '#EC4899',
-        active: false,
-        features: ['Real-time Data', 'Custom Reports', 'Performance Metrics', 'Alerts']
-    },
-    {
-        name: 'Development Sandbox',
-        url: 'dev.opticalautomation.com',
-        description: 'Testing and staging environment for development and QA purposes.',
-        color: '#8B5CF6',
-        active: true,
-        features: ['Staging Environments', 'A/B Testing', 'Beta Features', 'Debug Tools']
-    },
+
     {
         name: 'Learning Platform',
         url: 'learn.opticalautomation.com',
         description: 'Educational resources, courses, and tutorials for web development.',
         color: '#06B6D4',
-        active: false,
+        active: true,
         features: ['Video Courses', 'Interactive Labs', 'Certifications', 'Community']
+    },
+    {
+        name: 'DollarDimeStore',
+        url: 'dollardimestore.com',
+        description: 'eCommerce platform offering affordable products and deals for everyday needs.',
+        color: '#22C55E',
+        active: false,
+        status: 'pending',
+        features: ['Product Catalog', 'Shopping Cart', 'Secure Checkout', 'Order Tracking']
     }
 ];
 
@@ -333,7 +328,7 @@ export default function ProductsPage() {
                                     <FiGlobe />
                                 </ProductIcon>
                                 <StatusBadge $active={product.active}>
-                                    {product.active ? 'Active' : 'Coming Soon'}
+                                    {product.status === 'pending' ? 'Pending' : (product.active ? 'Active' : 'Coming Soon')}
                                 </StatusBadge>
                             </ProductHeader>
                             <ProductName>{product.name}</ProductName>

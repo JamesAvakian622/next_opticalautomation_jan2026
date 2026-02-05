@@ -56,25 +56,25 @@ flex - shrink: 0;
 `;
 
 const Title = styled(motion.h1)`
-font - size: 3rem;
-margin - bottom: ${({ theme }) => theme.spacing.md};
-background: ${({ theme }) => theme.colors.gradient};
--webkit - background - clip: text;
--webkit - text - fill - color: transparent;
-background - clip: text;
-display: inline - flex;
-align - items: center;
-gap: ${({ theme }) => theme.spacing.md};
+    font-size: 3rem;
+    margin-bottom: ${({ theme }) => theme.spacing.md};
+    background: ${({ theme }) => theme.colors.gradient};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-flex;
+    align-items: center;
+    gap: ${({ theme }) => theme.spacing.md};
 
-@media(max - width: 768px) {
-    font - size: 2rem;
-}
+    @media (max-width: 768px) {
+        font-size: 2rem;
+    }
 `;
 
 const Subtitle = styled.p`
 color: ${({ theme }) => theme.colors.textSecondary};
-font - size: 1.125rem;
-max - width: 600px;
+font-size: 1.5rem;
+max-width: 600px;
 margin: 0 auto;
 `;
 
@@ -87,39 +87,63 @@ text - align: center;
 const SectionSubtitle = styled.h3`
 font - size: 1.5rem;
 color: ${({ theme }) => theme.colors.text};
-margin - bottom: ${({ theme }) => theme.spacing.lg};
+margin - bottom: ${({ theme }) => theme.spacing.xl};
+margin - top: ${({ theme }) => theme.spacing.lg};
 font - weight: 500;
 `;
 
 const DescriptionParagraph = styled.p`
 color: ${({ theme }) => theme.colors.textSecondary};
-font - size: 1.05rem;
-line - height: 1.8;
-margin - bottom: ${({ theme }) => theme.spacing.md};
-text - align: left;
+font-size: 1.05rem;
+line-height: 1.8;
+margin-top: 1.5rem;
+margin-bottom: 1.5rem;
+text-align: left;
     
-    &: last - child {
-    margin - bottom: 0;
+&:first-child {
+    margin-top: 0;
+}
+
+&:last-child {
+    margin-bottom: 0;
 }
 `;
 
 const SoftwareGrid = styled.div`
 display: grid;
-grid - template - columns: repeat(auto - fill, minmax(200px, 1fr));
+grid-template-columns: repeat(3, 1fr);
 gap: ${({ theme }) => theme.spacing.md};
-margin: ${({ theme }) => theme.spacing.xl} 0;
-text - align: left;
+margin: ${({ theme }) => theme.spacing.xl} auto;
+max-width: 800px;
+text-align: left;
+
+@media(max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 600px;
+}
+
+@media(max-width: 600px) {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+}
 `;
 
 const FeaturedSection = styled.div`
 display: flex;
 gap: ${({ theme }) => theme.spacing.xxl};
-align - items: flex - start;
-margin - bottom: ${({ theme }) => theme.spacing.xxl};
+align-items: flex-start;
+margin-bottom: 4rem;
+padding-bottom: 2rem;
+border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
-@media(max - width: 1024px) {
-    flex - direction: column;
-    align - items: center;
+@media(max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+}
+
+&:last-of-type {
+    border-bottom: none;
+    margin-bottom: 3rem;
 }
 `;
 
@@ -161,14 +185,52 @@ font - size: 0.95rem;
 }
 `;
 
+const CategoryTitle = styled.h4`
+grid-column: 1 / -1;
+color: ${({ theme }) => theme.mode === 'dark' ? '#ffffff' : '#333333'};
+font-size: 1.1rem;
+font-weight: 600;
+text-align: center;
+margin-top: ${({ theme }) => theme.spacing.lg};
+margin-bottom: ${({ theme }) => theme.spacing.sm};
+padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(156, 163, 175, 0.3)'};
+border-radius: ${({ theme }) => theme.borderRadius.md};
+border: 1px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.5)' : 'rgba(156, 163, 175, 0.5)'};
+
+&:first-child {
+    margin-top: 0;
+}
+`;
+
+const CategoryGroup = styled.div`
+background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(156, 163, 175, 0.15)'};
+border: 1px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(156, 163, 175, 0.3)'};
+border-radius: ${({ theme }) => theme.borderRadius.lg};
+padding: ${({ theme }) => theme.spacing.md};
+margin-bottom: ${({ theme }) => theme.spacing.lg};
+`;
+
+const CategoryItemsList = styled.div`
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: ${({ theme }) => theme.spacing.sm};
+margin-top: ${({ theme }) => theme.spacing.sm};
+
+@media(max-width: 600px) {
+    grid-template-columns: 1fr;
+}
+`;
+
 const ProductsGrid = styled.div`
 display: grid;
-grid - template - columns: repeat(auto - fill, minmax(350px, 1fr));
+grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 gap: ${({ theme }) => theme.spacing.xl};
-margin - bottom: ${({ theme }) => theme.spacing.xxl};
+margin-top: 2rem;
+margin-bottom: ${({ theme }) => theme.spacing.xxl};
 
-@media(max - width: 400px) {
-    grid - template - columns: 1fr;
+@media(max-width: 400px) {
+    grid-template-columns: 1fr;
 }
 `;
 
@@ -261,21 +323,21 @@ margin - bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
 const VisitLink = styled.a`
-display: inline - flex;
-align - items: center;
+display: inline-flex;
+align-items: center;
 gap: 6px;
 padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-margin - top: ${({ theme }) => theme.spacing.lg};
+margin-top: 1.5rem;
 background: ${({ theme }) => theme.colors.gradient};
 color: white;
-border - radius: ${({ theme }) => theme.borderRadius.md};
-font - size: 0.875rem;
-font - weight: 500;
+border-radius: ${({ theme }) => theme.borderRadius.md};
+font-size: 0.875rem;
+font-weight: 500;
 transition: all 0.3s ease;
 
-    &:hover {
+&:hover {
     transform: translateY(-2px);
-    box - shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
 }
 `;
 
@@ -336,7 +398,7 @@ font - size: 0.875rem;
 const products = [
     {
         name: 'MyDeskView',
-        url: 'mydeskview.opticalautomation.com',
+        url: 'www.MyDeskView.com',
         description: 'Your central command center for daily workflow management and productivity.',
         color: '#6366f1',
         active: true,
@@ -345,7 +407,7 @@ const products = [
     },
     {
         name: 'MyPersonalOrganizer',
-        url: 'personal.opticalautomation.com',
+        url: 'www.MyPersonalOrganizer.com',
         description: 'Comprehensive personal life management for goals, habits, and schedules.',
         color: '#10B981',
         active: true,
@@ -375,34 +437,70 @@ const products = [
         url: 'universe.opticalautomation.com',
         description: 'The unifying ecosystem connecting all your Optical Automation apps.',
         color: '#8B5CF6',
-        active: true,
+        active: false,
+        status: 'pending',
         features: ['Cross-App Sync', 'Universal Search', 'Unified Identity', 'Seamless Handoff'],
         icon: FiLayers
+    },
+    {
+        name: 'MyDeskView - DIY Solutions',
+        url: 'diy.opticalautomation.com',
+        description: 'Home improvement and DIY project management integrated into your desktop workflow.',
+        color: '#F97316',
+        active: false,
+        status: 'pending',
+        features: ['Project Templates', 'Material Lists', 'Step-by-Step Guides', 'Cost Tracking'],
+        icon: FiZap
+    },
+    {
+        name: 'MyDeskView - YouTube Videos',
+        url: 'youtube.opticalautomation.com',
+        description: 'Curated video content and YouTube integration with assignable movies for quick access.',
+        color: '#EF4444',
+        active: false,
+        status: 'pending',
+        features: ['Video Library', 'Quick Access Menu', 'Playlist Management', 'Watch History'],
+        icon: FiExternalLink
     }
 ];
 
-const integratedSoftware = [
-    'A Snowy Christmas',
-    'BistroRestaurant',
-    'BusinessTracker',
-    'CorvetteQuiz',
-    'CreativeTracker',
-    'DollarDimeStore',
-    'GoodDayMusic',
-    'Hi5',
-    'InvestmentTracker',
-    'LearningPlatform',
-    'MyDateBook',
-    'MyTelephoneBook',
-    'Photo Albums',
-    'Quiz System',
-    'RealEstatePortal',
-    'RecipeLists',
-    'SportsTracker',
-    'TaskManager',
-    'TechnologyAndTimes',
-    'Teleprompter'
-];
+const integratedSoftware = {
+    'Business & Finance': [
+        'BistroRestaurant',
+        'BusinessTracker',
+        'CreativeTracker',
+        'DollarDimeStore',
+        'InvestmentTracker',
+        'RealEstatePortal'
+    ],
+    'Education & Learning': [
+        'LearnSkills365.com',
+        'Quiz System'
+    ],
+    'Entertainment & Leisure': [
+        'A Snowy Christmas',
+        'CorvetteQuiz',
+        'GoodDayMusic',
+        'GuitarBranded',
+        'SportsTracker'
+    ],
+    'Personal Productivity': [
+        'MyDateBook',
+        'Photo Albums',
+        'RecipeLists',
+        'TaskManager',
+        'Teleprompter'
+    ],
+    'Communication & Social': [
+        'Hi5',
+        'MyTelephoneBook',
+        'TechnologyAndTimes'
+    ],
+    'Health': [
+        'Fitness Tracker',
+        'Health Tracker'
+    ]
+};
 
 export default function DeskViewPage() {
     const FeaturedIcon = products[0].icon;
@@ -426,16 +524,16 @@ export default function DeskViewPage() {
                                 priority
                             />
                         </LogoWrapper>
-                        The DeskView Series
+                        MyDeskView Series
                     </Title>
                     <Subtitle>
-                        Dashboard Information and Website Items
+                        Dashboard Information and Website System
                     </Subtitle>
                 </HeroSection>
 
                 <IntroSection initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
 
-                    <SectionSubtitle>The Single Point Of Execution For Applications</SectionSubtitle>
+                    <SectionSubtitle>Your Central Desktop</SectionSubtitle>
                     <DescriptionParagraph>
                         MyDeskView serves as your comprehensive dashboard for managing all aspects of your daily workflow. This powerful application brings together your most important information, tasks, and tools in one centralized location, allowing you to maintain focus and productivity throughout your day. With its intuitive interface and customizable widgets, you can tailor your workspace to match your unique needs and preferences.
                     </DescriptionParagraph>
@@ -454,10 +552,17 @@ export default function DeskViewPage() {
                     </SectionSubtitle>
 
                     <SoftwareGrid>
-                        {integratedSoftware.map((title) => (
-                            <SoftwareItem key={title}>
-                                <FiCheck /> {title}
-                            </SoftwareItem>
+                        {Object.entries(integratedSoftware).map(([category, items]) => (
+                            <CategoryGroup key={category}>
+                                <CategoryTitle>{category}</CategoryTitle>
+                                <CategoryItemsList>
+                                    {items.map((title) => (
+                                        <SoftwareItem key={title}>
+                                            <FiCheck /> {title}
+                                        </SoftwareItem>
+                                    ))}
+                                </CategoryItemsList>
+                            </CategoryGroup>
                         ))}
                     </SoftwareGrid>
                 </IntroSection>
@@ -622,7 +727,7 @@ export default function DeskViewPage() {
                                     <product.icon />
                                 </ProductIcon>
                                 <StatusBadge $active={product.active}>
-                                    {product.active ? 'Active' : 'Coming Soon'}
+                                    {product.status === 'pending' ? 'Pending' : (product.active ? 'Active' : 'Coming Soon')}
                                 </StatusBadge>
                             </ProductHeader>
                             <ProductName>{product.name}</ProductName>

@@ -35,7 +35,8 @@ import {
   FiMessageSquare,
   FiMapPin,
   FiDollarSign,
-  FiTerminal
+  FiTerminal,
+  FiAward
 } from 'react-icons/fi';
 
 // Tab Categories Data
@@ -47,64 +48,64 @@ const tabCategories = [
     color: 'linear-gradient(135deg, #61DAFB 0%, #0070F3 100%)',
     projects: [
       {
-        id: 'react-dashboard',
-        title: 'Enterprise Dashboard Pro',
-        category: 'ReactJS Application',
-        description: 'Advanced admin dashboard with real-time analytics, data visualization, and role-based access control built with React 18 and Redux Toolkit.',
-        detailedDescription: 'Enterprise Dashboard Pro is a comprehensive business intelligence platform built with React 18, Redux Toolkit, and React Query. Features include customizable widget layouts, real-time WebSocket data streaming, interactive Chart.js visualizations, and granular permission systems. The responsive design adapts seamlessly from mobile to 4K displays.',
-        icon: FiPieChart,
+        id: 'optical-automation',
+        title: 'Optical Automation',
+        category: 'Web & Mobile Suite',
+        description: 'MERN Stack and SwiftUI application featuring Megamenu navigation, SEO optimized metadata-driven content, SOC2 compliant metatags, and AI-powered insights.',
+        detailedDescription: 'Optical Automation is a comprehensive Web & Mobile Suite built with MERN Stack and SwiftUI. Features include an advanced Megamenu navigation system, SEO optimized pages with metadata-driven content management, SOC2 compliant metatags for enterprise security, and AI-powered insights for enhanced user experience.',
+        icon: FiGlobe,
+        color: '#6366F1',
+        website: 'https://opticalautomation.com'
+      },
+      {
+        id: 'mydeskview',
+        title: 'MyDeskView',
+        category: 'Desktop Productivity Suite',
+        description: 'Desktop Productivity Suite integrating MyDeskView, MyPersonalOrganizer, MyBusinessOrganizer, DIY Solutions, MyDeskView - 2026 Places, and MyDeskView - YouTube with assignable movies for fast menu access.',
+        detailedDescription: 'MyDeskView is a comprehensive Desktop Productivity Suite featuring multiple integrated applications: MyPersonalOrganizer for personal task management, MyBusinessOrganizer for professional workflows, DIY Solutions for home projects, MyDeskView - 2026 Places for location tracking, and MyDeskView - YouTube integration with assignable movies for fast menu access.',
+        icon: FiMonitor,
         color: '#61DAFB',
-        website: 'https://example-dashboard.com'
+        website: 'https://mydeskview.com'
       },
       {
-        id: 'nextjs-ecommerce',
-        title: 'ShopNext E-Commerce',
-        category: 'Next.js Application',
-        description: 'Full-stack e-commerce platform with SSR/SSG, Stripe integration, and headless CMS powered by Next.js 14 App Router.',
-        detailedDescription: 'ShopNext leverages Next.js 14 App Router for optimal performance with server-side rendering, static site generation, and incremental static regeneration. Includes Stripe payment processing, inventory management, customer authentication via NextAuth.js, and integration with Sanity CMS for content management.',
-        icon: FiShoppingCart,
-        color: '#0070F3',
-        website: 'https://example-shopnext.com'
-      },
-      {
-        id: 'react-social',
-        title: 'ConnectHub Social Platform',
-        category: 'ReactJS Application',
-        description: 'Modern social networking app with real-time messaging, post feeds, and notification system using React and Socket.io.',
-        detailedDescription: 'ConnectHub delivers a seamless social experience with React functional components, Context API for state management, and Socket.io for real-time communication. Features include infinite scrolling feeds, media uploads via Cloudinary, friend suggestions algorithm, and push notifications.',
-        icon: FiUsers,
-        color: '#E91E63',
-        website: 'https://example-connecthub.com'
-      },
-      {
-        id: 'nextjs-blog',
-        title: 'DevBlog Publishing Platform',
-        category: 'Next.js Application',
-        description: 'Developer blog platform with MDX support, syntax highlighting, and SEO optimization built on Next.js.',
-        detailedDescription: 'DevBlog is a performant publishing platform utilizing Next.js static generation for blazing-fast page loads. Features MDX for rich content authoring, Prism.js syntax highlighting, automatic table of contents generation, RSS feed, and comprehensive SEO with structured data.',
-        icon: FiBook,
+        id: 'technology-and-times',
+        title: 'Technology And Times',
+        category: 'Web & Mobile Suite',
+        description: 'Comprehensive technology portal covering Technology, Computers, Homes, Automobiles, Corporations, and Government with videos and photo galleries.',
+        detailedDescription: 'Technology And Times delivers today\'s technology and everything accessible on the internet. Covers Technology, Computers, Homes, Automobiles, Corporations, and Government sectors with rich video content, photo galleries, and in-depth articles in a full Web & Mobile Suite experience.',
+        icon: FiCpu,
         color: '#10B981',
-        website: 'https://example-devblog.com'
+        website: 'https://technologyandtimes.com'
       },
       {
-        id: 'react-music',
-        title: 'WaveFlow Music Player',
-        category: 'ReactJS Application',
-        description: 'Spotify-inspired music streaming interface with playlist management, audio visualization, and offline support.',
-        detailedDescription: 'WaveFlow showcases advanced React audio handling with Web Audio API integration for visualizations, IndexedDB for offline playlist caching, and background audio playback. Includes cross-device sync, collaborative playlists, and AI-powered recommendations.',
-        icon: FiMusic,
-        color: '#1DB954',
-        website: 'https://example-waveflow.com'
+        id: 'america-today-250',
+        title: 'AmericaToday250',
+        category: 'Web & Mobile Suite',
+        description: 'American history from George Washington arranged in decades, featuring colonial America, state acquisitions, all presidents, and current government officials.',
+        detailedDescription: 'AmericaToday250 chronicles American history from George Washington to present day, organized by decades with colonial America and state acquisitions. Comprehensive appendix includes all presidents, current Executive Branch, official logos, State Governors, and House and Congress officials.',
+        icon: FiBook,
+        color: '#DC2626',
+        website: 'https://americatoday250.com'
       },
       {
-        id: 'nextjs-portfolio',
-        title: 'CreativeForge Portfolio',
-        category: 'Next.js Application',
-        description: 'Stunning portfolio template with Framer Motion animations, project galleries, and contact form integration.',
-        detailedDescription: 'CreativeForge is a premium portfolio starter using Next.js and Framer Motion for jaw-dropping animations. Features include project filtering, image galleries with lightbox, testimonials carousel, and Resend email integration for the contact form.',
-        icon: FiLayers,
-        color: '#8B5CF6',
-        website: 'https://example-creativeforge.com'
+        id: 'learnskills365',
+        title: 'LearnSkills365',
+        category: 'Educational Platform',
+        description: 'Interactive learning platform for Math, Reading, Writing, Memory, Typing, Geography, and multiple Quizzes to build essential skills year-round.',
+        detailedDescription: 'LearnSkills365 is an interactive educational platform designed to build essential skills throughout the year. Features comprehensive lessons in Math, Reading, Writing, Memory training, Typing practice, Geography exploration, and a variety of engaging Quizzes to reinforce learning.',
+        icon: FiBook,
+        color: '#F59E0B',
+        website: 'https://learnskills365.com'
+      },
+      {
+        id: 'purchase-software-hub',
+        title: 'Purchase Software Hub',
+        category: 'Software Titles For Sale',
+        description: 'Technical documentation, API references, and development guides. Software titles available for purchase.',
+        detailedDescription: 'Purchase Software Hub provides comprehensive technical documentation, API references, and development guides. Browse and purchase software titles from our catalog.',
+        icon: FiShoppingCart,
+        color: '#10B981',
+        website: 'https://docs.opticalautomation.com'
       }
     ]
   },
@@ -115,64 +116,54 @@ const tabCategories = [
     color: 'linear-gradient(135deg, #68A063 0%, #3F3F3F 100%)',
     projects: [
       {
-        id: 'mern-marketplace',
-        title: 'MarketPlace Hub',
-        category: 'MERN Application',
-        description: 'Multi-vendor marketplace with seller dashboards, product reviews, and secure payment processing using MongoDB, Express, React, and Node.',
-        detailedDescription: 'MarketPlace Hub is a comprehensive multi-vendor platform featuring seller storefronts, product listings with variants, customer reviews with moderation, Stripe Connect for split payments, order tracking, and real-time chat between buyers and sellers.',
-        icon: FiShoppingCart,
+        id: 'mern-optical-automation',
+        title: 'Optical Automation',
+        category: 'Web & Mobile Suite',
+        description: 'MERN Stack and SwiftUI application featuring Megamenu navigation, SEO optimized metadata-driven content, SOC2 compliant metatags, and AI-powered insights.',
+        detailedDescription: 'Optical Automation is a comprehensive Web & Mobile Suite built with MERN Stack and SwiftUI. Features include an advanced Megamenu navigation system, SEO optimized pages with metadata-driven content management, SOC2 compliant metatags for enterprise security, and AI-powered insights for enhanced user experience.',
+        icon: FiGlobe,
         color: '#68A063',
-        website: 'https://example-marketplace.com'
+        website: 'https://opticalautomation.com'
       },
       {
-        id: 'mern-crm',
-        title: 'SalesForce Lite CRM',
-        category: 'MERN Application',
-        description: 'Customer relationship management system with lead tracking, pipeline visualization, and email campaign integration.',
-        detailedDescription: 'SalesForce Lite provides small businesses with powerful CRM capabilities built on the MERN stack. Features include contact management, deal pipeline with drag-and-drop Kanban boards, email sequence automation, activity logging, and sales analytics dashboards.',
-        icon: FiUsers,
+        id: 'mern-mydeskview',
+        title: 'MyDeskView',
+        category: 'Desktop Productivity Suite',
+        description: 'Desktop Productivity Suite with 27+ integrated applications across Business & Finance, Education & Learning, Entertainment & Leisure, Personal Productivity, Communication & Social, and Health categories.',
+        detailedDescription: 'MyDeskView is a comprehensive Desktop Productivity Suite featuring 27+ integrated applications: Business & Finance (BusinessTracker, CreativeTracker, DollarDimeStore, InvestmentTracker, RealEstatePortal), Education & Learning (LearnSkills365.com, Quiz System), Entertainment & Leisure (A Snowy Christmas, CorvetteQuiz, GoodDayMusic, GuitarBranded, SportsTracker), Personal Productivity (MyDateBook, Photo Albums, RecipeLists, TaskManager, Teleprompter), Communication & Social (Hi5, MyTelephoneBook, TechnologyAndTimes), and Health (Fitness Tracker, Health Tracker).',
+        icon: FiMonitor,
         color: '#00A4EF',
-        website: 'https://example-crm.com'
+        website: 'https://mydeskview.com'
       },
       {
-        id: 'mern-learning',
-        title: 'EduCore LMS',
-        category: 'MERN Application',
-        description: 'Learning management system with course creation, video streaming, quizzes, and student progress tracking.',
-        detailedDescription: 'EduCore enables educators to create and sell online courses with a full MERN implementation. Includes video hosting via AWS S3, course builder with drag-and-drop sections, quiz creation, completion certificates, and revenue analytics for instructors.',
-        icon: FiBook,
+        id: 'mern-technology-times',
+        title: 'Technology And Times',
+        category: 'Web & Mobile Suite',
+        description: 'Comprehensive technology portal covering Technology, Computers, Homes, Automobiles, Corporations, and Government with videos and photo galleries.',
+        detailedDescription: 'Technology And Times delivers today\'s technology and everything accessible on the internet. Covers Technology, Computers, Homes, Automobiles, Corporations, and Government sectors with rich video content, photo galleries, and in-depth articles in a full Web & Mobile Suite experience.',
+        icon: FiCpu,
         color: '#F59E0B',
-        website: 'https://example-educore.com'
+        website: 'https://technologyandtimes.com'
       },
       {
-        id: 'mern-booking',
-        title: 'BookingMaster Scheduler',
-        category: 'MERN Application',
-        description: 'Appointment scheduling platform for service businesses with calendar sync, reminders, and payment collection.',
-        detailedDescription: 'BookingMaster streamlines appointment management with Google Calendar integration, automated SMS/email reminders, rescheduling options, deposit collection, staff scheduling, and detailed analytics on booking patterns and revenue.',
-        icon: FiLayout,
-        color: '#EC4899',
-        website: 'https://example-booking.com'
+        id: 'mern-america-today',
+        title: 'AmericaToday250',
+        category: 'Web & Mobile Suite',
+        description: 'American history from George Washington arranged in decades, featuring colonial America, state acquisitions, all presidents, and current government officials.',
+        detailedDescription: 'AmericaToday250 chronicles American history from George Washington to present day, organized by decades with colonial America and state acquisitions. Comprehensive appendix includes all presidents, current Executive Branch, official logos, State Governors, and House and Congress officials.',
+        icon: FiBook,
+        color: '#DC2626',
+        website: 'https://americatoday250.com'
       },
       {
-        id: 'mern-inventory',
-        title: 'StockTrack Inventory',
-        category: 'MERN Application',
-        description: 'Inventory management system with barcode scanning, stock alerts, and supplier management for warehouses.',
-        detailedDescription: 'StockTrack provides complete inventory control with barcode/QR scanning, multi-warehouse support, automated reorder points, supplier management, purchase order generation, and comprehensive reporting for stock movements and valuations.',
-        icon: FiPackage,
-        color: '#6366F1',
-        website: 'https://example-stocktrack.com'
-      },
-      {
-        id: 'mern-realtime',
-        title: 'ChatFlow Messaging',
-        category: 'MERN Application',
-        description: 'Real-time messaging platform with group chats, file sharing, and video calls using Socket.io and WebRTC.',
-        detailedDescription: 'ChatFlow delivers enterprise messaging capabilities with Socket.io-powered real-time communication, WebRTC video/audio calls, file sharing with preview, message search, read receipts, and desktop notification support.',
-        icon: FiMessageSquare,
-        color: '#14B8A6',
-        website: 'https://example-chatflow.com'
+        id: 'mern-purchase-software-hub',
+        title: 'Purchase Software Hub',
+        category: 'Software Titles For Sale',
+        description: 'Technical documentation, API references, and development guides. Software titles available for purchase.',
+        detailedDescription: 'Purchase Software Hub provides comprehensive technical documentation, API references, and development guides. Browse and purchase software titles from our catalog.',
+        icon: FiShoppingCart,
+        color: '#10B981',
+        website: 'https://docs.opticalautomation.com'
       }
     ]
   },
@@ -183,64 +174,54 @@ const tabCategories = [
     color: 'linear-gradient(135deg, #F05138 0%, #FA7343 100%)',
     projects: [
       {
-        id: 'swift-fitness',
-        title: 'FitTrack Pro',
-        category: 'SwiftUI iOS App',
-        description: 'Comprehensive fitness tracking app with workout logging, Apple Health integration, and personalized training plans.',
-        detailedDescription: 'FitTrack Pro leverages SwiftUI and HealthKit for seamless Apple ecosystem integration. Features include workout templates, exercise video guides, progress charts with Charts framework, Apple Watch companion app, and CloudKit sync for multi-device support.',
-        icon: FiHeart,
+        id: 'swift-optical-automation',
+        title: 'Optical Automation',
+        category: 'Web & Mobile Suite',
+        description: 'MERN Stack and SwiftUI application featuring Megamenu navigation, SEO optimized metadata-driven content, SOC2 compliant metatags, and AI-powered insights.',
+        detailedDescription: 'Optical Automation is a comprehensive Web & Mobile Suite built with MERN Stack and SwiftUI. Features include an advanced Megamenu navigation system, SEO optimized pages with metadata-driven content management, SOC2 compliant metatags for enterprise security, and AI-powered insights for enhanced user experience.',
+        icon: FiGlobe,
         color: '#F05138',
-        website: 'https://apps.apple.com/fittrack'
+        website: 'https://opticalautomation.com'
       },
       {
-        id: 'swift-finance',
-        title: 'BudgetWise Finance',
-        category: 'SwiftUI iOS App',
-        description: 'Personal finance manager with expense tracking, budget categories, and investment portfolio monitoring.',
-        detailedDescription: 'BudgetWise brings financial clarity with SwiftUI Charts, Core Data persistence, and secure Face ID/Touch ID authentication. Includes bank account linking via Plaid, recurring transaction detection, spending insights, and goal tracking with visual progress indicators.',
-        icon: FiDollarSign,
+        id: 'swift-mydeskview',
+        title: 'MyDeskView',
+        category: 'Desktop Productivity Suite',
+        description: 'Desktop Productivity Suite integrating MyDeskView, MyPersonalOrganizer, MyBusinessOrganizer, DIY Solutions, MyDeskView - 2026 Places, and MyDeskView - YouTube with assignable movies for fast menu access.',
+        detailedDescription: 'MyDeskView is a comprehensive Desktop Productivity Suite featuring multiple integrated applications: MyPersonalOrganizer for personal task management, MyBusinessOrganizer for professional workflows, DIY Solutions for home projects, MyDeskView - 2026 Places for location tracking, and MyDeskView - YouTube integration with assignable movies for fast menu access.',
+        icon: FiMonitor,
+        color: '#FA7343',
+        website: 'https://mydeskview.com'
+      },
+      {
+        id: 'swift-technology-times',
+        title: 'Technology And Times',
+        category: 'Web & Mobile Suite',
+        description: 'Comprehensive technology portal covering Technology, Computers, Homes, Automobiles, Corporations, and Government with videos and photo galleries.',
+        detailedDescription: 'Technology And Times delivers today\'s technology and everything accessible on the internet. Covers Technology, Computers, Homes, Automobiles, Corporations, and Government sectors with rich video content, photo galleries, and in-depth articles in a full Web & Mobile Suite experience.',
+        icon: FiCpu,
         color: '#10B981',
-        website: 'https://apps.apple.com/budgetwise'
+        website: 'https://technologyandtimes.com'
       },
       {
-        id: 'swift-recipes',
-        title: 'ChefMate Recipes',
-        category: 'SwiftUI iOS App',
-        description: 'Recipe discovery and meal planning app with shopping lists, nutrition info, and step-by-step cooking mode.',
-        detailedDescription: 'ChefMate offers a beautiful recipe browsing experience with SwiftUI animations and transitions. Features recipe search by ingredients, dietary filters, meal planning calendar, auto-generated shopping lists, and a distraction-free cooking mode with voice commands via SiriKit.',
-        icon: FiHome,
-        color: '#F59E0B',
-        website: 'https://apps.apple.com/chefmate'
-      },
-      {
-        id: 'swift-notes',
-        title: 'ThoughtSpace Notes',
-        category: 'SwiftUI iOS/macOS App',
-        description: 'Universal note-taking app with markdown support, folder organization, and seamless iCloud synchronization.',
-        detailedDescription: 'ThoughtSpace is a cross-platform notes app for iPhone, iPad, and Mac built with SwiftUI and ShareExtension. Supports rich text with markdown rendering, nested folders, tags, search with spotlight integration, and end-to-end encrypted sync via CloudKit.',
+        id: 'swift-america-today',
+        title: 'AmericaToday250',
+        category: 'Web & Mobile Suite',
+        description: 'American history from George Washington arranged in decades, featuring colonial America, state acquisitions, all presidents, and current government officials.',
+        detailedDescription: 'AmericaToday250 chronicles American history from George Washington to present day, organized by decades with colonial America and state acquisitions. Comprehensive appendix includes all presidents, current Executive Branch, official logos, State Governors, and House and Congress officials.',
         icon: FiBook,
-        color: '#8B5CF6',
-        website: 'https://apps.apple.com/thoughtspace'
+        color: '#DC2626',
+        website: 'https://americatoday250.com'
       },
       {
-        id: 'swift-weather',
-        title: 'SkyView Weather',
-        category: 'SwiftUI iOS App',
-        description: 'Beautiful weather app with animated conditions, hourly/10-day forecasts, and severe weather alerts.',
-        detailedDescription: 'SkyView delivers weather information through stunning SwiftUI animations that reflect current conditions. Integrates with WeatherKit for accurate forecasts, provides location-based alerts, includes widgets with multiple sizes, and a watchOS companion for quick glances.',
-        icon: FiCloud,
-        color: '#0EA5E9',
-        website: 'https://apps.apple.com/skyview'
-      },
-      {
-        id: 'swift-meditation',
-        title: 'ZenMind Meditation',
-        category: 'SwiftUI iOS App',
-        description: 'Guided meditation app with breathing exercises, sleep stories, and mindfulness tracking.',
-        detailedDescription: 'ZenMind promotes mental wellness with beautifully animated breathing guides, curated meditation sessions, ambient soundscapes, and Apple Health integration for mindfulness minutes tracking. Includes widgets, shortcuts, and Focus mode integration.',
-        icon: FiZap,
-        color: '#A855F7',
-        website: 'https://apps.apple.com/zenmind'
+        id: 'swift-corvette-quiz',
+        title: 'CorvetteQuiz',
+        category: 'SwiftUI Mobile App',
+        description: 'Interactive quiz application testing knowledge of Corvette history, models, and specifications.',
+        detailedDescription: 'CorvetteQuiz is a native SwiftUI mobile application featuring an engaging quiz experience for Corvette enthusiasts. Test your knowledge of Corvette history, model generations, specifications, and trivia with beautiful animations and achievement tracking.',
+        icon: FiAward,
+        color: '#EF4444',
+        website: 'https://corvettequiz.com'
       }
     ]
   },
@@ -251,34 +232,14 @@ const tabCategories = [
     color: 'linear-gradient(135deg, #61DAFB 0%, #0070F3 100%)',
     projects: [
       {
-        id: 'rn-ecommerce',
-        title: 'Mobile Commerce App',
-        category: 'React Native iOS/Android App',
-        description: 'Native mobile shopping experience with cross-platform performance, optimized for both iOS and Android.',
-        detailedDescription: 'This React Native application delivers a high-performance shopping experience with native-like UI components. It features a robust state management system, offline support for browsing, and integration with native device features like biometric authentication and push notifications.',
-        icon: FiShoppingCart,
-        color: '#61DAFB',
-        website: 'https://example-rn-ecommerce.com'
-      },
-      {
-        id: 'rn-health',
-        title: 'Pulse Health Tracker',
-        category: 'React Native iOS/Android App',
-        description: 'Health and wellness tracking application with real-time health data visualization and native health kit integration.',
-        detailedDescription: 'Pulse provides users with a comprehensive view of their wellness by integrating with Apple HealthKit and Google Fit. The app uses React Native\'s bridge to access native health APIs while maintaining a single codebase for both platforms.',
-        icon: FiHeart,
-        color: '#E91E63',
-        website: 'https://example-rn-health.com'
-      },
-      {
-        id: 'rn-rideshare',
-        title: 'RideShare Connect',
-        category: 'React Native iOS/Android App',
-        description: 'Location-based ride sharing platform with real-time mapping, driver tracking, and secure payment processing.',
-        detailedDescription: 'RideShare Connect leverages advanced mapping libraries for sub-second location updates. It includes a sophisticated dispatching algorithm, in-app messaging between drivers and riders, and a secure payment portal supporting major digital wallets.',
-        icon: FiMapPin,
-        color: '#10B981',
-        website: 'https://example-rn-rideshare.com'
+        id: 'android-corvette-quiz',
+        title: 'CorvetteQuiz',
+        category: 'Android Mobile App',
+        description: 'Interactive quiz application testing knowledge of Corvette history, models, and specifications.',
+        detailedDescription: 'CorvetteQuiz is a native Android application featuring an engaging quiz experience for Corvette enthusiasts. Test your knowledge of Corvette history, model generations, specifications, and trivia with beautiful animations and achievement tracking.',
+        icon: FiAward,
+        color: '#EF4444',
+        website: 'https://corvettequiz.com'
       }
     ]
   },
@@ -288,36 +249,6 @@ const tabCategories = [
     icon: FiTerminal,
     color: 'linear-gradient(135deg, #3776AB 0%, #FFD43B 100%)',
     projects: [
-      {
-        id: 'python-ai',
-        title: 'DataInsight AI',
-        category: 'Python AI/ML Solution',
-        description: 'Advanced machine learning platform for predictive analytics and automated data processing using Python and TensorFlow.',
-        detailedDescription: 'DataInsight AI processes massive datasets to provide actionable business predictions. Built with Python, it utilizes Spark for data processing and PyTorch for model training, delivering 98% accuracy in market trend forecasting.',
-        icon: FiPieChart,
-        color: '#3776AB',
-        website: 'https://example-python-ai.com'
-      },
-      {
-        id: 'python-automation',
-        title: 'Automation Engine',
-        category: 'Python Automation Tool',
-        description: 'Enterprise workflow automation suite designed to streamline repetitive tasks and improve operational efficiency.',
-        detailedDescription: 'This Python-based automation engine integrates with legacy systems and modern APIs to automate complex workflows. It features a visual task builder, scheduled executions, and comprehensive logging for auditing and compliance.',
-        icon: FiZap,
-        color: '#F59E0B',
-        website: 'https://example-python-automation.com'
-      },
-      {
-        id: 'python-api',
-        title: 'Backend API Pro',
-        category: 'Python Backend Service',
-        description: 'High-performance RESTful API service built with FastAPI, providing sub-millisecond response times for global applications.',
-        detailedDescription: 'Backend API Pro is an enterprise-grade service designed for extreme scalability. It utilizes FastAPI and PostgreSQL with Redis caching to handle millions of requests daily, supporting core services for multiple frontend platforms.',
-        icon: FiServer,
-        color: '#14B8A6',
-        website: 'https://example-python-api.com'
-      }
     ]
   }
 ];
