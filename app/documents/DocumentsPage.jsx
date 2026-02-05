@@ -686,6 +686,10 @@ export default function DocumentsPage() {
                                 <DocumentDescription>{doc.description}</DocumentDescription>
                                 <DocumentActions>
                                     <ActionButton
+                                        as="a"
+                                        href={doc.isRequest ? undefined : "https://documenthubaws.netlify.app/"}
+                                        target={doc.isRequest ? undefined : "_blank"}
+                                        rel={doc.isRequest ? undefined : "noopener noreferrer"}
                                         onClick={() => {
                                             if (doc.isRequest) {
                                                 window.location.href = `/ support ? subject = Document Request: ${doc.title} #contact`;
@@ -702,7 +706,13 @@ export default function DocumentsPage() {
                                             <FiMail /> Request via Email
                                         </ActionButton>
                                     ) : (
-                                        <ActionButton $primary>
+                                        <ActionButton
+                                            $primary
+                                            as="a"
+                                            href="https://documenthubaws.netlify.app/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
                                             <FiDownload /> Download
                                         </ActionButton>
                                     )}

@@ -262,18 +262,17 @@ const products = [
         features: ['Project Tracking', 'File Sharing', 'Real-time Chat', 'Invoice Management']
     },
     {
-        name: 'Documentation Hub',
-        url: 'docs.opticalautomation.com',
-        description: 'Technical documentation, API references, and development guides.',
+        name: 'DocumentHub',
+        url: 'documenthubaws.netlify.app',
+        description: 'AWS-powered document management system for viewing and accessing PDF documents.',
         color: '#F59E0B',
-        active: false,
-        status: 'pending',
-        features: ['API Docs', 'Tutorials', 'Code Examples', 'Version History']
+        active: true,
+        features: ['PDF Viewer', 'AWS Storage', 'Document Search', 'Quick Access']
     },
 
     {
-        name: 'Learning Platform',
-        url: 'learn.opticalautomation.com',
+        name: 'LearnSkills365',
+        url: 'www.LearnSkills365.com',
         description: 'Educational resources, courses, and tutorials for web development.',
         color: '#06B6D4',
         active: true,
@@ -281,11 +280,10 @@ const products = [
     },
     {
         name: 'DollarDimeStore',
-        url: 'dollardimestore.com',
+        url: 'www.dollardimestore.com',
         description: 'eCommerce platform offering affordable products and deals for everyday needs.',
         color: '#22C55E',
-        active: false,
-        status: 'pending',
+        active: true,
         features: ['Product Catalog', 'Shopping Cart', 'Secure Checkout', 'Order Tracking']
     }
 ];

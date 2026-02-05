@@ -223,6 +223,13 @@
             "desc": "Dashboard Information"
           },
           {
+            "href": "https://documenthubaws.netlify.app/",
+            "label": "DocumentHub",
+            "icon": "FiFileText",
+            "desc": "AWS Document Viewer",
+            "external": true
+          },
+          {
             "href": "/products",
             "label": "Web Apps",
             "icon": "FiCode",

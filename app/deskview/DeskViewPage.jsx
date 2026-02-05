@@ -16,7 +16,12 @@ import {
     FiUser,
     FiDatabase,
     FiBriefcase,
-    FiLayers
+    FiLayers,
+    FiTool,
+    FiCalendar,
+    FiMonitor,
+    FiMapPin,
+    FiImage
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -112,10 +117,10 @@ text-align: left;
 const SoftwareGrid = styled.div`
 display: grid;
 grid-template-columns: repeat(3, 1fr);
-gap: ${({ theme }) => theme.spacing.md};
+gap: ${({ theme }) => theme.spacing.lg};
 margin: ${({ theme }) => theme.spacing.xl} auto;
-max-width: 800px;
-text-align: left;
+max-width: 900px;
+justify-content: center;
 
 @media(max-width: 900px) {
     grid-template-columns: repeat(2, 1fr);
@@ -124,7 +129,7 @@ text-align: left;
 
 @media(max-width: 600px) {
     grid-template-columns: 1fr;
-    max-width: 300px;
+    max-width: 350px;
 }
 `;
 
@@ -209,6 +214,12 @@ border: 1px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0
 border-radius: ${({ theme }) => theme.borderRadius.lg};
 padding: ${({ theme }) => theme.spacing.md};
 margin-bottom: ${({ theme }) => theme.spacing.lg};
+transition: all 0.3s ease;
+
+&:hover {
+    border: 3px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.7)' : 'rgba(59, 130, 246, 0.5)'};
+    background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.25)' : 'rgba(59, 130, 246, 0.1)'};
+}
 `;
 
 const CategoryItemsList = styled.div`
@@ -461,44 +472,124 @@ const products = [
         status: 'pending',
         features: ['Video Library', 'Quick Access Menu', 'Playlist Management', 'Watch History'],
         icon: FiExternalLink
+    },
+    {
+        name: 'DIY Solutions',
+        url: 'www.DIYSolutions.com',
+        description: 'Do-it-yourself solutions and projects for home improvement and creative endeavors.',
+        color: '#F59E0B',
+        active: false,
+        status: 'pending',
+        features: ['Project Guides', 'Tool Lists', 'Step-by-Step Instructions', 'Material Calculators'],
+        icon: FiTool
+    },
+    {
+        name: 'MyDateBook',
+        url: 'www.MyDateBook.com',
+        description: 'Personal date and event management with calendar integration and reminders.',
+        color: '#8B5CF6',
+        active: false,
+        status: 'pending',
+        features: ['Event Calendar', 'Reminders', 'Date Tracking', 'Anniversary Alerts'],
+        icon: FiCalendar
+    },
+    {
+        name: 'MyDeskView',
+        url: 'www.MyDeskView.com',
+        description: 'Central desktop productivity suite for managing all your applications and tasks.',
+        color: '#3B82F6',
+        active: false,
+        status: 'pending',
+        features: ['App Integration', 'Task Management', 'Quick Launch', 'Customizable Dashboard'],
+        icon: FiMonitor
+    },
+    {
+        name: 'MyDeskView - 2026 Places',
+        url: 'places.mydeskview.com',
+        description: 'Location tracking and management for your favorite places and destinations.',
+        color: '#10B981',
+        active: false,
+        status: 'pending',
+        features: ['Location Bookmarks', 'Travel Planning', 'Map Integration', 'Place Reviews'],
+        icon: FiMapPin
+    },
+    {
+        name: 'MyDeskView - PhotoAlbums',
+        url: 'photos.mydeskview.com',
+        description: 'Photo organization and album management for your digital memories.',
+        color: '#EC4899',
+        active: false,
+        status: 'pending',
+        features: ['Album Creation', 'Photo Organization', 'Sharing Options', 'Memory Timeline'],
+        icon: FiImage
     }
 ];
 
 const integratedSoftware = {
     'Business & Finance': [
+        'AccessMoney',
+        'AI Trading',
+        'AppointmentBook',
         'BistroRestaurant',
         'BusinessTracker',
         'CreativeTracker',
         'DollarDimeStore',
+        'EmployDirectory',
+        'EmployeeHandBook',
+        'GasolineFinder',
         'InvestmentTracker',
         'RealEstatePortal'
     ],
     'Education & Learning': [
+        'Animals',
+        'GrammyHistory',
+        'GuitarBranded',
+        'InventorsBio',
         'LearnSkills365.com',
-        'Quiz System'
+        'MusiciansHallOfFame',
+        'MyGreatRecipes',
+        'NationalParks',
+        'NewsChannels',
+        'NinePlanets',
+        'Quiz System',
+        'SportsTracker'
     ],
     'Entertainment & Leisure': [
         'A Snowy Christmas',
+        'Apple M Processors',
+        'Biographies',
+        'CarShow YouTube',
+        'CoolJimmy',
         'CorvetteQuiz',
-        'GoodDayMusic',
-        'GuitarBranded',
-        'SportsTracker'
+        'CruiseFinder',
+        'GoodDayMusic'
     ],
     'Personal Productivity': [
+        'DIY Solutions',
+        'MyBusinessOrganizer',
         'MyDateBook',
-        'Photo Albums',
-        'RecipeLists',
-        'TaskManager',
-        'Teleprompter'
+        'MyDeskView',
+        'MyDeskView - 2026 Places',
+        'MyDeskView - YouTube',
+        'MyPersonalOrganizer',
+        'Photo Albums'
     ],
     'Communication & Social': [
         'Hi5',
         'MyTelephoneBook',
-        'TechnologyAndTimes'
+        'RecipeLists',
+        'TaskManager',
+        'TechnologyAndTimes',
+        'Teleprompter'
     ],
     'Health': [
+        'Disease Tracker',
         'Fitness Tracker',
-        'Health Tracker'
+        'GymnasticTracker',
+        'Health Tracker',
+        'HealthAidTracking',
+        'MigraineTinitusTracker',
+        'WalkTracker'
     ]
 };
 
@@ -548,7 +639,7 @@ export default function DeskViewPage() {
                     </DescriptionParagraph>
 
                     <SectionSubtitle style={{ marginTop: '3rem', fontSize: '1.25rem' }}>
-                        The following software titles are integrated and built into each of the MyDeskView Series program:
+                        MyDeskView Series Software Integrates These
                     </SectionSubtitle>
 
                     <SoftwareGrid>

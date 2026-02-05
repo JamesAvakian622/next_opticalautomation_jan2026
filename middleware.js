@@ -24,7 +24,15 @@ const publicRoutes = [
     '/trademarks',
     '/forgot-password',
     '/opauto.ico',
-    '/opauto.png'
+    '/opauto.png',
+    '/learnSkills365',
+    '/deskview',
+    '/learning',
+    '/glossary',
+    '/product-videos',
+    '/features',
+    '/timeline',
+    '/questions'
 ];
 
 function isPublicRoute(pathname) {

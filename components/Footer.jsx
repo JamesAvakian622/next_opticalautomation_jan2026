@@ -275,6 +275,7 @@ const technologyLinks = [
 
 const productsLinks = [
   { href: '/deskview', label: 'MyDeskView' },
+  { href: 'https://documenthubaws.netlify.app/', label: 'DocumentHub', external: true },
   { href: '/products', label: 'E-Commerce' },
   { href: '/products', label: 'Automotive' },
   { href: '/products', label: 'Business' },
@@ -357,7 +358,11 @@ export default function Footer() {
             <FooterLinks>
               {productsLinks.map((link) => (
                 <FooterLinkItem key={link.label}>
-                  <FooterLink href={link.href}>{link.label}</FooterLink>
+                  {link.external ? (
+                    <ExternalFooterLink href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</ExternalFooterLink>
+                  ) : (
+                    <FooterLink href={link.href}>{link.label}</FooterLink>
+                  )}
                 </FooterLinkItem>
               ))}
             </FooterLinks>

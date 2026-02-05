@@ -148,6 +148,12 @@ const CategoryGroup = styled.div`
     border-radius: ${({ theme }) => theme.borderRadius.lg};
     padding: ${({ theme }) => theme.spacing.md};
     margin-bottom: ${({ theme }) => theme.spacing.lg};
+    transition: all 0.3s ease;
+
+    &:hover {
+        border: 3px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.7)' : 'rgba(59, 130, 246, 0.5)'};
+        background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.25)' : 'rgba(59, 130, 246, 0.1)'};
+    }
 `;
 
 const CategoryTitle = styled.h4`
@@ -234,39 +240,69 @@ const activities = [
 
 const integratedSoftware = {
     'Business & Finance': [
+        'AccessMoney',
+        'AI Trading',
+        'AppointmentBook',
         'BistroRestaurant',
         'BusinessTracker',
         'CreativeTracker',
         'DollarDimeStore',
+        'EmployDirectory',
+        'EmployeeHandBook',
+        'GasolineFinder',
         'InvestmentTracker',
         'RealEstatePortal'
     ],
     'Education & Learning': [
+        'Animals',
+        'GrammyHistory',
+        'GuitarBranded',
+        'InventorsBio',
         'LearnSkills365.com',
-        'Quiz System'
+        'MusiciansHallOfFame',
+        'MyGreatRecipes',
+        'NationalParks',
+        'NewsChannels',
+        'NinePlanets',
+        'Quiz System',
+        'SportsTracker'
     ],
     'Entertainment & Leisure': [
         'A Snowy Christmas',
+        'Apple M Processors',
+        'Biographies',
+        'CarShow YouTube',
+        'CoolJimmy',
         'CorvetteQuiz',
-        'GoodDayMusic',
-        'GuitarBranded',
-        'SportsTracker'
+        'CruiseFinder',
+        'GoodDayMusic'
     ],
     'Personal Productivity': [
+        'DIY Solutions',
+        'MyBusinessOrganizer',
         'MyDateBook',
-        'Photo Albums',
-        'RecipeLists',
-        'TaskManager',
-        'Teleprompter'
+        'MyDeskView',
+        'MyDeskView - 2026 Places',
+        'MyDeskView - YouTube',
+        'MyPersonalOrganizer',
+        'Photo Albums'
     ],
     'Communication & Social': [
         'Hi5',
         'MyTelephoneBook',
-        'TechnologyAndTimes'
+        'RecipeLists',
+        'TaskManager',
+        'TechnologyAndTimes',
+        'Teleprompter'
     ],
     'Health': [
+        'Disease Tracker',
         'Fitness Tracker',
-        'Health Tracker'
+        'GymnasticTracker',
+        'Health Tracker',
+        'HealthAidTracking',
+        'MigraineTinitusTracker',
+        'WalkTracker'
     ]
 };
 
