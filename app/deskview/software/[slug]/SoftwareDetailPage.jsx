@@ -150,12 +150,19 @@ const VisitButton = styled.a`
     border-radius: ${({ theme }) => theme.borderRadius.md};
     font-weight: 500;
     transition: all 0.2s ease;
-    margin-top: ${({ theme }) => theme.spacing.xl};
 
     &:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 20px ${({ theme }) => theme.colors.shadow};
     }
+`;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: ${({ theme }) => theme.spacing.md};
+    margin-top: ${({ theme }) => theme.spacing.xl};
+    flex-wrap: wrap;
 `;
 
 export default function SoftwareDetailPage({ slug }) {
@@ -224,13 +231,22 @@ export default function SoftwareDetailPage({ slug }) {
                         ))}
                     </FeaturesList>
 
-                    <VisitButton
-                        href="https://mydeskview.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Visit MyDeskView.com <FiExternalLink />
-                    </VisitButton>
+                    <ButtonContainer>
+                        <VisitButton
+                            href="https://mydeskview.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Visit MyDeskView.com <FiExternalLink />
+                        </VisitButton>
+                        <VisitButton
+                            href="http://www.GoodDayMusic.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            GoodDayMusic.com <FiExternalLink />
+                        </VisitButton>
+                    </ButtonContainer>
                 </ContentSection>
             </Container>
         </PageWrapper>
