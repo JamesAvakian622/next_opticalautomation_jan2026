@@ -498,7 +498,7 @@ const PageWrapper = styled.div`
 `;
 
 const HeroSection = styled.section`
-  padding: 180px ${({ theme }) => theme.spacing.lg} ${({ theme }) => theme.spacing.xxl};
+  padding: 120px ${({ theme }) => theme.spacing.lg} ${({ theme }) => theme.spacing.xxl};
   background: ${({ theme }) => theme.colors.gradient};
   text-align: center;
   position: relative;
@@ -517,7 +517,7 @@ const HeroSection = styled.section`
   }
 
   @media (max-width: 768px) {
-    padding: 140px ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+    padding: 100px ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
   }
 `;
 
@@ -1035,7 +1035,7 @@ export default function PortfolioPage() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: 'Portfolio | Optical Automation',
-    description: 'Explore our portfolio of web development projects including e-commerce, dashboards, and enterprise applications.',
+    description: 'Explore our portfolio of web development projects including eCommerce, dashboards, and enterprise applications.',
     url: 'https://opticalautomation.com/portfolio',
     mainEntity: {
       '@type': 'ItemList',
@@ -1092,7 +1092,7 @@ export default function PortfolioPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             Explore our latest projects showcasing innovative web solutions,
-            from Search Engine Optimized, e-commerce platforms to enterprise information technology applications.
+            from Search Engine Optimized, eCommerce platforms to enterprise information technology applications.
           </Subtitle>
         </HeroContent>
       </HeroSection>

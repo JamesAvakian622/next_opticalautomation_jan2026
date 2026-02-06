@@ -575,12 +575,9 @@ const integratedSoftware = {
     ],
     'Personal Productivity': [
         'DIY Solutions',
-        'MyBusinessOrganizer',
-        'MyDateBook',
-        'MyDeskView',
-        'MyDeskView - 2026 Places',
-        'MyDeskView - YouTube',
-        'MyPersonalOrganizer',
+        'DrivingRoute',
+        'Weather',
+        'AirlineTracker',
         'Photo Albums'
     ],
     'Communication & Social': [
