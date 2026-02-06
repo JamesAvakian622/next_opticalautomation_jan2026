@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -101,24 +101,12 @@ const ContinueButton = styled(motion.button)`
 
 export default function SplashScreen() {
     const [isVisible, setIsVisible] = useState(true);
-    const [hasCheckedStorage, setHasCheckedStorage] = useState(false);
-
-    useEffect(() => {
-        // Check if user has already seen the splash screen in this session
-        const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
-        if (hasSeenSplash) {
-            setIsVisible(false);
-        }
-        setHasCheckedStorage(true);
-    }, []);
 
     const handleContinue = () => {
-        sessionStorage.setItem('hasSeenSplash', 'true');
         setIsVisible(false);
     };
 
-    // Don't render anything until we've checked storage to prevent flash
-    if (!hasCheckedStorage) {
+    if (!isVisible) {
         return null;
     }
 
