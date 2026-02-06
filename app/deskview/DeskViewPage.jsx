@@ -637,7 +637,10 @@ const integratedSoftware = {
         'CoolJimmy',
         'CorvetteQuiz',
         'CruiseFinder',
-        'GoodDayMusic'
+        'GoodDayMusic',
+        'GrammyTracker',
+        'OlympicsTracker',
+        'OscarTracker'
     ],
     'Personal Productivity': [
         'DIY Solutions',

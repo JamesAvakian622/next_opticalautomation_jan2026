@@ -158,12 +158,14 @@ const siteMapData = [
         ]
     },
     {
-        title: 'User Account',
-        icon: FiUser,
+        title: 'Products',
+        icon: FiGlobe,
         links: [
-            { href: '/login', label: 'Login / Register', icon: FiUser },
-            { href: '/profile', label: 'User Profile', icon: FiUser },
-            { href: '/favorites', label: 'My Favorites', icon: FiHeart }
+            { href: '/deskview', label: 'MyDeskView', icon: FiGlobe },
+            { href: '/products', label: 'All Products', icon: FiGlobe },
+            { href: '/pricing', label: 'Pricing', icon: FiGlobe },
+            { href: '/subscription', label: 'Subscription Access', icon: FiGlobe },
+            { href: '/business-pricing', label: 'Business Licensing', icon: FiGlobe }
         ]
     },
     {
@@ -196,14 +198,12 @@ const siteMapData = [
         ]
     },
     {
-        title: 'Products',
-        icon: FiGlobe,
+        title: 'User Account',
+        icon: FiUser,
         links: [
-            { href: '/deskview', label: 'MyDeskView', icon: FiGlobe },
-            { href: '/products', label: 'All Products', icon: FiGlobe },
-            { href: '/pricing', label: 'Pricing', icon: FiGlobe },
-            { href: '/subscription', label: 'Subscription Access', icon: FiGlobe },
-            { href: '/business-pricing', label: 'Business Licensing', icon: FiGlobe }
+            { href: '/login', label: 'Login / Register', icon: FiUser },
+            { href: '/profile', label: 'User Profile', icon: FiUser },
+            { href: '/favorites', label: 'My Favorites', icon: FiHeart }
         ]
     }
 ];
