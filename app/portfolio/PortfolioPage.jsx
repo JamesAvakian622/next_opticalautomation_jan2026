@@ -1153,7 +1153,7 @@ export default function PortfolioPage() {
                     <TabCardCategory>{project.category}</TabCardCategory>
                     <TabCardDescription>{project.description}</TabCardDescription>
                     <TabCardLink
-                      href={project.website}
+                      href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
                       target="_blank"
                       rel="noopener noreferrer"
                       $color={project.color}

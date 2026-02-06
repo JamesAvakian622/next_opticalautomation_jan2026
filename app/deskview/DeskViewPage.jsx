@@ -795,7 +795,7 @@ export default function DeskViewPage() {
                             </FeaturesList>
                             {products[0].active && (
                                 <VisitLink
-                                    href={`https://${products[0].url}`}
+                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -856,7 +856,7 @@ export default function DeskViewPage() {
                             </FeaturesList>
                             {products[1].active && (
                                 <VisitLink
-                                    href={`https://${products[1].url}`}
+                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -895,7 +895,7 @@ export default function DeskViewPage() {
                             </FeaturesList>
                             {products[2].active && (
                                 <VisitLink
-                                    href={`https://${products[2].url}`}
+                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -946,7 +946,7 @@ export default function DeskViewPage() {
                             </FeaturesList>
                             {product.active && (
                                 <VisitLink
-                                    href={`https://${product.url}`}
+                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >

@@ -473,7 +473,7 @@ export default function ProductsPage() {
                             </FeaturesList>
                             {product.active && (
                                 <VisitLink
-                                    href={`https://${product.url}`}
+                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >

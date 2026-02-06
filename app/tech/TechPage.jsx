@@ -891,23 +891,6 @@ export default function TechPage() {
             </ServicesGrid>
           </ServicesSection>
 
-          <SoftwareSection>
-            <SoftwareSectionTitle>MyDeskView Series Software Integration</SoftwareSectionTitle>
-            <SoftwareGrid>
-              {Object.entries(integratedSoftware).map(([category, items]) => (
-                <SoftwareCategoryGroup key={category}>
-                  <SoftwareCategoryTitle>{category}</SoftwareCategoryTitle>
-                  <SoftwareItemsList>
-                    {items.map((title) => (
-                      <SoftwareItemEntry key={title}>
-                        <FiCheck /> {title}
-                      </SoftwareItemEntry>
-                    ))}
-                  </SoftwareItemsList>
-                </SoftwareCategoryGroup>
-              ))}
-            </SoftwareGrid>
-          </SoftwareSection>
 
         </Container>
       </ContentSection>

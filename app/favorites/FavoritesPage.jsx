@@ -313,7 +313,7 @@ export default function FavoritesPage() {
                                     </ActionLink>
                                     {item.website && (
                                         <ActionLink
-                                            href={item.website}
+                                            href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
