@@ -1170,7 +1170,7 @@ export default function PortfolioPage() {
 
       <SoftwareSection>
         <Container>
-          <SoftwareSectionTitle>MyDeskView Series Software Integrates These</SoftwareSectionTitle>
+          <SoftwareSectionTitle>MyDeskView Series Software Integration</SoftwareSectionTitle>
           <SoftwareGrid>
             {Object.entries(integratedSoftware).map(([category, items]) => (
               <SoftwareCategoryGroup key={category}>

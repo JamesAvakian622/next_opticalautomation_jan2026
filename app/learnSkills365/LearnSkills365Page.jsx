@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import {
     FiCheckSquare,
-    FiBrain,
+    FiCpu,
     FiBookOpen,
-    FiKeyboard,
+    FiType,
     FiCircle,
     FiAward,
     FiHash,
@@ -205,7 +205,7 @@ const activities = [
         id: 'memory',
         title: 'Memory',
         description: 'Memory enhancement games designed to improve retention and cognitive recall abilities.',
-        icon: FiBrain,
+        icon: FiCpu,
         color: '#F59E0B'
     },
     {
@@ -219,7 +219,7 @@ const activities = [
         id: 'typing',
         title: 'Typing',
         description: 'Typing practice to improve your speed and accuracy with progressive lessons.',
-        icon: FiKeyboard,
+        icon: FiType,
         color: '#EC4899'
     },
     {

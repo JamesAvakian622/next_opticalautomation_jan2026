@@ -2,6 +2,7 @@
   "portfolio": {
     "title": "Portfolio",
     "icon": "FiGrid",
+    "directLink": "/portfolio",
     "sections": [
       {
         "title": "Technologies",

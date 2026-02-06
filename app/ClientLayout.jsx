@@ -10,6 +10,7 @@ import Footer from '@/components/Footer';
 import JsonLd from '@/components/JsonLd';
 import CookieConsent from '@/components/CookieConsent';
 import PageLogger from '@/components/PageLogger';
+import SplashScreen from '@/components/SplashScreen';
 import { FavoritesProvider } from '@/contexts/FavoritesContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 
@@ -21,6 +22,7 @@ export default function ClientLayout({ children }) {
                     <FavoritesProvider>
                         <ThemeProvider>
                             <GlobalStyles />
+                            <SplashScreen />
                             <PageLogger />
                             <JsonLd type="organization" />
                             <JsonLd type="website" />

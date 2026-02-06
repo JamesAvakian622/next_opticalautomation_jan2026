@@ -629,12 +629,51 @@ export default function DeskViewPage() {
                     <Subtitle>
                         Dashboard Information and Website System
                     </Subtitle>
+
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        margin: '2rem 0',
+                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                        width: '100%',
+                        maxWidth: '1200px'
+                    }}>
+                        <Image
+                            src="/mypersonalorganizer_dashboard.png"
+                            alt="MyDeskView Dashboard Screenshot"
+                            width={1200}
+                            height={700}
+                            style={{
+                                display: 'block',
+                                objectFit: 'contain',
+                                borderRadius: '12px',
+                                width: '100%',
+                                height: 'auto'
+                            }}
+                        />
+                    </div>
                 </HeroSection>
 
                 <IntroSection initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
 
-                    <SectionSubtitle>
-                        MyDeskView Series Software Integrates These
+                    <SectionSubtitle style={{ fontSize: '2.5rem' }}>Your Central Desktop</SectionSubtitle>
+                    <DescriptionParagraph>
+                        MyDeskView serves as your comprehensive dashboard for managing all aspects of your daily workflow. This powerful application brings together your most important information, tasks, and tools in one centralized location, allowing you to maintain focus and productivity throughout your day. With its intuitive interface and customizable widgets, you can tailor your workspace to match your unique needs and preferences.
+                    </DescriptionParagraph>
+                    <DescriptionParagraph>
+                        The application features real-time updates and notifications, ensuring you never miss important deadlines or appointments. Whether you're tracking project milestones, monitoring team progress, or managing your personal schedule, MyDeskView provides the visibility and control you need to stay on top of everything. The dashboard adapts to your workflow, learning from your usage patterns to surface the most relevant information when you need it most.
+                    </DescriptionParagraph>
+                    <DescriptionParagraph>
+                        Integration capabilities allow MyDeskView to connect with your existing tools and services, creating a seamless ecosystem for your digital workspace. From calendar synchronization to task management integration, the platform works harmoniously with the applications you already use. This eliminates the need to switch between multiple windows and applications, streamlining your workflow and reducing context-switching overhead.
+                    </DescriptionParagraph>
+                    <DescriptionParagraph>
+                        Built with performance and reliability in mind, MyDeskView ensures your data is always accessible and secure. The application employs industry-standard encryption and follows best practices for data protection, giving you peace of mind while you focus on what matters most. Whether you're working from the office, home, or on the go, MyDeskView provides a consistent and reliable experience across all your devices.
+                    </DescriptionParagraph>
+
+                    <SectionSubtitle style={{ marginTop: '3rem', fontSize: '2.5rem' }}>
+                        MyDeskView Series Software Integration
                     </SectionSubtitle>
 
                     <SoftwareGrid>
@@ -651,20 +690,6 @@ export default function DeskViewPage() {
                             </CategoryGroup>
                         ))}
                     </SoftwareGrid>
-
-                    <SectionSubtitle style={{ marginTop: '3rem' }}>Your Central Desktop</SectionSubtitle>
-                    <DescriptionParagraph>
-                        MyDeskView serves as your comprehensive dashboard for managing all aspects of your daily workflow. This powerful application brings together your most important information, tasks, and tools in one centralized location, allowing you to maintain focus and productivity throughout your day. With its intuitive interface and customizable widgets, you can tailor your workspace to match your unique needs and preferences.
-                    </DescriptionParagraph>
-                    <DescriptionParagraph>
-                        The application features real-time updates and notifications, ensuring you never miss important deadlines or appointments. Whether you're tracking project milestones, monitoring team progress, or managing your personal schedule, MyDeskView provides the visibility and control you need to stay on top of everything. The dashboard adapts to your workflow, learning from your usage patterns to surface the most relevant information when you need it most.
-                    </DescriptionParagraph>
-                    <DescriptionParagraph>
-                        Integration capabilities allow MyDeskView to connect with your existing tools and services, creating a seamless ecosystem for your digital workspace. From calendar synchronization to task management integration, the platform works harmoniously with the applications you already use. This eliminates the need to switch between multiple windows and applications, streamlining your workflow and reducing context-switching overhead.
-                    </DescriptionParagraph>
-                    <DescriptionParagraph>
-                        Built with performance and reliability in mind, MyDeskView ensures your data is always accessible and secure. The application employs industry-standard encryption and follows best practices for data protection, giving you peace of mind while you focus on what matters most. Whether you're working from the office, home, or on the go, MyDeskView provides a consistent and reliable experience across all your devices.
-                    </DescriptionParagraph>
 
                 </IntroSection>
 

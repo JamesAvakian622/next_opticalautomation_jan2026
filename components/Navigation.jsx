@@ -131,7 +131,7 @@ const LogoImage = styled.div`
 `;
 
 const LogoText = styled.span`
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: ${({ theme }) => theme.colors.text};
 
@@ -570,15 +570,25 @@ export default function Navigation() {
                             .filter(([_, menu]) => !menu.isAdminOnly || (isAuthenticated && user?.role === 'admin'))
                             .map(([key, menu]) => (
                                 <NavItem key={key}>
-                                    <NavLink
-                                        onClick={() => toggleMenu(key)}
-                                        $isActive={activeMenu === key}
-                                        $isOpen={activeMenu === key}
-                                    >
-                                        <menu.icon />
-                                        {menu.title}
-                                        <FiChevronDown className="chevron" />
-                                    </NavLink>
+                                    {menu.directLink ? (
+                                        <SimpleNavLink
+                                            href={menu.directLink}
+                                            onClick={() => setActiveMenu(null)}
+                                        >
+                                            <menu.icon />
+                                            {menu.title}
+                                        </SimpleNavLink>
+                                    ) : (
+                                        <NavLink
+                                            onClick={() => toggleMenu(key)}
+                                            $isActive={activeMenu === key}
+                                            $isOpen={activeMenu === key}
+                                        >
+                                            <menu.icon />
+                                            {menu.title}
+                                            <FiChevronDown className="chevron" />
+                                        </NavLink>
+                                    )}
                                 </NavItem>
                             ))}
                     </NavLinks>
