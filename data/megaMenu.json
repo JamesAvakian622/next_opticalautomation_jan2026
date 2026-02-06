@@ -90,6 +90,12 @@
         "title": "Frontend",
         "links": [
           {
+            "href": "/tech#ai",
+            "label": "Agentic AI Development",
+            "icon": "FiCpu",
+            "desc": "System wide development"
+          },
+          {
             "href": "/tech#nextjs",
             "label": "Next.js",
             "icon": "FiCode",
@@ -106,12 +112,6 @@
             "label": "Python",
             "icon": "FiTerminal",
             "desc": "AI & Data solutions"
-          },
-          {
-            "href": "/tech#ai",
-            "label": "AI Agentic Development",
-            "icon": "FiCpu",
-            "desc": "System wide development"
           }
         ]
       },
@@ -271,10 +271,11 @@
             "desc": "Educational learning platform"
           },
           {
-            "href": "/products",
-            "label": "Telecommunications",
+            "href": "https://www.MyTelephoneBook.com",
+            "label": "MyTelephoneBook",
             "icon": "FiPhone",
-            "desc": "communications Information"
+            "desc": "Telecommunications Information",
+            "external": true
           }
         ]
       },
@@ -310,6 +311,47 @@
             "label": "Scheduling",
             "icon": "FiCalendar",
             "desc": "Booking systems"
+          }
+        ]
+      },
+      {
+        "title": "Next.js Products",
+        "links": [
+          {
+            "href": "/products#business-finance",
+            "label": "Business & Finance",
+            "icon": "FiBriefcase",
+            "desc": "AccessMoney, AI Trading, BusinessTracker & more"
+          },
+          {
+            "href": "/products#education-learning",
+            "label": "Education & Learning",
+            "icon": "FiBook",
+            "desc": "LearnSkills365, Quiz System, Animals & more"
+          },
+          {
+            "href": "/products#entertainment-leisure",
+            "label": "Entertainment & Leisure",
+            "icon": "FiMusic",
+            "desc": "GoodDayMusic, CorvetteQuiz, Biographies & more"
+          },
+          {
+            "href": "/products#personal-productivity",
+            "label": "Personal Productivity",
+            "icon": "FiLayout",
+            "desc": "MyDeskView, MyBusinessOrganizer & more"
+          },
+          {
+            "href": "/products#communication-social",
+            "label": "Communication & Social",
+            "icon": "FiMessageCircle",
+            "desc": "MyTelephoneBook, Hi5, Teleprompter & more"
+          },
+          {
+            "href": "/products#health",
+            "label": "Health",
+            "icon": "FiHeart",
+            "desc": "Fitness Tracker, Health Tracker & more"
           }
         ]
       }

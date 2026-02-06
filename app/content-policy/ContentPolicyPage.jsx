@@ -226,7 +226,7 @@ export default function ContentPolicyPage() {
                 >
                     <SectionTitle>8. Reporting Violations</SectionTitle>
                     <Paragraph>
-                        If you encounter content that you believe violates this policy, please report it to us at opticalautomation2025@gmail.com. We take all reports seriously and will investigate promptly.
+                        If you encounter content that you believe violates this policy, please report it to us at Software@OpticalAutomation.com. We take all reports seriously and will investigate promptly.
                     </Paragraph>
                 </Section>
             </Container>

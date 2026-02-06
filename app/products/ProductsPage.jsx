@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -11,7 +11,9 @@ import {
     FiServer,
     FiShield,
     FiZap,
-    FiCheck
+    FiCheck,
+    FiHeart,
+    FiPrinter
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -131,6 +133,66 @@ color: ${({ $active, theme }) =>
 border-radius: ${({ theme }) => theme.borderRadius.full};
 font-size: 0.75rem;
 font-weight: 600;
+`;
+
+const FavoriteButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: ${({ $favorited, theme }) => $favorited ? '#ef4444' : theme.colors.textSecondary};
+  
+  &:hover {
+    background: ${({ theme }) => theme.colors.backgroundAlt};
+    transform: scale(1.1);
+  }
+  
+  svg {
+    font-size: 1.25rem;
+    fill: ${({ $favorited }) => $favorited ? '#ef4444' : 'none'};
+  }
+`;
+
+const HeaderActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const PrintFavoritesButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => theme.colors.gradient};
+  color: white;
+  border: none;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  svg {
+    font-size: 1rem;
+  }
 `;
 
 const ProductName = styled.h3`
@@ -289,6 +351,61 @@ const products = [
 ];
 
 export default function ProductsPage() {
+    const [favorites, setFavorites] = useState([]);
+
+    const toggleFavorite = (productUrl) => {
+        setFavorites(prev =>
+            prev.includes(productUrl)
+                ? prev.filter(url => url !== productUrl)
+                : [...prev, productUrl]
+        );
+    };
+
+    const printFavorites = () => {
+        const favoriteProducts = products.filter(p => favorites.includes(p.url));
+        const printContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>My Favorite Products - Optical Automation</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 40px; color: #333; }
+                    h1 { color: #6366f1; border-bottom: 2px solid #6366f1; padding-bottom: 10px; }
+                    .product { margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 12px; }
+                    .product-name { font-size: 1.5rem; font-weight: bold; color: #6366f1; margin-bottom: 5px; }
+                    .product-url { color: #666; font-size: 0.9rem; margin-bottom: 10px; }
+                    .product-desc { margin-bottom: 15px; line-height: 1.6; }
+                    .features { display: flex; flex-wrap: wrap; gap: 8px; }
+                    .feature { background: #f0f0f0; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; }
+                    .footer { margin-top: 40px; text-align: center; color: #666; font-size: 0.85rem; }
+                </style>
+            </head>
+            <body>
+                <h1>⭐ My Favorite Products</h1>
+                <p>Generated on ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                ${favoriteProducts.map(p => `
+                    <div class="product">
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-url">🌐 ${p.url}</div>
+                        <div class="product-desc">${p.description}</div>
+                        <div class="features">
+                            ${p.features.map(f => `<span class="feature">✓ ${f}</span>`).join('')}
+                        </div>
+                    </div>
+                `).join('')}
+                <div class="footer">
+                    <p>Optical Automation | opticalautomation.com</p>
+                </div>
+            </body>
+            </html>
+        `;
+
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+        printWindow.print();
+    };
+
     return (
         <PageWrapper>
             <Container>
@@ -313,6 +430,12 @@ export default function ProductsPage() {
                     </Subtitle>
                 </HeroSection>
 
+                {favorites.length > 0 && (
+                    <PrintFavoritesButton onClick={printFavorites}>
+                        <FiPrinter /> Print {favorites.length} Favorite{favorites.length > 1 ? 's' : ''} as PDF
+                    </PrintFavoritesButton>
+                )}
+
                 <ProductsGrid>
                     {products.map((product, index) => (
                         <ProductCard
@@ -325,9 +448,18 @@ export default function ProductsPage() {
                                 <ProductIcon $color={product.color}>
                                     <FiGlobe />
                                 </ProductIcon>
-                                <StatusBadge $active={product.active}>
-                                    {product.status === 'pending' ? 'Pending' : (product.active ? 'Active' : 'Coming Soon')}
-                                </StatusBadge>
+                                <HeaderActions>
+                                    <FavoriteButton
+                                        $favorited={favorites.includes(product.url)}
+                                        onClick={() => toggleFavorite(product.url)}
+                                        title={favorites.includes(product.url) ? 'Remove from favorites' : 'Add to favorites'}
+                                    >
+                                        <FiHeart />
+                                    </FavoriteButton>
+                                    <StatusBadge $active={product.active}>
+                                        {product.status === 'pending' ? 'Pending' : (product.active ? 'Active' : 'Coming Soon')}
+                                    </StatusBadge>
+                                </HeaderActions>
                             </ProductHeader>
                             <ProductName>{product.name}</ProductName>
                             <ProductUrl>{product.url}</ProductUrl>
@@ -351,56 +483,6 @@ export default function ProductsPage() {
                         </ProductCard >
                     ))}
                 </ProductsGrid >
-
-                <ServicesSection>
-                    <SectionTitle>Product Services</SectionTitle>
-                    <ServicesGrid>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                        >
-                            <ServiceIcon>
-                                <FiServer />
-                            </ServiceIcon>
-                            <ServiceTitle>Cloud Hosting</ServiceTitle>
-                            <ServiceDesc>High-performance cloud hosting with 99.9% uptime guarantee</ServiceDesc>
-                        </ServiceItem>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                        >
-                            <ServiceIcon>
-                                <FiShield />
-                            </ServiceIcon>
-                            <ServiceTitle>SSL Certificates</ServiceTitle>
-                            <ServiceDesc>Enterprise-grade SSL encryption for all products</ServiceDesc>
-                        </ServiceItem>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                        >
-                            <ServiceIcon>
-                                <FiZap />
-                            </ServiceIcon>
-                            <ServiceTitle>CDN Integration</ServiceTitle>
-                            <ServiceDesc>Global content delivery for lightning-fast load times</ServiceDesc>
-                        </ServiceItem>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
-                        >
-                            <ServiceIcon>
-                                <FiGlobe />
-                            </ServiceIcon>
-                            <ServiceTitle>DNS Management</ServiceTitle>
-                            <ServiceDesc>Advanced DNS configuration and management tools</ServiceDesc>
-                        </ServiceItem>
-                    </ServicesGrid>
-                </ServicesSection>
             </Container >
         </PageWrapper >
     );

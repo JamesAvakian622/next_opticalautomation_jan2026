@@ -405,7 +405,7 @@ export default function PricingPage() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <Image src="/opauto.png" alt="Logo" width={40} height={40} style={{ objectFit: 'contain' }} /> Applications Production
+                        <Image src="/opauto.png" alt="Logo" width={40} height={40} style={{ objectFit: 'contain' }} /> Application Production
                     </Title>
                     <Subtitle>
                         Let us create a profitable software solution for your company.

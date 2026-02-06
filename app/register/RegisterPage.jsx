@@ -282,7 +282,7 @@ export default function RegisterPage() {
                 animate={{ opacity: 1, y: 0 }}
             >
                 <Title>Create Account</Title>
-                <Subtitle>Start your 30-day free trial today</Subtitle>
+                <Subtitle>Start your Per Title 14-day free trial today</Subtitle>
 
                 <Form onSubmit={handleSubmit}>
                     <InputGroup>

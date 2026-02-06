@@ -393,10 +393,10 @@ const subscriptionTiers = [
         name: 'Individual',
         price: 0,
         period: 'Free',
-        description: '30-day free trial access to all software',
+        description: 'Per Title 14-day free trial access to all software',
         features: [
             'Access to all software titles',
-            '30-day free trial',
+            'Per Title 14-day free trial',
             'Web-based applications',
             'Basic support'
         ]
@@ -406,7 +406,7 @@ const subscriptionTiers = [
         name: 'Silver',
         price: 25,
         period: 'per year',
-        description: 'Annual subscription with full access',
+        description: 'Ten software titles, Annual subscription with full access',
         features: [
             'Everything in Individual',
             'Unlimited access after trial',
@@ -418,9 +418,9 @@ const subscriptionTiers = [
     {
         id: 'gold',
         name: 'Gold',
-        price: 35,
+        price: 99,
         period: 'per year',
-        description: 'Premium annual subscription',
+        description: 'All titles, premium annual subscription',
         features: [
             'Everything in Silver',
             'Premium support',
@@ -488,7 +488,7 @@ export default function SubscriptionPage() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.2 }}
                     >
-                        🎉 30-Day Free Trial on All Software
+                        🎉 14-Day Free Trial on All Software
                     </TrialBadge>
                 </Hero>
 

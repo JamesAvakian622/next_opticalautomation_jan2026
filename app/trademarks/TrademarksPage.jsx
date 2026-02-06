@@ -303,7 +303,7 @@ export default function TrademarksPage() {
                 >
                     <SectionTitle>Contact Information</SectionTitle>
                     <Paragraph>
-                        If your proposed use falls outside of these Trademark Guidelines, the use is not permitted unless you seek approval from an appropriate contact within Optical Automation. If you have a question, please contact your legal counsel, Optical Automation business contact, or opticalautomation2025@gmail.com.
+                        If your proposed use falls outside of these Trademark Guidelines, the use is not permitted unless you seek approval from an appropriate contact within Optical Automation. If you have a question, please contact your legal counsel, Optical Automation business contact, or Software@OpticalAutomation.com.
                     </Paragraph>
                 </Section>
             </Container>

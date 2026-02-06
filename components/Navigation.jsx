@@ -131,7 +131,7 @@ const LogoImage = styled.div`
 `;
 
 const LogoText = styled.span`
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: ${({ theme }) => theme.colors.text};
 
@@ -656,6 +656,7 @@ export default function Navigation() {
                                                     onClick={() => setActiveMenu(null)}
                                                     $featured={section.featured}
                                                     $highlight={link.highlight}
+                                                    style={link.image ? { display: 'flex', alignItems: 'flex-start' } : {}}
                                                 >
                                                     <MegaMenuLinkIcon $featured={section.featured}>
                                                         <link.icon />
@@ -666,6 +667,23 @@ export default function Navigation() {
                                                             {link.desc}
                                                         </MegaMenuLinkDesc>
                                                     </MegaMenuLinkContent>
+                                                    {link.image && (
+                                                        <div style={{
+                                                            marginLeft: '16px',
+                                                            borderRadius: '8px',
+                                                            overflow: 'hidden',
+                                                            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                                                            flexShrink: 0
+                                                        }}>
+                                                            <Image
+                                                                src={link.image}
+                                                                alt={link.label}
+                                                                width={200}
+                                                                height={200}
+                                                                style={{ display: 'block', objectFit: 'cover' }}
+                                                            />
+                                                        </div>
+                                                    )}
                                                 </MegaMenuLink>
                                             ))}
                                         </MegaMenuLinks>

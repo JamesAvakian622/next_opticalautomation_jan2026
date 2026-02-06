@@ -163,12 +163,12 @@ export default function TermsPage() {
                 >
                     <SectionTitle>6. Free Trial</SectionTitle>
                     <Paragraph>
-                        All new users receive a 30-day free trial with access to all software applications. The free trial terms are:
+                        All new users receive a Per Title 14-day free trial with access to all software applications. The free trial terms are:
                     </Paragraph>
                     <List>
-                        <li>30-day access to all software titles in our catalog</li>
+                        <li>Per Title 14-day access to all software titles in our catalog</li>
                         <li>No credit card required for the free trial period</li>
-                        <li>Trial automatically expires after 30 days unless a paid subscription is activated</li>
+                        <li>Trial automatically expires after 14 days unless a paid subscription is activated</li>
                         <li>One free trial per user account</li>
                         <li>Full functionality during the trial period with no limitations</li>
                     </List>
@@ -201,7 +201,7 @@ export default function TermsPage() {
                 >
                     <SectionTitle>8. Refund Policy</SectionTitle>
                     <Paragraph>
-                        <strong>All sales are final. All software purchased items are non-refundable according to the Terms Of Usage, Content Policy, and Privacy Policy.</strong> This applies to both individual subscriptions and business licensing purchases. We do not offer refunds, credits, or prorated billing for any subscription or license purchases. Please carefully review your subscription tier, business licensing option, and selected software before completing your purchase. The 30-day free trial period (for individual users) allows you to evaluate our software before committing to a paid subscription.
+                        <strong>All sales are final. All software purchased items are non-refundable according to the Terms Of Usage, Content Policy, and Privacy Policy.</strong> This applies to both individual subscriptions and business licensing purchases. We do not offer refunds, credits, or prorated billing for any subscription or license purchases. Please carefully review your subscription tier, business licensing option, and selected software before completing your purchase. The Per Title 14-day free trial period (for individual users) allows you to evaluate our software before committing to a paid subscription.
                     </Paragraph>
                     <Paragraph>
                         Exceptions may be made at our sole discretion in cases of technical issues that prevent access to purchased services, billing errors, or other extraordinary circumstances.
@@ -248,7 +248,7 @@ export default function TermsPage() {
                 >
                     <SectionTitle>10. Contact Information</SectionTitle>
                     <Paragraph>
-                        If you have any questions about these Terms of Use, please contact us at opticalautomation2025@gmail.com.
+                        If you have any questions about these Terms of Use, please contact us at Software@OpticalAutomation.com.
                     </Paragraph>
                 </Section>
             </Container>

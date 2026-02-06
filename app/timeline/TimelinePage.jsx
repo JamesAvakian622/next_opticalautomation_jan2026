@@ -446,6 +446,74 @@ line - height: 1.8;
 position: relative;
 `;
 
+const StatsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+  position: relative;
+  text-align: left;
+`;
+
+const StatCard = styled(motion.div)`
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 24px;
+  
+  h4 {
+    font-size: 1.1rem;
+    color: #6366f1;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    strong {
+      color: #ec4899;
+    }
+  }
+`;
+
+const StatHighlight = styled.div`
+  text-align: center;
+  margin-top: 40px;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  
+  h3 {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+`;
+
 export default function TimelinePage() {
     const [expandedItem, setExpandedItem] = useState(null);
 
@@ -476,7 +544,7 @@ export default function TimelinePage() {
                                 priority
                             />
                         </LogoWrapper>
-                        Timeline of Internet Software Milestones
+                        Internet Software Timeline
                     </Title>
                     <Subtitle
                         initial={{ opacity: 0, y: -20 }}
@@ -561,6 +629,113 @@ export default function TimelinePage() {
                         each era builds on the last. We're witnessing an unprecedented convergence of AI,
                         cloud computing, and developer tools that's reshaping how we build, deploy, and experience software.
                     </ClosingText>
+
+                    <StatsGrid>
+                        <StatCard
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                        >
+                            <h4>Global Website Statistics</h4>
+                            <ul>
+                                <li><strong>1.98 billion</strong> websites worldwide</li>
+                                <li><strong>7.5 million+</strong> Next.js websites</li>
+                                <li><strong>12 million+</strong> React-based applications</li>
+                                <li><strong>3.2 million+</strong> MERN stack projects</li>
+                                <li><strong>85%</strong> of top sites are SEO optimized</li>
+                            </ul>
+                        </StatCard>
+
+                        <StatCard
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                        >
+                            <h4>Mobile Apps Worldwide</h4>
+                            <ul>
+                                <li><strong>8.93 million</strong> mobile apps globally</li>
+                                <li><strong>2.1 million+</strong> iOS App Store apps</li>
+                                <li><strong>3.5 million+</strong> Google Play apps</li>
+                                <li><strong>850,000+</strong> SwiftUI-based apps</li>
+                                <li><strong>1.2 million+</strong> React Native apps</li>
+                            </ul>
+                        </StatCard>
+
+                        <StatCard
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                        >
+                            <h4>Developers Worldwide</h4>
+                            <ul>
+                                <li><strong>28.7 million</strong> developers globally</li>
+                                <li><strong>17.4 million</strong> JavaScript developers</li>
+                                <li><strong>8.5 million</strong> Python developers</li>
+                                <li><strong>4.2 million</strong> Swift/iOS developers</li>
+                                <li><strong>6.1 million</strong> full-stack developers</li>
+                            </ul>
+                        </StatCard>
+
+                        <StatCard
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4 }}
+                        >
+                            <h4>Compliance Standards</h4>
+                            <ul>
+                                <li><strong>SOC2</strong> — 45,000+ certified companies</li>
+                                <li><strong>ISO 8601</strong> — Universal date/time standard</li>
+                                <li><strong>GDPR</strong> — 1.2 million+ compliant sites</li>
+                                <li><strong>WCAG</strong> — Growing accessibility adoption</li>
+                                <li><strong>PCI DSS</strong> — E-commerce security standard</li>
+                            </ul>
+                        </StatCard>
+
+                        <StatCard
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.5 }}
+                        >
+                            <h4>Internet Users by Continent</h4>
+                            <ul>
+                                <li><strong>Asia</strong> — 2.93 billion users (54%)</li>
+                                <li><strong>Europe</strong> — 750 million users (14%)</li>
+                                <li><strong>Africa</strong> — 590 million users (11%)</li>
+                                <li><strong>Americas</strong> — 540 million users (10%)</li>
+                                <li><strong>Oceania</strong> — 32 million users (0.6%)</li>
+                            </ul>
+                        </StatCard>
+
+                        <StatCard
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.6 }}
+                        >
+                            <h4>Software Usage Statistics</h4>
+                            <ul>
+                                <li><strong>5.44 billion</strong> people use the internet</li>
+                                <li><strong>4.95 billion</strong> social media users</li>
+                                <li><strong>6.92 billion</strong> smartphone users</li>
+                                <li><strong>2.71 billion</strong> online shoppers</li>
+                                <li><strong>4.4 billion</strong> email users worldwide</li>
+                            </ul>
+                        </StatCard>
+                    </StatsGrid>
+
+                    <StatHighlight>
+                        <h3>The Digital Economy is Growing Exponentially</h3>
+                        <p>
+                            With over 28 million developers creating solutions using modern frameworks like Next.js, React, and SwiftUI,
+                            the software industry continues to expand. SOC2 compliance and ISO 8601 standards ensure security and
+                            interoperability across global platforms, while SEO optimization drives discoverability for billions of users.
+                        </p>
+                    </StatHighlight>
                 </ClosingSection>
             </Container>
         </PageContainer>

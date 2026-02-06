@@ -225,7 +225,7 @@ export default function PrivacyPage() {
                 >
                     <SectionTitle>10. Contact Us</SectionTitle>
                     <Paragraph>
-                        If you have any questions about this Privacy Policy, please contact us at opticalautomation2025@gmail.com.
+                        If you have any questions about this Privacy Policy, please contact us at Software@OpticalAutomation.com.
                     </Paragraph>
                 </Section>
             </Container>

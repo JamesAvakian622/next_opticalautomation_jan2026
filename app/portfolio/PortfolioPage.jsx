@@ -36,7 +36,8 @@ import {
   FiMapPin,
   FiDollarSign,
   FiTerminal,
-  FiAward
+  FiAward,
+  FiCheck
 } from 'react-icons/fi';
 
 // Tab Categories Data
@@ -881,6 +882,98 @@ const itemVariants = {
   }
 };
 
+// MyDeskView Integrated Software Data
+const integratedSoftware = {
+  'Business & Finance': [
+    'AccessMoney', 'AI Trading', 'AppointmentBook', 'BistroRestaurant', 'BusinessTracker',
+    'CreativeTracker', 'DollarDimeStore', 'EmployDirectory', 'EmployeeHandBook',
+    'GasolineFinder', 'InvestmentTracker', 'RealEstatePortal'
+  ],
+  'Education & Learning': [
+    'Animals', 'GrammyHistory', 'GuitarBranded', 'InventorsBio', 'LearnSkills365.com',
+    'MusiciansHallOfFame', 'MyGreatRecipes', 'NationalParks', 'NewsChannels',
+    'NinePlanets', 'Quiz System', 'SportsTracker'
+  ],
+  'Entertainment & Leisure': [
+    'A Snowy Christmas', 'Apple M Processors', 'Biographies', 'CarShow YouTube',
+    'CoolJimmy', 'CorvetteQuiz', 'CruiseFinder', 'GoodDayMusic'
+  ],
+  'Personal Productivity': [
+    'DIY Solutions', 'MyBusinessOrganizer', 'MyDateBook', 'MyDeskView',
+    'MyDeskView - 2026 Places', 'MyDeskView - YouTube', 'MyPersonalOrganizer', 'Photo Albums'
+  ],
+  'Communication & Social': [
+    'Hi5', 'MyTelephoneBook', 'RecipeLists', 'TaskManager', 'TechnologyAndTimes', 'Teleprompter'
+  ],
+  'Health': [
+    'Disease Tracker', 'Fitness Tracker', 'GymnasticTracker', 'Health Tracker',
+    'HealthAidTracking', 'MigraineTinitusTracker', 'WalkTracker'
+  ]
+};
+
+const SoftwareSection = styled.section`
+  padding: ${({ theme }) => theme.spacing.xxl};
+  background: ${({ theme }) => theme.colors.surface};
+  
+  @media (max-width: 768px) {
+    padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.md};
+  }
+`;
+
+const SoftwareSectionTitle = styled.h2`
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
+  background: ${({ theme }) => theme.colors.gradient};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+`;
+
+const SoftwareGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: ${({ theme }) => theme.spacing.lg};
+  max-width: 1400px;
+  margin: 0 auto;
+`;
+
+const SoftwareCategoryGroup = styled.div`
+  background: ${({ theme }) => theme.colors.background};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  padding: ${({ theme }) => theme.spacing.lg};
+`;
+
+const SoftwareCategoryTitle = styled.h3`
+  font-size: 1.125rem;
+  color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  padding-bottom: ${({ theme }) => theme.spacing.sm};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.primary}20;
+`;
+
+const SoftwareItemsList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xs};
+`;
+
+const SoftwareItemEntry = styled.li`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 0.875rem;
+  
+  svg {
+    color: ${({ theme }) => theme.colors.success};
+    flex-shrink: 0;
+    font-size: 0.875rem;
+  }
+`;
+
 export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState('react-nextjs');
 
@@ -1074,6 +1167,26 @@ export default function PortfolioPage() {
           </AnimatePresence>
         </TabContentWrapper>
       </TabSection>
+
+      <SoftwareSection>
+        <Container>
+          <SoftwareSectionTitle>MyDeskView Series Software Integrates These</SoftwareSectionTitle>
+          <SoftwareGrid>
+            {Object.entries(integratedSoftware).map(([category, items]) => (
+              <SoftwareCategoryGroup key={category}>
+                <SoftwareCategoryTitle>{category}</SoftwareCategoryTitle>
+                <SoftwareItemsList>
+                  {items.map((title) => (
+                    <SoftwareItemEntry key={title}>
+                      <FiCheck /> {title}
+                    </SoftwareItemEntry>
+                  ))}
+                </SoftwareItemsList>
+              </SoftwareCategoryGroup>
+            ))}
+          </SoftwareGrid>
+        </Container>
+      </SoftwareSection>
     </PageWrapper>
   );
 }

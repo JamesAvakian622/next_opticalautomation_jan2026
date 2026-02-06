@@ -16,7 +16,9 @@ import {
   FiSmartphone,
   FiTerminal,
   FiTrendingUp,
-  FiSearch
+  FiSearch,
+  FiShield,
+  FiCheck
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -255,8 +257,9 @@ const HighlightBox = styled.div`
   background: ${({ theme }) => theme.colors.backgroundAlt};
   border-radius: ${({ theme }) => theme.borderRadius.xl};
   padding: ${({ theme }) => theme.spacing.xxl};
-  margin: ${({ theme }) => theme.spacing.xxl} 0;
-  text-align: left;
+  margin: ${({ theme }) => theme.spacing.xxl} auto;
+  text-align: center;
+  max-width: 100%;
 `;
 
 const HighlightTitle = styled.h2`
@@ -268,8 +271,9 @@ const HighlightText = styled.p`
   font-size: 1.125rem;
   color: ${({ theme }) => theme.colors.textSecondary};
   line-height: 1.8;
-  max-width: 800px;
-  margin: 0 0 ${({ theme }) => theme.spacing.md};
+  max-width: 100%;
+  margin: 0 auto ${({ theme }) => theme.spacing.md};
+  text-align: left;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -293,72 +297,177 @@ const StackBadge = styled.span`
   font-size: 0.875rem;
 `;
 
+const HoverZoomImage = styled.div`
+  flex-shrink: 0;
+  border-radius: 16px;
+  overflow: visible;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  
+  img {
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  &:hover {
+    z-index: 100;
+    
+    img {
+      transform: scale(3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+  }
+`;
+
+const ServicesSection = styled.div`
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  padding: ${({ theme }) => theme.spacing.xxl};
+  margin-top: ${({ theme }) => theme.spacing.xxl};
+`;
+
+const ServicesSectionTitle = styled.h2`
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
+  background: ${({ theme }) => theme.colors.gradient};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+`;
+
+const ServicesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: ${({ theme }) => theme.spacing.lg};
+`;
+
+const ServiceItem = styled(motion.div)`
+  text-align: center;
+  padding: ${({ theme }) => theme.spacing.lg};
+`;
+
+const ServiceIcon = styled.div`
+  width: 60px;
+  height: 60px;
+  margin: 0 auto ${({ theme }) => theme.spacing.md};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  background: ${({ theme }) => theme.colors.backgroundAlt};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const ServiceTitle = styled.h4`
+  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+`;
+
+const ServiceDesc = styled.p`
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 0.875rem;
+`;
+
+// MyDeskView Integrated Software Data
+const integratedSoftware = {
+  'Business & Finance': [
+    'AccessMoney', 'AI Trading', 'AppointmentBook', 'BistroRestaurant', 'BusinessTracker',
+    'CreativeTracker', 'DollarDimeStore', 'EmployDirectory', 'EmployeeHandBook',
+    'GasolineFinder', 'InvestmentTracker', 'RealEstatePortal'
+  ],
+  'Education & Learning': [
+    'Animals', 'GrammyHistory', 'GuitarBranded', 'InventorsBio', 'LearnSkills365.com',
+    'MusiciansHallOfFame', 'MyGreatRecipes', 'NationalParks', 'NewsChannels',
+    'NinePlanets', 'Quiz System', 'SportsTracker'
+  ],
+  'Entertainment & Leisure': [
+    'A Snowy Christmas', 'Apple M Processors', 'Biographies', 'CarShow YouTube',
+    'CoolJimmy', 'CorvetteQuiz', 'CruiseFinder', 'GoodDayMusic'
+  ],
+  'Personal Productivity': [
+    'DIY Solutions', 'MyBusinessOrganizer', 'MyDateBook', 'MyDeskView',
+    'MyDeskView - 2026 Places', 'MyDeskView - YouTube', 'MyPersonalOrganizer', 'Photo Albums'
+  ],
+  'Communication & Social': [
+    'Hi5', 'MyTelephoneBook', 'RecipeLists', 'TaskManager', 'TechnologyAndTimes', 'Teleprompter'
+  ],
+  'Health': [
+    'Disease Tracker', 'Fitness Tracker', 'GymnasticTracker', 'Health Tracker',
+    'HealthAidTracking', 'MigraineTinitusTracker', 'WalkTracker'
+  ]
+};
+
+const SoftwareSection = styled.section`
+  margin-top: ${({ theme }) => theme.spacing.xxl};
+`;
+
+const SoftwareSectionTitle = styled.h2`
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
+  background: ${({ theme }) => theme.colors.gradient};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+`;
+
+const SoftwareGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: ${({ theme }) => theme.spacing.lg};
+`;
+
+const SoftwareCategoryGroup = styled.div`
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  padding: ${({ theme }) => theme.spacing.lg};
+`;
+
+const SoftwareCategoryTitle = styled.h3`
+  font-size: 1.125rem;
+  color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  padding-bottom: ${({ theme }) => theme.spacing.sm};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.primary}20;
+`;
+
+const SoftwareItemsList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xs};
+`;
+
+const SoftwareItemEntry = styled.li`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 0.875rem;
+  
+  svg {
+    color: ${({ theme }) => theme.colors.success};
+    flex-shrink: 0;
+    font-size: 0.875rem;
+  }
+`;
+
 const technologies = [
-  {
-    id: 'nextjs',
-    icon: FiCode,
-    title: 'Next.js',
-    color: '#000000',
-    description: [
-      'Next.js is a powerful JavaScript library for building user interfaces, developed and maintained by Vercel.',
-      'Core features and benefits:',
-      '• Component-based architecture for maximum reusability',
-      '• High-performance Virtual DOM for seamless interactions',
-      '• Rich ecosystem of modern development tools',
-      '• Declarative UI that is easy to debug and maintain',
-      'Together with modern frameworks, React.js forms the foundation of our powerful, scalable web applications.',
-    ],
-  },
-  {
-    id: 'styling',
-    icon: FiLayers,
-    title: 'CSS, Styled-Components, and TailwindCSS',
-    color: '#DB7093',
-    description: [
-      'We utilize a sophisticated styling stack to create beautiful, responsive, and maintainable user interfaces.',
-      'Our styling toolkit includes:',
-      '• CSS (Flexbox, Grid) for core layout and design foundations',
-      '• Styled-Components for encapsulated, component-scoped styling',
-      '• TailwindCSS for rapid, utility-first development and consistency',
-      '• Responsive design patterns for perfect viewing on all devices',
-      'This combination enables us to deliver premium aesthetics with high performance and complete design flexibility.',
-    ],
-  },
-  {
-    id: 'nodejs',
-    icon: FiServer,
-    title: 'Node.js & Express',
-    color: '#339933',
-    description: [
-      'We build scalable server-side applications using high-performance JavaScript runtimes.',
-      'Core backend features:',
-      '• Efficient event-driven, non-blocking I/O model',
-      '• Robust RESTful API development with Express.js',
-      '• Real-time data processing and websocket integration',
-      '• Secure middleware and authentication systems',
-      'Node.js and Express together provide a unified JavaScript development experience for reliable, high-traffic server solutions.',
-    ],
-  },
-  {
-    id: 'mongodb',
-    icon: FiDatabase,
-    title: 'MongoDB & MERN Stack',
-    color: '#47A248',
-    description: [
-      'Our full-stack solutions are powered by modern NoSQL databases and unified JavaScript architectures.',
-      'Architecture highlights:',
-      '• Flexible JSON-like document storage with MongoDB',
-      '• Seamless data flow between frontend and backend',
-      '• Rapid development with unified stack expertise',
-      '• Scalable cloud database integrations',
-      'We leverage the MERN stack to build data-driven applications that balance speed, reliability, and complex data management.',
-    ],
-  },
   {
     id: 'ai',
     icon: FiCpu,
-    title: 'AI Agentic Development',
+    title: 'Agentic AI Development',
     color: '#8B5CF6',
+    image: '/agentic_ai_diagram.png',
     description: [
       'We embrace the future of software engineering through AI-human collaboration and automation.',
       'Development methodology:',
@@ -416,18 +525,18 @@ const technologies = [
     ],
   },
   {
-    id: 'reactnative',
-    icon: FiSmartphone,
-    title: 'React Native',
-    color: '#61DAFB',
+    id: 'nextjs',
+    icon: FiCode,
+    title: 'Next.js',
+    color: '#000000',
     description: [
-      'We develop high-performance cross-platform mobile applications using React Native.',
-      'Mobile development benefits:',
-      '• Single codebase for both iOS and Android platforms',
-      '• Native-like performance and smooth animations',
-      '• Access to native device APIs through powerful bridges',
-      '• Rapid development and deployment cycles',
-      'React Native allows us to deliver high-quality mobile experiences with greater efficiency and speed.',
+      'Next.js is a powerful JavaScript library for building user interfaces, developed and maintained by Vercel.',
+      'Core features and benefits:',
+      '• Component-based architecture for maximum reusability',
+      '• High-performance Virtual DOM for seamless interactions',
+      '• Rich ecosystem of modern development tools',
+      '• Declarative UI that is easy to debug and maintain',
+      'Together with modern frameworks, React.js forms the foundation of our powerful, scalable web applications.',
     ],
   },
   {
@@ -442,7 +551,7 @@ const technologies = [
       '• One design system for iOS, macOS, watchOS, and more',
       '• Modern visuals with smooth animations and dynamic layouts',
       '• Predictable, state‑driven architecture for lower maintenance',
-      '• Future‑ready and aligned with Apple’s long‑term direction',
+      '• Future-ready and aligned with Apple\'s long-term direction',
     ],
   },
   {
@@ -474,6 +583,66 @@ const technologies = [
       '• Open Graph and Twitter Card integration',
       '• Semantic HTML structure for accessibility',
       'Ensuring your application is perfectly indexed, discoverable, and stands out in search results.',
+    ],
+  },
+  {
+    id: 'reactnative',
+    icon: FiSmartphone,
+    title: 'React Native',
+    color: '#61DAFB',
+    description: [
+      'We develop high-performance cross-platform mobile applications using React Native.',
+      'Mobile development benefits:',
+      '• Single codebase for both iOS and Android platforms',
+      '• Native-like performance and smooth animations',
+      '• Access to native device APIs through powerful bridges',
+      '• Rapid development and deployment cycles',
+      'React Native allows us to deliver high-quality mobile experiences with greater efficiency and speed.',
+    ],
+  },
+  {
+    id: 'styling',
+    icon: FiLayers,
+    title: 'CSS, Styled-Components, and TailwindCSS',
+    color: '#DB7093',
+    description: [
+      'We utilize a sophisticated styling stack to create beautiful, responsive, and maintainable user interfaces.',
+      'Our styling toolkit includes:',
+      '• CSS (Flexbox, Grid) for core layout and design foundations',
+      '• Styled-Components for encapsulated, component-scoped styling',
+      '• TailwindCSS for rapid, utility-first development and consistency',
+      '• Responsive design patterns for perfect viewing on all devices',
+      'This combination enables us to deliver premium aesthetics with high performance and complete design flexibility.',
+    ],
+  },
+  {
+    id: 'nodejs',
+    icon: FiServer,
+    title: 'Node.js & Express',
+    color: '#339933',
+    description: [
+      'We build scalable server-side applications using high-performance JavaScript runtimes.',
+      'Core backend features:',
+      '• Efficient event-driven, non-blocking I/O model',
+      '• Robust RESTful API development with Express.js',
+      '• Real-time data processing and websocket integration',
+      '• Secure middleware and authentication systems',
+      'Node.js and Express together provide a unified JavaScript development experience for reliable, high-traffic server solutions.',
+    ],
+  },
+  {
+    id: 'mongodb',
+    icon: FiDatabase,
+    title: 'MongoDB & MERN Stack',
+    color: '#47A248',
+    description: [
+      'Our full-stack solutions are powered by modern NoSQL databases and unified JavaScript architectures.',
+      'Architecture highlights:',
+      '• Flexible JSON-like document storage with MongoDB',
+      '• Seamless data flow between frontend and backend',
+      '• Rapid development with unified stack expertise',
+      '• Scalable cloud database integrations',
+      'We leverage the MERN stack to build data-driven applications that balance speed, reliability, and complex data management.',
     ],
   },
 ];
@@ -634,22 +803,111 @@ export default function TechPage() {
             viewport={{ once: true }}
           >
             {technologies.map((tech, index) => (
-              <TechCard key={index} variants={itemVariants} id={tech.id}>
-                <TechHeader>
-                  <TechIcon $color={tech.color}>
-                    <tech.icon />
-                  </TechIcon>
-                  <TechTitle>{tech.title}</TechTitle>
-                </TechHeader>
-                <TechDescription>
-                  {tech.description.map((paragraph, pIndex) => (
-                    <p key={pIndex}>{paragraph}</p>
-                  ))}
-                </TechDescription>
+              <TechCard key={index} variants={itemVariants} id={tech.id} style={tech.image ? { gridColumn: '1 / -1' } : {}}>
+                <div style={tech.image ? { display: 'flex', gap: '2rem', alignItems: 'flex-start' } : {}}>
+                  <div style={{ flex: 1 }}>
+                    <TechHeader>
+                      <TechIcon $color={tech.color}>
+                        <tech.icon />
+                      </TechIcon>
+                      <TechTitle>{tech.title}</TechTitle>
+                    </TechHeader>
+                    <TechDescription>
+                      {tech.description.map((paragraph, pIndex) => (
+                        <p key={pIndex}>{paragraph}</p>
+                      ))}
+                    </TechDescription>
+                  </div>
+                  {tech.image && (
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                      <HoverZoomImage>
+                        <Image
+                          src={tech.image}
+                          alt={tech.title}
+                          width={400}
+                          height={400}
+                          style={{ display: 'block', objectFit: 'cover' }}
+                        />
+                      </HoverZoomImage>
+                      <p style={{ marginTop: '12px', fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)', fontStyle: 'italic', fontWeight: '500' }}>Hover To Read</p>
+                    </div>
+                  )}
+                </div>
               </TechCard>
             ))}
           </TechGrid>
 
+          <ServicesSection>
+            <ServicesSectionTitle>Product Services</ServicesSectionTitle>
+            <ServicesGrid>
+              <ServiceItem
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <ServiceIcon>
+                  <FiServer />
+                </ServiceIcon>
+                <ServiceTitle>Cloud Hosting</ServiceTitle>
+                <ServiceDesc>High-performance cloud hosting with 99.9% uptime guarantee</ServiceDesc>
+              </ServiceItem>
+              <ServiceItem
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <ServiceIcon>
+                  <FiShield />
+                </ServiceIcon>
+                <ServiceTitle>SSL Certificates</ServiceTitle>
+                <ServiceDesc>Enterprise-grade SSL encryption for all products</ServiceDesc>
+              </ServiceItem>
+              <ServiceItem
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
+                <ServiceIcon>
+                  <FiZap />
+                </ServiceIcon>
+                <ServiceTitle>CDN Integration</ServiceTitle>
+                <ServiceDesc>Global content delivery for lightning-fast load times</ServiceDesc>
+              </ServiceItem>
+              <ServiceItem
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
+                <ServiceIcon>
+                  <FiGlobe />
+                </ServiceIcon>
+                <ServiceTitle>DNS Management</ServiceTitle>
+                <ServiceDesc>Advanced DNS configuration and management tools</ServiceDesc>
+              </ServiceItem>
+            </ServicesGrid>
+          </ServicesSection>
+
+          <SoftwareSection>
+            <SoftwareSectionTitle>MyDeskView Series Software Integrates These</SoftwareSectionTitle>
+            <SoftwareGrid>
+              {Object.entries(integratedSoftware).map(([category, items]) => (
+                <SoftwareCategoryGroup key={category}>
+                  <SoftwareCategoryTitle>{category}</SoftwareCategoryTitle>
+                  <SoftwareItemsList>
+                    {items.map((title) => (
+                      <SoftwareItemEntry key={title}>
+                        <FiCheck /> {title}
+                      </SoftwareItemEntry>
+                    ))}
+                  </SoftwareItemsList>
+                </SoftwareCategoryGroup>
+              ))}
+            </SoftwareGrid>
+          </SoftwareSection>
 
         </Container>
       </ContentSection>

@@ -260,77 +260,102 @@ transition: all 0.3s ease;
 `;
 
 const ProductHeader = styled.div`
-display: flex;
-align - items: center;
-justify - content: space - between;
-margin - bottom: ${({ theme }) => theme.spacing.md};
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  gap: 12px;
 `;
 
 const ProductIcon = styled.div`
-width: 48px;
-height: 48px;
-border - radius: ${({ theme }) => theme.borderRadius.lg};
-background: ${({ $color }) => `${$color}20`};
-display: flex;
-align - items: center;
-justify - content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  background: ${({ $color }) => `${$color}20`};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 
-    svg {
-    font - size: 1.5rem;
+  svg {
+    font-size: 1.5rem;
     color: ${({ $color }) => $color};
-}
+  }
 `;
 
 const StatusBadge = styled.span`
-padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
-background: ${({ $active, theme }) =>
+  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+  background: ${({ $active, theme }) =>
         $active ? `${theme.colors.success}20` : `${theme.colors.warning}20`
     };
-color: ${({ $active, theme }) =>
+  color: ${({ $active, theme }) =>
         $active ? theme.colors.success : theme.colors.warning
     };
-border - radius: ${({ theme }) => theme.borderRadius.full};
-font - size: 0.75rem;
-font - weight: 600;
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  font-size: 0.75rem;
+  font-weight: 600;
+`;
+
+const PlatformStatusContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+  flex-shrink: 0;
+`;
+
+const PlatformStatus = styled.span`
+  display: block;
+  padding: 3px 10px;
+  background: ${({ $active, theme }) =>
+        $active ? `${theme.colors.success}20` : `${theme.colors.warning}20`
+    };
+  color: ${({ $active, theme }) =>
+        $active ? theme.colors.success : theme.colors.warning
+    };
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
 `;
 
 const ProductName = styled.h3`
-font - size: 1.25rem;
-color: ${({ theme }) => theme.colors.text};
-margin - bottom: ${({ theme }) => theme.spacing.xs};
+  font-size: 1.25rem;
+  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: ${({ theme }) => theme.spacing.xs};
 `;
 
 const ProductUrl = styled.p`
-color: ${({ theme }) => theme.colors.primary};
-font - size: 0.875rem;
-font - weight: 500;
-margin - bottom: ${({ theme }) => theme.spacing.md};
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const ProductDescription = styled.p`
-color: ${({ theme }) => theme.colors.textSecondary};
-font - size: 0.9rem;
-line - height: 1.6;
-margin - bottom: ${({ theme }) => theme.spacing.lg};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
 const FeaturesList = styled.ul`
-list - style: none;
-margin - bottom: ${({ theme }) => theme.spacing.lg};
+  list-style: none;
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
 const FeatureItem = styled.li`
-display: flex;
-align - items: center;
-gap: ${({ theme }) => theme.spacing.sm};
-color: ${({ theme }) => theme.colors.textSecondary};
-font - size: 0.875rem;
-margin - bottom: ${({ theme }) => theme.spacing.sm};
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 0.875rem;
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
 
-    svg {
+  svg {
     color: ${({ theme }) => theme.colors.success};
-    flex - shrink: 0;
-}
+    flex-shrink: 0;
+  }
 `;
 
 const VisitLink = styled.a`
@@ -427,7 +452,7 @@ const products = [
     },
     {
         name: 'MyDetailBase',
-        url: 'details.opticalautomation.com',
+        url: 'www.MyDetailBase.com',
         description: 'Secure structured data management for all your essential information.',
         color: '#F59E0B',
         active: true,
@@ -436,7 +461,7 @@ const products = [
     },
     {
         name: 'MyBusinessOrganizer',
-        url: 'business.opticalautomation.com',
+        url: 'www.MyBusinessOrganizer.com',
         description: 'Complete business operations suite for entrepreneurs and teams.',
         color: '#EC4899',
         active: true,
@@ -445,81 +470,65 @@ const products = [
     },
     {
         name: 'MyOneUniverse',
-        url: 'universe.opticalautomation.com',
+        url: 'www.MyOneUniverse.com',
         description: 'The unifying ecosystem connecting all your Optical Automation apps.',
         color: '#8B5CF6',
-        active: false,
-        status: 'pending',
+        active: true,
         features: ['Cross-App Sync', 'Universal Search', 'Unified Identity', 'Seamless Handoff'],
         icon: FiLayers
     },
     {
         name: 'MyDeskView - DIY Solutions',
-        url: 'diy.opticalautomation.com',
+        url: 'www.MyDeskView.com',
         description: 'Home improvement and DIY project management integrated into your desktop workflow.',
         color: '#F97316',
-        active: false,
-        status: 'pending',
+        active: true,
         features: ['Project Templates', 'Material Lists', 'Step-by-Step Guides', 'Cost Tracking'],
         icon: FiZap
     },
     {
         name: 'MyDeskView - YouTube Videos',
-        url: 'youtube.opticalautomation.com',
+        url: 'www.MyDeskView.com',
         description: 'Curated video content and YouTube integration with assignable movies for quick access.',
         color: '#EF4444',
-        active: false,
-        status: 'pending',
+        active: true,
         features: ['Video Library', 'Quick Access Menu', 'Playlist Management', 'Watch History'],
         icon: FiExternalLink
     },
     {
         name: 'DIY Solutions',
-        url: 'www.DIYSolutions.com',
+        url: 'www.MyDeskView.com',
         description: 'Do-it-yourself solutions and projects for home improvement and creative endeavors.',
         color: '#F59E0B',
-        active: false,
-        status: 'pending',
+        active: true,
         features: ['Project Guides', 'Tool Lists', 'Step-by-Step Instructions', 'Material Calculators'],
         icon: FiTool
     },
     {
         name: 'MyDateBook',
-        url: 'www.MyDateBook.com',
+        url: 'www.MyDeskView.com',
         description: 'Personal date and event management with calendar integration and reminders.',
         color: '#8B5CF6',
-        active: false,
-        status: 'pending',
+        active: true,
         features: ['Event Calendar', 'Reminders', 'Date Tracking', 'Anniversary Alerts'],
         icon: FiCalendar
     },
-    {
-        name: 'MyDeskView',
-        url: 'www.MyDeskView.com',
-        description: 'Central desktop productivity suite for managing all your applications and tasks.',
-        color: '#3B82F6',
-        active: false,
-        status: 'pending',
-        features: ['App Integration', 'Task Management', 'Quick Launch', 'Customizable Dashboard'],
-        icon: FiMonitor
-    },
+
     {
         name: 'MyDeskView - 2026 Places',
-        url: 'places.mydeskview.com',
+        url: 'www.MyDeskView.com',
         description: 'Location tracking and management for your favorite places and destinations.',
         color: '#10B981',
-        active: false,
-        status: 'pending',
+        active: true,
         features: ['Location Bookmarks', 'Travel Planning', 'Map Integration', 'Place Reviews'],
         icon: FiMapPin
     },
     {
         name: 'MyDeskView - PhotoAlbums',
-        url: 'photos.mydeskview.com',
+        url: 'www.MyDeskView.com',
         description: 'Photo organization and album management for your digital memories.',
         color: '#EC4899',
-        active: false,
-        status: 'pending',
+        active: true,
         features: ['Album Creation', 'Photo Organization', 'Sharing Options', 'Memory Timeline'],
         icon: FiImage
     }
@@ -624,21 +633,7 @@ export default function DeskViewPage() {
 
                 <IntroSection initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
 
-                    <SectionSubtitle>Your Central Desktop</SectionSubtitle>
-                    <DescriptionParagraph>
-                        MyDeskView serves as your comprehensive dashboard for managing all aspects of your daily workflow. This powerful application brings together your most important information, tasks, and tools in one centralized location, allowing you to maintain focus and productivity throughout your day. With its intuitive interface and customizable widgets, you can tailor your workspace to match your unique needs and preferences.
-                    </DescriptionParagraph>
-                    <DescriptionParagraph>
-                        The application features real-time updates and notifications, ensuring you never miss important deadlines or appointments. Whether you're tracking project milestones, monitoring team progress, or managing your personal schedule, MyDeskView provides the visibility and control you need to stay on top of everything. The dashboard adapts to your workflow, learning from your usage patterns to surface the most relevant information when you need it most.
-                    </DescriptionParagraph>
-                    <DescriptionParagraph>
-                        Integration capabilities allow MyDeskView to connect with your existing tools and services, creating a seamless ecosystem for your digital workspace. From calendar synchronization to task management integration, the platform works harmoniously with the applications you already use. This eliminates the need to switch between multiple windows and applications, streamlining your workflow and reducing context-switching overhead.
-                    </DescriptionParagraph>
-                    <DescriptionParagraph>
-                        Built with performance and reliability in mind, MyDeskView ensures your data is always accessible and secure. The application employs industry-standard encryption and follows best practices for data protection, giving you peace of mind while you focus on what matters most. Whether you're working from the office, home, or on the go, MyDeskView provides a consistent and reliable experience across all your devices.
-                    </DescriptionParagraph>
-
-                    <SectionSubtitle style={{ marginTop: '3rem', fontSize: '1.25rem' }}>
+                    <SectionSubtitle>
                         MyDeskView Series Software Integrates These
                     </SectionSubtitle>
 
@@ -656,6 +651,21 @@ export default function DeskViewPage() {
                             </CategoryGroup>
                         ))}
                     </SoftwareGrid>
+
+                    <SectionSubtitle style={{ marginTop: '3rem' }}>Your Central Desktop</SectionSubtitle>
+                    <DescriptionParagraph>
+                        MyDeskView serves as your comprehensive dashboard for managing all aspects of your daily workflow. This powerful application brings together your most important information, tasks, and tools in one centralized location, allowing you to maintain focus and productivity throughout your day. With its intuitive interface and customizable widgets, you can tailor your workspace to match your unique needs and preferences.
+                    </DescriptionParagraph>
+                    <DescriptionParagraph>
+                        The application features real-time updates and notifications, ensuring you never miss important deadlines or appointments. Whether you're tracking project milestones, monitoring team progress, or managing your personal schedule, MyDeskView provides the visibility and control you need to stay on top of everything. The dashboard adapts to your workflow, learning from your usage patterns to surface the most relevant information when you need it most.
+                    </DescriptionParagraph>
+                    <DescriptionParagraph>
+                        Integration capabilities allow MyDeskView to connect with your existing tools and services, creating a seamless ecosystem for your digital workspace. From calendar synchronization to task management integration, the platform works harmoniously with the applications you already use. This eliminates the need to switch between multiple windows and applications, streamlining your workflow and reducing context-switching overhead.
+                    </DescriptionParagraph>
+                    <DescriptionParagraph>
+                        Built with performance and reliability in mind, MyDeskView ensures your data is always accessible and secure. The application employs industry-standard encryption and follows best practices for data protection, giving you peace of mind while you focus on what matters most. Whether you're working from the office, home, or on the go, MyDeskView provides a consistent and reliable experience across all your devices.
+                    </DescriptionParagraph>
+
                 </IntroSection>
 
                 <FeaturedSection>
@@ -669,12 +679,13 @@ export default function DeskViewPage() {
                                 <ProductIcon $color={products[0].color}>
                                     <FeaturedIcon />
                                 </ProductIcon>
-                                <StatusBadge $active={products[0].active}>
-                                    {products[0].active ? 'Active' : 'Coming Soon'}
-                                </StatusBadge>
                             </ProductHeader>
                             <ProductName>{products[0].name}</ProductName>
                             <ProductUrl>{products[0].url}</ProductUrl>
+                            <PlatformStatusContainer style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
+                                <PlatformStatus $active={products[0].active}>Web : {products[0].active ? 'Active.' : 'Pending.'}</PlatformStatus>
+                                <PlatformStatus $active={false}>iOS / Android : Pending</PlatformStatus>
+                            </PlatformStatusContainer>
                             <ProductDescription>{products[0].description}</ProductDescription>
                             <FeaturesList>
                                 {products[0].features.map((feature) => (
@@ -729,12 +740,13 @@ export default function DeskViewPage() {
                                 <ProductIcon $color={products[1].color}>
                                     <FeaturedIcon2 />
                                 </ProductIcon>
-                                <StatusBadge $active={products[1].active}>
-                                    {products[1].active ? 'Active' : 'Coming Soon'}
-                                </StatusBadge>
                             </ProductHeader>
                             <ProductName>{products[1].name}</ProductName>
                             <ProductUrl>{products[1].url}</ProductUrl>
+                            <PlatformStatusContainer style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
+                                <PlatformStatus $active={products[1].active}>Web : {products[1].active ? 'Active.' : 'Pending.'}</PlatformStatus>
+                                <PlatformStatus $active={false}>iOS / Android : Pending</PlatformStatus>
+                            </PlatformStatusContainer>
                             <ProductDescription>{products[1].description}</ProductDescription>
                             <FeaturesList>
                                 {products[1].features.map((feature) => (
@@ -767,12 +779,13 @@ export default function DeskViewPage() {
                                 <ProductIcon $color={products[2].color}>
                                     <FeaturedIcon3 />
                                 </ProductIcon>
-                                <StatusBadge $active={products[2].active}>
-                                    {products[2].active ? 'Active' : 'Coming Soon'}
-                                </StatusBadge>
                             </ProductHeader>
                             <ProductName>{products[2].name}</ProductName>
                             <ProductUrl>{products[2].url}</ProductUrl>
+                            <PlatformStatusContainer style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
+                                <PlatformStatus $active={products[2].active}>Web : {products[2].active ? 'Active.' : 'Pending.'}</PlatformStatus>
+                                <PlatformStatus $active={false}>iOS / Android : Pending</PlatformStatus>
+                            </PlatformStatusContainer>
                             <ProductDescription>{products[2].description}</ProductDescription>
                             <FeaturesList>
                                 {products[2].features.map((feature) => (
@@ -817,12 +830,13 @@ export default function DeskViewPage() {
                                 <ProductIcon $color={product.color}>
                                     <product.icon />
                                 </ProductIcon>
-                                <StatusBadge $active={product.active}>
-                                    {product.status === 'pending' ? 'Pending' : (product.active ? 'Active' : 'Coming Soon')}
-                                </StatusBadge>
                             </ProductHeader>
                             <ProductName>{product.name}</ProductName>
                             <ProductUrl>{product.url}</ProductUrl>
+                            <PlatformStatusContainer style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
+                                <PlatformStatus $active={product.active}>Web : {product.active ? 'Active.' : 'Pending.'}</PlatformStatus>
+                                <PlatformStatus $active={false}>iOS / Android : Pending</PlatformStatus>
+                            </PlatformStatusContainer>
                             <ProductDescription>{product.description}</ProductDescription>
                             <FeaturesList>
                                 {product.features.map((feature) => (

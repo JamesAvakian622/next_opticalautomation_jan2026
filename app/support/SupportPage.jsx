@@ -482,9 +482,9 @@ export default function SupportPage() {
             const lowerMessage = userMessage.toLowerCase();
 
             if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('pricing')) {
-                botResponse = 'For pricing information, please visit our Pricing page or contact us directly at +1(747)354-2925. We offer flexible plans for all project sizes!';
+                botResponse = 'For pricing information, please visit our Pricing page or contact us directly at +1(747)354-4008. We offer flexible plans for all project sizes!';
             } else if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('call')) {
-                botResponse = 'You can reach us at +1(747)354-2925 (Mon-Fri 9AM-6PM PST) or email opticalautomation2025@gmail.com. We typically respond within 24-48 hours.';
+                botResponse = 'You can reach us at +1(747)354-4008 (Mon-Fri 9AM-6PM PST) or email Software@OpticalAutomation.com. We typically respond within 24-48 hours.';
             } else if (lowerMessage.includes('hour') || lowerMessage.includes('time') || lowerMessage.includes('open')) {
                 botResponse = 'Our business hours are Monday through Friday, 9AM to 6PM PST. For urgent matters, please leave a message and we\'ll get back to you as soon as possible.';
             } else if (lowerMessage.includes('project') || lowerMessage.includes('work') || lowerMessage.includes('develop')) {
@@ -492,7 +492,7 @@ export default function SupportPage() {
             } else if (lowerMessage.includes('thank') || lowerMessage.includes('bye') || lowerMessage.includes('goodbye')) {
                 botResponse = 'Thank you for chatting with us! If you have any more questions, feel free to reach out anytime. Have a great day!';
             } else {
-                botResponse = 'Thank you for your message! For detailed assistance, please fill out our contact form or call us at +1(747)354-2925. Our team will be happy to help!';
+                botResponse = 'Thank you for your message! For detailed assistance, please fill out our contact form or call us at +1(747)354-4008. Our team will be happy to help!';
             }
 
             setChatMessages(prev => [...prev, { from: 'bot', text: botResponse }]);
@@ -567,7 +567,7 @@ export default function SupportPage() {
                             <FiPhone />
                         </CardIcon>
                         <CardTitle>Phone Support</CardTitle>
-                        <CardInfo>+1(747)354-2925</CardInfo>
+                        <CardInfo>+1(747)354-4008</CardInfo>
                         <CardSubInfo>Mon-Fri 9AM-6PM PST</CardSubInfo>
                     </ContactCard>
 
@@ -580,7 +580,7 @@ export default function SupportPage() {
                             <FiMail />
                         </CardIcon>
                         <CardTitle>Email Support</CardTitle>
-                        <CardInfo>opticalautomation2025@gmail.com</CardInfo>
+                        <CardInfo>Software@OpticalAutomation.com</CardInfo>
                         <CardSubInfo>24-48 hour response time</CardSubInfo>
                     </ContactCard>
 

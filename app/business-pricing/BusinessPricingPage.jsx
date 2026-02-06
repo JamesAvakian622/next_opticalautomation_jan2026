@@ -286,7 +286,7 @@ export default function BusinessPricingPage() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.2 }}
                     >
-                        Volume Licensing Available
+                        Volume Licensing
                     </Badge>
                 </Header>
 

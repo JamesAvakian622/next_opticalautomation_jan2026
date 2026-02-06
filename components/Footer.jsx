@@ -327,7 +327,7 @@ export default function Footer() {
               </LogoImage>
             </LogoLink>
             <BrandDescription>
-              We are a software development company that produces app applications Websites, Mobile Apps, and Database system networks. These products are developed by AI process Agents for high performance, fast display, and efficient access according to American Industry Standards.
+              Software app applications as Websites, Mobile Apps, and Database were developed by Agentic AI access for high performance, fast display, and efficient access with SEO Optimization, SOC2, and ISO8601 compliance.
             </BrandDescription>
           </BrandSection>
 
