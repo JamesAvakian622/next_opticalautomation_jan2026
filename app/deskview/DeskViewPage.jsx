@@ -5,6 +5,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { titleToSlug } from '@/lib/softwareData';
 import {
     FiGlobe,
     FiExternalLink,
@@ -177,17 +178,82 @@ height: auto;
 display: block;
 `;
 
+const SoftwareItemWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
 const SoftwareItem = styled.div`
-display: flex;
-align - items: center;
-gap: ${({ theme }) => theme.spacing.sm};
-color: ${({ theme }) => theme.colors.text};
-font - size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
     
-    svg {
+  svg {
     color: ${({ theme }) => theme.colors.success};
-    font - size: 1.1em;
-}
+    font-size: 1.1em;
+  }
+`;
+
+const SoftwareTooltip = styled.div`
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  padding: ${({ theme }) => theme.spacing.md};
+  box-shadow: 0 8px 24px ${({ theme }) => theme.colors.shadow};
+  z-index: 1000;
+  min-width: 180px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  
+  ${SoftwareItemWrapper}:hover & {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+`;
+
+const TooltipTitle = styled.div`
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: ${({ theme }) => theme.spacing.xs};
+`;
+
+const TooltipCategory = styled.div`
+  font-size: 0.85rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+`;
+
+const TooltipButton = styled(Link)`
+  display: inline-block;
+  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.md};
+  background: ${({ theme }) => theme.colors.gradient};
+  color: white;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+  }
 `;
 
 const CategoryTitle = styled.h4`
@@ -669,7 +735,7 @@ export default function DeskViewPage() {
                         Built with performance and reliability in mind, MyDeskView ensures your data is always accessible and secure. The application employs industry-standard encryption and follows best practices for data protection, giving you peace of mind while you focus on what matters most. Whether you're working from the office, home, or on the go, MyDeskView provides a consistent and reliable experience across all your devices.
                     </DescriptionParagraph>
 
-                    <SectionSubtitle style={{ marginTop: '3rem', fontSize: '2.5rem' }}>
+                    <SectionSubtitle style={{ marginTop: '1.5rem', marginBottom: '1rem', fontSize: '2.5rem' }}>
                         MyDeskView Series Software Integration
                     </SectionSubtitle>
 
@@ -679,9 +745,20 @@ export default function DeskViewPage() {
                                 <CategoryTitle>{category}</CategoryTitle>
                                 <CategoryItemsList>
                                     {items.map((title) => (
-                                        <SoftwareItem key={title}>
-                                            <FiCheck /> {title}
-                                        </SoftwareItem>
+                                        <SoftwareItemWrapper key={title}>
+                                            <SoftwareItem>
+                                                <FiCheck /> {title}
+                                            </SoftwareItem>
+                                            <SoftwareTooltip>
+                                                <TooltipTitle>{title}</TooltipTitle>
+                                                <TooltipCategory>Excells in {category}</TooltipCategory>
+                                                <TooltipButton
+                                                    href={`/deskview/software/${titleToSlug(title)}`}
+                                                >
+                                                    Visit Site
+                                                </TooltipButton>
+                                            </SoftwareTooltip>
+                                        </SoftwareItemWrapper>
                                     ))}
                                 </CategoryItemsList>
                             </CategoryGroup>
