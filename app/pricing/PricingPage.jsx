@@ -347,7 +347,7 @@ const pricingPlans = {
                 'Single WebView',
                 'iOS or Android',
                 'Responsive Design',
-                'Store Submission',
+                'Includes Store Submission',
                 'Core Functionality',
                 'Basic Support'
             ]
@@ -369,18 +369,18 @@ const pricingPlans = {
             ]
         },
         {
-            name: 'BusinessWebView and Pro Apps',
+            name: 'Four Business Apps',
             price: '$4,999',
             period: 'one-time',
             description: 'Full-featured business mobile application.',
             color: '#F59E0B',
             featured: false,
             features: [
+                'iOS & Android WebView',
+                'Four Store Submissions',
                 'Native Business App',
-                'WebView Integration',
                 'Advanced Features',
                 'Custom API Integration',
-                'Analytics Dashboard',
                 'Premium Support'
             ]
         }
@@ -388,7 +388,7 @@ const pricingPlans = {
     both: [
         {
             name: 'Web and One App',
-            price: '$750',
+            price: 'TBD',
             period: 'one-time',
             updates: '$499/mo updates',
             description: 'Seamless integration between web and one mobile platform.',
@@ -400,13 +400,13 @@ const pricingPlans = {
                 'Shared MERN Database',
                 'User Authentication',
                 'Cloud Image Sync',
-                'Store Submission',
+                'Includes Store Submission',
                 'Multi-channel Auth'
             ]
         },
         {
             name: 'Business Solution Web + 2 Apps',
-            price: '$1,250',
+            price: 'TBD',
             period: 'one-time',
             updates: '$499/mo updates',
             description: 'The ultimate digital ecosystem: Web, iOS, and Android.',
