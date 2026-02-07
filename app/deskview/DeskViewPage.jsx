@@ -100,7 +100,7 @@ font - weight: 500;
 
 const DescriptionParagraph = styled.p`
 color: ${({ theme }) => theme.colors.textSecondary};
-font-size: 1.05rem;
+font-size: 1.25rem;
 line-height: 1.8;
 margin-top: 1.5rem;
 margin-bottom: 1.5rem;
@@ -253,6 +253,28 @@ const TooltipButton = styled(Link)`
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+  }
+`;
+
+const TooltipFeatures = styled.ul`
+  list-style: none;
+  text-align: left;
+  margin: ${({ theme }) => theme.spacing.sm} 0;
+  padding: 0;
+  
+  li {
+    font-size: 0.75rem;
+    color: ${({ theme }) => theme.colors.textSecondary};
+    padding: 2px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    svg {
+      color: ${({ theme }) => theme.colors.success};
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
   }
 `;
 
@@ -668,6 +690,15 @@ const integratedSoftware = {
     ]
 };
 
+// Features map for software items with sub-applications
+const softwareFeatures = {
+    'LearnSkills365.com': {
+        label: 'Learning',
+        features: ['Math', 'Reading', 'Memory', 'Typing Game', 'Geography', 'Writing', 'Quizzes', 'and more Applications'],
+        internalUrl: '/deskview/software/learnskills365'
+    }
+};
+
 export default function DeskViewPage() {
     const FeaturedIcon = products[0].icon;
     const FeaturedIcon2 = products[1].icon;
@@ -732,7 +763,7 @@ export default function DeskViewPage() {
                         The application features real-time updates and notifications, ensuring you never miss important deadlines or appointments. Whether you're tracking project milestones, monitoring team progress, or managing your personal schedule, MyDeskView provides the visibility and control you need to stay on top of everything. The dashboard adapts to your workflow, learning from your usage patterns to surface the most relevant information when you need it most.
                     </DescriptionParagraph>
                     <DescriptionParagraph>
-                        Integration capabilities allow MyDeskView to connect with your existing tools and services, creating a seamless ecosystem for your digital workspace. From calendar synchronization to task management integration, the platform works harmoniously with the applications you already use. This eliminates the need to switch between multiple windows and applications, streamlining your workflow and reducing context-switching overhead.
+                        Software integrated inside MyDeskView allows users enjoy built-in apps creating a practical ecosystem for your digital workspace. From calendar synchronization to task management integration, the platform works harmoniously with the applications you already use. This eliminates the need to switch between multiple windows and applications, streamlining your workflow and reducing context-switching overhead.
                     </DescriptionParagraph>
                     <DescriptionParagraph>
                         Built with performance and reliability in mind, MyDeskView ensures your data is always accessible and secure. The application employs industry-standard encryption and follows best practices for data protection, giving you peace of mind while you focus on what matters most. Whether you're working from the office, home, or on the go, MyDeskView provides a consistent and reliable experience across all your devices.
@@ -754,9 +785,18 @@ export default function DeskViewPage() {
                                             </SoftwareItem>
                                             <SoftwareTooltip>
                                                 <TooltipTitle>{title}</TooltipTitle>
-                                                <TooltipCategory>Excells in {category}</TooltipCategory>
+                                                <TooltipCategory>
+                                                    Excels in {softwareFeatures[title] ? softwareFeatures[title].label : category}
+                                                </TooltipCategory>
+                                                {softwareFeatures[title] && (
+                                                    <TooltipFeatures>
+                                                        {softwareFeatures[title].features.map((feat) => (
+                                                            <li key={feat}><FiCheck />{feat}</li>
+                                                        ))}
+                                                    </TooltipFeatures>
+                                                )}
                                                 <TooltipButton
-                                                    href={`/deskview/software/${titleToSlug(title)}`}
+                                                    href={softwareFeatures[title]?.internalUrl || `/deskview/software/${titleToSlug(title)}`}
                                                 >
                                                     Visit Site
                                                 </TooltipButton>

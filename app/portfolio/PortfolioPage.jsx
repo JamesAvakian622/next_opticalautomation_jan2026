@@ -107,7 +107,66 @@ const tabCategories = [
         icon: FiShoppingCart,
         color: '#10B981',
         website: 'https://docs.opticalautomation.com'
-      }
+      },
+      // Business & Finance
+      { id: 'accessmoney', title: 'AccessMoney', category: 'Business & Finance', description: 'Financial access and money management application.', icon: FiDollarSign, color: '#10B981', website: 'https://mydeskview.com' },
+      { id: 'ai-trading', title: 'AI Trading', category: 'Business & Finance', description: 'AI-powered trading and investment analysis platform.', icon: FiTrendingUp, color: '#6366F1', website: 'https://mydeskview.com' },
+      { id: 'appointmentbook', title: 'AppointmentBook', category: 'Business & Finance', description: 'Appointment scheduling and booking management system.', icon: FiBook, color: '#F59E0B', website: 'https://mydeskview.com' },
+      { id: 'bistrorestaurant', title: 'BistroRestaurant', category: 'Business & Finance', description: 'Restaurant management and ordering platform.', icon: FiHome, color: '#EF4444', website: 'https://mydeskview.com' },
+      { id: 'businesstracker', title: 'BusinessTracker', category: 'Business & Finance', description: 'Business performance tracking and analytics dashboard.', icon: FiPieChart, color: '#8B5CF6', website: 'https://mydeskview.com' },
+      { id: 'creativetracker', title: 'CreativeTracker', category: 'Business & Finance', description: 'Creative project tracking and portfolio management.', icon: FiCamera, color: '#EC4899', website: 'https://mydeskview.com' },
+      { id: 'dollardimestore', title: 'DollarDimeStore', category: 'Business & Finance', description: 'E-commerce retail and store management platform.', icon: FiShoppingCart, color: '#10B981', website: 'https://mydeskview.com' },
+      { id: 'employdirectory', title: 'EmployDirectory', category: 'Business & Finance', description: 'Employee directory and organizational management.', icon: FiUsers, color: '#0EA5E9', website: 'https://mydeskview.com' },
+      { id: 'employeehandbook', title: 'EmployeeHandBook', category: 'Business & Finance', description: 'Digital employee handbook and HR resource center.', icon: FiBook, color: '#F97316', website: 'https://mydeskview.com' },
+      { id: 'gasolinefinder', title: 'GasolineFinder', category: 'Business & Finance', description: 'Gas station locator and fuel price comparison tool.', icon: FiMapPin, color: '#EF4444', website: 'https://mydeskview.com' },
+      { id: 'investmenttracker', title: 'InvestmentTracker', category: 'Business & Finance', description: 'Investment portfolio tracking and performance analysis.', icon: FiTrendingUp, color: '#10B981', website: 'https://mydeskview.com' },
+      { id: 'realestateportal', title: 'RealEstatePortal', category: 'Business & Finance', description: 'Real estate listing and property management portal.', icon: FiHome, color: '#6366F1', website: 'https://mydeskview.com' },
+      // Education & Learning
+      { id: 'animals', title: 'Animals', category: 'Education & Learning', description: 'Educational animal encyclopedia and learning resource.', icon: FiBook, color: '#10B981', website: 'https://mydeskview.com' },
+      { id: 'grammyhistory', title: 'GrammyHistory', category: 'Education & Learning', description: 'Interactive history of Grammy Awards and music achievements.', icon: FiMusic, color: '#F59E0B', website: 'https://mydeskview.com' },
+      { id: 'guitarbranded', title: 'GuitarBranded', category: 'Education & Learning', description: 'Guitar brands encyclopedia and music education platform.', icon: FiMusic, color: '#8B5CF6', website: 'https://mydeskview.com' },
+      { id: 'inventorsbio', title: 'InventorsBio', category: 'Education & Learning', description: 'Biographies of famous inventors and their innovations.', icon: FiAward, color: '#EC4899', website: 'https://mydeskview.com' },
+      { id: 'learnskills365-app', title: 'LearnSkills365.com', category: 'Education & Learning', description: 'Interactive daily learning platform for building essential skills.', icon: FiBook, color: '#F59E0B', website: 'https://learnskills365.com' },
+      { id: 'musicianshalloffame', title: 'MusiciansHallOfFame', category: 'Education & Learning', description: 'Hall of fame directory celebrating legendary musicians.', icon: FiMusic, color: '#6366F1', website: 'https://mydeskview.com' },
+      { id: 'mygreatrecipes', title: 'MyGreatRecipes', category: 'Education & Learning', description: 'Recipe collection and cooking education platform.', icon: FiBook, color: '#EF4444', website: 'https://mydeskview.com' },
+      { id: 'nationalparks', title: 'NationalParks', category: 'Education & Learning', description: 'Guide to U.S. National Parks with maps and information.', icon: FiMapPin, color: '#10B981', website: 'https://mydeskview.com' },
+      { id: 'newschannels', title: 'NewsChannels', category: 'Education & Learning', description: 'Aggregated news channels and media directory.', icon: FiGlobe, color: '#0EA5E9', website: 'https://mydeskview.com' },
+      { id: 'nineplanets', title: 'NinePlanets', category: 'Education & Learning', description: 'Solar system exploration and planetary science education.', icon: FiGlobe, color: '#8B5CF6', website: 'https://mydeskview.com' },
+      { id: 'quiz-system', title: 'Quiz System', category: 'Education & Learning', description: 'Interactive quiz platform for knowledge testing and learning.', icon: FiAward, color: '#F59E0B', website: 'https://mydeskview.com' },
+      { id: 'sportstracker', title: 'SportsTracker', category: 'Education & Learning', description: 'Sports statistics tracking and athletic performance analysis.', icon: FiAward, color: '#EF4444', website: 'https://mydeskview.com' },
+      // Entertainment & Leisure
+      { id: 'a-snowy-christmas', title: 'A Snowy Christmas', category: 'Entertainment & Leisure', description: 'Holiday-themed interactive entertainment experience.', icon: FiHeart, color: '#EF4444', website: 'https://mydeskview.com' },
+      { id: 'apple-m-processors', title: 'Apple M Processors', category: 'Entertainment & Leisure', description: 'Guide to Apple M-series processor technology and specifications.', icon: FiCpu, color: '#6366F1', website: 'https://mydeskview.com' },
+      { id: 'biographies', title: 'Biographies', category: 'Entertainment & Leisure', description: 'Collection of notable biographies and life stories.', icon: FiBook, color: '#8B5CF6', website: 'https://mydeskview.com' },
+      { id: 'carshow-youtube', title: 'CarShow YouTube', category: 'Entertainment & Leisure', description: 'Curated car show videos and automotive entertainment.', icon: FiPlay, color: '#EF4444', website: 'https://mydeskview.com' },
+      { id: 'cooljimmy', title: 'CoolJimmy', category: 'Entertainment & Leisure', description: 'Entertainment and lifestyle content platform.', icon: FiZap, color: '#F59E0B', website: 'https://mydeskview.com' },
+      { id: 'corvettequiz-app', title: 'CorvetteQuiz', category: 'Entertainment & Leisure', description: 'Interactive quiz testing knowledge of Corvette history and models.', icon: FiAward, color: '#EF4444', website: 'https://mydeskview.com' },
+      { id: 'cruisefinder', title: 'CruiseFinder', category: 'Entertainment & Leisure', description: 'Cruise vacation search and booking discovery platform.', icon: FiGlobe, color: '#0EA5E9', website: 'https://mydeskview.com' },
+      { id: 'gooddaymusic', title: 'GoodDayMusic', category: 'Entertainment & Leisure', description: 'Music discovery and playlist management application.', icon: FiMusic, color: '#10B981', website: 'https://mydeskview.com' },
+      // Personal Productivity
+      { id: 'diy-solutions', title: 'DIY Solutions', category: 'Personal Productivity', description: 'Do-it-yourself project guides and home improvement solutions.', icon: FiZap, color: '#F97316', website: 'https://mydeskview.com' },
+      { id: 'mybusinessorganizer', title: 'MyBusinessOrganizer', category: 'Personal Productivity', description: 'Complete business operations suite for entrepreneurs and teams.', icon: FiLayers, color: '#EC4899', website: 'https://mydeskview.com' },
+      { id: 'mydatebook', title: 'MyDateBook', category: 'Personal Productivity', description: 'Personal date and event management with calendar integration.', icon: FiBook, color: '#8B5CF6', website: 'https://mydeskview.com' },
+      { id: 'mydeskview-app', title: 'MyDeskView', category: 'Personal Productivity', description: 'Central command center for daily workflow management and productivity.', icon: FiMonitor, color: '#6366F1', website: 'https://mydeskview.com' },
+      { id: 'mydeskview-2026-places', title: 'MyDeskView - 2026 Places', category: 'Personal Productivity', description: 'Location tracking and management for favorite places and destinations.', icon: FiMapPin, color: '#10B981', website: 'https://mydeskview.com' },
+      { id: 'mydeskview-youtube', title: 'MyDeskView - YouTube', category: 'Personal Productivity', description: 'Curated video content and YouTube integration with quick access.', icon: FiPlay, color: '#EF4444', website: 'https://mydeskview.com' },
+      { id: 'mypersonalorganizer', title: 'MyPersonalOrganizer', category: 'Personal Productivity', description: 'Comprehensive personal life management for goals, habits, and schedules.', icon: FiLayers, color: '#10B981', website: 'https://mydeskview.com' },
+      { id: 'photo-albums', title: 'Photo Albums', category: 'Personal Productivity', description: 'Photo organization and album management for digital memories.', icon: FiCamera, color: '#EC4899', website: 'https://mydeskview.com' },
+      // Communication & Social
+      { id: 'hi5', title: 'Hi5', category: 'Communication & Social', description: 'Social networking and communication platform.', icon: FiMessageSquare, color: '#6366F1', website: 'https://mydeskview.com' },
+      { id: 'mytelephonebook', title: 'MyTelephoneBook', category: 'Communication & Social', description: 'Digital telephone directory and contact management.', icon: FiUsers, color: '#10B981', website: 'https://mydeskview.com' },
+      { id: 'recipelists', title: 'RecipeLists', category: 'Communication & Social', description: 'Recipe sharing and meal planning collaboration tool.', icon: FiBook, color: '#F59E0B', website: 'https://mydeskview.com' },
+      { id: 'taskmanager', title: 'TaskManager', category: 'Communication & Social', description: 'Task management and productivity tracking application.', icon: FiCheck, color: '#8B5CF6', website: 'https://mydeskview.com' },
+      { id: 'technologyandtimes-app', title: 'TechnologyAndTimes', category: 'Communication & Social', description: 'Technology news and media portal.', icon: FiCpu, color: '#0EA5E9', website: 'https://mydeskview.com' },
+      { id: 'teleprompter', title: 'Teleprompter', category: 'Communication & Social', description: 'Digital teleprompter for presentations and video production.', icon: FiMonitor, color: '#EC4899', website: 'https://mydeskview.com' },
+      // Health
+      { id: 'disease-tracker', title: 'Disease Tracker', category: 'Health', description: 'Disease monitoring and health condition tracking application.', icon: FiHeart, color: '#EF4444', website: 'https://mydeskview.com' },
+      { id: 'fitness-tracker', title: 'Fitness Tracker', category: 'Health', description: 'Fitness activity tracking and workout management.', icon: FiHeart, color: '#10B981', website: 'https://mydeskview.com' },
+      { id: 'gymnastictracker', title: 'GymnasticTracker', category: 'Health', description: 'Gymnastics training and performance tracking tool.', icon: FiAward, color: '#8B5CF6', website: 'https://mydeskview.com' },
+      { id: 'health-tracker', title: 'Health Tracker', category: 'Health', description: 'Comprehensive health monitoring and wellness tracking.', icon: FiHeart, color: '#EC4899', website: 'https://mydeskview.com' },
+      { id: 'healthaidtracking', title: 'HealthAidTracking', category: 'Health', description: 'Health aid and medication tracking management system.', icon: FiHeart, color: '#F97316', website: 'https://mydeskview.com' },
+      { id: 'migrainetinitrustracker', title: 'MigraineTinitusTracker', category: 'Health', description: 'Migraine and tinnitus symptom tracking and management.', icon: FiHeart, color: '#6366F1', website: 'https://mydeskview.com' },
+      { id: 'walktracker', title: 'WalkTracker', category: 'Health', description: 'Walking activity tracker with distance and step counting.', icon: FiHeart, color: '#0EA5E9', website: 'https://mydeskview.com' }
     ]
   },
   {
@@ -882,97 +941,7 @@ const itemVariants = {
   }
 };
 
-// MyDeskView Integrated Software Data
-const integratedSoftware = {
-  'Business & Finance': [
-    'AccessMoney', 'AI Trading', 'AppointmentBook', 'BistroRestaurant', 'BusinessTracker',
-    'CreativeTracker', 'DollarDimeStore', 'EmployDirectory', 'EmployeeHandBook',
-    'GasolineFinder', 'InvestmentTracker', 'RealEstatePortal'
-  ],
-  'Education & Learning': [
-    'Animals', 'GrammyHistory', 'GuitarBranded', 'InventorsBio', 'LearnSkills365.com',
-    'MusiciansHallOfFame', 'MyGreatRecipes', 'NationalParks', 'NewsChannels',
-    'NinePlanets', 'Quiz System', 'SportsTracker'
-  ],
-  'Entertainment & Leisure': [
-    'A Snowy Christmas', 'Apple M Processors', 'Biographies', 'CarShow YouTube',
-    'CoolJimmy', 'CorvetteQuiz', 'CruiseFinder', 'GoodDayMusic'
-  ],
-  'Personal Productivity': [
-    'DIY Solutions', 'MyBusinessOrganizer', 'MyDateBook', 'MyDeskView',
-    'MyDeskView - 2026 Places', 'MyDeskView - YouTube', 'MyPersonalOrganizer', 'Photo Albums'
-  ],
-  'Communication & Social': [
-    'Hi5', 'MyTelephoneBook', 'RecipeLists', 'TaskManager', 'TechnologyAndTimes', 'Teleprompter'
-  ],
-  'Health': [
-    'Disease Tracker', 'Fitness Tracker', 'GymnasticTracker', 'Health Tracker',
-    'HealthAidTracking', 'MigraineTinitusTracker', 'WalkTracker'
-  ]
-};
 
-const SoftwareSection = styled.section`
-  padding: ${({ theme }) => theme.spacing.xxl};
-  background: ${({ theme }) => theme.colors.surface};
-  
-  @media (max-width: 768px) {
-    padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.md};
-  }
-`;
-
-const SoftwareSectionTitle = styled.h2`
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: ${({ theme }) => theme.spacing.xl};
-  background: ${({ theme }) => theme.colors.gradient};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
-
-const SoftwareGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: ${({ theme }) => theme.spacing.lg};
-  max-width: 1400px;
-  margin: 0 auto;
-`;
-
-const SoftwareCategoryGroup = styled.div`
-  background: ${({ theme }) => theme.colors.background};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.borderRadius.xl};
-  padding: ${({ theme }) => theme.spacing.lg};
-`;
-
-const SoftwareCategoryTitle = styled.h3`
-  font-size: 1.125rem;
-  color: ${({ theme }) => theme.colors.primary};
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-  padding-bottom: ${({ theme }) => theme.spacing.sm};
-  border-bottom: 2px solid ${({ theme }) => theme.colors.primary}20;
-`;
-
-const SoftwareItemsList = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xs};
-`;
-
-const SoftwareItemEntry = styled.li`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  font-size: 0.875rem;
-  
-  svg {
-    color: ${({ theme }) => theme.colors.success};
-    flex-shrink: 0;
-    font-size: 0.875rem;
-  }
-`;
 
 export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState('react-nextjs');
@@ -1168,25 +1137,7 @@ export default function PortfolioPage() {
         </TabContentWrapper>
       </TabSection>
 
-      <SoftwareSection>
-        <Container>
-          <SoftwareSectionTitle>MyDeskView Series Software Integration</SoftwareSectionTitle>
-          <SoftwareGrid>
-            {Object.entries(integratedSoftware).map(([category, items]) => (
-              <SoftwareCategoryGroup key={category}>
-                <SoftwareCategoryTitle>{category}</SoftwareCategoryTitle>
-                <SoftwareItemsList>
-                  {items.map((title) => (
-                    <SoftwareItemEntry key={title}>
-                      <FiCheck /> {title}
-                    </SoftwareItemEntry>
-                  ))}
-                </SoftwareItemsList>
-              </SoftwareCategoryGroup>
-            ))}
-          </SoftwareGrid>
-        </Container>
-      </SoftwareSection>
+
     </PageWrapper>
   );
 }

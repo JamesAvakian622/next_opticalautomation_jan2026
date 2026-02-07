@@ -204,7 +204,7 @@ export default function SoftwareDetailPage({ slug }) {
                     transition={{ duration: 0.5 }}
                 >
                     <Title>{software.title}</Title>
-                    <Subtitle>Excells in {software.category}</Subtitle>
+                    <Subtitle>{software.customLabel || `Excels in ${software.category}`}</Subtitle>
                 </HeroSection>
 
                 <ImagePlaceholder
@@ -232,20 +232,35 @@ export default function SoftwareDetailPage({ slug }) {
                     </FeaturesList>
 
                     <ButtonContainer>
-                        <VisitButton
-                            href="https://mydeskview.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Visit MyDeskView.com <FiExternalLink />
-                        </VisitButton>
-                        <VisitButton
-                            href="http://www.GoodDayMusic.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            GoodDayMusic.com <FiExternalLink />
-                        </VisitButton>
+                        {software.customButtons ? (
+                            software.customButtons.map((btn) => (
+                                <VisitButton
+                                    key={btn.label}
+                                    href={btn.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {btn.label} <FiExternalLink />
+                                </VisitButton>
+                            ))
+                        ) : (
+                            <>
+                                <VisitButton
+                                    href="https://mydeskview.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Visit MyDeskView.com <FiExternalLink />
+                                </VisitButton>
+                                <VisitButton
+                                    href="http://www.GoodDayMusic.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    GoodDayMusic.com <FiExternalLink />
+                                </VisitButton>
+                            </>
+                        )}
                     </ButtonContainer>
                 </ContentSection>
             </Container>
