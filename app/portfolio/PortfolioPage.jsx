@@ -1081,7 +1081,6 @@ export default function PortfolioPage() {
               $activeColor={category.color}
               onClick={() => {
                 setActiveTab(category.id);
-                document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
               }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

@@ -88,15 +88,17 @@ const TabButton = styled.button`
 
 
 const PricingGrid = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: ${({ theme }) => theme.spacing.xl};
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
 
-    @media (max-width: 400px) {
-        flex-direction: column;
-        align-items: center;
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
     }
 `;
 
@@ -283,9 +285,9 @@ const pricingPlans = {
     web: [
         {
             name: 'Starter Website',
-            price: '$249',
+            price: '$3,499',
             period: 'one-time',
-            updates: '$125 updates',
+            updates: '$249 updates',
             description: 'Professional presence for small businesses.',
             color: '#6366f1',
             featured: false,
@@ -300,9 +302,9 @@ const pricingPlans = {
         },
         {
             name: 'Business Solution Web',
-            price: '$750',
+            price: '$4,999',
             period: 'one-time',
-            updates: '$249/month updates',
+            updates: '$499/spot updates or $2,500/month',
             description: 'Advanced business features and database.',
             color: '#10B981',
             featured: true,
@@ -312,43 +314,74 @@ const pricingPlans = {
                 'Admin Dashboard',
                 'Custom API Design',
                 'Priority Support',
-                'Advanced Analytics'
+                'SEO Optimization with Analytics'
+            ]
+        },
+        {
+            name: 'Business eCommerce Solution',
+            price: '$7,500',
+            period: 'one-time',
+            updates: '$2,499/month',
+            description: 'Full-featured eCommerce platform for online businesses.',
+            color: '#F59E0B',
+            featured: false,
+            features: [
+                'Complete eCommerce Platform',
+                'Stripe & PayPal Integration',
+                'Product Catalog & Inventory',
+                'Order Management System',
+                'Customer Accounts & Dashboards',
+                'Analytics & Reporting'
             ]
         }
     ],
     mobile: [
         {
-            name: 'Starter Mobile App',
-            price: '$249',
+            name: 'Starter WebView',
+            price: '$1,299',
             period: 'one-time',
-            updates: '$125 updates',
-            description: 'Professional app for either iOS or Android.',
+            description: 'WebView-based mobile app for quick market entry.',
             color: '#EC4899',
             featured: false,
             features: [
-                'Native Performance',
-                'Core Functionality',
-                'User Login',
-                'Basic Push Notifications',
+                'Single WebView',
+                'iOS or Android',
+                'Responsive Design',
                 'Store Submission',
-                'Essential Features'
+                'Core Functionality',
+                'Basic Support'
             ]
         },
         {
-            name: 'Business iOS and Android',
-            price: '$499',
+            name: 'Dual Starter Apps',
+            price: '$2,499',
             period: 'one-time',
-            updates: '$249 updates',
-            description: 'High-performance cross-platform application.',
+            description: 'WebView apps for both iOS and Android platforms.',
             color: '#06B6D4',
             featured: true,
             features: [
-                'Both iOS and Android',
+                'iOS & Android WebView',
                 'Both Store Submissions',
-                'Cross-platform Sync',
-                'Push Notifications Pro',
+                'Cross-platform Access',
+                'Push Notifications',
                 'Unified Management',
-                'Priority Tech Support'
+                'Priority Support'
+            ]
+        },
+        {
+            name: 'BusinessWebView and Pro Apps',
+            price: '$4,999',
+            period: 'one-time',
+            description: 'Full-featured business mobile application.',
+            color: '#F59E0B',
+            featured: false,
+            features: [
+                'Native Business App',
+                'WebView Integration',
+                'Advanced Features',
+                'Custom API Integration',
+                'Analytics Dashboard',
+                'Premium Support'
             ]
         }
     ],
@@ -413,7 +446,7 @@ export default function PricingPage() {
 
                     <TabContainer>
                         <TabButton $active={activeTab === 'web'} onClick={() => setActiveTab('web')}>Starter Website</TabButton>
-                        <TabButton $active={activeTab === 'mobile'} onClick={() => setActiveTab('mobile')}>Starter Mobile App</TabButton>
+                        <TabButton $active={activeTab === 'mobile'} onClick={() => setActiveTab('mobile')}>Mobile App</TabButton>
                         <TabButton $active={activeTab === 'both'} onClick={() => setActiveTab('both')}>Both (Web + Apps)</TabButton>
                     </TabContainer>
                 </HeroSection>
@@ -467,6 +500,39 @@ export default function PricingPage() {
                             transition={{ delay: 0.1 }}
                         >
                             <ServiceIcon>
+                                <FiCode />
+                            </ServiceIcon>
+                            <ServiceTitle>Sharp Design</ServiceTitle>
+                            <ServiceDesc>Modern, visually stunning interfaces crafted for maximum impact and user engagement</ServiceDesc>
+                        </ServiceItem>
+                        <ServiceItem
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                        >
+                            <ServiceIcon>
+                                <FiZap />
+                            </ServiceIcon>
+                            <ServiceTitle>SEO Optimization</ServiceTitle>
+                            <ServiceDesc>Search engine optimized pages with metadata-driven content for maximum visibility</ServiceDesc>
+                        </ServiceItem>
+                        <ServiceItem
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                        >
+                            <ServiceIcon>
+                                <FiDatabase />
+                            </ServiceIcon>
+                            <ServiceTitle>Information Research</ServiceTitle>
+                            <ServiceDesc>In-depth research and data-driven content to power your application</ServiceDesc>
+                        </ServiceItem>
+                        <ServiceItem
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                        >
+                            <ServiceIcon>
                                 <FiDatabase />
                             </ServiceIcon>
                             <ServiceTitle>Database Design</ServiceTitle>
@@ -475,7 +541,7 @@ export default function PricingPage() {
                         <ServiceItem
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
+                            transition={{ delay: 0.5 }}
                         >
                             <ServiceIcon>
                                 <FiCode />
@@ -486,7 +552,7 @@ export default function PricingPage() {
                         <ServiceItem
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
+                            transition={{ delay: 0.6 }}
                         >
                             <ServiceIcon>
                                 <FiShield />
@@ -497,13 +563,24 @@ export default function PricingPage() {
                         <ServiceItem
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
+                            transition={{ delay: 0.7 }}
                         >
                             <ServiceIcon>
                                 <FiCloud />
                             </ServiceIcon>
                             <ServiceTitle>Cloud Hosting</ServiceTitle>
                             <ServiceDesc>Deployment assistance and hosting recommendations</ServiceDesc>
+                        </ServiceItem>
+                        <ServiceItem
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.8 }}
+                        >
+                            <ServiceIcon>
+                                <FiShield />
+                            </ServiceIcon>
+                            <ServiceTitle>Login Secure Authentication</ServiceTitle>
+                            <ServiceDesc>Enterprise-grade user authentication with secure login and access control</ServiceDesc>
                         </ServiceItem>
                     </ServicesGrid>
                 </ServicesSection>
