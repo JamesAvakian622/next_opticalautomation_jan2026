@@ -519,8 +519,51 @@ export default function PricingPage() {
     const [activeTab, setActiveTab] = React.useState('readymade');
     const [whatsIncludedOpen, setWhatsIncludedOpen] = React.useState(false);
 
+    // JSON-LD Structured Data for SEO
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: 'Optical Automation Product Marketing Solutions',
+        description: 'Professional web development, mobile app development, and ready-made software solutions. SOC2 and ISO 8601 compliant.',
+        url: 'https://opticalautomation.com/pricing',
+        brand: {
+            '@type': 'Organization',
+            name: 'Optical Automation',
+            url: 'https://opticalautomation.com'
+        },
+        offers: Object.entries(pricingPlans).flatMap(([category, plans]) =>
+            plans.map(plan => ({
+                '@type': 'Offer',
+                name: plan.name,
+                price: plan.price.replace(/[^0-9.]/g, '') || '0',
+                priceCurrency: 'USD',
+                description: plan.description,
+                category: category,
+                availability: 'https://schema.org/InStock'
+            }))
+        ),
+        dateModified: new Date().toISOString(),
+        additionalProperty: [
+            {
+                '@type': 'PropertyValue',
+                name: 'SOC2 Compliance',
+                value: 'SOC2 Type II compliant — Security, Availability, Processing Integrity, Confidentiality, and Privacy controls verified for all delivered solutions.'
+            },
+            {
+                '@type': 'PropertyValue',
+                name: 'ISO 8601 Compliance',
+                value: 'All date and time values conform to ISO 8601 international standard format (YYYY-MM-DDTHH:MM:SSZ).'
+            }
+        ]
+    };
+
     return (
         <PageWrapper>
+            {/* JSON-LD Structured Data for SEO */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <Container>
                 <HeroSection>
                     <Title

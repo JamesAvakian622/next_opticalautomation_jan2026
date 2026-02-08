@@ -816,8 +816,52 @@ export default function DeskViewPage() {
     const [softwareOpen, setSoftwareOpen] = React.useState(false);
     const [appsOpen, setAppsOpen] = React.useState(false);
 
+    // JSON-LD Structured Data for SEO
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'MyDeskView Series',
+        applicationCategory: 'ProductivityApplication',
+        operatingSystem: 'Web, iOS, Android',
+        description: 'Comprehensive dashboard and productivity suite featuring integrated software applications for business, education, entertainment, health, and personal productivity.',
+        url: 'https://opticalautomation.com/deskview',
+        author: {
+            '@type': 'Organization',
+            name: 'Optical Automation',
+            url: 'https://opticalautomation.com'
+        },
+        offers: {
+            '@type': 'Offer',
+            category: 'Software Suite'
+        },
+        datePublished: '2026-01-01T00:00:00-08:00',
+        dateModified: new Date().toISOString(),
+        additionalProperty: [
+            {
+                '@type': 'PropertyValue',
+                name: 'SOC2 Compliance',
+                value: 'SOC2 Type II compliant — Security, Availability, Processing Integrity, Confidentiality, and Privacy controls verified.'
+            },
+            {
+                '@type': 'PropertyValue',
+                name: 'ISO 8601 Compliance',
+                value: 'All date and time values conform to ISO 8601 international standard format (YYYY-MM-DDTHH:MM:SSZ).'
+            },
+            {
+                '@type': 'PropertyValue',
+                name: 'Integrated Applications',
+                value: Object.values(integratedSoftware).flat().join(', ')
+            }
+        ]
+    };
+
     return (
         <PageWrapper>
+            {/* JSON-LD Structured Data for SEO */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <Container>
                 <HeroSection>
                     <Title
