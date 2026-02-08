@@ -15,7 +15,8 @@ import {
     FiStar,
     FiZap,
     FiShield,
-    FiCloud
+    FiCloud,
+    FiChevronDown
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -67,6 +68,7 @@ const TabContainer = styled.div`
     justify-content: center;
     gap: ${({ theme }) => theme.spacing.sm};
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
+    flex-wrap: wrap;
 `;
 
 const TabButton = styled.button`
@@ -281,6 +283,43 @@ const ServiceDesc = styled.p`
     font-size: 0.875rem;
 `;
 
+const AccordionHeader = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
+    background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.15)'};
+    border: 1px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.5)' : 'rgba(59, 130, 246, 0.4)'};
+    border-radius: ${({ theme }) => theme.borderRadius.lg};
+    margin-bottom: ${({ theme }) => theme.spacing.md};
+    transition: all 0.3s ease;
+    user-select: none;
+
+    &:hover {
+        border-color: ${({ theme }) => theme.colors.primary};
+        box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        color: ${({ theme }) => theme.mode === 'dark' ? '#ffffff' : '#000000'};
+        -webkit-text-fill-color: ${({ theme }) => theme.mode === 'dark' ? '#ffffff' : '#000000'};
+        margin: 0;
+    }
+
+    svg {
+        font-size: 1.5rem;
+        color: ${({ theme }) => theme.colors.primary};
+        transition: transform 0.3s ease;
+        transform: ${({ $isOpen }) => $isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+    }
+`;
+
+const AccordionContent = styled(motion.div)`
+    overflow: hidden;
+`;
+
 const pricingPlans = {
     web: [
         {
@@ -422,13 +461,63 @@ const pricingPlans = {
                 'Priority 24/7 Support'
             ]
         }
+    ],
+    readymade: [
+        {
+            name: 'Single Application',
+            price: '$2, 5, and 10',
+            period: 'one-time',
+            description: 'Choose a single application from our catalog. Pricing varies by app tier — from basic tools to full-featured premium applications.',
+            color: '#8B5CF6',
+            featured: false,
+            features: [
+                'One Application License',
+                'Instant Access',
+                '$2 Basic, $5 Premium, $10 Top-Tier',
+                'Full Features at Every Level',
+                'Community & Email Support'
+            ]
+        },
+        {
+            name: 'Silver Group',
+            price: '$49',
+            period: 'one-time',
+            description: 'Bundle of twenty applications from our catalog. Perfect for users who want a broad selection of tools.',
+            color: '#94A3B8',
+            featured: true,
+            features: [
+                '20 Applications Included',
+                'Mix & Match Any Apps',
+                'Full Feature Access',
+                'Cross-App Integration',
+                'Email & Chat Support',
+                'Free Updates for 6 Months'
+            ]
+        },
+        {
+            name: 'Gold Level',
+            price: '$125',
+            period: '/year',
+            description: 'Annual all-title access. Every application in our entire catalog, current and future, included for one year.',
+            color: '#F59E0B',
+            featured: false,
+            features: [
+                'All Titles Available',
+                'Annual Access Pass',
+                'New Titles Included',
+                'Full Feature Access',
+                'Priority Support',
+                'Exclusive Updates'
+            ]
+        }
     ]
 };
 
 
 
 export default function PricingPage() {
-    const [activeTab, setActiveTab] = React.useState('both');
+    const [activeTab, setActiveTab] = React.useState('readymade');
+    const [whatsIncludedOpen, setWhatsIncludedOpen] = React.useState(false);
 
     return (
         <PageWrapper>
@@ -438,13 +527,14 @@ export default function PricingPage() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <Image src="/opauto.png" alt="Logo" width={40} height={40} style={{ objectFit: 'contain' }} /> Application Production
+                        <Image src="/opauto.png" alt="Logo" width={40} height={40} style={{ objectFit: 'contain' }} /> Product Marketing Pricing
                     </Title>
                     <Subtitle>
                         Let us create a profitable software solution for your company.
                     </Subtitle>
 
                     <TabContainer>
+                        <TabButton $active={activeTab === 'readymade'} onClick={() => setActiveTab('readymade')}>Ready-Made Products</TabButton>
                         <TabButton $active={activeTab === 'web'} onClick={() => setActiveTab('web')}>Starter Website</TabButton>
                         <TabButton $active={activeTab === 'mobile'} onClick={() => setActiveTab('mobile')}>Mobile App</TabButton>
                         <TabButton $active={activeTab === 'both'} onClick={() => setActiveTab('both')}>Both (Web + Apps)</TabButton>
@@ -491,99 +581,152 @@ export default function PricingPage() {
                 </PricingGrid>
 
 
-                <ServicesSection>
-                    <SectionTitle>What's Included</SectionTitle>
-                    <ServicesGrid>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                        >
-                            <ServiceIcon>
-                                <FiCode />
-                            </ServiceIcon>
-                            <ServiceTitle>Sharp Design</ServiceTitle>
-                            <ServiceDesc>Modern, visually stunning interfaces crafted for maximum impact and user engagement</ServiceDesc>
-                        </ServiceItem>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                        >
-                            <ServiceIcon>
-                                <FiZap />
-                            </ServiceIcon>
-                            <ServiceTitle>SEO Optimization</ServiceTitle>
-                            <ServiceDesc>Search engine optimized pages with metadata-driven content for maximum visibility</ServiceDesc>
-                        </ServiceItem>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                        >
-                            <ServiceIcon>
-                                <FiDatabase />
-                            </ServiceIcon>
-                            <ServiceTitle>Information Research</ServiceTitle>
-                            <ServiceDesc>In-depth research and data-driven content to power your application</ServiceDesc>
-                        </ServiceItem>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
-                        >
-                            <ServiceIcon>
-                                <FiDatabase />
-                            </ServiceIcon>
-                            <ServiceTitle>Database Design</ServiceTitle>
-                            <ServiceDesc>Custom MongoDB schemas optimized for your business needs</ServiceDesc>
-                        </ServiceItem>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                        >
-                            <ServiceIcon>
-                                <FiCode />
-                            </ServiceIcon>
-                            <ServiceTitle>Clean Code</ServiceTitle>
-                            <ServiceDesc>Well-documented, maintainable code following best practices</ServiceDesc>
-                        </ServiceItem>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.6 }}
-                        >
-                            <ServiceIcon>
-                                <FiShield />
-                            </ServiceIcon>
-                            <ServiceTitle>Security First</ServiceTitle>
-                            <ServiceDesc>Enterprise-grade security with JWT authentication</ServiceDesc>
-                        </ServiceItem>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.7 }}
-                        >
-                            <ServiceIcon>
-                                <FiCloud />
-                            </ServiceIcon>
-                            <ServiceTitle>Cloud Hosting</ServiceTitle>
-                            <ServiceDesc>Deployment assistance and hosting recommendations</ServiceDesc>
-                        </ServiceItem>
-                        <ServiceItem
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8 }}
-                        >
-                            <ServiceIcon>
-                                <FiShield />
-                            </ServiceIcon>
-                            <ServiceTitle>Login Secure Authentication</ServiceTitle>
-                            <ServiceDesc>Enterprise-grade user authentication with secure login and access control</ServiceDesc>
-                        </ServiceItem>
-                    </ServicesGrid>
-                </ServicesSection>
+                <AccordionHeader $isOpen={whatsIncludedOpen} onClick={() => setWhatsIncludedOpen(!whatsIncludedOpen)}>
+                    <h3>What's Included</h3>
+                    <FiChevronDown />
+                </AccordionHeader>
+                <AccordionContent
+                    initial={false}
+                    animate={{ height: whatsIncludedOpen ? 'auto' : 0, opacity: whatsIncludedOpen ? 1 : 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                >
+                    <ServicesSection>
+                        <ServicesGrid>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 }}
+                            >
+                                <ServiceIcon>
+                                    <FiCode />
+                                </ServiceIcon>
+                                <ServiceTitle>Sharp Design</ServiceTitle>
+                                <ServiceDesc>Modern, visually stunning interfaces crafted for maximum impact and user engagement</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 }}
+                            >
+                                <ServiceIcon>
+                                    <FiZap />
+                                </ServiceIcon>
+                                <ServiceTitle>SEO Optimization</ServiceTitle>
+                                <ServiceDesc>Search engine optimized pages with metadata-driven content for maximum visibility</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 }}
+                            >
+                                <ServiceIcon>
+                                    <FiDatabase />
+                                </ServiceIcon>
+                                <ServiceTitle>Information Research</ServiceTitle>
+                                <ServiceDesc>In-depth research and data-driven content to power your application</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4 }}
+                            >
+                                <ServiceIcon>
+                                    <FiDatabase />
+                                </ServiceIcon>
+                                <ServiceTitle>Database Design</ServiceTitle>
+                                <ServiceDesc>Custom MongoDB schemas optimized for your business needs</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 }}
+                            >
+                                <ServiceIcon>
+                                    <FiCode />
+                                </ServiceIcon>
+                                <ServiceTitle>Clean Code</ServiceTitle>
+                                <ServiceDesc>Well-documented, maintainable code following best practices</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.6 }}
+                            >
+                                <ServiceIcon>
+                                    <FiShield />
+                                </ServiceIcon>
+                                <ServiceTitle>Security First</ServiceTitle>
+                                <ServiceDesc>Enterprise-grade security with JWT authentication</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.7 }}
+                            >
+                                <ServiceIcon>
+                                    <FiCloud />
+                                </ServiceIcon>
+                                <ServiceTitle>Cloud Hosting</ServiceTitle>
+                                <ServiceDesc>Deployment assistance and hosting recommendations</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.8 }}
+                            >
+                                <ServiceIcon>
+                                    <FiShield />
+                                </ServiceIcon>
+                                <ServiceTitle>Login Secure Authentication</ServiceTitle>
+                                <ServiceDesc>Enterprise-grade user authentication with secure login and access control</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.9 }}
+                            >
+                                <ServiceIcon>
+                                    <FiDatabase />
+                                </ServiceIcon>
+                                <ServiceTitle>Historic Research</ServiceTitle>
+                                <ServiceDesc>Thorough historical data analysis and research integrated into every application</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 1.0 }}
+                            >
+                                <ServiceIcon>
+                                    <FiServer />
+                                </ServiceIcon>
+                                <ServiceTitle>Full Available Background</ServiceTitle>
+                                <ServiceDesc>Comprehensive background information and context provided for all application data</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 1.1 }}
+                            >
+                                <ServiceIcon>
+                                    <FiZap />
+                                </ServiceIcon>
+                                <ServiceTitle>Latent Industry</ServiceTitle>
+                                <ServiceDesc>Emerging market insights and latent industry trends incorporated into solutions</ServiceDesc>
+                            </ServiceItem>
+                            <ServiceItem
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 1.2 }}
+                            >
+                                <ServiceIcon>
+                                    <FiShield />
+                                </ServiceIcon>
+                                <ServiceTitle>SOC2 & ISO8601 Compliance</ServiceTitle>
+                                <ServiceDesc>Standard SOC2 and ISO8601 compliance applied to every application</ServiceDesc>
+                            </ServiceItem>
+                        </ServicesGrid>
+                    </ServicesSection>
+                </AccordionContent>
             </Container>
         </PageWrapper>
     );

@@ -22,7 +22,8 @@ import {
     FiCalendar,
     FiMonitor,
     FiMapPin,
-    FiImage
+    FiImage,
+    FiChevronDown
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -154,22 +155,28 @@ border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const FeaturedCardWrapper = styled.div`
-flex: 0 0 400px;
-max - width: 100 %;
+flex: 0 0 280px;
+max-width: 100%;
 
-@media(max - width: 1024px) {
+@media(max-width: 1024px) {
     flex: 1;
-    width: 100 %;
-    max - width: 500px;
+    width: 100%;
+    max-width: 500px;
 }
 `;
 
 const ScreenshotWrapper = styled(motion.div)`
-flex: 1;
-border - radius: ${({ theme }) => theme.borderRadius.xl};
+flex: 2;
+min-width: 0;
+margin-top: 60px;
+border-radius: ${({ theme }) => theme.borderRadius.xl};
 overflow: hidden;
-box - shadow: 0 20px 40px ${({ theme }) => theme.colors.shadow};
+box-shadow: 0 20px 40px ${({ theme }) => theme.colors.shadow};
 border: 1px solid ${({ theme }) => theme.colors.border};
+
+@media(max-width: 1024px) {
+    margin-top: 0;
+}
 `;
 
 const ScreenshotImage = styled.img`
@@ -519,6 +526,43 @@ color: ${({ theme }) => theme.colors.textSecondary};
 font - size: 0.875rem;
 `;
 
+const AccordionHeader = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
+    background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.15)'};
+    border: 1px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(59, 130, 246, 0.5)' : 'rgba(59, 130, 246, 0.4)'};
+    border-radius: ${({ theme }) => theme.borderRadius.lg};
+    margin-bottom: ${({ theme }) => theme.spacing.md};
+    transition: all 0.3s ease;
+    user-select: none;
+
+    &:hover {
+        border-color: ${({ theme }) => theme.colors.primary};
+        box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        color: ${({ theme }) => theme.mode === 'dark' ? '#ffffff' : '#000000'};
+        -webkit-text-fill-color: ${({ theme }) => theme.mode === 'dark' ? '#ffffff' : '#000000'};
+        margin: 0;
+    }
+
+    svg {
+        font-size: 1.5rem;
+        color: ${({ theme }) => theme.colors.primary};
+        transition: transform 0.3s ease;
+        transform: ${({ $isOpen }) => $isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+    }
+`;
+
+const AccordionContent = styled(motion.div)`
+    overflow: hidden;
+`;
+
 const products = [
     {
         name: 'MyDeskView',
@@ -583,24 +627,7 @@ const products = [
         features: ['Video Library', 'Quick Access Menu', 'Playlist Management', 'Watch History'],
         icon: FiExternalLink
     },
-    {
-        name: 'DIY Solutions',
-        url: 'www.MyDeskView.com',
-        description: 'Do-it-yourself solutions and projects for home improvement and creative endeavors.',
-        color: '#F59E0B',
-        active: true,
-        features: ['Project Guides', 'Tool Lists', 'Step-by-Step Instructions', 'Material Calculators'],
-        icon: FiTool
-    },
-    {
-        name: 'MyDateBook',
-        url: 'www.MyDeskView.com',
-        description: 'Personal date and event management with calendar integration and reminders.',
-        color: '#8B5CF6',
-        active: true,
-        features: ['Event Calendar', 'Reminders', 'Date Tracking', 'Anniversary Alerts'],
-        icon: FiCalendar
-    },
+
 
     {
         name: 'MyDeskView - 2026 Places',
@@ -648,8 +675,7 @@ const integratedSoftware = {
         'NationalParks',
         'NewsChannels',
         'NinePlanets',
-        'Quiz System',
-        'SportsTracker'
+        'Quiz System'
     ],
     'Entertainment & Leisure': [
         'A Snowy Christmas',
@@ -664,12 +690,21 @@ const integratedSoftware = {
         'OlympicsTracker',
         'OscarTracker'
     ],
-    'Personal Productivity': [
-        'DIY Solutions',
-        'DrivingRoute',
-        'Weather',
-        'AirlineTracker',
-        'Photo Albums'
+    'Health & Sports': [
+        'CorvettePartsClubs Tracker',
+        'CorvetteShows',
+        'DiseaseTracker',
+        'Fitness Tracker',
+        'GymnasticTracker',
+        'Health Tracker',
+        'HealthAidTracking',
+        'IndyCarTracker',
+        'MigraineTinitusTracker',
+        'NascarTracker',
+        'SportsTracker',
+        'SuperBowlTracker',
+        'TrackAndFieldTracker',
+        'WalkTracker'
     ],
     'Communication & Social': [
         'Hi5',
@@ -679,14 +714,17 @@ const integratedSoftware = {
         'TechnologyAndTimes',
         'Teleprompter'
     ],
-    'Health': [
-        'Disease Tracker',
-        'Fitness Tracker',
-        'GymnasticTracker',
-        'Health Tracker',
-        'HealthAidTracking',
-        'MigraineTinitusTracker',
-        'WalkTracker'
+    'Personal Productivity': [
+        'AirlineTracker',
+        'BuyingAgent',
+        'CarBuyingAgent',
+        'DIY Solutions',
+        'DrivingRoute',
+        'ElectricCarAgent',
+        'MyDateBook',
+        'Photo Albums',
+        'TruckBuyingAgent',
+        'Weather'
     ]
 };
 
@@ -696,6 +734,78 @@ const softwareFeatures = {
         label: 'Learning',
         features: ['Math', 'Reading', 'Memory', 'Typing Game', 'Geography', 'Writing', 'Quizzes', 'and more Applications'],
         internalUrl: '/deskview/software/learnskills365'
+    },
+    'DiseaseTracker': {
+        label: 'Health & Sports',
+        features: ['Symptom Logging', 'Medication Reminders', 'Health History', 'Doctor Notes']
+    },
+    'Fitness Tracker': {
+        label: 'Health & Sports',
+        features: ['Workout Logging', 'Step Counter', 'Goal Setting', 'Progress Charts']
+    },
+    'GymnasticTracker': {
+        label: 'Health & Sports',
+        features: ['Routine Logging', 'Skill Tracking', 'Competition Scores', 'Training Plans']
+    },
+    'Health Tracker': {
+        label: 'Health & Sports',
+        features: ['Vital Signs', 'Sleep Tracking', 'Nutrition Log', 'Health Reports']
+    },
+    'HealthAidTracking': {
+        label: 'Health & Sports',
+        features: ['Medical Aids', 'Prescription Tracking', 'Appointment Calendar', 'Insurance Info']
+    },
+    'IndyCarTracker': {
+        label: 'Health & Sports',
+        features: ['Race Schedules', 'Driver Standings', 'Lap-by-Lap Stats', 'Team Profiles']
+    },
+    'MigraineTinitusTracker': {
+        label: 'Health & Sports',
+        features: ['Episode Logging', 'Trigger Identification', 'Pattern Analysis', 'Doctor Reports']
+    },
+    'NascarTracker': {
+        label: 'Health & Sports',
+        features: ['Race Calendar', 'Driver Rankings', 'Lap Times', 'Pit Stop Data']
+    },
+    'SportsTracker': {
+        label: 'Health & Sports',
+        features: ['Live Scores', 'Team Stats', 'Schedule', 'Player Profiles']
+    },
+    'SuperBowlTracker': {
+        label: 'Health & Sports',
+        features: ['Game History', 'MVP Awards', 'Team Records', 'Halftime Shows']
+    },
+    'TrackAndFieldTracker': {
+        label: 'Health & Sports',
+        features: ['Event Results', 'Athlete Records', 'Meet Schedules', 'Personal Bests']
+    },
+    'WalkTracker': {
+        label: 'Health & Sports',
+        features: ['Route Recording', 'Distance Tracking', 'Pace Analysis', 'Walking Goals']
+    },
+    'CorvetteShows': {
+        label: 'Health & Sports',
+        features: ['Show Listings', 'Event Calendar', 'Photo Galleries', 'Registration Info']
+    },
+    'CorvettePartsClubs Tracker': {
+        label: 'Health & Sports',
+        features: ['OEM Parts Catalog', 'Club Directory', 'Event Schedules', 'Member Forums']
+    },
+    'BuyingAgent': {
+        label: 'Personal Productivity',
+        features: ['Price Comparison', 'Deal Alerts', 'Product Research', 'Purchase History']
+    },
+    'CarBuyingAgent': {
+        label: 'Personal Productivity',
+        features: ['Vehicle Search', 'Price Analysis', 'Dealer Listings', 'Trade-In Values']
+    },
+    'ElectricCarAgent': {
+        label: 'Personal Productivity',
+        features: ['EV Listings', 'Range Calculator', 'Charging Stations', 'Incentive Finder']
+    },
+    'TruckBuyingAgent': {
+        label: 'Personal Productivity',
+        features: ['Truck Search', 'Towing Specs', 'Dealer Network', 'Price Comparison']
     }
 };
 
@@ -703,6 +813,8 @@ export default function DeskViewPage() {
     const FeaturedIcon = products[0].icon;
     const FeaturedIcon2 = products[1].icon;
     const FeaturedIcon3 = products[2].icon;
+    const [softwareOpen, setSoftwareOpen] = React.useState(false);
+    const [appsOpen, setAppsOpen] = React.useState(false);
 
     return (
         <PageWrapper>
@@ -755,7 +867,7 @@ export default function DeskViewPage() {
 
                 <IntroSection initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
 
-                    <SectionSubtitle style={{ fontSize: '2.5rem' }}>Your Central Desktop</SectionSubtitle>
+                    <SectionSubtitle style={{ fontSize: '2rem' }}>Your Central Desktop</SectionSubtitle>
                     <DescriptionParagraph>
                         MyDeskView serves as your comprehensive dashboard for managing all aspects of your daily workflow. This powerful application brings together your most important information, tasks, and tools in one centralized location, allowing you to maintain focus and productivity throughout your day. With its intuitive interface and customizable widgets, you can tailor your workspace to match your unique needs and preferences.
                     </DescriptionParagraph>
@@ -769,44 +881,50 @@ export default function DeskViewPage() {
                         Built with performance and reliability in mind, MyDeskView ensures your data is always accessible and secure. The application employs industry-standard encryption and follows best practices for data protection, giving you peace of mind while you focus on what matters most. Whether you're working from the office, home, or on the go, MyDeskView provides a consistent and reliable experience across all your devices.
                     </DescriptionParagraph>
 
-                    <SectionSubtitle style={{ marginTop: '1.5rem', marginBottom: '1rem', fontSize: '2.5rem' }}>
-                        MyDeskView Series Software Integration
-                    </SectionSubtitle>
-
-                    <SoftwareGrid>
-                        {Object.entries(integratedSoftware).map(([category, items]) => (
-                            <CategoryGroup key={category}>
-                                <CategoryTitle>{category}</CategoryTitle>
-                                <CategoryItemsList>
-                                    {items.map((title) => (
-                                        <SoftwareItemWrapper key={title}>
-                                            <SoftwareItem>
-                                                <FiCheck /> {title}
-                                            </SoftwareItem>
-                                            <SoftwareTooltip>
-                                                <TooltipTitle>{title}</TooltipTitle>
-                                                <TooltipCategory>
-                                                    Excels in {softwareFeatures[title] ? softwareFeatures[title].label : category}
-                                                </TooltipCategory>
-                                                {softwareFeatures[title] && (
-                                                    <TooltipFeatures>
-                                                        {softwareFeatures[title].features.map((feat) => (
-                                                            <li key={feat}><FiCheck />{feat}</li>
-                                                        ))}
-                                                    </TooltipFeatures>
-                                                )}
-                                                <TooltipButton
-                                                    href={softwareFeatures[title]?.internalUrl || `/deskview/software/${titleToSlug(title)}`}
-                                                >
-                                                    Visit Site
-                                                </TooltipButton>
-                                            </SoftwareTooltip>
-                                        </SoftwareItemWrapper>
-                                    ))}
-                                </CategoryItemsList>
-                            </CategoryGroup>
-                        ))}
-                    </SoftwareGrid>
+                    <AccordionHeader $isOpen={softwareOpen} onClick={() => setSoftwareOpen(!softwareOpen)}>
+                        <h3>Application Software Integration</h3>
+                        <FiChevronDown />
+                    </AccordionHeader>
+                    <AccordionContent
+                        initial={false}
+                        animate={{ height: softwareOpen ? 'auto' : 0, opacity: softwareOpen ? 1 : 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    >
+                        <SoftwareGrid>
+                            {Object.entries(integratedSoftware).map(([category, items]) => (
+                                <CategoryGroup key={category}>
+                                    <CategoryTitle>{category}</CategoryTitle>
+                                    <CategoryItemsList>
+                                        {items.map((title) => (
+                                            <SoftwareItemWrapper key={title}>
+                                                <SoftwareItem>
+                                                    <FiCheck /> {title}
+                                                </SoftwareItem>
+                                                <SoftwareTooltip>
+                                                    <TooltipTitle>{title}</TooltipTitle>
+                                                    <TooltipCategory>
+                                                        Excels in {softwareFeatures[title] ? softwareFeatures[title].label : category}
+                                                    </TooltipCategory>
+                                                    {softwareFeatures[title] && (
+                                                        <TooltipFeatures>
+                                                            {softwareFeatures[title].features.map((feat) => (
+                                                                <li key={feat}><FiCheck />{feat}</li>
+                                                            ))}
+                                                        </TooltipFeatures>
+                                                    )}
+                                                    <TooltipButton
+                                                        href={softwareFeatures[title]?.internalUrl || `/deskview/software/${titleToSlug(title)}`}
+                                                    >
+                                                        Visit Site
+                                                    </TooltipButton>
+                                                </SoftwareTooltip>
+                                            </SoftwareItemWrapper>
+                                        ))}
+                                    </CategoryItemsList>
+                                </CategoryGroup>
+                            ))}
+                        </SoftwareGrid>
+                    </AccordionContent>
 
                 </IntroSection>
 
@@ -838,7 +956,7 @@ export default function DeskViewPage() {
                             </FeaturesList>
                             {products[0].active && (
                                 <VisitLink
-                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
+                                    href="https://6987d7a939023ea3456d00fb--mypersonalorganizer.netlify.app/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -899,7 +1017,7 @@ export default function DeskViewPage() {
                             </FeaturesList>
                             {products[1].active && (
                                 <VisitLink
-                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
+                                    href="https://6987d7a939023ea3456d00fb--mypersonalorganizer.netlify.app/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -910,95 +1028,105 @@ export default function DeskViewPage() {
                     </FeaturedCardWrapper>
                 </FeaturedSection>
 
-                <FeaturedSection>
-                    <FeaturedCardWrapper>
-                        <ProductCard
-                            initial={{ opacity: 0, x: -20 }}
+                <AccordionHeader $isOpen={appsOpen} onClick={() => setAppsOpen(!appsOpen)}>
+                    <h3>More MyDeskView Applications</h3>
+                    <FiChevronDown />
+                </AccordionHeader>
+                <AccordionContent
+                    initial={false}
+                    animate={{ height: appsOpen ? 'auto' : 0, opacity: appsOpen ? 1 : 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                >
+                    <FeaturedSection>
+                        <FeaturedCardWrapper>
+                            <ProductCard
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                style={{ height: '100%' }}
+                            >
+                                <ProductHeader>
+                                    <ProductIcon $color={products[2].color}>
+                                        <FeaturedIcon3 />
+                                    </ProductIcon>
+                                </ProductHeader>
+                                <ProductName>{products[2].name}</ProductName>
+                                <ProductUrl>{products[2].url}</ProductUrl>
+                                <PlatformStatusContainer style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
+                                    <PlatformStatus $active={products[2].active}>Web : {products[2].active ? 'Active.' : 'Pending.'}</PlatformStatus>
+                                    <PlatformStatus $active={false}>iOS / Android : Pending</PlatformStatus>
+                                </PlatformStatusContainer>
+                                <ProductDescription>{products[2].description}</ProductDescription>
+                                <FeaturesList>
+                                    {products[2].features.map((feature) => (
+                                        <FeatureItem key={feature}>
+                                            <FiCheck /> {feature}
+                                        </FeatureItem>
+                                    ))}
+                                </FeaturesList>
+                                {products[2].active && (
+                                    <VisitLink
+                                        href="https://6987d7a939023ea3456d00fb--mypersonalorganizer.netlify.app/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Visit Site <FiExternalLink />
+                                    </VisitLink>
+                                )}
+                            </ProductCard>
+                        </FeaturedCardWrapper>
+
+                        <ScreenshotWrapper
+                            initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            style={{ height: '100%' }}
+                            transition={{ delay: 0.2 }}
                         >
-                            <ProductHeader>
-                                <ProductIcon $color={products[2].color}>
-                                    <FeaturedIcon3 />
-                                </ProductIcon>
-                            </ProductHeader>
-                            <ProductName>{products[2].name}</ProductName>
-                            <ProductUrl>{products[2].url}</ProductUrl>
-                            <PlatformStatusContainer style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
-                                <PlatformStatus $active={products[2].active}>Web : {products[2].active ? 'Active.' : 'Pending.'}</PlatformStatus>
-                                <PlatformStatus $active={false}>iOS / Android : Pending</PlatformStatus>
-                            </PlatformStatusContainer>
-                            <ProductDescription>{products[2].description}</ProductDescription>
-                            <FeaturesList>
-                                {products[2].features.map((feature) => (
-                                    <FeatureItem key={feature}>
-                                        <FiCheck /> {feature}
-                                    </FeatureItem>
-                                ))}
-                            </FeaturesList>
-                            {products[2].active && (
-                                <VisitLink
-                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Visit Site <FiExternalLink />
-                                </VisitLink>
-                            )}
-                        </ProductCard>
-                    </FeaturedCardWrapper>
+                            <ScreenshotImage
+                                src="/mydetailbase_dashboard.png"
+                                alt="MyDetailBase Dashboard Interface"
+                            />
+                        </ScreenshotWrapper>
+                    </FeaturedSection>
 
-                    <ScreenshotWrapper
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        <ScreenshotImage
-                            src="/mydetailbase_dashboard.png"
-                            alt="MyDetailBase Dashboard Interface"
-                        />
-                    </ScreenshotWrapper>
-                </FeaturedSection>
-
-                <ProductsGrid>
-                    {products.slice(3).map((product, index) => (
-                        <ProductCard
-                            key={product.url}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                        >
-                            <ProductHeader>
-                                <ProductIcon $color={product.color}>
-                                    <product.icon />
-                                </ProductIcon>
-                            </ProductHeader>
-                            <ProductName>{product.name}</ProductName>
-                            <ProductUrl>{product.url}</ProductUrl>
-                            <PlatformStatusContainer style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
-                                <PlatformStatus $active={product.active}>Web : {product.active ? 'Active.' : 'Pending.'}</PlatformStatus>
-                                <PlatformStatus $active={false}>iOS / Android : Pending</PlatformStatus>
-                            </PlatformStatusContainer>
-                            <ProductDescription>{product.description}</ProductDescription>
-                            <FeaturesList>
-                                {product.features.map((feature) => (
-                                    <FeatureItem key={feature}>
-                                        <FiCheck /> {feature}
-                                    </FeatureItem>
-                                ))}
-                            </FeaturesList>
-                            {product.active && (
-                                <VisitLink
-                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Visit Site < FiExternalLink />
-                                </VisitLink >
-                            )}
-                        </ProductCard >
-                    ))}
-                </ProductsGrid >
+                    <ProductsGrid>
+                        {products.slice(3).map((product, index) => (
+                            <ProductCard
+                                key={product.url}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                <ProductHeader>
+                                    <ProductIcon $color={product.color}>
+                                        <product.icon />
+                                    </ProductIcon>
+                                </ProductHeader>
+                                <ProductName>{product.name}</ProductName>
+                                <ProductUrl>{product.url}</ProductUrl>
+                                <PlatformStatusContainer style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
+                                    <PlatformStatus $active={product.active}>Web : {product.active ? 'Active.' : 'Pending.'}</PlatformStatus>
+                                    <PlatformStatus $active={false}>iOS / Android : Pending</PlatformStatus>
+                                </PlatformStatusContainer>
+                                <ProductDescription>{product.description}</ProductDescription>
+                                <FeaturesList>
+                                    {product.features.map((feature) => (
+                                        <FeatureItem key={feature}>
+                                            <FiCheck /> {feature}
+                                        </FeatureItem>
+                                    ))}
+                                </FeaturesList>
+                                {product.active && (
+                                    <VisitLink
+                                        href="https://6987d7a939023ea3456d00fb--mypersonalorganizer.netlify.app/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Visit Site < FiExternalLink />
+                                    </VisitLink >
+                                )}
+                            </ProductCard >
+                        ))}
+                    </ProductsGrid >
+                </AccordionContent>
 
 
             </Container >
