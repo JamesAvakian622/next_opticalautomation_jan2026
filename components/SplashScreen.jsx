@@ -51,14 +51,14 @@ const MainTitle = styled.h1`
 
 const TaglineText = styled.p`
     color: #000000;
-    font-size: 1.5rem;
+    font-size: 2.25rem;
     font-weight: 400;
     font-style: italic;
     margin: 0;
     text-align: center;
     
     @media (max-width: 768px) {
-        font-size: 1.125rem;
+        font-size: 1.5rem;
     }
 `;
 

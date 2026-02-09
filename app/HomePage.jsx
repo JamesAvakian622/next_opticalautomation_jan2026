@@ -349,6 +349,81 @@ const StatLabel = styled.div`
     opacity: 0.9;
 `;
 
+// Testimonial Section
+const TestimonialSection = styled.section`
+    padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.lg};
+    background: ${({ theme }) => theme.colors.backgroundAlt};
+`;
+
+const TestimonialContainer = styled.div`
+    max-width: 900px;
+    margin: 0 auto;
+`;
+
+const TestimonialCard = styled(motion.div)`
+    position: relative;
+    background: ${({ theme }) => theme.colors.surface};
+    border: 1px solid ${({ theme }) => theme.colors.border};
+    border-radius: ${({ theme }) => theme.borderRadius.xl};
+    padding: ${({ theme }) => theme.spacing.xxl};
+    text-align: center;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: ${({ theme }) => theme.colors.gradient};
+    }
+
+    @media (max-width: 768px) {
+        padding: ${({ theme }) => theme.spacing.xl};
+    }
+`;
+
+const TestimonialStars = styled.div`
+    font-size: 1.75rem;
+    margin-bottom: ${({ theme }) => theme.spacing.md};
+    letter-spacing: 4px;
+`;
+
+const TestimonialLabel = styled.h3`
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: ${({ theme }) => theme.spacing.lg};
+    background: ${({ theme }) => theme.colors.gradient};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+`;
+
+const TestimonialQuote = styled.blockquote`
+    color: ${({ theme }) => theme.colors.textSecondary};
+    font-size: 1.125rem;
+    line-height: 1.9;
+    font-style: italic;
+    margin: 0;
+    position: relative;
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
+    }
+`;
+
+const TestimonialAttribution = styled.p`
+    color: ${({ theme }) => theme.colors.text};
+    font-size: 1rem;
+    font-weight: 600;
+    font-style: normal;
+    margin-top: ${({ theme }) => theme.spacing.lg};
+    letter-spacing: 0.5px;
+`;
+
 const features = [
     {
         icon: FiCode,
@@ -593,6 +668,26 @@ export default function HomePage() {
                 </SectionContainer>
             </QuickLinksSection>
             <InfoCards />
+
+            <TestimonialSection>
+                <TestimonialContainer>
+                    <TestimonialCard
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <TestimonialStars>⭐⭐⭐⭐⭐</TestimonialStars>
+                        <TestimonialLabel>Marketing Testimonial</TestimonialLabel>
+                        <TestimonialQuote>
+                            &ldquo;Optical Automation doesn&rsquo;t just build apps&nbsp;&mdash; they build the systems that power entire businesses. Their team delivers lightning&#8209;fast, AI&#8209;driven, cross&#8209;platform platforms that feel like they were pulled straight from the future. While others ship interfaces, Optical Automation ships intelligence: agentic workflows, automated pipelines, and architecture that scales without breaking a sweat. If you want software that&rsquo;s smarter, faster, and engineered to last, Optical Automation is the team that makes it happen.&rdquo;
+                        </TestimonialQuote>
+                        <TestimonialAttribution>
+                            &mdash; Anonymous, Copilot.Microsoft.Com Reply
+                        </TestimonialAttribution>
+                    </TestimonialCard>
+                </TestimonialContainer>
+            </TestimonialSection>
         </PageWrapper>
     );
 }

@@ -228,7 +228,8 @@
             "label": "DocumentHub",
             "icon": "FiFileText",
             "desc": "AWS Document Viewer",
-            "external": true
+            "external": true,
+            "requiresAuth": true
           },
           {
             "href": "/products",

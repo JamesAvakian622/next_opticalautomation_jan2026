@@ -707,12 +707,19 @@ const integratedSoftware = {
         'WalkTracker'
     ],
     'Communication & Social': [
+        'BillAnalyzer',
+        'EfficiencyGenius',
         'Hi5',
         'MyTelephoneBook',
+        'ReceiptHub',
         'RecipeLists',
         'TaskManager',
         'TechnologyAndTimes',
-        'Teleprompter'
+        'Teleprompter',
+        'TravelBin',
+        'WhatMovieToSee',
+        'WhoToCall',
+        'YearBestMovie'
     ],
     'Personal Productivity': [
         'AirlineTracker',
@@ -721,10 +728,14 @@ const integratedSoftware = {
         'DIY Solutions',
         'DrivingRoute',
         'ElectricCarAgent',
+        'HowToAgent',
+        'ItemBuyingAgent',
         'MyDateBook',
         'Photo Albums',
         'TruckBuyingAgent',
-        'Weather'
+        'Weather',
+        'WhereToAgent',
+        'WhoOrWhatAgent'
     ]
 };
 
@@ -806,6 +817,50 @@ const softwareFeatures = {
     'TruckBuyingAgent': {
         label: 'Personal Productivity',
         features: ['Truck Search', 'Towing Specs', 'Dealer Network', 'Price Comparison']
+    },
+    'ItemBuyingAgent': {
+        label: 'Personal Productivity',
+        features: ['Product Search', 'Price Alerts', 'Store Comparison', 'Wish Lists']
+    },
+    'WhereToAgent': {
+        label: 'Personal Productivity',
+        features: ['Location Search', 'Directions', 'Nearby Places', 'Reviews & Ratings']
+    },
+    'HowToAgent': {
+        label: 'Personal Productivity',
+        features: ['Step-by-Step Guides', 'Tutorial Search', 'Video Instructions', 'Expert Tips']
+    },
+    'WhoOrWhatAgent': {
+        label: 'Personal Productivity',
+        features: ['People Search', 'Topic Lookup', 'Knowledge Base', 'Quick Answers']
+    },
+    'BillAnalyzer': {
+        label: 'Communication & Social',
+        features: ['Bill Scanning', 'Expense Breakdown', 'Payment Tracking', 'Budget Alerts']
+    },
+    'ReceiptHub': {
+        label: 'Communication & Social',
+        features: ['Receipt Capture', 'Expense Categories', 'Tax Reports', 'Cloud Storage']
+    },
+    'TravelBin': {
+        label: 'Communication & Social',
+        features: ['Trip Planning', 'Itinerary Builder', 'Booking Management', 'Travel Journal']
+    },
+    'WhoToCall': {
+        label: 'Communication & Social',
+        features: ['Contact Lookup', 'Service Directory', 'Quick Dial', 'Call History']
+    },
+    'WhatMovieToSee': {
+        label: 'Communication & Social',
+        features: ['Movie Recommendations', 'Ratings & Reviews', 'Showtimes', 'Watchlist']
+    },
+    'YearBestMovie': {
+        label: 'Communication & Social',
+        features: ['Annual Rankings', 'Award Winners', 'Genre Picks', 'Critic Reviews']
+    },
+    'EfficiencyGenius': {
+        label: 'Communication & Social',
+        features: ['Workflow Optimization', 'Time Tracking', 'Productivity Insights', 'Task Automation']
     }
 };
 

@@ -3,9 +3,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedTab = 0
     
-    // Base URL - Change this to production URL when deploying
-    // Use your Mac's local IP address so iOS devices can access the dev server
-    private let baseURL = "http://192.168.1.191:3000"
+    // Production URL
+    private let baseURL = "https://opticalautomation.com"
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -30,7 +29,19 @@ struct ContentView: View {
             }
             .tag(0)
             
-            // Subscription Tab - NEW
+            // DeskView Tab - Software Suite
+            NavigationStack {
+                WebViewContainer(urlString: "\(baseURL)/deskview")
+                    .navigationTitle("MyDeskView")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Image(systemName: "desktopcomputer")
+                Text("DeskView")
+            }
+            .tag(1)
+            
+            // Subscription Tab
             NavigationStack {
                 WebViewContainer(urlString: "\(baseURL)/subscription")
                     .navigationTitle("Subscription")
@@ -40,7 +51,7 @@ struct ContentView: View {
                 Image(systemName: "star.circle.fill")
                 Text("Subscribe")
             }
-            .tag(1)
+            .tag(2)
             
             // Portfolio Tab
             NavigationStack {
@@ -51,16 +62,6 @@ struct ContentView: View {
             .tabItem {
                 Image(systemName: "square.grid.2x2.fill")
                 Text("Portfolio")
-            }
-            .tag(2)
-            
-            // Guides Tab - IP Guides
-            NavigationStack {
-                GuidesView()
-            }
-            .tabItem {
-                Image(systemName: "book.fill")
-                Text("IP Guides")
             }
             .tag(3)
             
@@ -75,6 +76,12 @@ struct ContentView: View {
             .tag(4)
         }
         .tint(.purple)
+        .onAppear {
+            // Configure tab bar appearance for a polished look
+            let appearance = UITabBarAppearance()
+            appearance.configureWithDefaultBackground()
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }
 

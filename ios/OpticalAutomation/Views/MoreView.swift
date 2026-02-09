@@ -19,8 +19,54 @@ struct MoreView: View {
                 } label: {
                     Label("Support", systemImage: "questionmark.circle.fill")
                 }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/glossary")
+                        .navigationTitle("Glossary")
+                } label: {
+                    Label("Glossary", systemImage: "textformat.abc")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/questions")
+                        .navigationTitle("FAQ")
+                } label: {
+                    Label("FAQ", systemImage: "bubble.left.and.bubble.right.fill")
+                }
             } header: {
                 Text("Company")
+            }
+            
+            Section {
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/deskview")
+                        .navigationTitle("MyDeskView")
+                } label: {
+                    Label("MyDeskView", systemImage: "desktopcomputer")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/learnSkills365")
+                        .navigationTitle("LearnSkills365")
+                } label: {
+                    Label("LearnSkills365", systemImage: "graduationcap.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/select-software")
+                        .navigationTitle("Select Software")
+                } label: {
+                    Label("Select Software", systemImage: "app.badge.checkmark.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/products")
+                        .navigationTitle("Products")
+                } label: {
+                    Label("Products", systemImage: "cube.fill")
+                }
+            } header: {
+                Text("Software & Services")
             }
             
             Section {
@@ -39,10 +85,10 @@ struct MoreView: View {
                 }
                 
                 NavigationLink {
-                    WebViewContainer(urlString: "\(baseURL)/select-software")
-                        .navigationTitle("Select Software")
+                    WebViewContainer(urlString: "\(baseURL)/pricing")
+                        .navigationTitle("Pricing")
                 } label: {
-                    Label("Select Software", systemImage: "app.badge.checkmark.fill")
+                    Label("Pricing", systemImage: "tag.fill")
                 }
                 
                 NavigationLink {
@@ -51,18 +97,25 @@ struct MoreView: View {
                 } label: {
                     Label("Dashboard", systemImage: "chart.bar.fill")
                 }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/accounts")
+                        .navigationTitle("Account")
+                } label: {
+                    Label("Account", systemImage: "person.circle.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/favorites")
+                        .navigationTitle("Favorites")
+                } label: {
+                    Label("Favorites", systemImage: "heart.fill")
+                }
             } header: {
                 Text("Access & Subscriptions")
             }
             
             Section {
-                NavigationLink {
-                    WebViewContainer(urlString: "\(baseURL)/products")
-                        .navigationTitle("Products")
-                } label: {
-                    Label("Products", systemImage: "cube.fill")
-                }
-                
                 NavigationLink {
                     WebViewContainer(urlString: "\(baseURL)/tech")
                         .navigationTitle("Technology")
@@ -85,13 +138,44 @@ struct MoreView: View {
                 }
                 
                 NavigationLink {
-                    WebViewContainer(urlString: "\(baseURL)/guides")
-                        .navigationTitle("IP Guides")
+                    GuidesView()
                 } label: {
                     Label("IP Guides", systemImage: "book.fill")
                 }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/learning")
+                        .navigationTitle("Learning")
+                } label: {
+                    Label("Learning", systemImage: "lightbulb.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/sitemap")
+                        .navigationTitle("Sitemap")
+                } label: {
+                    Label("Sitemap", systemImage: "map.fill")
+                }
             } header: {
                 Text("Resources")
+            }
+            
+            Section {
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/videos")
+                        .navigationTitle("Videos")
+                } label: {
+                    Label("Videos", systemImage: "play.rectangle.fill")
+                }
+                
+                NavigationLink {
+                    WebViewContainer(urlString: "\(baseURL)/product-videos")
+                        .navigationTitle("Product Videos")
+                } label: {
+                    Label("Product Videos", systemImage: "film.fill")
+                }
+            } header: {
+                Text("Media")
             }
             
             Section {
@@ -141,14 +225,21 @@ struct MoreView: View {
                 HStack {
                     Text("Version")
                     Spacer()
-                    Text("1.1.0")
+                    Text("1.2.0")
                         .foregroundColor(.secondary)
                 }
                 
                 HStack {
                     Text("Build")
                     Spacer()
-                    Text("2026.1.16")
+                    Text("2026.2.8")
+                        .foregroundColor(.secondary)
+                }
+                
+                HStack {
+                    Text("Platform")
+                    Spacer()
+                    Text("iOS / iPadOS")
                         .foregroundColor(.secondary)
                 }
             } header: {
@@ -162,6 +253,6 @@ struct MoreView: View {
 
 #Preview {
     NavigationStack {
-        MoreView(baseURL: "http://192.168.1.191:3000")
+        MoreView(baseURL: "https://opticalautomation.com")
     }
 }

@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -507,6 +508,7 @@ export default function Navigation() {
     const { isDark, toggleTheme } = useTheme();
     const { favorites } = useFavorites();
     const { user, isAuthenticated } = useAuth();
+    const router = useRouter();
     const navRef = useRef(null);
 
     // Handle scroll
@@ -541,6 +543,18 @@ export default function Navigation() {
 
     const toggleMobileMenu = (menuKey) => {
         setMobileActiveMenu(mobileActiveMenu === menuKey ? null : menuKey);
+    };
+
+    const handleAuthLink = (e, link) => {
+        if (link.requiresAuth && !isAuthenticated) {
+            e.preventDefault();
+            setActiveMenu(null);
+            setMobileMenuOpen(false);
+            router.push(`/login?redirect=${encodeURIComponent(link.href)}`);
+        } else {
+            setActiveMenu(null);
+            setMobileMenuOpen(false);
+        }
     };
 
     return (
@@ -662,8 +676,8 @@ export default function Navigation() {
                                             {section.links.map((link, linkIdx) => (
                                                 <MegaMenuLink
                                                     key={linkIdx}
-                                                    href={link.href}
-                                                    onClick={() => setActiveMenu(null)}
+                                                    href={link.requiresAuth && !isAuthenticated ? '#' : link.href}
+                                                    onClick={(e) => handleAuthLink(e, link)}
                                                     $featured={section.featured}
                                                     $highlight={link.highlight}
                                                     style={link.image ? { display: 'flex', alignItems: 'flex-start' } : {}}
@@ -780,8 +794,8 @@ export default function Navigation() {
                                                             {section.links.map((link, linkIdx) => (
                                                                 <MobileSubLink
                                                                     key={linkIdx}
-                                                                    href={link.href}
-                                                                    onClick={() => setMobileMenuOpen(false)}
+                                                                    href={link.requiresAuth && !isAuthenticated ? '#' : link.href}
+                                                                    onClick={(e) => handleAuthLink(e, link)}
                                                                 >
                                                                     <link.icon /> {link.label}
                                                                 </MobileSubLink>

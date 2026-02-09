@@ -413,9 +413,9 @@ const TermMeta = styled.div`
 `;
 
 const CategoryBadge = styled.span`
-    padding: 4px 12px;
+    padding: 6px 14px;
     border-radius: 12px;
-    font-size: 0.75rem;
+    font-size: 1.15rem;
     font-weight: 600;
     background: ${({ $category }) => {
         const colors = {
@@ -485,5 +485,5 @@ const TermDefinition = styled(motion.p)`
     border-top: 1px solid ${({ theme }) => theme.colors.border};
     color: ${({ theme }) => theme.colors.textSecondary};
     line-height: 1.8;
-    font-size: 1.15rem;
+    font-size: 1.5rem;
 `;
