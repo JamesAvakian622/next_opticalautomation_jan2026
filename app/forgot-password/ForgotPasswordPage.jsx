@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { FiMail, FiArrowLeft, FiSend, FiShield } from 'react-icons/fi';
-import { useSignIn } from '@clerk/nextjs';
 
 const PageWrapper = styled.div`
     min-height: calc(100vh - 70px);
@@ -133,7 +132,6 @@ const SuccessIcon = styled.div`
 `;
 
 export default function ForgotPasswordPage() {
-    const { signIn } = useSignIn();
     const [email, setEmail] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -145,14 +143,21 @@ export default function ForgotPasswordPage() {
         setError('');
 
         try {
-            await signIn.create({
-                strategy: 'reset_password_email_code',
-                identifier: email,
+            const response = await fetch('/api/auth/forgot-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
             });
-            setIsSubmitted(true);
+
+            const data = await response.json();
+
+            if (data.success) {
+                setIsSubmitted(true);
+            } else {
+                setError(data.error || 'Failed to send reset email. Please try again.');
+            }
         } catch (err) {
-            const clerkError = err?.errors?.[0]?.longMessage || err?.errors?.[0]?.message || 'Failed to send reset email. Please try again.';
-            setError(clerkError);
+            setError('Network error. Please try again.');
         } finally {
             setIsLoading(false);
         }
