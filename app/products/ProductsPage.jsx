@@ -316,6 +316,14 @@ const products = [
         features: ['React/Next.js', 'Full-Stack Development', 'AI Integration', 'SEO Optimized']
     },
     {
+        name: 'App Portfolio',
+        url: 'opticalautomation.com/app-portfolio',
+        description: 'Browse our collection of native iOS and Android mobile applications built with SwiftUI and Kotlin.',
+        color: '#EC4899',
+        active: true,
+        features: ['iOS / SwiftUI', 'Android / Kotlin', '16+ Apps', 'Native Performance']
+    },
+    {
         name: 'Client Portal',
         url: 'www.JamesAvakian.com',
         description: 'Secure client portal for project management, file sharing, and communication.',

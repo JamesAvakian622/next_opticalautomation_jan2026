@@ -218,6 +218,12 @@
             "desc": "View all platforms"
           },
           {
+            "href": "/app-portfolio",
+            "label": "App Portfolio",
+            "icon": "FiSmartphone",
+            "desc": "iOS & Android mobile apps"
+          },
+          {
             "href": "/deskview",
             "label": "MyDeskView",
             "icon": "FiLayout",

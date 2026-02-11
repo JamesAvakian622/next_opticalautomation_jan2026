@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var themeManager: ThemeManager
     @State private var selectedTab = 0
     
     // Production URL
@@ -8,20 +9,9 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            // Home Tab - Main Website
+            // Home Tab
             NavigationStack {
-                WebViewContainer(urlString: baseURL)
-                    .navigationTitle("Optical Automation")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Image("Logo")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 28, height: 28)
-                                .cornerRadius(6)
-                        }
-                    }
+                HomeView(baseURL: baseURL)
             }
             .tabItem {
                 Image(systemName: "house.fill")
@@ -29,11 +19,20 @@ struct ContentView: View {
             }
             .tag(0)
             
-            // DeskView Tab - Software Suite
+            // DeskView Tab
             NavigationStack {
                 WebViewContainer(urlString: "\(baseURL)/deskview")
                     .navigationTitle("MyDeskView")
                     .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Image("Logo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                        }
+                    }
             }
             .tabItem {
                 Image(systemName: "desktopcomputer")
@@ -41,33 +40,30 @@ struct ContentView: View {
             }
             .tag(1)
             
-            // Subscription Tab
-            NavigationStack {
-                WebViewContainer(urlString: "\(baseURL)/subscription")
-                    .navigationTitle("Subscription")
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .tabItem {
-                Image(systemName: "star.circle.fill")
-                Text("Subscribe")
-            }
-            .tag(2)
-            
             // Portfolio Tab
             NavigationStack {
-                WebViewContainer(urlString: "\(baseURL)/portfolio")
-                    .navigationTitle("Portfolio")
-                    .navigationBarTitleDisplayMode(.inline)
+                PortfolioView(baseURL: baseURL)
             }
             .tabItem {
                 Image(systemName: "square.grid.2x2.fill")
                 Text("Portfolio")
+            }
+            .tag(2)
+            
+            // Subscribe Tab
+            NavigationStack {
+                SubscriptionView(baseURL: baseURL)
+            }
+            .tabItem {
+                Image(systemName: "star.circle.fill")
+                Text("Subscribe")
             }
             .tag(3)
             
             // More Tab
             NavigationStack {
                 MoreView(baseURL: baseURL)
+                    .environmentObject(themeManager)
             }
             .tabItem {
                 Image(systemName: "ellipsis.circle.fill")
@@ -75,16 +71,32 @@ struct ContentView: View {
             }
             .tag(4)
         }
-        .tint(.purple)
+        .tint(themeManager.accentColor)
         .onAppear {
-            // Configure tab bar appearance for a polished look
-            let appearance = UITabBarAppearance()
-            appearance.configureWithDefaultBackground()
-            UITabBar.appearance().scrollEdgeAppearance = appearance
+            configureTabBarAppearance()
         }
+    }
+    
+    private func configureTabBarAppearance() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.95)
+        
+        let blurEffect = UIBlurEffect(style: .systemMaterial)
+        appearance.backgroundEffect = blurEffect
+        
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+        
+        // Navigation bar appearance
+        let navAppearance = UINavigationBarAppearance()
+        navAppearance.configureWithDefaultBackground()
+        UINavigationBar.appearance().standardAppearance = navAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(ThemeManager())
 }

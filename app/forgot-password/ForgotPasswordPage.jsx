@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { FiMail, FiArrowLeft, FiSend, FiShield } from 'react-icons/fi';
+import { useSignIn } from '@clerk/nextjs';
 
 const PageWrapper = styled.div`
     min-height: calc(100vh - 70px);
@@ -132,19 +133,29 @@ const SuccessIcon = styled.div`
 `;
 
 export default function ForgotPasswordPage() {
+    const { signIn } = useSignIn();
     const [email, setEmail] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        setError('');
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
-        setIsSubmitted(true);
-        setIsLoading(false);
+        try {
+            await signIn.create({
+                strategy: 'reset_password_email_code',
+                identifier: email,
+            });
+            setIsSubmitted(true);
+        } catch (err) {
+            const clerkError = err?.errors?.[0]?.longMessage || err?.errors?.[0]?.message || 'Failed to send reset email. Please try again.';
+            setError(clerkError);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     if (isSubmitted) {
@@ -195,6 +206,10 @@ export default function ForgotPasswordPage() {
                             required
                         />
                     </InputGroup>
+
+                    {error && (
+                        <p style={{ color: '#EF4444', fontSize: '0.875rem', margin: 0 }}>{error}</p>
+                    )}
 
                     <SubmitButton
                         type="submit"

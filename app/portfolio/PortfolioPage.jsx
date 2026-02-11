@@ -244,6 +244,16 @@ const tabCategories = [
         website: 'https://opticalautomation.com'
       },
       {
+        id: 'swift-app-portfolio',
+        title: 'App Portfolio',
+        category: 'Mobile Apps Collection',
+        description: 'Browse our collection of native iOS and Android mobile applications featuring SwiftUI and Kotlin implementations across productivity, education, entertainment, and business.',
+        detailedDescription: 'App Portfolio showcases 16+ native mobile applications built with SwiftUI for iOS and Kotlin for Android. Browse apps across multiple categories including Business & Finance, Education, Entertainment, Health & Fitness, and Productivity with tab-based filtering.',
+        icon: FiSmartphone,
+        color: '#EC4899',
+        website: 'https://opticalautomation.com/app-portfolio'
+      },
+      {
         id: 'swift-mydeskview',
         title: 'MyDeskView',
         category: 'Desktop Productivity Suite',
