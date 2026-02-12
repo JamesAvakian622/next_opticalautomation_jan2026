@@ -25,6 +25,10 @@ const Container = styled.div`
 const Header = styled.div`
     text-align: center;
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.xl};
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
 `;
 
 
@@ -44,36 +48,35 @@ flex - shrink: 0;
 `;
 
 const Title = styled(motion.h1)`
-font - size: 3rem;
-margin - bottom: ${({ theme }) => theme.spacing.md};
-background: ${({ theme }) => theme.colors.gradient};
--webkit - background - clip: text;
--webkit - text - fill - color: transparent;
-background - clip: text;
-display: inline - flex;
-align - items: center;
+font-size: 3rem;
+margin-bottom: ${({ theme }) => theme.spacing.md};
+color: white;
+-webkit-text-fill-color: white;
+display: inline-flex;
+align-items: center;
 gap: ${({ theme }) => theme.spacing.md};
 
-@media(max - width: 768px) {
-    font - size: 2rem;
-    flex - direction: column;
+@media(max-width: 768px) {
+    font-size: 2rem;
+    flex-direction: column;
 }
 `;
 
 const Subtitle = styled.p`
-font - size: 1.25rem;
-color: ${({ theme }) => theme.colors.textSecondary};
-margin - bottom: ${({ theme }) => theme.spacing.lg};
+font-size: 1.25rem;
+color: rgba(255, 255, 255, 0.9);
+margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
 const Badge = styled(motion.div)`
-display: inline - block;
-background: ${({ theme }) => theme.colors.gradient};
+display: inline-block;
+background: rgba(255, 255, 255, 0.2);
 color: white;
 padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
-border - radius: ${({ theme }) => theme.borderRadius.full};
-font - weight: 600;
-font - size: 1rem;
+border-radius: ${({ theme }) => theme.borderRadius.full};
+font-weight: 600;
+font-size: 1rem;
+border: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
 const PricingGrid = styled.div`
@@ -345,7 +348,7 @@ export default function BusinessPricingPage() {
                         <TierName>Silver</TierName>
                         <PriceSection>
                             <Price>
-                                $125
+                                $250
                                 <span>/year</span>
                             </Price>
                             <PriceDescription>DeskView Series, up to 25 users</PriceDescription>
@@ -392,7 +395,7 @@ export default function BusinessPricingPage() {
                         <TierName>Gold</TierName>
                         <PriceSection>
                             <Price>
-                                $250
+                                $375
                                 <span>/year</span>
                             </Price>
                             <PriceDescription>All software titles, up to 50 users</PriceDescription>
@@ -483,14 +486,14 @@ export default function BusinessPricingPage() {
                             <tr>
                                 <td>Annual Price</td>
                                 <td>$125</td>
-                                <td>$125</td>
                                 <td>$250</td>
+                                <td>$375</td>
                             </tr>
                             <tr>
                                 <td>Price per User</td>
                                 <td>$5/user</td>
-                                <td>$5/user</td>
-                                <td>$5/user</td>
+                                <td>$10/user</td>
+                                <td>$7.50/user</td>
                             </tr>
                             <tr>
                                 <td>Support</td>

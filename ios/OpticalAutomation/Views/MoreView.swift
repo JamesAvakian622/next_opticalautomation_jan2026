@@ -85,25 +85,19 @@ struct MoreView: View {
             // Software & Services
             Section {
                 NavigationLink {
-                    WebViewContainer(urlString: "\(baseURL)/deskview")
-                        .navigationTitle("MyDeskView")
-                        .navigationBarTitleDisplayMode(.inline)
+                    DeskViewDetailView(baseURL: baseURL)
                 } label: {
                     Label("MyDeskView", systemImage: "desktopcomputer")
                 }
                 
                 NavigationLink {
-                    WebViewContainer(urlString: "\(baseURL)/learnSkills365")
-                        .navigationTitle("LearnSkills365")
-                        .navigationBarTitleDisplayMode(.inline)
+                    LearnSkillsView(baseURL: baseURL)
                 } label: {
                     Label("LearnSkills365", systemImage: "graduationcap.fill")
                 }
                 
                 NavigationLink {
-                    WebViewContainer(urlString: "\(baseURL)/select-software")
-                        .navigationTitle("Select Software")
-                        .navigationBarTitleDisplayMode(.inline)
+                    SelectSoftwareView(baseURL: baseURL)
                 } label: {
                     Label("Select Software", systemImage: "app.badge.checkmark.fill")
                 }
@@ -122,9 +116,7 @@ struct MoreView: View {
             // MyDeskView Section
             Section {
                 NavigationLink {
-                    WebViewContainer(urlString: "\(baseURL)/deskview")
-                        .navigationTitle("MyDeskView Dashboard")
-                        .navigationBarTitleDisplayMode(.inline)
+                    DeskViewDetailView(baseURL: baseURL)
                 } label: {
                     Label("MyDeskView Dashboard", systemImage: "desktopcomputer")
                 }
@@ -210,9 +202,7 @@ struct MoreView: View {
                 }
                 
                 NavigationLink {
-                    WebViewContainer(urlString: "\(baseURL)/pricing")
-                        .navigationTitle("Pricing")
-                        .navigationBarTitleDisplayMode(.inline)
+                    PricingView(baseURL: baseURL)
                 } label: {
                     Label("Pricing", systemImage: "tag.fill")
                 }

@@ -236,18 +236,6 @@
             "desc": "AWS Document Viewer",
             "external": true,
             "requiresAuth": true
-          },
-          {
-            "href": "/products",
-            "label": "Web Apps",
-            "icon": "FiCode",
-            "desc": "Browser-based solutions"
-          },
-          {
-            "href": "/products",
-            "label": "Mobile Apps",
-            "icon": "FiSmartphone",
-            "desc": "IOS MongoDB applications"
           }
         ]
       },
@@ -329,13 +317,13 @@
             "href": "/products#business-finance",
             "label": "Business & Finance",
             "icon": "FiBriefcase",
-            "desc": "AccessMoney, AI Trading, BusinessTracker & more"
+            "desc": "AccessMoney, AI Trading, BusinessTracker"
           },
           {
-            "href": "/products#education-learning",
+            "href": "/learnSkills365",
             "label": "Education & Learning",
             "icon": "FiBook",
-            "desc": "LearnSkills365, Quiz System, Animals & more"
+            "desc": "LearnSkills365"
           },
           {
             "href": "/products#entertainment-leisure",
@@ -347,19 +335,19 @@
             "href": "/products#personal-productivity",
             "label": "Personal Productivity",
             "icon": "FiLayout",
-            "desc": "MyDeskView, MyBusinessOrganizer & more"
+            "desc": "MyDeskView, MyBusinessOrganizer, PhotoAlbum, YouTube"
           },
           {
             "href": "/products#communication-social",
             "label": "Communication & Social",
             "icon": "FiMessageCircle",
-            "desc": "MyTelephoneBook, Hi5, Teleprompter & more"
+            "desc": "MyTelephoneBook, Hi5, Teleprompter"
           },
           {
             "href": "/products#health",
             "label": "Health",
             "icon": "FiHeart",
-            "desc": "Fitness Tracker, Health Tracker & more"
+            "desc": "FitnessTracker, HealthTracker & others"
           }
         ]
       }
