@@ -585,21 +585,7 @@ const technologies = [
       'Ensuring your application is perfectly indexed, discoverable, and stands out in search results.',
     ],
   },
-  {
-    id: 'reactnative',
-    icon: FiSmartphone,
-    title: 'React Native',
-    color: '#61DAFB',
-    description: [
-      'We develop high-performance cross-platform mobile applications using React Native.',
-      'Mobile development benefits:',
-      '• Single codebase for both iOS and Android platforms',
-      '• Native-like performance and smooth animations',
-      '• Access to native device APIs through powerful bridges',
-      '• Rapid development and deployment cycles',
-      'React Native allows us to deliver high-quality mobile experiences with greater efficiency and speed.',
-    ],
-  },
+
   {
     id: 'styling',
     icon: FiLayers,
@@ -618,22 +604,22 @@ const technologies = [
   {
     id: 'nodejs',
     icon: FiServer,
-    title: 'Node.js & Express',
+    title: 'Node.js & Mongoose',
     color: '#339933',
     description: [
       'We build scalable server-side applications using high-performance JavaScript runtimes.',
       'Core backend features:',
       '• Efficient event-driven, non-blocking I/O model',
-      '• Robust RESTful API development with Express.js',
+      '• Robust RESTful API development',
       '• Real-time data processing and websocket integration',
       '• Secure middleware and authentication systems',
-      'Node.js and Express together provide a unified JavaScript development experience for reliable, high-traffic server solutions.',
+      'Node.js and Mongoose together provide a unified JavaScript development experience for reliable, high-traffic server solutions.',
     ],
   },
   {
     id: 'mongodb',
     icon: FiDatabase,
-    title: 'MongoDB & MERN Stack',
+    title: 'MongoDB Stack',
     color: '#47A248',
     description: [
       'Our full-stack solutions are powered by modern NoSQL databases and unified JavaScript architectures.',
@@ -642,13 +628,27 @@ const technologies = [
       '• Seamless data flow between frontend and backend',
       '• Rapid development with unified stack expertise',
       '• Scalable cloud database integrations',
-      'We leverage the MERN stack to build data-driven applications that balance speed, reliability, and complex data management.',
+      'We leverage the MongoDB stack to build data-driven applications that balance speed, reliability, and complex data management.',
+    ],
+  },
+  {
+    id: 'clerk-multitenant',
+    icon: FiShield,
+    title: 'Clerk Multi‑tenant Authentication',
+    color: '#6C47FF',
+    description: [
+      'We implement enterprise‑grade authentication and multi‑tenant data isolation using Clerk and a metadata‑driven MongoDB architecture.',
+      '• The platform runs on a shared‑database, shared‑collection NoSQL model designed for scalable multi‑organization data management.',
+      '• Clerk provides native multi‑tenant authentication through its Organizations model, enabling users to belong to multiple tenants with isolated roles, permissions, and session contexts.',
+      '• Every request is automatically scoped to the correct organization, ensuring strict tenant isolation and secure access patterns.',
+      '• Built‑in RBAC, invitation flows, membership management, and organization switching eliminate custom auth logic and reduce engineering overhead.',
+      '• This unified, tenant‑aware architecture delivers secure, scalable, and efficient multi‑tenant SaaS operations.',
     ],
   },
 ];
 
 const technologyStack = [
-  'MERN Stack and SwiftUI Mobile App Database Development',
+  'MongoDB Stack and SwiftUI Mobile App Database Development',
   'Google Antigravity with Anthropic Claude Opus 4 Agent Reasoning',
   'Next.js Server-Side Execution (SSR)',
   'Github Copilot Coding Assistant',
@@ -760,9 +760,9 @@ export default function TechPage() {
           </SectionSubtitle>
 
           <HighlightBox>
-            <HighlightTitle>The MERN Stack Advantage</HighlightTitle>
+            <HighlightTitle>The MongoDB Stack Advantage</HighlightTitle>
             <HighlightText>
-              We use industry‑standard JavaScript across the entire stack, and MERN—MongoDB, Express.js, React.js or Next.js, and Node.js—is one of the most efficient technologies for high‑performance information delivery and SEO‑optimized web applications. By building on a unified JavaScript ecosystem, we eliminate unnecessary context switching and significantly increase engineering efficiency.
+              We use industry‑standard JavaScript across the entire stack. We have created a shared MongoDB website to database and mobile app to database multi-tenant authentication ecosystem—Next.js, Mongoose, and MongoDB. This proves to be one of the most efficient foundations for high‑performance SEO‑optimized access operation. By building on a unified JavaScript environment, we eliminate context switching and significantly increase engineering speed, consistency, and maintainability.
             </HighlightText>
             <HighlightText>
               This cohesive architecture enables predictable data flow, shared validation schemas, reusable logic, and consistent development patterns from the database layer to the user interface. Leveraging our standardized industry components, we further ensure uniform, high‑quality UI/UX design across all products.
@@ -772,7 +772,7 @@ export default function TechPage() {
             </HighlightText>
             <StackBadges>
               <StackBadge>MongoDB</StackBadge>
-              <StackBadge>Express.js</StackBadge>
+
               <StackBadge>React</StackBadge>
               <StackBadge>Node.js</StackBadge>
               <StackBadge>Next.js</StackBadge>

@@ -19,24 +19,13 @@ struct ContentView: View {
             }
             .tag(0)
             
-            // DeskView Tab
+            // Videos Tab
             NavigationStack {
-                WebViewContainer(urlString: "\(baseURL)/deskview")
-                    .navigationTitle("MyDeskView")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Image("Logo")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                        }
-                    }
+                ProductVideosView()
             }
             .tabItem {
-                Image(systemName: "desktopcomputer")
-                Text("DeskView")
+                Image(systemName: "play.rectangle.fill")
+                Text("Videos")
             }
             .tag(1)
             

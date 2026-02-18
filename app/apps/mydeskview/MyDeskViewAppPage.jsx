@@ -1,245 +1,288 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { FiArrowLeft, FiSmartphone, FiStar, FiCheck, FiMonitor, FiLayout, FiGrid, FiRefreshCw, FiLayers, FiSettings, FiMoon, FiMail, FiGlobe } from 'react-icons/fi';
+import { FiArrowLeft, FiSmartphone, FiStar, FiCheck, FiMonitor, FiLayout, FiGrid, FiRefreshCw, FiLayers, FiSettings, FiMoon, FiMail, FiGlobe, FiMaximize2, FiX } from 'react-icons/fi';
 
 export default function MyDeskViewAppPage() {
-    const screens = [
-        {
-            title: 'Dashboard',
-            color: '#0EA5E9',
-            content: (
-                <>
-                    <MockNav>
-                        <span style={{ fontSize: '0.7rem', opacity: 0.6 }}>●●○ MyDeskView</span>
-                    </MockNav>
-                    <MockHeader bg="#0EA5E9">
-                        <span style={{ fontSize: '2rem' }}>🖥️</span>
-                        <h3>MyDeskView</h3>
-                        <small>Your Digital Desktop</small>
-                    </MockHeader>
-                    <MockCard>
-                        <FiLayout style={{ color: '#0EA5E9' }} />
-                        <div><strong>Quick Access</strong><br /><small>27+ Apps Ready</small></div>
-                    </MockCard>
-                    <MockCard>
-                        <FiGrid style={{ color: '#8b5cf6' }} />
-                        <div><strong>Widgets</strong><br /><small>Customizable Layout</small></div>
-                    </MockCard>
-                    <MockCard>
-                        <FiRefreshCw style={{ color: '#10b981' }} />
-                        <div><strong>Sync</strong><br /><small>Real-time Updates</small></div>
-                    </MockCard>
-                    <MockTabBar active={0} tabs={['Dashboard', 'Apps', 'Widgets', 'Settings']} />
-                </>
-            )
-        },
-        {
-            title: 'Apps',
-            color: '#8b5cf6',
-            content: (
-                <>
-                    <MockNav>
-                        <span style={{ fontSize: '0.7rem', opacity: 0.6 }}>Apps</span>
-                    </MockNav>
-                    <MockSectionTitle>📱 Integrated Apps</MockSectionTitle>
-                    <MockTabs tabs={['All', 'Business', 'Education', 'Personal']} active={0} />
-                    <MockProjectCard color="#0EA5E9">
-                        <strong>AccessMoney</strong>
-                        <small>Financial Management</small>
-                    </MockProjectCard>
-                    <MockProjectCard color="#10b981">
-                        <strong>BusinessTracker</strong>
-                        <small>Business Intelligence</small>
-                    </MockProjectCard>
-                    <MockProjectCard color="#f59e0b">
-                        <strong>LearnSkills365</strong>
-                        <small>Educational Platform</small>
-                    </MockProjectCard>
-                    <MockProjectCard color="#ec4899">
-                        <strong>FitnessTracker</strong>
-                        <small>Health & Fitness</small>
-                    </MockProjectCard>
-                    <MockTabBar active={1} tabs={['Dashboard', 'Apps', 'Widgets', 'Settings']} />
-                </>
-            )
-        },
-        {
-            title: 'Widgets',
-            color: '#10b981',
-            content: (
-                <>
-                    <MockNav>
-                        <span style={{ fontSize: '0.7rem', opacity: 0.6 }}>Widgets</span>
-                    </MockNav>
-                    <MockSectionTitle>🧩 Widget System</MockSectionTitle>
-                    <MockCard>
-                        <FiMonitor style={{ color: '#0EA5E9' }} />
-                        <div><strong>Calendar Widget</strong><br /><small>Events & Reminders</small></div>
-                    </MockCard>
-                    <MockCard>
-                        <FiLayers style={{ color: '#10b981' }} />
-                        <div><strong>Quick Notes</strong><br /><small>Sticky Notes</small></div>
-                    </MockCard>
-                    <MockCard>
-                        <FiGrid style={{ color: '#f59e0b' }} />
-                        <div><strong>App Launcher</strong><br /><small>Favorite Apps</small></div>
-                    </MockCard>
-                    <MockCard>
-                        <FiRefreshCw style={{ color: '#ec4899' }} />
-                        <div><strong>News Feed</strong><br /><small>Live Updates</small></div>
-                    </MockCard>
-                    <MockTabBar active={2} tabs={['Dashboard', 'Apps', 'Widgets', 'Settings']} />
-                </>
-            )
-        },
-        {
-            title: 'Settings',
-            color: '#f59e0b',
-            content: (
-                <>
-                    <MockNav>
-                        <span style={{ fontSize: '0.7rem', opacity: 0.6 }}>Settings</span>
-                    </MockNav>
-                    <MockSectionTitle>⚙️ Settings</MockSectionTitle>
-                    <MockSettingRow>
-                        <FiMoon /> <span>Dark Mode</span> <MockToggle on={true} />
-                    </MockSettingRow>
-                    <MockSettingRow>
-                        <FiGrid /> <span>Widget Layout</span> <span style={{ opacity: 0.5, fontSize: '0.7rem' }}>→</span>
-                    </MockSettingRow>
-                    <MockSettingRow>
-                        <FiRefreshCw /> <span>Auto Sync</span> <MockToggle on={true} />
-                    </MockSettingRow>
-                    <MockSettingRow>
-                        <FiMail /> <span>Support</span> <span style={{ opacity: 0.5, fontSize: '0.7rem' }}>→</span>
-                    </MockSettingRow>
-                    <MockSettingRow>
-                        <FiGlobe /> <span>Visit Website</span> <span style={{ opacity: 0.5, fontSize: '0.7rem' }}>→</span>
-                    </MockSettingRow>
-                    <MockAbout>
-                        <p>MyDeskView</p>
-                        <small>Version 1.0 • © 2026</small>
-                        <small>Optical Automation, LLC</small>
-                    </MockAbout>
-                    <MockTabBar active={3} tabs={['Dashboard', 'Apps', 'Widgets', 'Settings']} />
-                </>
-            )
-        }
-    ];
+  const [fullScreenIndex, setFullScreenIndex] = useState(null);
+  const screens = [
+    {
+      title: 'Dashboard',
+      color: '#0EA5E9',
+      content: (
+        <>
+          <MockNav>
+            <span style={{ fontSize: '0.7rem', opacity: 0.6 }}>●●○ MyDeskView</span>
+          </MockNav>
+          <MockHeader bg="#0EA5E9">
+            <span style={{ fontSize: '2rem' }}>🖥️</span>
+            <h3>MyDeskView</h3>
+            <small>Your Digital Desktop</small>
+          </MockHeader>
+          <MockCard>
+            <FiLayout style={{ color: '#0EA5E9' }} />
+            <div><strong>Quick Access</strong><br /><small>27+ Apps Ready</small></div>
+          </MockCard>
+          <MockCard>
+            <FiGrid style={{ color: '#8b5cf6' }} />
+            <div><strong>Widgets</strong><br /><small>Customizable Layout</small></div>
+          </MockCard>
+          <MockCard>
+            <FiRefreshCw style={{ color: '#10b981' }} />
+            <div><strong>Sync</strong><br /><small>Real-time Updates</small></div>
+          </MockCard>
+          <MockTabBar active={0} tabs={['Dashboard', 'Apps', 'Widgets', 'Settings']} />
+        </>
+      )
+    },
+    {
+      title: 'Apps',
+      color: '#8b5cf6',
+      content: (
+        <>
+          <MockNav>
+            <span style={{ fontSize: '0.7rem', opacity: 0.6 }}>Apps</span>
+          </MockNav>
+          <MockSectionTitle>📱 Integrated Apps</MockSectionTitle>
+          <MockTabs tabs={['All', 'Business', 'Education', 'Personal']} active={0} />
+          <MockProjectCard color="#0EA5E9">
+            <strong>AccessMoney</strong>
+            <small>Financial Management</small>
+          </MockProjectCard>
+          <MockProjectCard color="#10b981">
+            <strong>BusinessTracker</strong>
+            <small>Business Intelligence</small>
+          </MockProjectCard>
+          <MockProjectCard color="#f59e0b">
+            <strong>LearnSkills365</strong>
+            <small>Educational Platform</small>
+          </MockProjectCard>
+          <MockProjectCard color="#ec4899">
+            <strong>FitnessTracker</strong>
+            <small>Health & Fitness</small>
+          </MockProjectCard>
+          <MockTabBar active={1} tabs={['Dashboard', 'Apps', 'Widgets', 'Settings']} />
+        </>
+      )
+    },
+    {
+      title: 'Widgets',
+      color: '#10b981',
+      content: (
+        <>
+          <MockNav>
+            <span style={{ fontSize: '0.7rem', opacity: 0.6 }}>Widgets</span>
+          </MockNav>
+          <MockSectionTitle>🧩 Widget System</MockSectionTitle>
+          <MockCard>
+            <FiMonitor style={{ color: '#0EA5E9' }} />
+            <div><strong>Calendar Widget</strong><br /><small>Events & Reminders</small></div>
+          </MockCard>
+          <MockCard>
+            <FiLayers style={{ color: '#10b981' }} />
+            <div><strong>Quick Notes</strong><br /><small>Sticky Notes</small></div>
+          </MockCard>
+          <MockCard>
+            <FiGrid style={{ color: '#f59e0b' }} />
+            <div><strong>App Launcher</strong><br /><small>Favorite Apps</small></div>
+          </MockCard>
+          <MockCard>
+            <FiRefreshCw style={{ color: '#ec4899' }} />
+            <div><strong>News Feed</strong><br /><small>Live Updates</small></div>
+          </MockCard>
+          <MockTabBar active={2} tabs={['Dashboard', 'Apps', 'Widgets', 'Settings']} />
+        </>
+      )
+    },
+    {
+      title: 'Settings',
+      color: '#f59e0b',
+      content: (
+        <>
+          <MockNav>
+            <span style={{ fontSize: '0.7rem', opacity: 0.6 }}>Settings</span>
+          </MockNav>
+          <MockSectionTitle>⚙️ Settings</MockSectionTitle>
+          <MockSettingRow>
+            <FiMoon /> <span>Dark Mode</span> <MockToggle on={true} />
+          </MockSettingRow>
+          <MockSettingRow>
+            <FiGrid /> <span>Widget Layout</span> <span style={{ opacity: 0.5, fontSize: '0.7rem' }}>→</span>
+          </MockSettingRow>
+          <MockSettingRow>
+            <FiRefreshCw /> <span>Auto Sync</span> <MockToggle on={true} />
+          </MockSettingRow>
+          <MockSettingRow>
+            <FiMail /> <span>Support</span> <span style={{ opacity: 0.5, fontSize: '0.7rem' }}>→</span>
+          </MockSettingRow>
+          <MockSettingRow>
+            <FiGlobe /> <span>Visit Website</span> <span style={{ opacity: 0.5, fontSize: '0.7rem' }}>→</span>
+          </MockSettingRow>
+          <MockAbout>
+            <p>MyDeskView</p>
+            <small>Version 1.0 • © 2026</small>
+            <small>Optical Automation, LLC</small>
+          </MockAbout>
+          <MockTabBar active={3} tabs={['Dashboard', 'Apps', 'Widgets', 'Settings']} />
+        </>
+      )
+    }
+  ];
 
-    const features = [
-        { icon: <FiMonitor />, title: '27+ Integrated Apps', desc: 'Business, Education, Entertainment, Productivity & Health categories' },
-        { icon: <FiGrid />, title: 'Widget System', desc: 'Customizable widgets for quick access to your favorite tools' },
-        { icon: <FiRefreshCw />, title: 'Cross-App Sync', desc: 'Real-time synchronization across all integrated applications' },
-        { icon: <FiLayers />, title: 'Dashboard View', desc: 'Central command center for daily workflow management' },
-        { icon: <FiMoon />, title: 'Dark Mode', desc: 'Beautiful dark interface with automatic system detection' },
-        { icon: <FiSettings />, title: 'Customizable', desc: 'Personalize layout, themes, and notification preferences' },
-    ];
+  const features = [
+    { icon: <FiMonitor />, title: '27+ Integrated Apps', desc: 'Business, Education, Entertainment, Productivity & Health categories' },
+    { icon: <FiGrid />, title: 'Widget System', desc: 'Customizable widgets for quick access to your favorite tools' },
+    { icon: <FiRefreshCw />, title: 'Cross-App Sync', desc: 'Real-time synchronization across all integrated applications' },
+    { icon: <FiLayers />, title: 'Dashboard View', desc: 'Central command center for daily workflow management' },
+    { icon: <FiMoon />, title: 'Dark Mode', desc: 'Beautiful dark interface with automatic system detection' },
+    { icon: <FiSettings />, title: 'Customizable', desc: 'Personalize layout, themes, and notification preferences' },
+  ];
 
-    return (
-        <PageContainer>
-            <HeroSection>
-                <BackLink href="/app-portfolio">
-                    <FiArrowLeft /> Back to App Portfolio
-                </BackLink>
-                <HeroContent>
-                    <AppIconLarge
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
-                    >
-                        🖥️
-                    </AppIconLarge>
-                    <AppTitle
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        MyDeskView
-                    </AppTitle>
-                    <AppTagline
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                    >
-                        Your Digital Desktop — 27+ Apps In One Place
-                    </AppTagline>
-                    <BadgeRow
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                    >
-                        <Badge color="#0EA5E9"><FiSmartphone size={12} /> iOS</Badge>
-                        <Badge color="#10b981"><FiStar size={12} /> SwiftUI</Badge>
-                        <Badge color="#f59e0b">Live</Badge>
-                    </BadgeRow>
-                </HeroContent>
-            </HeroSection>
+  return (
+    <PageContainer>
+      <HeroSection>
+        <BackLink href="/app-portfolio">
+          <FiArrowLeft /> Back to App Portfolio
+        </BackLink>
+        <HeroContent>
+          <MobileAppsBadge
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <FiSmartphone /> Mobile Applications
+          </MobileAppsBadge>
+          <AppIconLarge
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
+          >
+            🖥️
+          </AppIconLarge>
+          <AppTitle
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            MyDeskView
+          </AppTitle>
+          <AppTagline
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            Your Digital Desktop — 27+ Apps In One Place
+          </AppTagline>
+          <BadgeRow
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            <Badge color="#0EA5E9"><FiSmartphone size={12} /> iOS</Badge>
+            <Badge color="#10b981"><FiStar size={12} /> SwiftUI</Badge>
+            <Badge color="#f59e0b">Live</Badge>
+          </BadgeRow>
+        </HeroContent>
+      </HeroSection>
 
-            <ScreensSection>
-                <SectionTitle
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                >
-                    App Screenshots
-                </SectionTitle>
-                <ScreensGrid>
-                    {screens.map((screen, i) => (
-                        <PhoneFrame
-                            key={screen.title}
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 + i * 0.1 }}
-                        >
-                            <PhoneNotch />
-                            <PhoneScreen>
-                                {screen.content}
-                            </PhoneScreen>
-                            <ScreenLabel>{screen.title}</ScreenLabel>
-                        </PhoneFrame>
-                    ))}
-                </ScreensGrid>
-            </ScreensSection>
+      <ScreensSection>
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          App Screenshots
+        </SectionTitle>
+        <ScreensGrid>
+          {screens.map((screen, i) => (
+            <PhoneFrameWrapper key={screen.title}>
+              <PhoneFrame
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + i * 0.1 }}
+              >
+                <PhoneNotch />
+                <PhoneScreen>
+                  {screen.content}
+                </PhoneScreen>
+                <ScreenLabel>{screen.title}</ScreenLabel>
+              </PhoneFrame>
+              <FullScreenButton onClick={() => setFullScreenIndex(i)}>
+                <FiMaximize2 size={14} />
+                Full Screen
+              </FullScreenButton>
+            </PhoneFrameWrapper>
+          ))}
+        </ScreensGrid>
 
-            <FeaturesSection>
-                <SectionTitle
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                >
-                    Key Features
-                </SectionTitle>
-                <FeaturesGrid>
-                    {features.map((f, i) => (
-                        <FeatureCard
-                            key={f.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 + i * 0.08 }}
-                        >
-                            <FeatureIcon>{f.icon}</FeatureIcon>
-                            <div>
-                                <FeatureTitle>{f.title}</FeatureTitle>
-                                <FeatureDesc>{f.desc}</FeatureDesc>
-                            </div>
-                        </FeatureCard>
-                    ))}
-                </FeaturesGrid>
-            </FeaturesSection>
+        <AnimatePresence>
+          {fullScreenIndex !== null && (
+            <FullScreenOverlay
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setFullScreenIndex(null)}
+            >
+              <FullScreenCloseBtn onClick={() => setFullScreenIndex(null)}>
+                <FiX size={24} />
+              </FullScreenCloseBtn>
+              <FullScreenContent
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.7, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 25 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <PhoneNotch />
+                <FullScreenPhoneScreen>
+                  {screens[fullScreenIndex].content}
+                </FullScreenPhoneScreen>
+                <FullScreenLabel>{screens[fullScreenIndex].title}</FullScreenLabel>
+                <FullScreenHint>Click anywhere outside to close</FullScreenHint>
+              </FullScreenContent>
+            </FullScreenOverlay>
+          )}
+        </AnimatePresence>
+      </ScreensSection>
 
-            <CTASection>
-                <CTATitle>Built with SwiftUI</CTATitle>
-                <CTADesc>Native iOS experience with premium design and performance.</CTADesc>
-                <CTAButton href="/app-portfolio">
-                    <FiArrowLeft /> Back to Portfolio
-                </CTAButton>
-            </CTASection>
-        </PageContainer>
-    );
+      <FeaturesSection>
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          Key Features
+        </SectionTitle>
+        <FeaturesGrid>
+          {features.map((f, i) => (
+            <FeatureCard
+              key={f.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + i * 0.08 }}
+            >
+              <FeatureIcon>{f.icon}</FeatureIcon>
+              <div>
+                <FeatureTitle>{f.title}</FeatureTitle>
+                <FeatureDesc>{f.desc}</FeatureDesc>
+              </div>
+            </FeatureCard>
+          ))}
+        </FeaturesGrid>
+      </FeaturesSection>
+
+      <CTASection>
+        <CTATitle>Built with SwiftUI</CTATitle>
+        <CTADesc>Native iOS experience with premium design and performance.</CTADesc>
+        <CTAButton href="/app-portfolio">
+          <FiArrowLeft /> Back to Portfolio
+        </CTAButton>
+      </CTASection>
+    </PageContainer>
+  );
 }
 
 // ── Styled Components ──────────────────────────
@@ -255,8 +298,8 @@ const HeroSection = styled.section`
   padding: 100px 20px 60px;
   text-align: center;
   background: ${({ theme }) => theme.mode === 'dark'
-        ? 'linear-gradient(135deg, #0c1929 0%, #0e3a5e 50%, #0f2942 100%)'
-        : 'linear-gradient(135deg, #bae6fd 0%, #7dd3fc 50%, #a5f3fc 100%)'};
+    ? 'linear-gradient(135deg, #0c1929 0%, #0e3a5e 50%, #0f2942 100%)'
+    : 'linear-gradient(135deg, #bae6fd 0%, #7dd3fc 50%, #a5f3fc 100%)'};
 `;
 
 const BackLink = styled(Link)`
@@ -279,6 +322,30 @@ const HeroContent = styled.div`
   margin: 0 auto;
 `;
 
+const MobileAppsBadge = styled(motion.div)`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.12)'
+    : 'rgba(99, 102, 241, 0.10)'};
+  border: 1px solid ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.3)'
+    : 'rgba(99, 102, 241, 0.25)'};
+  border-radius: 50px;
+  padding: 10px 28px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.mode === 'dark' ? '#a5b4fc' : '#4f46e5'};
+  backdrop-filter: blur(10px);
+
+  svg {
+    color: ${({ theme }) => theme.mode === 'dark' ? '#818cf8' : '#6366f1'};
+    font-size: 1.1rem;
+  }
+`;
+
 const AppIconLarge = styled(motion.div)`
   font-size: 4rem;
   margin-bottom: 16px;
@@ -289,8 +356,8 @@ const AppTitle = styled(motion.h1)`
   font-weight: 800;
   margin-bottom: 8px;
   background: ${({ theme }) => theme.mode === 'dark'
-        ? 'linear-gradient(135deg, #fff 0%, #7dd3fc 100%)'
-        : 'linear-gradient(135deg, #0c4a6e 0%, #0EA5E9 100%)'};
+    ? 'linear-gradient(135deg, #fff 0%, #7dd3fc 100%)'
+    : 'linear-gradient(135deg, #0c4a6e 0%, #0EA5E9 100%)'};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -342,6 +409,120 @@ const ScreensGrid = styled.div`
   gap: 28px;
   justify-content: center;
   flex-wrap: wrap;
+`;
+
+const PhoneFrameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const FullScreenButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(14,165,233,0.3)' : 'rgba(14,165,233,0.25)'};
+  background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(14,165,233,0.1)' : 'rgba(14,165,233,0.08)'};
+  color: #0EA5E9;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(14,165,233,0.2)' : 'rgba(14,165,233,0.15)'};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14,165,233,0.2);
+  }
+
+  svg {
+    opacity: 0.9;
+  }
+`;
+
+const FullScreenOverlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+`;
+
+const FullScreenCloseBtn = styled.button`
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10000;
+
+  &:hover {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.1);
+  }
+`;
+
+const FullScreenContent = styled(motion.div)`
+  width: min(440px, 90vw);
+  background: ${({ theme }) => theme.mode === 'dark' ? '#1a1a2e' : '#f8fafc'};
+  border: 2px solid ${({ theme }) => theme.mode === 'dark' ? '#2d2d5e' : '#e2e8f0'};
+  border-radius: 36px;
+  padding: 14px;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.5);
+  cursor: default;
+`;
+
+const FullScreenPhoneScreen = styled.div`
+  background: ${({ theme }) => theme.mode === 'dark' ? '#0f0f23' : '#f1f5f9'};
+  border-radius: 26px;
+  min-height: 60vh;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 50px;
+
+  /* Scale up the inner content for readability */
+  font-size: 1.3em;
+
+  & > div {
+    padding: 12px 18px;
+  }
+`;
+
+const FullScreenLabel = styled.div`
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
+  margin-top: 12px;
+  padding-bottom: 6px;
+`;
+
+const FullScreenHint = styled.div`
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 4px;
+  padding-bottom: 2px;
 `;
 
 const PhoneFrame = styled(motion.div)`
@@ -437,8 +618,8 @@ const CTASection = styled.section`
   text-align: center;
   padding: 50px 20px 80px;
   background: ${({ theme }) => theme.mode === 'dark'
-        ? 'linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.06) 100%)'
-        : 'linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.04) 100%)'};
+    ? 'linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.06) 100%)'
+    : 'linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.04) 100%)'};
 `;
 
 const CTATitle = styled.h2`
@@ -517,11 +698,11 @@ const MockCard = styled.div`
 `;
 
 const MockTabBar = ({ tabs, active }) => (
-    <MockTabBarContainer>
-        {tabs.map((t, i) => (
-            <MockTab key={t} $active={i === active}>{t}</MockTab>
-        ))}
-    </MockTabBarContainer>
+  <MockTabBarContainer>
+    {tabs.map((t, i) => (
+      <MockTab key={t} $active={i === active}>{t}</MockTab>
+    ))}
+  </MockTabBarContainer>
 );
 
 const MockTabBarContainer = styled.div`
@@ -550,11 +731,11 @@ const MockSectionTitle = styled.div`
 `;
 
 const MockTabs = ({ tabs, active }) => (
-    <MockTabsContainer>
-        {tabs.map((t, i) => (
-            <MockFilterTab key={t} $active={i === active}>{t}</MockFilterTab>
-        ))}
-    </MockTabsContainer>
+  <MockTabsContainer>
+    {tabs.map((t, i) => (
+      <MockFilterTab key={t} $active={i === active}>{t}</MockFilterTab>
+    ))}
+  </MockTabsContainer>
 );
 
 const MockTabsContainer = styled.div`
@@ -575,10 +756,10 @@ const MockFilterTab = styled.span`
 `;
 
 const MockProjectCard = ({ color, children }) => (
-    <MockProjectCardStyled $color={color}>
-        <div style={{ width: 8, height: 8, borderRadius: 4, background: color, flexShrink: 0 }} />
-        <div>{children}</div>
-    </MockProjectCardStyled>
+  <MockProjectCardStyled $color={color}>
+    <div style={{ width: 8, height: 8, borderRadius: 4, background: color, flexShrink: 0 }} />
+    <div>{children}</div>
+  </MockProjectCardStyled>
 );
 
 const MockProjectCardStyled = styled.div`
@@ -611,21 +792,21 @@ const MockSettingRow = styled.div`
 `;
 
 const MockToggle = ({ on }) => (
+  <div style={{
+    width: 28, height: 16, borderRadius: 8,
+    background: on ? '#0EA5E9' : '#555',
+    position: 'relative',
+    flexShrink: 0
+  }}>
     <div style={{
-        width: 28, height: 16, borderRadius: 8,
-        background: on ? '#0EA5E9' : '#555',
-        position: 'relative',
-        flexShrink: 0
-    }}>
-        <div style={{
-            width: 12, height: 12, borderRadius: 6,
-            background: '#fff',
-            position: 'absolute',
-            top: 2,
-            left: on ? 14 : 2,
-            transition: 'left 0.2s'
-        }} />
-    </div>
+      width: 12, height: 12, borderRadius: 6,
+      background: '#fff',
+      position: 'absolute',
+      top: 2,
+      left: on ? 14 : 2,
+      transition: 'left 0.2s'
+    }} />
+  </div>
 );
 
 const MockAbout = styled.div`

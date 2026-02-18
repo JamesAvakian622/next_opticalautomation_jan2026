@@ -3,6 +3,8 @@ import SwiftUI
 // MARK: - Home View (Native)
 struct HomeView: View {
     let baseURL: String
+    @EnvironmentObject var themeManager: ThemeManager
+    @Environment(\.openURL) private var openURL
     @State private var showWebHome = false
     
     var body: some View {
@@ -37,14 +39,30 @@ struct HomeView: View {
                     .frame(width: 28, height: 28)
                     .clipShape(RoundedRectangle(cornerRadius: 6))
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink {
-                    WebViewContainer(urlString: baseURL)
-                        .navigationTitle("Website")
-                        .navigationBarTitleDisplayMode(.inline)
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                // Open Website in Safari
+                Button {
+                    if let url = URL(string: baseURL) {
+                        openURL(url)
+                    }
                 } label: {
                     Image(systemName: "globe")
                         .font(.body)
+                        .foregroundColor(Color(red: 0.39, green: 0.40, blue: 0.95))
+                }
+                
+                // Dark / Light Mode Toggle
+                Button {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        themeManager.isDarkMode.toggle()
+                    }
+                } label: {
+                    Image(systemName: themeManager.isDarkMode ? "moon.fill" : "sun.max.fill")
+                        .font(.body)
+                        .foregroundColor(themeManager.isDarkMode
+                            ? Color(red: 0.58, green: 0.37, blue: 0.98)
+                            : Color(red: 0.96, green: 0.62, blue: 0.04))
+                        .contentTransition(.symbolEffect(.replace))
                 }
             }
         }

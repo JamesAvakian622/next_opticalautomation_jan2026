@@ -180,6 +180,13 @@ export default function SnowyChristmasAppPage() {
           ))}
         </SnowflakesBg>
         <HeroContent>
+          <MobileAppsBadge
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <FiSmartphone /> Mobile Applications
+          </MobileAppsBadge>
           <AppIconLarge initial={{ scale: 0, rotate: -180 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: 'spring', stiffness: 150, delay: 0.1 }}>
             ❄️
           </AppIconLarge>
@@ -278,6 +285,30 @@ const BackLink = styled(Link)`
 `;
 
 const HeroContent = styled.div`max-width: 600px; margin: 0 auto; position: relative; z-index: 2;`;
+
+const MobileAppsBadge = styled(motion.div)`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.12)'
+    : 'rgba(99, 102, 241, 0.10)'};
+  border: 1px solid ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.3)'
+    : 'rgba(99, 102, 241, 0.25)'};
+  border-radius: 50px;
+  padding: 10px 28px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.mode === 'dark' ? '#a5b4fc' : '#4f46e5'};
+  backdrop-filter: blur(10px);
+
+  svg {
+    color: ${({ theme }) => theme.mode === 'dark' ? '#818cf8' : '#6366f1'};
+    font-size: 1.1rem;
+  }
+`;
 
 const AppIconLarge = styled(motion.div)`font-size: 4rem; margin-bottom: 16px;`;
 

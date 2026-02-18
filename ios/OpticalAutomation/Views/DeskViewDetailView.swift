@@ -49,7 +49,7 @@ struct DeskViewDetailView: View {
                     Text("MyDeskView Series")
                         .font(.title2.weight(.bold))
                     
-                    Text("Dashboard Information and Website System")
+                    Text("King Dual - Dashboard Website And App Shared Data System")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -78,7 +78,7 @@ struct DeskViewDetailView: View {
                 VStack(spacing: 14) {
                     ForEach(products.indices, id: \.self) { index in
                         let product = products[index]
-                        DeskViewProductCard(
+                        DeskViewDetailProductCard(
                             name: product.name,
                             url: product.url,
                             description: product.desc,
@@ -177,7 +177,7 @@ struct DeskViewDetailView: View {
 }
 
 // MARK: - DeskView Product Card
-struct DeskViewProductCard: View {
+struct DeskViewDetailProductCard: View {
     let name: String
     let url: String
     let description: String

@@ -79,8 +79,11 @@ export async function POST(request) {
         return response;
     } catch (error) {
         console.error('Login error:', error);
+        const errorMsg = error.name === 'MongoServerError' || error.name === 'MongoNetworkError'
+            ? 'Database connection error. Please try again.'
+            : 'Internal server error';
         return NextResponse.json(
-            { success: false, error: 'Internal server error' },
+            { success: false, error: errorMsg },
             { status: 500 }
         );
     } finally {

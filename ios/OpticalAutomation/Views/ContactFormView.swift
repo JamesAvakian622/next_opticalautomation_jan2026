@@ -155,7 +155,7 @@ struct ContactFormView: View {
                                 } else {
                                     Image(systemName: "paperplane.fill")
                                 }
-                                Text(isSending ? "Opening Mail..." : "Send Message")
+                                Text(isSending ? "Sending..." : "Send Message")
                                     .font(.headline)
                             }
                             .foregroundColor(.white)
@@ -247,25 +247,81 @@ struct ContactFormView: View {
         let bodyText = "Name: \(name)\nEmail: \(email)\n\n\(message)"
         let bodyEncoded = bodyText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? bodyText
         
+        // Build mailto URL
         let mailtoString = "mailto:\(recipientEmail)?subject=\(subjectEncoded)&body=\(bodyEncoded)"
         
-        if let url = URL(string: mailtoString) {
-            UIApplication.shared.open(url) { success in
+        // Try mailto first (Apple Mail)
+        if let mailtoURL = URL(string: mailtoString),
+           UIApplication.shared.canOpenURL(mailtoURL) {
+            UIApplication.shared.open(mailtoURL) { success in
                 DispatchQueue.main.async {
                     isSending = false
-                    if success {
-                        sent = true
-                    } else {
-                        alertTitle = "Cannot Open Mail"
-                        alertMessage = "Please configure a mail account in Settings, or email us directly at \(recipientEmail)"
-                        showingAlert = true
-                    }
+                    if success { sent = true }
+                    else { tryAlternativeMailApps(subject: subjectEncoded, body: bodyEncoded) }
                 }
             }
-        } else {
+            return
+        }
+        
+        // If mailto can't open, try alternatives
+        tryAlternativeMailApps(subject: subjectEncoded, body: bodyEncoded)
+    }
+    
+    private func tryAlternativeMailApps(subject: String, body: String) {
+        // Try Gmail
+        let gmailString = "googlegmail:///co?to=\(recipientEmail)&subject=\(subject)&body=\(body)"
+        if let gmailURL = URL(string: gmailString),
+           UIApplication.shared.canOpenURL(gmailURL) {
+            UIApplication.shared.open(gmailURL) { _ in
+                DispatchQueue.main.async {
+                    isSending = false
+                    sent = true
+                }
+            }
+            return
+        }
+        
+        // Try Outlook
+        let outlookString = "ms-outlook://compose?to=\(recipientEmail)&subject=\(subject)&body=\(body)"
+        if let outlookURL = URL(string: outlookString),
+           UIApplication.shared.canOpenURL(outlookURL) {
+            UIApplication.shared.open(outlookURL) { _ in
+                DispatchQueue.main.async {
+                    isSending = false
+                    sent = true
+                }
+            }
+            return
+        }
+        
+        // Try Yahoo Mail
+        let yahooString = "ymail://mail/compose?to=\(recipientEmail)&subject=\(subject)&body=\(body)"
+        if let yahooURL = URL(string: yahooString),
+           UIApplication.shared.canOpenURL(yahooURL) {
+            UIApplication.shared.open(yahooURL) { _ in
+                DispatchQueue.main.async {
+                    isSending = false
+                    sent = true
+                }
+            }
+            return
+        }
+        
+        // No mail app available — copy message to clipboard
+        DispatchQueue.main.async {
             isSending = false
-            alertTitle = "Error"
-            alertMessage = "Could not create email. Please email us directly at \(recipientEmail)"
+            let clipboardText = """
+            To: \(recipientEmail)
+            Subject: \(subject)
+            
+            Name: \(name)
+            Email: \(email)
+            
+            \(message)
+            """
+            UIPasteboard.general.string = clipboardText
+            alertTitle = "Message Copied"
+            alertMessage = "No mail app was found on this device. Your message has been copied to the clipboard. Please paste it into your preferred email app and send it to \(recipientEmail)."
             showingAlert = true
         }
     }

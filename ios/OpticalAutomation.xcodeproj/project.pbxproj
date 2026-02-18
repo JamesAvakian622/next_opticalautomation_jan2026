@@ -20,6 +20,11 @@
 		1A000000B /* DeskViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000019 /* DeskViewView.swift */; };
 		1A000000C /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000001A /* PortfolioView.swift */; };
 		1A000000D /* ContactFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000001B /* ContactFormView.swift */; };
+		1A000000E /* DeskViewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000001C /* DeskViewDetailView.swift */; };
+		1A000000F /* LearnSkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000001D /* LearnSkillsView.swift */; };
+		1A0000021 /* SelectSoftwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000001E /* SelectSoftwareView.swift */; };
+		1A0000022 /* PricingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000001F /* PricingView.swift */; };
+		1A0000023 /* ProductVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000024 /* ProductVideosView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +41,11 @@
 		1A0000019 /* DeskViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskViewView.swift; sourceTree = "<group>"; };
 		1A000001A /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
 		1A000001B /* ContactFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactFormView.swift; sourceTree = "<group>"; };
+		1A000001C /* DeskViewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskViewDetailView.swift; sourceTree = "<group>"; };
+		1A000001D /* LearnSkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnSkillsView.swift; sourceTree = "<group>"; };
+		1A000001E /* SelectSoftwareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSoftwareView.swift; sourceTree = "<group>"; };
+		1A000001F /* PricingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingView.swift; sourceTree = "<group>"; };
+		1A0000024 /* ProductVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVideosView.swift; sourceTree = "<group>"; };
 		1A0000020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +100,11 @@
 				1A0000019 /* DeskViewView.swift */,
 				1A000001A /* PortfolioView.swift */,
 				1A000001B /* ContactFormView.swift */,
+				1A000001C /* DeskViewDetailView.swift */,
+				1A000001D /* LearnSkillsView.swift */,
+				1A000001E /* SelectSoftwareView.swift */,
+				1A000001F /* PricingView.swift */,
+				1A0000024 /* ProductVideosView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,6 +190,11 @@
 				1A000000B /* DeskViewView.swift in Sources */,
 				1A000000C /* PortfolioView.swift in Sources */,
 				1A000000D /* ContactFormView.swift in Sources */,
+				1A000000E /* DeskViewDetailView.swift in Sources */,
+				1A000000F /* LearnSkillsView.swift in Sources */,
+				1A0000021 /* SelectSoftwareView.swift in Sources */,
+				1A0000022 /* PricingView.swift in Sources */,
+				1A0000023 /* ProductVideosView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

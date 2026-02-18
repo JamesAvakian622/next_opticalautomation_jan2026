@@ -8,135 +8,143 @@ import { FiArrowLeft, FiArrowRight, FiSmartphone, FiBook, FiStar, FiCheck, FiBar
 
 // ── Component ──────────────────────────────────
 export default function LearnSkills365AppPage() {
-    const screens = [
-        { src: '/ls365_dashboard.png', label: 'Dashboard', caption: 'Track progress across all subjects with stats and quick access' },
-        { src: '/ls365_math.png', label: 'Mathematics', caption: 'Practice Addition, Subtraction, Multiplication & Division' },
-        { src: '/ls365_reading.png', label: 'Reading Practice', caption: 'Read passages aloud with voice recognition feedback' },
-        { src: '/ls365_states.png', label: 'States & Capitals', caption: 'Learn all 50 US states and capitals with quizzes' },
-    ];
+  const screens = [
+    { src: '/ls365_dashboard.png', label: 'Dashboard', caption: 'Track progress across all subjects with stats and quick access' },
+    { src: '/ls365_math.png', label: 'Mathematics', caption: 'Practice Addition, Subtraction, Multiplication & Division' },
+    { src: '/ls365_reading.png', label: 'Reading Practice', caption: 'Read passages aloud with voice recognition feedback' },
+    { src: '/ls365_states.png', label: 'States & Capitals', caption: 'Learn all 50 US states and capitals with quizzes' },
+  ];
 
-    const features = [
-        { icon: <FiBarChart2 />, title: 'Math Practice', desc: 'Addition, Subtraction, Multiplication & Division with Easy, Medium, and Hard difficulty levels' },
-        { icon: <FiBook />, title: 'Reading Practice', desc: 'Read passages aloud with voice recognition to improve fluency and comprehension' },
-        { icon: <FiEdit3 />, title: 'Writing Skills', desc: 'Improve writing abilities with guided exercises and practice prompts' },
-        { icon: <FiType />, title: 'Typing Practice', desc: 'Build typing speed and accuracy with WPM tracking and progress stats' },
-        { icon: <FiMapPin />, title: 'States & Capitals', desc: 'Learn all 50 US states and their capitals with searchable lists and practice quizzes' },
-        { icon: <FiTrendingUp />, title: 'Progress Tracking', desc: 'Track scores, accuracy, quizzes completed, and improvement across all subjects' },
-        { icon: <FiAward />, title: 'Practice Quizzes', desc: 'Interactive quizzes across all subjects with instant feedback and score tracking' },
-        { icon: <FiTarget />, title: 'Memory Games', desc: 'Brain training exercises to sharpen memory and cognitive skills' },
-    ];
+  const features = [
+    { icon: <FiBarChart2 />, title: 'Math Practice', desc: 'Addition, Subtraction, Multiplication & Division with Easy, Medium, and Hard difficulty levels' },
+    { icon: <FiBook />, title: 'Reading Practice', desc: 'Read passages aloud with voice recognition to improve fluency and comprehension' },
+    { icon: <FiEdit3 />, title: 'Writing Skills', desc: 'Improve writing abilities with guided exercises and practice prompts' },
+    { icon: <FiType />, title: 'Typing Practice', desc: 'Build typing speed and accuracy with WPM tracking and progress stats' },
+    { icon: <FiMapPin />, title: 'States & Capitals', desc: 'Learn all 50 US states and their capitals with searchable lists and practice quizzes' },
+    { icon: <FiTrendingUp />, title: 'Progress Tracking', desc: 'Track scores, accuracy, quizzes completed, and improvement across all subjects' },
+    { icon: <FiAward />, title: 'Practice Quizzes', desc: 'Interactive quizzes across all subjects with instant feedback and score tracking' },
+    { icon: <FiTarget />, title: 'Memory Games', desc: 'Brain training exercises to sharpen memory and cognitive skills' },
+  ];
 
-    return (
-        <PageContainer>
-            {/* Back Navigation */}
-            <BackNav>
-                <Link href="/app-portfolio">
-                    <FiArrowLeft /> Back to App Portfolio
-                </Link>
-            </BackNav>
+  return (
+    <PageContainer>
+      {/* Back Navigation */}
+      <BackNav>
+        <Link href="/app-portfolio">
+          <FiArrowLeft /> Back to App Portfolio
+        </Link>
+      </BackNav>
 
-            {/* Hero */}
-            <HeroSection>
-                <HeroGlow />
-                <HeroContent>
-                    <AppIconLarge
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        📚
-                    </AppIconLarge>
+      {/* Hero */}
+      <HeroSection>
+        <HeroGlow />
+        <HeroContent>
+          <MobileAppsBadge
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <FiSmartphone /> Mobile Applications
+          </MobileAppsBadge>
 
-                    <AppTitle
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.15 }}
-                    >
-                        LearnSkills365
-                    </AppTitle>
+          <AppIconLarge
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            📚
+          </AppIconLarge>
 
-                    <AppTagline
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                    >
-                        Learn Something New Every Day
-                    </AppTagline>
+          <AppTitle
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            LearnSkills365
+          </AppTitle>
 
-                    <AppDesc
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                    >
-                        A comprehensive learning platform covering Math, Reading, Writing, Typing,
-                        Memory, Geography, and more. Track your progress with detailed stats,
-                        practice with interactive quizzes, and build skills at your own pace.
-                    </AppDesc>
+          <AppTagline
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            Learn Something New Every Day
+          </AppTagline>
 
-                    <HeroBadges
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.5 }}
-                    >
-                        <Badge><FiSmartphone size={14} /> iOS Native</Badge>
-                        <Badge $accent><FiZap size={14} /> SwiftUI</Badge>
-                        <Badge><FiBook size={14} /> 7 Subjects</Badge>
-                    </HeroBadges>
-                </HeroContent>
-            </HeroSection>
+          <AppDesc
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            A comprehensive learning platform covering Math, Reading, Writing, Typing,
+            Memory, Geography, and more. Track your progress with detailed stats,
+            practice with interactive quizzes, and build skills at your own pace.
+          </AppDesc>
 
-            {/* Screenshots Section */}
-            <ScreensSection>
-                <SectionTitle>App Screenshots</SectionTitle>
-                <ScreensGrid>
-                    {screens.map((screen, i) => (
-                        <ScreenCard
-                            key={screen.label}
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: i * 0.12 }}
-                        >
-                            <PhoneFrame>
-                                <ScreenImage src={screen.src} alt={`LearnSkills365 — ${screen.label}`} loading="lazy" />
-                            </PhoneFrame>
-                            <ScreenLabel>{screen.label}</ScreenLabel>
-                            <ScreenCaption>{screen.caption}</ScreenCaption>
-                        </ScreenCard>
-                    ))}
-                </ScreensGrid>
-            </ScreensSection>
+          <HeroBadges
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <Badge><FiSmartphone size={14} /> iOS Native</Badge>
+            <Badge $accent><FiZap size={14} /> SwiftUI</Badge>
+            <Badge><FiBook size={14} /> 7 Subjects</Badge>
+          </HeroBadges>
+        </HeroContent>
+      </HeroSection>
 
-            {/* Features Section */}
-            <FeaturesSection>
-                <SectionTitle>Key Features</SectionTitle>
-                <FeaturesGrid>
-                    {features.map((f, i) => (
-                        <FeatureCard
-                            key={f.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: i * 0.08 }}
-                        >
-                            <FeatureIcon>{f.icon}</FeatureIcon>
-                            <div>
-                                <FeatureTitle>{f.title}</FeatureTitle>
-                                <FeatureDesc>{f.desc}</FeatureDesc>
-                            </div>
-                        </FeatureCard>
-                    ))}
-                </FeaturesGrid>
-            </FeaturesSection>
+      {/* Screenshots Section */}
+      <ScreensSection>
+        <SectionTitle>App Screenshots</SectionTitle>
+        <ScreensGrid>
+          {screens.map((screen, i) => (
+            <ScreenCard
+              key={screen.label}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+            >
+              <PhoneFrame>
+                <ScreenImage src={screen.src} alt={`LearnSkills365 — ${screen.label}`} loading="lazy" />
+              </PhoneFrame>
+              <ScreenLabel>{screen.label}</ScreenLabel>
+              <ScreenCaption>{screen.caption}</ScreenCaption>
+            </ScreenCard>
+          ))}
+        </ScreensGrid>
+      </ScreensSection>
 
-            {/* CTA */}
-            <CTASection>
-                <CTATitle>Ready to Start Learning?</CTATitle>
-                <CTADesc>LearnSkills365 makes education fun with interactive quizzes, progress tracking, and 7 subjects to master.</CTADesc>
-                <CTAButton href="/app-portfolio">
-                    Browse All Apps <FiArrowRight />
-                </CTAButton>
-            </CTASection>
-        </PageContainer>
-    );
+      {/* Features Section */}
+      <FeaturesSection>
+        <SectionTitle>Key Features</SectionTitle>
+        <FeaturesGrid>
+          {features.map((f, i) => (
+            <FeatureCard
+              key={f.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+            >
+              <FeatureIcon>{f.icon}</FeatureIcon>
+              <div>
+                <FeatureTitle>{f.title}</FeatureTitle>
+                <FeatureDesc>{f.desc}</FeatureDesc>
+              </div>
+            </FeatureCard>
+          ))}
+        </FeaturesGrid>
+      </FeaturesSection>
+
+      {/* CTA */}
+      <CTASection>
+        <CTATitle>Ready to Start Learning?</CTATitle>
+        <CTADesc>LearnSkills365 makes education fun with interactive quizzes, progress tracking, and 7 subjects to master.</CTADesc>
+        <CTAButton href="/app-portfolio">
+          Browse All Apps <FiArrowRight />
+        </CTAButton>
+      </CTASection>
+    </PageContainer>
+  );
 }
 
 // ── Styled Components ──────────────────────────
@@ -190,6 +198,30 @@ const HeroContent = styled.div`
   margin: 0 auto;
 `;
 
+const MobileAppsBadge = styled(motion.div)`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.12)'
+    : 'rgba(99, 102, 241, 0.10)'};
+  border: 1px solid ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.3)'
+    : 'rgba(99, 102, 241, 0.25)'};
+  border-radius: 50px;
+  padding: 10px 28px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.mode === 'dark' ? '#a5b4fc' : '#4f46e5'};
+  backdrop-filter: blur(10px);
+
+  svg {
+    color: ${({ theme }) => theme.mode === 'dark' ? '#818cf8' : '#6366f1'};
+    font-size: 1.1rem;
+  }
+`;
+
 const AppIconLarge = styled(motion.div)`
   font-size: 4rem;
   margin-bottom: 16px;
@@ -200,8 +232,8 @@ const AppTitle = styled(motion.h1)`
   font-weight: 800;
   margin-bottom: 8px;
   background: ${({ theme }) => theme.mode === 'dark'
-        ? 'linear-gradient(135deg, #fff 0%, #fcd34d 100%)'
-        : 'linear-gradient(135deg, #92400e 0%, #f59e0b 100%)'};
+    ? 'linear-gradient(135deg, #fff 0%, #fcd34d 100%)'
+    : 'linear-gradient(135deg, #92400e 0%, #f59e0b 100%)'};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -238,14 +270,14 @@ const Badge = styled.span`
   font-size: 0.78rem;
   font-weight: 600;
   background: ${({ $accent, theme }) => $accent
-        ? 'rgba(245,158,11,0.15)'
-        : theme.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)'};
+    ? 'rgba(245,158,11,0.15)'
+    : theme.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)'};
   color: ${({ $accent, theme }) => $accent
-        ? '#f59e0b'
-        : theme.colors.textSecondary};
+    ? '#f59e0b'
+    : theme.colors.textSecondary};
   border: 1px solid ${({ $accent, theme }) => $accent
-        ? 'rgba(245,158,11,0.25)'
-        : theme.colors.border};
+    ? 'rgba(245,158,11,0.25)'
+    : theme.colors.border};
 `;
 
 // ── Screenshots ──────────────────────────
@@ -373,8 +405,8 @@ const CTASection = styled.section`
   text-align: center;
   padding: 60px 20px 80px;
   background: ${({ theme }) => theme.mode === 'dark'
-        ? 'linear-gradient(180deg, transparent 0%, rgba(245,158,11,0.06) 100%)'
-        : 'linear-gradient(180deg, transparent 0%, rgba(245,158,11,0.04) 100%)'};
+    ? 'linear-gradient(180deg, transparent 0%, rgba(245,158,11,0.06) 100%)'
+    : 'linear-gradient(180deg, transparent 0%, rgba(245,158,11,0.04) 100%)'};
 `;
 
 const CTATitle = styled.h2`

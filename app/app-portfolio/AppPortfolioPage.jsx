@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -30,7 +30,8 @@ import {
   FiDollarSign,
   FiCalendar,
   FiStar,
-  FiUser
+  FiUser,
+  FiX
 } from 'react-icons/fi';
 
 // ── App Data ──────────────────────────────────────────────
@@ -485,6 +486,39 @@ const AppCard = styled(motion.div)`
   }
 `;
 
+const SectionBadge = styled(motion.div)`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.12)'
+    : 'rgba(99, 102, 241, 0.10)'};
+  border: 1px solid ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.3)'
+    : 'rgba(99, 102, 241, 0.25)'};
+  border-radius: 50px;
+  padding: 10px 28px;
+  margin: 0 auto 36px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.mode === 'dark' ? '#a5b4fc' : '#4f46e5'};
+  backdrop-filter: blur(10px);
+  text-align: center;
+  width: fit-content;
+
+  svg {
+    color: ${({ theme }) => theme.mode === 'dark' ? '#818cf8' : '#6366f1'};
+    font-size: 1.1rem;
+  }
+`;
+
+const SectionBadgeWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 8px;
+`;
+
 const CardHeader = styled.div`
   display: flex;
   align-items: flex-start;
@@ -645,6 +679,7 @@ const ScreenshotItem = styled.div`
   flex-shrink: 0;
   width: 120px;
   text-align: center;
+  cursor: pointer;
 
   img {
     width: 120px;
@@ -656,7 +691,7 @@ const ScreenshotItem = styled.div`
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
-      transform: scale(1.04);
+      transform: scale(1.08);
       box-shadow: 0 8px 24px ${({ theme }) => theme.colors.shadow};
     }
   }
@@ -667,6 +702,71 @@ const ScreenshotItem = styled.div`
     font-weight: 600;
     color: ${({ theme }) => theme.colors.textSecondary};
     margin-top: 6px;
+  }
+`;
+
+// ── Lightbox Modal ──────────────────────────
+const LightboxOverlay = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  padding: 40px;
+`;
+
+const LightboxContent = styled(motion.div)`
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  cursor: default;
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  }
+`;
+
+const LightboxLabel = styled(motion.p)`
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.3px;
+`;
+
+const LightboxClose = styled(motion.button)`
+  position: absolute;
+  top: -48px;
+  right: -4px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+  }
+
+  svg {
+    font-size: 1.1rem;
   }
 `;
 
@@ -824,6 +924,21 @@ const platformLabel = (p) => {
 // ── Component ──────────────────────────────
 export default function AppPortfolioPage() {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [lightboxImage, setLightboxImage] = useState(null);
+
+  // Close lightbox on Escape key
+  const closeLightbox = useCallback(() => setLightboxImage(null), []);
+  useEffect(() => {
+    const handleKey = (e) => { if (e.key === 'Escape') closeLightbox(); };
+    if (lightboxImage) {
+      document.addEventListener('keydown', handleKey);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = '';
+    };
+  }, [lightboxImage, closeLightbox]);
 
   const filteredApps = activeFilter === 'all'
     ? apps
@@ -923,6 +1038,17 @@ export default function AppPortfolioPage() {
           ))}
         </FilterBar>
 
+        {/* Section Title Badge */}
+        <SectionBadgeWrapper>
+          <SectionBadge
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <FiSmartphone /> Mobile Applications
+          </SectionBadge>
+        </SectionBadgeWrapper>
+
         {/* App Grid */}
         <AnimatePresence mode="wait">
           <AppGrid
@@ -969,7 +1095,7 @@ export default function AppPortfolioPage() {
                   {app.screenshots && app.screenshots.length > 0 && (
                     <ScreenshotGallery>
                       {app.screenshots.map((shot) => (
-                        <ScreenshotItem key={shot.label}>
+                        <ScreenshotItem key={shot.label} onClick={() => setLightboxImage({ src: shot.src, label: `${app.name} — ${shot.label}` })}>
                           <img src={shot.src} alt={`${app.name} — ${shot.label}`} loading="lazy" />
                           <span>{shot.label}</span>
                         </ScreenshotItem>
@@ -1025,6 +1151,43 @@ export default function AppPortfolioPage() {
           View Pricing <FiArrowRight />
         </CTAButton>
       </CTASection>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxImage && (
+          <LightboxOverlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setLightboxImage(null)}
+          >
+            <LightboxContent
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <LightboxClose
+                onClick={() => setLightboxImage(null)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <FiX />
+              </LightboxClose>
+              <img src={lightboxImage.src} alt={lightboxImage.label} />
+              <LightboxLabel
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+              >
+                {lightboxImage.label}
+              </LightboxLabel>
+            </LightboxContent>
+          </LightboxOverlay>
+        )}
+      </AnimatePresence>
     </PageContainer>
   );
 }

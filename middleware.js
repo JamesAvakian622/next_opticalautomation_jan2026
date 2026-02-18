@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { resolveTenant } from './lib/resolve-tenant.js';
 
 const publicRoutes = [
     '/',
@@ -32,7 +33,9 @@ const publicRoutes = [
     '/product-videos',
     '/features',
     '/timeline',
-    '/questions'
+    '/questions',
+    '/onboarding',
+    '/api/onboarding',
 ];
 
 function isPublicRoute(pathname) {
@@ -50,12 +53,31 @@ export function middleware(request) {
         pathname.includes('.') ||
         pathname.startsWith('/api/')
     ) {
+        // Even for skipped routes, attach tenant headers if detected
+        const tenant = resolveTenant(request);
+        if (tenant) {
+            const response = NextResponse.next();
+            if (tenant.orgSlug) response.headers.set('x-tenant-slug', tenant.orgSlug);
+            if (tenant.orgId) response.headers.set('x-tenant-id', tenant.orgId);
+            response.headers.set('x-tenant-source', tenant.source);
+            return response;
+        }
         return NextResponse.next();
     }
 
+    // Resolve tenant from request
+    const tenant = resolveTenant(request);
+
     // Allow public routes
     if (isPublicRoute(pathname)) {
-        return NextResponse.next();
+        const response = NextResponse.next();
+        // Attach tenant headers even on public routes (for client-side usage)
+        if (tenant) {
+            if (tenant.orgSlug) response.headers.set('x-tenant-slug', tenant.orgSlug);
+            if (tenant.orgId) response.headers.set('x-tenant-id', tenant.orgId);
+            response.headers.set('x-tenant-source', tenant.source);
+        }
+        return response;
     }
 
     // Check for custom auth token
@@ -66,7 +88,14 @@ export function middleware(request) {
         return NextResponse.redirect(signInUrl);
     }
 
-    return NextResponse.next();
+    // Attach tenant headers for downstream use
+    const response = NextResponse.next();
+    if (tenant) {
+        if (tenant.orgSlug) response.headers.set('x-tenant-slug', tenant.orgSlug);
+        if (tenant.orgId) response.headers.set('x-tenant-id', tenant.orgId);
+        response.headers.set('x-tenant-source', tenant.source);
+    }
+    return response;
 }
 
 export const config = {

@@ -1,9 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { titleToSlug } from '@/lib/softwareData';
 import {
@@ -23,7 +23,9 @@ import {
     FiMonitor,
     FiMapPin,
     FiImage,
-    FiChevronDown
+    FiChevronDown,
+    FiMaximize2,
+    FiX
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -177,6 +179,106 @@ border: 1px solid ${({ theme }) => theme.colors.border};
 @media(max-width: 1024px) {
     margin-top: 0;
 }
+`;
+
+const ScreenshotWithButton = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 2;
+  min-width: 0;
+
+  @media (max-width: 1024px) {
+    margin-top: 0;
+  }
+`;
+
+const FullScreenBtn = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(99,102,241,0.3)' : 'rgba(99,102,241,0.25)'};
+  background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(99,102,241,0.1)' : 'rgba(99,102,241,0.08)'};
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &:hover {
+    background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(99,102,241,0.2)' : 'rgba(99,102,241,0.15)'};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.shadow};
+  }
+
+  svg {
+    opacity: 0.9;
+  }
+`;
+
+const FullScreenOverlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  cursor: pointer;
+`;
+
+const FullScreenCloseBtn = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10000;
+
+  &:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.1);
+  }
+`;
+
+const FullScreenImageContainer = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+`;
+
+const FullScreenHint = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  pointer-events: none;
 `;
 
 const ScreenshotImage = styled.img`
@@ -870,6 +972,7 @@ export default function DeskViewPage() {
     const FeaturedIcon3 = products[2].icon;
     const [softwareOpen, setSoftwareOpen] = React.useState(false);
     const [appsOpen, setAppsOpen] = React.useState(false);
+    const [fullScreenSrc, setFullScreenSrc] = useState(null);
 
     // JSON-LD Structured Data for SEO
     const jsonLd = {
@@ -935,33 +1038,38 @@ export default function DeskViewPage() {
                         MyDeskView Series
                     </Title>
                     <Subtitle>
-                        Dashboard Information and Website System
+                        King Dual - Dashboard Website And App Shared Data System
                     </Subtitle>
 
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        margin: '2rem 0',
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                        width: '100%',
-                        maxWidth: '1200px'
-                    }}>
-                        <Image
-                            src="/mypersonalorganizer_dashboard.png"
-                            alt="MyDeskView Dashboard Screenshot"
-                            width={1200}
-                            height={700}
-                            style={{
-                                display: 'block',
-                                objectFit: 'contain',
-                                borderRadius: '12px',
-                                width: '100%',
-                                height: 'auto'
-                            }}
-                        />
-                    </div>
+                    <ScreenshotWithButton style={{ justifyContent: 'center', margin: '2rem 0', maxWidth: '1200px' }}>
+                        <div style={{
+                            flex: 1,
+                            borderRadius: '12px',
+                            overflow: 'hidden',
+                            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                            cursor: 'pointer'
+                        }}
+                            onClick={() => setFullScreenSrc('/mypersonalorganizer_dashboard.png')}
+                        >
+                            <Image
+                                src="/mypersonalorganizer_dashboard.png"
+                                alt="MyDeskView Dashboard Screenshot"
+                                width={1200}
+                                height={700}
+                                style={{
+                                    display: 'block',
+                                    objectFit: 'contain',
+                                    borderRadius: '12px',
+                                    width: '100%',
+                                    height: 'auto'
+                                }}
+                            />
+                        </div>
+                        <FullScreenBtn onClick={() => setFullScreenSrc('/mypersonalorganizer_dashboard.png')}>
+                            <FiMaximize2 size={16} />
+                            Full Screen
+                        </FullScreenBtn>
+                    </ScreenshotWithButton>
                 </HeroSection>
 
                 <IntroSection initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
@@ -1065,29 +1173,45 @@ export default function DeskViewPage() {
                         </ProductCard >
                     </FeaturedCardWrapper >
 
-                    <ScreenshotWrapper
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        <ScreenshotImage
-                            src="/mydeskview_dashboard.png"
-                            alt="MyDeskView Dashboard Interface"
-                        />
-                    </ScreenshotWrapper>
+                    <ScreenshotWithButton>
+                        <ScreenshotWrapper
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.2 }}
+                            onClick={() => setFullScreenSrc('/mydeskview_dashboard.png')}
+                            style={{ cursor: 'pointer', flex: 1 }}
+                        >
+                            <ScreenshotImage
+                                src="/mydeskview_dashboard.png"
+                                alt="MyDeskView Dashboard Interface"
+                            />
+                        </ScreenshotWrapper>
+                        <FullScreenBtn onClick={() => setFullScreenSrc('/mydeskview_dashboard.png')}>
+                            <FiMaximize2 size={16} />
+                            Full Screen
+                        </FullScreenBtn>
+                    </ScreenshotWithButton>
                 </FeaturedSection >
 
                 <FeaturedSection>
-                    <ScreenshotWrapper
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.3 }}
-                    >
-                        <ScreenshotImage
-                            src="/mypersonalorganizer_dashboard.png"
-                            alt="MyPersonalOrganizer Dashboard Interface"
-                        />
-                    </ScreenshotWrapper>
+                    <ScreenshotWithButton>
+                        <ScreenshotWrapper
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 }}
+                            onClick={() => setFullScreenSrc('/mypersonalorganizer_dashboard.png')}
+                            style={{ cursor: 'pointer', flex: 1 }}
+                        >
+                            <ScreenshotImage
+                                src="/mypersonalorganizer_dashboard.png"
+                                alt="MyPersonalOrganizer Dashboard Interface"
+                            />
+                        </ScreenshotWrapper>
+                        <FullScreenBtn onClick={() => setFullScreenSrc('/mypersonalorganizer_dashboard.png')}>
+                            <FiMaximize2 size={16} />
+                            Full Screen
+                        </FullScreenBtn>
+                    </ScreenshotWithButton>
 
                     <FeaturedCardWrapper>
                         <ProductCard
@@ -1174,16 +1298,24 @@ export default function DeskViewPage() {
                             </ProductCard>
                         </FeaturedCardWrapper>
 
-                        <ScreenshotWrapper
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2 }}
-                        >
-                            <ScreenshotImage
-                                src="/mydetailbase_dashboard.png"
-                                alt="MyDetailBase Dashboard Interface"
-                            />
-                        </ScreenshotWrapper>
+                        <ScreenshotWithButton>
+                            <ScreenshotWrapper
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.2 }}
+                                onClick={() => setFullScreenSrc('/mydetailbase_dashboard.png')}
+                                style={{ cursor: 'pointer', flex: 1 }}
+                            >
+                                <ScreenshotImage
+                                    src="/mydetailbase_dashboard.png"
+                                    alt="MyDetailBase Dashboard Interface"
+                                />
+                            </ScreenshotWrapper>
+                            <FullScreenBtn onClick={() => setFullScreenSrc('/mydetailbase_dashboard.png')}>
+                                <FiMaximize2 size={16} />
+                                Full Screen
+                            </FullScreenBtn>
+                        </ScreenshotWithButton>
                     </FeaturedSection>
 
                     <ProductsGrid>
@@ -1227,6 +1359,35 @@ export default function DeskViewPage() {
                     </ProductsGrid >
                 </AccordionContent>
 
+
+                <AnimatePresence>
+                    {fullScreenSrc && (
+                        <FullScreenOverlay
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={() => setFullScreenSrc(null)}
+                        >
+                            <FullScreenCloseBtn onClick={() => setFullScreenSrc(null)}>
+                                <FiX size={24} />
+                            </FullScreenCloseBtn>
+                            <FullScreenImageContainer
+                                initial={{ scale: 0.95, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.95, opacity: 0 }}
+                                transition={{ duration: 0.25 }}
+                                onClick={() => setFullScreenSrc(null)}
+                            >
+                                <img
+                                    src={fullScreenSrc}
+                                    alt="Full screen view"
+                                />
+                            </FullScreenImageContainer>
+                            <FullScreenHint>Click anywhere outside to close</FullScreenHint>
+                        </FullScreenOverlay>
+                    )}
+                </AnimatePresence>
 
             </Container >
         </PageWrapper >

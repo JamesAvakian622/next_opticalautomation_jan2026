@@ -8,128 +8,135 @@ import Image from 'next/image';
 import { FiArrowLeft, FiSmartphone, FiStar, FiBook, FiClock, FiMap, FiUsers, FiSearch, FiMoon, FiSettings, FiGlobe, FiMail, FiFlag } from 'react-icons/fi';
 
 export default function AmericaToday250AppPage() {
-    const screenshots = [
-        { src: '/america_home.png', label: 'Home' },
-        { src: '/america_chapters.png', label: 'Chapters' },
-        { src: '/america_chapter_detail.png', label: 'Chapter Detail' },
-        { src: '/america_map.png', label: 'Map View' },
-        { src: '/america_conflicts.png', label: 'Conflicts' }
-    ];
+  const screenshots = [
+    { src: '/america_home.png', label: 'Home' },
+    { src: '/america_chapters.png', label: 'Chapters' },
+    { src: '/america_chapter_detail.png', label: 'Chapter Detail' },
+    { src: '/america_map.png', label: 'Map View' },
+    { src: '/america_conflicts.png', label: 'Conflicts' }
+  ];
 
-    const features = [
-        { icon: <FiClock />, title: 'Timeline View', desc: 'American history from George Washington arranged in decades' },
-        { icon: <FiUsers />, title: 'President Database', desc: 'Comprehensive profiles of all U.S. presidents' },
-        { icon: <FiMap />, title: 'Interactive Maps', desc: 'Visual maps of historical events, territories, and more' },
-        { icon: <FiFlag />, title: 'Current Officials', desc: 'Up-to-date listing of current government officials' },
-        { icon: <FiBook />, title: 'Government Appendix', desc: 'Detailed appendix covering the structure of U.S. government' },
-        { icon: <FiSearch />, title: 'Full Search', desc: 'Search across all chapters, presidents, and historical events' },
-    ];
+  const features = [
+    { icon: <FiClock />, title: 'Timeline View', desc: 'American history from George Washington arranged in decades' },
+    { icon: <FiUsers />, title: 'President Database', desc: 'Comprehensive profiles of all U.S. presidents' },
+    { icon: <FiMap />, title: 'Interactive Maps', desc: 'Visual maps of historical events, territories, and more' },
+    { icon: <FiFlag />, title: 'Current Officials', desc: 'Up-to-date listing of current government officials' },
+    { icon: <FiBook />, title: 'Government Appendix', desc: 'Detailed appendix covering the structure of U.S. government' },
+    { icon: <FiSearch />, title: 'Full Search', desc: 'Search across all chapters, presidents, and historical events' },
+  ];
 
-    return (
-        <PageContainer>
-            <HeroSection>
-                <BackLink href="/app-portfolio">
-                    <FiArrowLeft /> Back to App Portfolio
-                </BackLink>
-                <HeroContent>
-                    <AppIconLarge
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
-                    >
-                        🇺🇸
-                    </AppIconLarge>
-                    <AppTitle
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        AmericaToday250
-                    </AppTitle>
-                    <AppTagline
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                    >
-                        250 Years of American History — From Washington to Today
-                    </AppTagline>
-                    <BadgeRow
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                    >
-                        <Badge color="#DC2626"><FiSmartphone size={12} /> iOS</Badge>
-                        <Badge color="#10b981"><FiStar size={12} /> SwiftUI</Badge>
-                        <Badge color="#f59e0b">Live</Badge>
-                    </BadgeRow>
-                </HeroContent>
-            </HeroSection>
+  return (
+    <PageContainer>
+      <HeroSection>
+        <BackLink href="/app-portfolio">
+          <FiArrowLeft /> Back to App Portfolio
+        </BackLink>
+        <HeroContent>
+          <MobileAppsBadge
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <FiSmartphone /> Mobile Applications
+          </MobileAppsBadge>
+          <AppIconLarge
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
+          >
+            🇺🇸
+          </AppIconLarge>
+          <AppTitle
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            AmericaToday250
+          </AppTitle>
+          <AppTagline
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            250 Years of American History — From Washington to Today
+          </AppTagline>
+          <BadgeRow
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            <Badge color="#DC2626"><FiSmartphone size={12} /> iOS</Badge>
+            <Badge color="#10b981"><FiStar size={12} /> SwiftUI</Badge>
+            <Badge color="#f59e0b">Live</Badge>
+          </BadgeRow>
+        </HeroContent>
+      </HeroSection>
 
-            <ScreensSection>
-                <SectionTitle
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                >
-                    App Screenshots
-                </SectionTitle>
-                <ScreensGrid>
-                    {screenshots.map((ss, i) => (
-                        <ScreenshotFrame
-                            key={ss.label}
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 + i * 0.1 }}
-                        >
-                            <ScreenshotImageWrapper>
-                                <Image
-                                    src={ss.src}
-                                    alt={ss.label}
-                                    width={240}
-                                    height={520}
-                                    style={{ objectFit: 'cover', borderRadius: '20px', width: '100%', height: 'auto' }}
-                                />
-                            </ScreenshotImageWrapper>
-                            <ScreenLabel>{ss.label}</ScreenLabel>
-                        </ScreenshotFrame>
-                    ))}
-                </ScreensGrid>
-            </ScreensSection>
+      <ScreensSection>
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          App Screenshots
+        </SectionTitle>
+        <ScreensGrid>
+          {screenshots.map((ss, i) => (
+            <ScreenshotFrame
+              key={ss.label}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 + i * 0.1 }}
+            >
+              <ScreenshotImageWrapper>
+                <Image
+                  src={ss.src}
+                  alt={ss.label}
+                  width={240}
+                  height={520}
+                  style={{ objectFit: 'cover', borderRadius: '20px', width: '100%', height: 'auto' }}
+                />
+              </ScreenshotImageWrapper>
+              <ScreenLabel>{ss.label}</ScreenLabel>
+            </ScreenshotFrame>
+          ))}
+        </ScreensGrid>
+      </ScreensSection>
 
-            <FeaturesSection>
-                <SectionTitle
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                >
-                    Key Features
-                </SectionTitle>
-                <FeaturesGrid>
-                    {features.map((f, i) => (
-                        <FeatureCard
-                            key={f.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 + i * 0.08 }}
-                        >
-                            <FeatureIcon>{f.icon}</FeatureIcon>
-                            <div>
-                                <FeatureTitle>{f.title}</FeatureTitle>
-                                <FeatureDesc>{f.desc}</FeatureDesc>
-                            </div>
-                        </FeatureCard>
-                    ))}
-                </FeaturesGrid>
-            </FeaturesSection>
+      <FeaturesSection>
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          Key Features
+        </SectionTitle>
+        <FeaturesGrid>
+          {features.map((f, i) => (
+            <FeatureCard
+              key={f.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + i * 0.08 }}
+            >
+              <FeatureIcon>{f.icon}</FeatureIcon>
+              <div>
+                <FeatureTitle>{f.title}</FeatureTitle>
+                <FeatureDesc>{f.desc}</FeatureDesc>
+              </div>
+            </FeatureCard>
+          ))}
+        </FeaturesGrid>
+      </FeaturesSection>
 
-            <CTASection>
-                <CTATitle>Built with SwiftUI</CTATitle>
-                <CTADesc>Native iOS experience with premium design and performance.</CTADesc>
-                <CTAButton href="/app-portfolio">
-                    <FiArrowLeft /> Back to Portfolio
-                </CTAButton>
-            </CTASection>
-        </PageContainer>
-    );
+      <CTASection>
+        <CTATitle>Built with SwiftUI</CTATitle>
+        <CTADesc>Native iOS experience with premium design and performance.</CTADesc>
+        <CTAButton href="/app-portfolio">
+          <FiArrowLeft /> Back to Portfolio
+        </CTAButton>
+      </CTASection>
+    </PageContainer>
+  );
 }
 
 // ── Styled Components ──────────────────────────
@@ -145,8 +152,8 @@ const HeroSection = styled.section`
   padding: 100px 20px 60px;
   text-align: center;
   background: ${({ theme }) => theme.mode === 'dark'
-        ? 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #3b0e0e 100%)'
-        : 'linear-gradient(135deg, #fca5a5 0%, #f87171 50%, #fca5a5 100%)'};
+    ? 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #3b0e0e 100%)'
+    : 'linear-gradient(135deg, #fca5a5 0%, #f87171 50%, #fca5a5 100%)'};
 `;
 
 const BackLink = styled(Link)`
@@ -169,6 +176,30 @@ const HeroContent = styled.div`
   margin: 0 auto;
 `;
 
+const MobileAppsBadge = styled(motion.div)`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.12)'
+    : 'rgba(99, 102, 241, 0.10)'};
+  border: 1px solid ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.3)'
+    : 'rgba(99, 102, 241, 0.25)'};
+  border-radius: 50px;
+  padding: 10px 28px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.mode === 'dark' ? '#a5b4fc' : '#4f46e5'};
+  backdrop-filter: blur(10px);
+
+  svg {
+    color: ${({ theme }) => theme.mode === 'dark' ? '#818cf8' : '#6366f1'};
+    font-size: 1.1rem;
+  }
+`;
+
 const AppIconLarge = styled(motion.div)`
   font-size: 4rem;
   margin-bottom: 16px;
@@ -179,8 +210,8 @@ const AppTitle = styled(motion.h1)`
   font-weight: 800;
   margin-bottom: 8px;
   background: ${({ theme }) => theme.mode === 'dark'
-        ? 'linear-gradient(135deg, #fff 0%, #fca5a5 100%)'
-        : 'linear-gradient(135deg, #7f1d1d 0%, #DC2626 100%)'};
+    ? 'linear-gradient(135deg, #fff 0%, #fca5a5 100%)'
+    : 'linear-gradient(135deg, #7f1d1d 0%, #DC2626 100%)'};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -315,8 +346,8 @@ const CTASection = styled.section`
   text-align: center;
   padding: 50px 20px 80px;
   background: ${({ theme }) => theme.mode === 'dark'
-        ? 'linear-gradient(180deg, transparent 0%, rgba(220, 38, 38, 0.06) 100%)'
-        : 'linear-gradient(180deg, transparent 0%, rgba(220, 38, 38, 0.04) 100%)'};
+    ? 'linear-gradient(180deg, transparent 0%, rgba(220, 38, 38, 0.06) 100%)'
+    : 'linear-gradient(180deg, transparent 0%, rgba(220, 38, 38, 0.04) 100%)'};
 `;
 
 const CTATitle = styled.h2`

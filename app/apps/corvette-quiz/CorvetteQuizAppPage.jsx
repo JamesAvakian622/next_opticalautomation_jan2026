@@ -8,133 +8,141 @@ import { FiArrowLeft, FiArrowRight, FiSmartphone, FiAward, FiStar, FiCheck, FiLa
 
 // ── Component ──────────────────────────────────
 export default function CorvetteQuizAppPage() {
-    const screens = [
-        { src: '/corvette_generations.png', label: 'Generations', caption: 'Browse all 8 Corvette generations from C1 to C8' },
-        { src: '/corvette_eray.png', label: 'E-Ray Model', caption: 'Detailed specs for every model including the hybrid E-Ray' },
-        { src: '/corvette_settings.png', label: 'Settings', caption: 'Customize appearance and view app statistics' },
-        { src: '/corvette_quiz.png', label: 'Quiz', caption: 'Test your knowledge with challenging trivia' },
-    ];
+  const screens = [
+    { src: '/corvette_generations.png', label: 'Generations', caption: 'Browse all 8 Corvette generations from C1 to C8' },
+    { src: '/corvette_eray.png', label: 'E-Ray Model', caption: 'Detailed specs for every model including the hybrid E-Ray' },
+    { src: '/corvette_settings.png', label: 'Settings', caption: 'Customize appearance and view app statistics' },
+    { src: '/corvette_quiz.png', label: 'Quiz', caption: 'Test your knowledge with challenging trivia' },
+  ];
 
-    const features = [
-        { icon: <FiAward />, title: '40+ Quiz Questions', desc: 'History, specs, racing heritage — all difficulty levels' },
-        { icon: <FiLayers />, title: '8 Generations', desc: 'From the 1953 C1 Solid Axle to the mid-engine C8' },
-        { icon: <FiTarget />, title: '17 Models', desc: 'Stingray, Grand Sport, Z06, E-Ray, ZR1 & ZR1X' },
-        { icon: <FiStar />, title: 'Score Tracking', desc: 'Track your performance and beat your personal best' },
-        { icon: <FiBarChart2 />, title: 'Difficulty Tags', desc: 'Easy, Medium, and Hard questions with category labels' },
-        { icon: <FiBookOpen />, title: 'Learn Mode', desc: 'Detailed model specs, highlights, and historical facts' },
-    ];
+  const features = [
+    { icon: <FiAward />, title: '40+ Quiz Questions', desc: 'History, specs, racing heritage — all difficulty levels' },
+    { icon: <FiLayers />, title: '8 Generations', desc: 'From the 1953 C1 Solid Axle to the mid-engine C8' },
+    { icon: <FiTarget />, title: '17 Models', desc: 'Stingray, Grand Sport, Z06, E-Ray, ZR1 & ZR1X' },
+    { icon: <FiStar />, title: 'Score Tracking', desc: 'Track your performance and beat your personal best' },
+    { icon: <FiBarChart2 />, title: 'Difficulty Tags', desc: 'Easy, Medium, and Hard questions with category labels' },
+    { icon: <FiBookOpen />, title: 'Learn Mode', desc: 'Detailed model specs, highlights, and historical facts' },
+  ];
 
-    return (
-        <PageContainer>
-            {/* Back Navigation */}
-            <BackNav>
-                <Link href="/app-portfolio">
-                    <FiArrowLeft /> Back to App Portfolio
-                </Link>
-            </BackNav>
+  return (
+    <PageContainer>
+      {/* Back Navigation */}
+      <BackNav>
+        <Link href="/app-portfolio">
+          <FiArrowLeft /> Back to App Portfolio
+        </Link>
+      </BackNav>
 
-            {/* Hero */}
-            <HeroSection>
-                <HeroGlow />
-                <HeroContent>
-                    <AppIconLarge
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        🏁
-                    </AppIconLarge>
+      {/* Hero */}
+      <HeroSection>
+        <HeroGlow />
+        <HeroContent>
+          <MobileAppsBadge
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <FiSmartphone /> Mobile Applications
+          </MobileAppsBadge>
 
-                    <AppTitle
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.15 }}
-                    >
-                        CorvetteQuiz
-                    </AppTitle>
+          <AppIconLarge
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            🏁
+          </AppIconLarge>
 
-                    <AppTagline
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                    >
-                        America&apos;s Sports Car — The Ultimate Corvette Trivia
-                    </AppTagline>
+          <AppTitle
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            CorvetteQuiz
+          </AppTitle>
 
-                    <AppDesc
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                    >
-                        Celebrating 70+ years of the Chevrolet Corvette. Explore every generation from the
-                        1953 C1 to today&apos;s mid-engine C8, test your knowledge with challenging quizzes,
-                        and discover specs for every iconic model including the 1,250 hp ZR1X hypercar.
-                    </AppDesc>
+          <AppTagline
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            America&apos;s Sports Car — The Ultimate Corvette Trivia
+          </AppTagline>
 
-                    <HeroBadges
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.5 }}
-                    >
-                        <Badge><FiSmartphone size={14} /> iOS Native</Badge>
-                        <Badge $accent><FiZap size={14} /> SwiftUI</Badge>
-                        <Badge><FiClock size={14} /> Dark Mode</Badge>
-                    </HeroBadges>
-                </HeroContent>
-            </HeroSection>
+          <AppDesc
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            Celebrating 70+ years of the Chevrolet Corvette. Explore every generation from the
+            1953 C1 to today&apos;s mid-engine C8, test your knowledge with challenging quizzes,
+            and discover specs for every iconic model including the 1,250 hp ZR1X hypercar.
+          </AppDesc>
 
-            {/* Screenshots Section */}
-            <ScreensSection>
-                <SectionTitle>App Screenshots</SectionTitle>
-                <ScreensGrid>
-                    {screens.map((screen, i) => (
-                        <ScreenCard
-                            key={screen.label}
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: i * 0.12 }}
-                        >
-                            <PhoneFrame>
-                                <ScreenImage src={screen.src} alt={`CorvetteQuiz — ${screen.label}`} loading="lazy" />
-                            </PhoneFrame>
-                            <ScreenLabel>{screen.label}</ScreenLabel>
-                            <ScreenCaption>{screen.caption}</ScreenCaption>
-                        </ScreenCard>
-                    ))}
-                </ScreensGrid>
-            </ScreensSection>
+          <HeroBadges
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <Badge><FiSmartphone size={14} /> iOS Native</Badge>
+            <Badge $accent><FiZap size={14} /> SwiftUI</Badge>
+            <Badge><FiClock size={14} /> Dark Mode</Badge>
+          </HeroBadges>
+        </HeroContent>
+      </HeroSection>
 
-            {/* Features Section */}
-            <FeaturesSection>
-                <SectionTitle>Key Features</SectionTitle>
-                <FeaturesGrid>
-                    {features.map((f, i) => (
-                        <FeatureCard
-                            key={f.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: i * 0.08 }}
-                        >
-                            <FeatureIcon>{f.icon}</FeatureIcon>
-                            <div>
-                                <FeatureTitle>{f.title}</FeatureTitle>
-                                <FeatureDesc>{f.desc}</FeatureDesc>
-                            </div>
-                        </FeatureCard>
-                    ))}
-                </FeaturesGrid>
-            </FeaturesSection>
+      {/* Screenshots Section */}
+      <ScreensSection>
+        <SectionTitle>App Screenshots</SectionTitle>
+        <ScreensGrid>
+          {screens.map((screen, i) => (
+            <ScreenCard
+              key={screen.label}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+            >
+              <PhoneFrame>
+                <ScreenImage src={screen.src} alt={`CorvetteQuiz — ${screen.label}`} loading="lazy" />
+              </PhoneFrame>
+              <ScreenLabel>{screen.label}</ScreenLabel>
+              <ScreenCaption>{screen.caption}</ScreenCaption>
+            </ScreenCard>
+          ))}
+        </ScreensGrid>
+      </ScreensSection>
 
-            {/* CTA */}
-            <CTASection>
-                <CTATitle>Ready to Test Your Corvette Knowledge?</CTATitle>
-                <CTADesc>Download CorvetteQuiz and prove you&apos;re the ultimate Corvette enthusiast.</CTADesc>
-                <CTAButton href="/app-portfolio">
-                    Browse All Apps <FiArrowRight />
-                </CTAButton>
-            </CTASection>
-        </PageContainer>
-    );
+      {/* Features Section */}
+      <FeaturesSection>
+        <SectionTitle>Key Features</SectionTitle>
+        <FeaturesGrid>
+          {features.map((f, i) => (
+            <FeatureCard
+              key={f.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+            >
+              <FeatureIcon>{f.icon}</FeatureIcon>
+              <div>
+                <FeatureTitle>{f.title}</FeatureTitle>
+                <FeatureDesc>{f.desc}</FeatureDesc>
+              </div>
+            </FeatureCard>
+          ))}
+        </FeaturesGrid>
+      </FeaturesSection>
+
+      {/* CTA */}
+      <CTASection>
+        <CTATitle>Ready to Test Your Corvette Knowledge?</CTATitle>
+        <CTADesc>Download CorvetteQuiz and prove you&apos;re the ultimate Corvette enthusiast.</CTADesc>
+        <CTAButton href="/app-portfolio">
+          Browse All Apps <FiArrowRight />
+        </CTAButton>
+      </CTASection>
+    </PageContainer>
+  );
 }
 
 // ── Styled Components ──────────────────────────
@@ -188,6 +196,30 @@ const HeroContent = styled.div`
   margin: 0 auto;
 `;
 
+const MobileAppsBadge = styled(motion.div)`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.12)'
+    : 'rgba(99, 102, 241, 0.10)'};
+  border: 1px solid ${({ theme }) => theme.mode === 'dark'
+    ? 'rgba(99, 102, 241, 0.3)'
+    : 'rgba(99, 102, 241, 0.25)'};
+  border-radius: 50px;
+  padding: 10px 28px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.mode === 'dark' ? '#a5b4fc' : '#4f46e5'};
+  backdrop-filter: blur(10px);
+
+  svg {
+    color: ${({ theme }) => theme.mode === 'dark' ? '#818cf8' : '#6366f1'};
+    font-size: 1.1rem;
+  }
+`;
+
 const AppIconLarge = styled(motion.div)`
   font-size: 4rem;
   margin-bottom: 16px;
@@ -198,8 +230,8 @@ const AppTitle = styled(motion.h1)`
   font-weight: 800;
   margin-bottom: 8px;
   background: ${({ theme }) => theme.mode === 'dark'
-        ? 'linear-gradient(135deg, #fff 0%, #fca5a5 100%)'
-        : 'linear-gradient(135deg, #991b1b 0%, #ef4444 100%)'};
+    ? 'linear-gradient(135deg, #fff 0%, #fca5a5 100%)'
+    : 'linear-gradient(135deg, #991b1b 0%, #ef4444 100%)'};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -236,14 +268,14 @@ const Badge = styled.span`
   font-size: 0.78rem;
   font-weight: 600;
   background: ${({ $accent, theme }) => $accent
-        ? 'rgba(239,68,68,0.15)'
-        : theme.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)'};
+    ? 'rgba(239,68,68,0.15)'
+    : theme.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)'};
   color: ${({ $accent, theme }) => $accent
-        ? '#ef4444'
-        : theme.colors.textSecondary};
+    ? '#ef4444'
+    : theme.colors.textSecondary};
   border: 1px solid ${({ $accent, theme }) => $accent
-        ? 'rgba(239,68,68,0.25)'
-        : theme.colors.border};
+    ? 'rgba(239,68,68,0.25)'
+    : theme.colors.border};
 `;
 
 // ── Screenshots ──────────────────────────
@@ -371,8 +403,8 @@ const CTASection = styled.section`
   text-align: center;
   padding: 60px 20px 80px;
   background: ${({ theme }) => theme.mode === 'dark'
-        ? 'linear-gradient(180deg, transparent 0%, rgba(239,68,68,0.06) 100%)'
-        : 'linear-gradient(180deg, transparent 0%, rgba(239,68,68,0.04) 100%)'};
+    ? 'linear-gradient(180deg, transparent 0%, rgba(239,68,68,0.06) 100%)'
+    : 'linear-gradient(180deg, transparent 0%, rgba(239,68,68,0.04) 100%)'};
 `;
 
 const CTATitle = styled.h2`

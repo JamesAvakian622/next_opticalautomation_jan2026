@@ -298,7 +298,7 @@ struct WebView: UIViewRepresentable {
         // Handle navigation decisions (open external links in Safari)
         func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
             if let url = navigationAction.request.url {
-                let allowedHosts = ["opticalautomation.com", "mydeskview.com"]
+                let allowedHosts = ["opticalautomation.com", "mydeskview.com", "biteable.com", "pinterest.com", "youtube.com"]
                 if let host = url.host,
                    !allowedHosts.contains(where: { host.contains($0) }),
                    navigationAction.navigationType == .linkActivated {
