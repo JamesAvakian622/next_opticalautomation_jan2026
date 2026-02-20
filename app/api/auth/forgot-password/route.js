@@ -1,13 +1,9 @@
 import { NextResponse } from 'next/server';
-import { MongoClient } from 'mongodb';
+import { getUsersCollection } from '@/lib/mongodb';
 import { sendPasswordResetEmail } from '@/lib/email';
 import crypto from 'crypto';
 
-const uri = process.env.MONGODB_URI;
-
 export async function POST(request) {
-    let client;
-
     try {
         const { email } = await request.json();
 
@@ -18,10 +14,7 @@ export async function POST(request) {
             );
         }
 
-        // Connect to MongoDB (same pattern as login route)
-        client = await MongoClient.connect(uri);
-        const db = client.db(process.env.MONGODB_DB || 'optical_automation');
-        const usersCollection = db.collection('users');
+        const usersCollection = await getUsersCollection();
 
         // Check if user exists
         const user = await usersCollection.findOne({ email: email.toLowerCase() });
@@ -51,8 +44,16 @@ export async function POST(request) {
         );
 
         // Send the password reset email
-        await sendPasswordResetEmail(email, resetToken);
-        console.log(`Password reset email sent to ${email}`);
+        try {
+            await sendPasswordResetEmail(email, resetToken);
+            console.log(`Password reset email sent to ${email}`);
+        } catch (emailError) {
+            console.error('Failed to send reset email:', emailError);
+            return NextResponse.json(
+                { success: false, error: 'Failed to send email. Please check your configuration.' },
+                { status: 500 }
+            );
+        }
 
         return NextResponse.json({
             success: true,
@@ -61,13 +62,18 @@ export async function POST(request) {
 
     } catch (error) {
         console.error('Forgot password error:', error);
+
+        // Handle MongoDB connection errors specifically
+        if (error.message.includes('ECONNREFUSED')) {
+            return NextResponse.json(
+                { success: false, error: 'Database connection failed. Please try again later.' },
+                { status: 503 }
+            );
+        }
+
         return NextResponse.json(
             { success: false, error: 'An error occurred. Please try again.' },
             { status: 500 }
         );
-    } finally {
-        if (client) {
-            await client.close();
-        }
     }
 }

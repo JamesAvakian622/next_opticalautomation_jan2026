@@ -1,12 +1,8 @@
 import { NextResponse } from 'next/server';
-import { MongoClient } from 'mongodb';
+import { getUsersCollection } from '@/lib/mongodb';
 import bcrypt from 'bcryptjs';
 
-const uri = process.env.MONGODB_URI;
-
 export async function POST(request) {
-    let client;
-
     try {
         const { token, password } = await request.json();
 
@@ -24,10 +20,7 @@ export async function POST(request) {
             );
         }
 
-        // Connect to MongoDB
-        client = await MongoClient.connect(uri);
-        const db = client.db(process.env.MONGODB_DB || 'optical_automation');
-        const usersCollection = db.collection('users');
+        const usersCollection = await getUsersCollection();
 
         // Find user with valid reset token
         const user = await usersCollection.findOne({
@@ -67,13 +60,17 @@ export async function POST(request) {
 
     } catch (error) {
         console.error('Reset password error:', error);
+
+        if (error.message.includes('ECONNREFUSED')) {
+            return NextResponse.json(
+                { success: false, error: 'Database connection failed. Please try again later.' },
+                { status: 503 }
+            );
+        }
+
         return NextResponse.json(
             { success: false, error: 'An error occurred. Please try again.' },
             { status: 500 }
         );
-    } finally {
-        if (client) {
-            await client.close();
-        }
     }
 }
