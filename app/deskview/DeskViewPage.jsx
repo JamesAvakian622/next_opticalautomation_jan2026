@@ -850,119 +850,148 @@ const softwareFeatures = {
     },
     'DiseaseTracker': {
         label: 'Health & Sports',
-        features: ['Symptom Logging', 'Medication Reminders', 'Health History', 'Doctor Notes']
+        features: ['Symptom Logging', 'Medication Reminders', 'Health History', 'Doctor Notes'],
+        internalUrl: '/deskview/software/diseasetracker'
     },
     'Fitness Tracker': {
         label: 'Health & Sports',
-        features: ['Workout Logging', 'Step Counter', 'Goal Setting', 'Progress Charts']
+        features: ['Workout Logging', 'Step Counter', 'Goal Setting', 'Progress Charts'],
+        internalUrl: '/deskview/software/fitnesstracker'
     },
     'GymnasticTracker': {
         label: 'Health & Sports',
-        features: ['Routine Logging', 'Skill Tracking', 'Competition Scores', 'Training Plans']
+        features: ['Routine Logging', 'Skill Tracking', 'Competition Scores', 'Training Plans'],
+        internalUrl: '/deskview/software/gymnastictracker'
     },
     'Health Tracker': {
         label: 'Health & Sports',
-        features: ['Vital Signs', 'Sleep Tracking', 'Nutrition Log', 'Health Reports']
+        features: ['Vital Signs', 'Sleep Tracking', 'Nutrition Log', 'Health Reports'],
+        internalUrl: '/deskview/software/healthtracker'
     },
     'HealthAidTracking': {
         label: 'Health & Sports',
-        features: ['Medical Aids', 'Prescription Tracking', 'Appointment Calendar', 'Insurance Info']
+        features: ['Medical Aids', 'Prescription Tracking', 'Appointment Calendar', 'Insurance Info'],
+        internalUrl: '/deskview/software/healthaidtracking'
     },
     'IndyCarTracker': {
         label: 'Health & Sports',
-        features: ['Race Schedules', 'Driver Standings', 'Lap-by-Lap Stats', 'Team Profiles']
+        features: ['Race Schedules', 'Driver Standings', 'Lap-by-Lap Stats', 'Team Profiles'],
+        internalUrl: '/deskview/software/indycartracker'
     },
     'MigraineTinitusTracker': {
         label: 'Health & Sports',
-        features: ['Episode Logging', 'Trigger Identification', 'Pattern Analysis', 'Doctor Reports']
+        features: ['Episode Logging', 'Trigger Identification', 'Pattern Analysis', 'Doctor Reports'],
+        internalUrl: '/deskview/software/migrainetinitustracker'
     },
     'NascarTracker': {
         label: 'Health & Sports',
-        features: ['Race Calendar', 'Driver Rankings', 'Lap Times', 'Pit Stop Data']
+        features: ['Race Calendar', 'Driver Rankings', 'Lap Times', 'Pit Stop Data'],
+        internalUrl: '/deskview/software/nascartracker'
     },
     'SportsTracker': {
         label: 'Health & Sports',
-        features: ['Live Scores', 'Team Stats', 'Schedule', 'Player Profiles']
+        features: ['Live Scores', 'Team Stats', 'Schedule', 'Player Profiles'],
+        internalUrl: '/deskview/software/sportstracker'
     },
     'SuperBowlTracker': {
         label: 'Health & Sports',
-        features: ['Game History', 'MVP Awards', 'Team Records', 'Halftime Shows']
+        features: ['Game History', 'MVP Awards', 'Team Records', 'Halftime Shows'],
+        internalUrl: '/deskview/software/superbowltracker'
     },
     'TrackAndFieldTracker': {
         label: 'Health & Sports',
-        features: ['Event Results', 'Athlete Records', 'Meet Schedules', 'Personal Bests']
+        features: ['Event Results', 'Athlete Records', 'Meet Schedules', 'Personal Bests'],
+        internalUrl: '/deskview/software/trackandfieldtracker'
     },
     'WalkTracker': {
         label: 'Health & Sports',
-        features: ['Route Recording', 'Distance Tracking', 'Pace Analysis', 'Walking Goals']
+        features: ['Route Recording', 'Distance Tracking', 'Pace Analysis', 'Walking Goals'],
+        internalUrl: '/deskview/software/walktracker'   
     },
     'CorvetteShows': {
         label: 'Health & Sports',
-        features: ['Show Listings', 'Event Calendar', 'Photo Galleries', 'Registration Info']
+        features: ['Show Listings', 'Event Calendar', 'Photo Galleries', 'Registration Info'],
+        internalUrl: '/deskview/software/corvetteshows'
     },
     'CorvettePartsClubs Tracker': {
         label: 'Health & Sports',
-        features: ['OEM Parts Catalog', 'Club Directory', 'Event Schedules', 'Member Forums']
+        features: ['OEM Parts Catalog', 'Club Directory', 'Event Schedules', 'Member Forums'],
+        internalUrl: '/deskview/software/corvettepartsclubs'
     },
     'BuyingAgent': {
         label: 'Personal Productivity',
-        features: ['Price Comparison', 'Deal Alerts', 'Product Research', 'Purchase History']
+        features: ['Price Comparison', 'Deal Alerts', 'Product Research', 'Purchase History'],
+        internalUrl: '/deskview/software/buyingagent'
     },
     'CarBuyingAgent': {
         label: 'Personal Productivity',
-        features: ['Vehicle Search', 'Price Analysis', 'Dealer Listings', 'Trade-In Values']
+        features: ['Vehicle Search', 'Price Analysis', 'Dealer Listings', 'Trade-In Values'],
+        internalUrl: '/deskview/software/carbuyingagent'
     },
     'ElectricCarAgent': {
         label: 'Personal Productivity',
-        features: ['EV Listings', 'Range Calculator', 'Charging Stations', 'Incentive Finder']
+        features: ['EV Listings', 'Range Calculator', 'Charging Stations', 'Incentive Finder'],
+        internalUrl: '/deskview/software/electriccaragent'      
     },
     'TruckBuyingAgent': {
         label: 'Personal Productivity',
-        features: ['Truck Search', 'Towing Specs', 'Dealer Network', 'Price Comparison']
+        features: ['Truck Search', 'Towing Specs', 'Dealer Network', 'Price Comparison'],   
+        internalUrl: '/deskview/software/truckbuyingagent'
     },
     'ItemBuyingAgent': {
         label: 'Personal Productivity',
-        features: ['Product Search', 'Price Alerts', 'Store Comparison', 'Wish Lists']
+        features: ['Product Search', 'Price Alerts', 'Store Comparison', 'Wish Lists'],
+        internalUrl: '/deskview/software/itembuyingagent'
     },
     'WhereToAgent': {
         label: 'Personal Productivity',
-        features: ['Location Search', 'Directions', 'Nearby Places', 'Reviews & Ratings']
+        features: ['Location Search', 'Directions', 'Nearby Places', 'Reviews & Ratings'],
+        internalUrl: '/deskview/software/wheretoagent'
     },
     'HowToAgent': {
         label: 'Personal Productivity',
-        features: ['Step-by-Step Guides', 'Tutorial Search', 'Video Instructions', 'Expert Tips']
+        features: ['Step-by-Step Guides', 'Tutorial Search', 'Video Instructions', 'Expert Tips'],
+        internalUrl: '/deskview/software/howtoagent'        
     },
     'WhoOrWhatAgent': {
         label: 'Personal Productivity',
-        features: ['People Search', 'Topic Lookup', 'Knowledge Base', 'Quick Answers']
+        features: ['People Search', 'Topic Lookup', 'Knowledge Base', 'Quick Answers'],
+        internalUrl: '/deskview/software/whoorwhatagent'
     },
     'BillAnalyzer': {
         label: 'Communication & Social',
-        features: ['Bill Scanning', 'Expense Breakdown', 'Payment Tracking', 'Budget Alerts']
+        features: ['Bill Scanning', 'Expense Breakdown', 'Payment Tracking', 'Budget Alerts'],
+        internalUrl: '/deskview/software/billanalyzer'
     },
     'ReceiptHub': {
         label: 'Communication & Social',
-        features: ['Receipt Capture', 'Expense Categories', 'Tax Reports', 'Cloud Storage']
+        features: ['Receipt Capture', 'Expense Categories', 'Tax Reports', 'Cloud Storage'],
+        internalUrl: '/deskview/software/receipthub'
     },
     'TravelBin': {
         label: 'Communication & Social',
-        features: ['Trip Planning', 'Itinerary Builder', 'Booking Management', 'Travel Journal']
+        features: ['Trip Planning', 'Itinerary Builder', 'Booking Management', 'Travel Journal'],
+        internalUrl: '/deskview/software/travelbin'
     },
     'WhoToCall': {
         label: 'Communication & Social',
-        features: ['Contact Lookup', 'Service Directory', 'Quick Dial', 'Call History']
+        features: ['Contact Lookup', 'Service Directory', 'Quick Dial', 'Call History'],
+        internalUrl: '/deskview/software/whotocall'
     },
     'WhatMovieToSee': {
         label: 'Communication & Social',
-        features: ['Movie Recommendations', 'Ratings & Reviews', 'Showtimes', 'Watchlist']
+        features: ['Movie Recommendations', 'Ratings & Reviews', 'Showtimes', 'Watchlist'],
+        internalUrl: '/deskview/software/whatmovietosee'
     },
     'YearBestMovie': {
         label: 'Communication & Social',
-        features: ['Annual Rankings', 'Award Winners', 'Genre Picks', 'Critic Reviews']
+        features: ['Annual Rankings', 'Award Winners', 'Genre Picks', 'Critic Reviews'],
+        internalUrl: '/deskview/software/yearbestmovie'
     },
     'EfficiencyGenius': {
         label: 'Communication & Social',
-        features: ['Workflow Optimization', 'Time Tracking', 'Productivity Insights', 'Task Automation']
+        features: ['Workflow Optimization', 'Time Tracking', 'Productivity Insights', 'Task Automation'],
+        internalUrl: '/deskview/software/efficiencygenius'
     }
 };
 
@@ -1087,6 +1116,11 @@ export default function DeskViewPage() {
                     <DescriptionParagraph>
                         Built with performance and reliability in mind, MyDeskView ensures your data is always accessible and secure. The application employs industry-standard encryption and follows best practices for data protection, giving you peace of mind while you focus on what matters most. Whether you're working from the office, home, or on the go, MyDeskView provides a consistent and reliable experience across all your devices.
                     </DescriptionParagraph>
+
+                    <DescriptionParagraph>
+                        Built with a long time waiting for technology, since 1983 we have been using computers and always wanted multi-tasking. Back then we always wanted windows and slowly we got them. Now fifty years later we have so many websites windows, photos, movies, and youtube videos we need organization. We also have apps and add an address here and an Internet there and are scattered.  Here comes the right stuff, MyDeskView and the MyPersonalOrganizer.com One window has a hundred integrated app applications with co-owned shared database we also have app applications. In the near future have have a MyPersonalOrganizer – Photo Albums and YouTube videos. Also MyBusinessOrganizer and more. Visit MyDeskView to see what is coming up! 
+                    </DescriptionParagraph>
+
 
                     <AccordionHeader $isOpen={softwareOpen} onClick={() => setSoftwareOpen(!softwareOpen)}>
                         <h3>Application Software Integration</h3>

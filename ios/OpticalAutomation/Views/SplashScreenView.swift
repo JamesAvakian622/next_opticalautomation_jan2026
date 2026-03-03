@@ -80,7 +80,10 @@ struct SplashScreenView: View {
                     .scaleEffect(0.8)
                     .opacity(subtitleOpacity)
                     .padding(.top, 20)
+                Spacer(minLength: 0)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .padding(.top, 60)
         }
         .onAppear {
             withAnimation(.spring(response: 0.8, dampingFraction: 0.6, blendDuration: 0)) {

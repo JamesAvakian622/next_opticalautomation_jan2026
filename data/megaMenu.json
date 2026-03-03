@@ -212,14 +212,8 @@
         "title": "Platforms",
         "links": [
           {
-            "href": "/products",
-            "label": "All Products",
-            "icon": "FiGlobe",
-            "desc": "View all platforms"
-          },
-          {
             "href": "/app-portfolio",
-            "label": "App Portfolio",
+            "label": "Websites And Apps",
             "icon": "FiSmartphone",
             "desc": "iOS & Android mobile apps"
           },
@@ -329,7 +323,7 @@
             "href": "/products#entertainment-leisure",
             "label": "Entertainment & Leisure",
             "icon": "FiMusic",
-            "desc": "GoodDayMusic, CorvetteQuiz, Biographies & more"
+            "desc": "GoodDayMusic, CorvetteQuiz, Biographies"
           },
           {
             "href": "/products#personal-productivity",
@@ -347,7 +341,7 @@
             "href": "/products#health",
             "label": "Health",
             "icon": "FiHeart",
-            "desc": "FitnessTracker, HealthTracker & others"
+            "desc": "FitnessTracker, HealthTracker, WalkTracker"
           }
         ]
       }

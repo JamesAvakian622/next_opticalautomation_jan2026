@@ -233,26 +233,26 @@ const tabCategories = [
     icon: FiSmartphone,
     color: 'linear-gradient(135deg, #F05138 0%, #FA7343 100%)',
     projects: [
-      {
-        id: 'swift-optical-automation',
-        title: 'Optical Automation',
-        category: 'Web & Mobile Suite',
-        description: 'MERN Stack and SwiftUI application featuring Megamenu navigation, SEO optimized metadata-driven content, SOC2 compliant metatags, and AI-powered insights.',
-        detailedDescription: 'Optical Automation is a comprehensive Web & Mobile Suite built with MERN Stack and SwiftUI. Features include an advanced Megamenu navigation system, SEO optimized pages with metadata-driven content management, SOC2 compliant metatags for enterprise security, and AI-powered insights for enhanced user experience.',
-        icon: FiGlobe,
-        color: '#F05138',
-        website: 'https://opticalautomation.com'
-      },
-      {
-        id: 'swift-app-portfolio',
-        title: 'App Portfolio',
-        category: 'Mobile Apps Collection',
-        description: 'Browse our collection of native iOS and Android mobile applications featuring SwiftUI and Kotlin implementations across productivity, education, entertainment, and business.',
-        detailedDescription: 'App Portfolio showcases 16+ native mobile applications built with SwiftUI for iOS and Kotlin for Android. Browse apps across multiple categories including Business & Finance, Education, Entertainment, Health & Fitness, and Productivity with tab-based filtering.',
-        icon: FiSmartphone,
-        color: '#EC4899',
-        website: 'https://opticalautomation.com/app-portfolio'
-      },
+      // {
+      //   id: 'swift-optical-automation',
+      //   title: 'Optical Automation',
+      //   category: 'Web & Mobile Suite',
+      //   description: 'MERN Stack and SwiftUI application featuring Megamenu navigation, SEO optimized metadata-driven content, SOC2 compliant metatags, and AI-powered insights.',
+      //   detailedDescription: 'Optical Automation is a comprehensive Web & Mobile Suite built with MERN Stack and SwiftUI. Features include an advanced Megamenu navigation system, SEO optimized pages with metadata-driven content management, SOC2 compliant metatags for enterprise security, and AI-powered insights for enhanced user experience.',
+      //   icon: FiGlobe,
+      //   color: '#F05138',
+      //   website: 'https://opticalautomation.com'
+      // },
+      // {
+      //   id: 'swift-app-portfolio',
+      //   title: 'App Portfolio',
+      //   category: 'Mobile Apps Collection',
+      //   description: 'Browse our collection of native iOS and Android mobile applications featuring SwiftUI and Kotlin implementations across productivity, education, entertainment, and business.',
+      //   detailedDescription: 'App Portfolio showcases 16+ native mobile applications built with SwiftUI for iOS and Kotlin for Android. Browse apps across multiple categories including Business & Finance, Education, Entertainment, Health & Fitness, and Productivity with tab-based filtering.',
+      //   icon: FiSmartphone,
+      //   color: '#EC4899',
+      //   website: 'https://opticalautomation.com/app-portfolio'
+      // },
       {
         id: 'swift-mydeskview',
         title: 'MyDeskView',

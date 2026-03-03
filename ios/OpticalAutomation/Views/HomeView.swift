@@ -6,6 +6,7 @@ struct HomeView: View {
     @EnvironmentObject var themeManager: ThemeManager
     @Environment(\.openURL) private var openURL
     @State private var showWebHome = false
+    @State private var showingInfo = false
     
     var body: some View {
         ScrollView {
@@ -64,7 +65,21 @@ struct HomeView: View {
                             : Color(red: 0.96, green: 0.62, blue: 0.04))
                         .contentTransition(.symbolEffect(.replace))
                 }
+                
+                // Info Sheet
+                Button {
+                    showingInfo = true
+                } label: {
+                    Image(systemName: "info.circle")
+                        .font(.body)
+                        .foregroundColor(Color(.label))
+                }
+                .accessibilityLabel("About this app")
             }
+        }
+        .sheet(isPresented: $showingInfo) {
+            AboutView()
+                .presentationDetents([.medium, .large])
         }
     }
 }
@@ -172,8 +187,9 @@ struct HeroSectionView: View {
                 }
             }
         }
-        .padding(.vertical, 32)
-        .frame(maxWidth: .infinity)
+        .padding(.top, 12)
+        .padding(.bottom, 32)
+        .frame(maxWidth: .infinity, alignment: .top)
     }
 }
 
@@ -495,6 +511,75 @@ struct FooterCTAView: View {
                 endPoint: .bottomTrailing
             )
         )
+    }
+}
+
+// MARK: - About View
+struct AboutView: View {
+    @Environment(\.dismiss) private var dismiss
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack(spacing: 12) {
+                        Image("Logo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 48, height: 48)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Optical Automation")
+                                .font(.headline)
+                            Text("Information At The Speed Of Light")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    Divider()
+                    Text("About")
+                        .font(.title3.weight(.bold))
+                    Text("Optical Automation delivers AI-powered development and modern full-stack solutions across web and mobile. This app showcases products, portfolio, and ways to get in touch.")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Divider()
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label("Version 1.0", systemImage: "number")
+                        Label("© 2026 Optical Automation", systemImage: "c.circle")
+                    }
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    Divider()
+                    Link(destination: URL(string: "https://opticalautomation.com")!) {
+                        HStack {
+                            Image(systemName: "globe")
+                            Text("Visit opticalautomation.com")
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption.weight(.bold))
+                        }
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            LinearGradient(
+                                colors: [Color(red: 0.39, green: 0.40, blue: 0.95), Color(red: 0.58, green: 0.37, blue: 0.98)],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("About")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") { dismiss() }
+                }
+            }
+        }
     }
 }
 

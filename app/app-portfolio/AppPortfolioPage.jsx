@@ -31,14 +31,16 @@ import {
   FiCalendar,
   FiStar,
   FiUser,
-  FiX
+  FiX,
+  FiChevronDown,
+  FiClock
 } from 'react-icons/fi';
 
 // ── App Data ──────────────────────────────────────────────
 const appCategories = [
   {
     id: 'all',
-    label: 'All Apps',
+    label: 'Websites',
     icon: FiPackage,
     color: '#6366F1'
   },
@@ -161,7 +163,7 @@ const apps = [
     icon: FiDollarSign,
     color: '#10B981',
     platforms: ['ios'],
-    status: 'Live',
+    status: 'Pending',
     features: ['Account Tracking', 'Budgeting', 'Reports', 'Secure Login'],
     website: 'https://mydeskview.com'
   },
@@ -173,7 +175,7 @@ const apps = [
     icon: FiTrendingUp,
     color: '#6366F1',
     platforms: ['ios'],
-    status: 'Live',
+    status: 'Pending',
     features: ['AI Predictions', 'Portfolio View', 'Market Analysis', 'Alerts'],
     website: 'https://mydeskview.com'
   },
@@ -185,7 +187,7 @@ const apps = [
     icon: FiShoppingCart,
     color: '#EF4444',
     platforms: ['ios'],
-    status: 'Live',
+    status: 'Pending',
     features: ['Menu Builder', 'Order Tracking', 'Table Mgmt', 'Analytics'],
     website: 'https://mydeskview.com'
   },
@@ -197,7 +199,7 @@ const apps = [
     icon: FiMusic,
     color: '#10B981',
     platforms: ['ios'],
-    status: 'Live',
+    status: 'Pending',
     features: ['Playlist Builder', 'Genre Browse', 'Artist Info', 'Favorites'],
     website: 'https://mydeskview.com'
   },
@@ -209,7 +211,7 @@ const apps = [
     icon: FiHeart,
     color: '#10B981',
     platforms: ['ios'],
-    status: 'Live',
+    status: 'Pending',
     features: ['Workout Logs', 'Step Counter', 'Goals', 'HealthKit'],
     website: 'https://mydeskview.com'
   },
@@ -221,7 +223,7 @@ const apps = [
     icon: FiCheck,
     color: '#8B5CF6',
     platforms: ['ios'],
-    status: 'Live',
+    status: 'Pending',
     features: ['Task Lists', 'Due Dates', 'Priority Levels', 'Reminders'],
     website: 'https://mydeskview.com'
   },
@@ -233,7 +235,7 @@ const apps = [
     icon: FiAward,
     color: '#F59E0B',
     platforms: ['ios'],
-    status: 'Live',
+    status: 'Pending',
     features: ['Award History', 'Nominees', 'Predictions', 'Search'],
     website: 'https://mydeskview.com'
   },
@@ -245,7 +247,7 @@ const apps = [
     icon: FiMapPin,
     color: '#0EA5E9',
     platforms: ['ios'],
-    status: 'Live',
+    status: 'Pending',
     features: ['Ship Search', 'Itineraries', 'Reviews', 'Booking Links'],
     website: 'https://mydeskview.com'
   },
@@ -257,7 +259,7 @@ const apps = [
     icon: FiCamera,
     color: '#EC4899',
     platforms: ['ios'],
-    status: 'Live',
+    status: 'Pending',
     features: ['Album Creation', 'Photo Organization', 'Sharing', 'Memory Timeline'],
     website: 'https://mydeskview.com'
   },
@@ -269,7 +271,7 @@ const apps = [
     icon: FiCalendar,
     color: '#8B5CF6',
     platforms: ['ios'],
-    status: 'Live',
+    status: 'Pending',
     features: ['Event Planning', 'Reminders', 'Notes', 'Calendar Sync'],
     website: 'https://mydeskview.com'
   }
@@ -911,6 +913,171 @@ const EmptyState = styled(motion.div)`
   }
 `;
 
+// ── Accordion Components ──────────────────────
+const AccordionSection = styled.div`
+  margin-top: 48px;
+`;
+
+const AccordionHeader = styled(motion.button)`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 28px;
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.mode === 'dark' ? 'rgba(245, 158, 11, 0.2)' : 'rgba(245, 158, 11, 0.25)'};
+  background: ${({ theme }) => theme.mode === 'dark'
+    ? 'linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(234, 88, 12, 0.06))'
+    : 'linear-gradient(135deg, rgba(245, 158, 11, 0.06), rgba(234, 88, 12, 0.04))'};
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba(245, 158, 11, 0.4);
+    background: ${({ theme }) => theme.mode === 'dark'
+      ? 'linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(234, 88, 12, 0.1))'
+      : 'linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(234, 88, 12, 0.08))'};
+  }
+`;
+
+const AccordionLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+`;
+
+const AccordionIconBox = styled.div`
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(245, 158, 11, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    font-size: 1.25rem;
+    color: #F59E0B;
+  }
+`;
+
+const AccordionTitle = styled.div`
+  text-align: left;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.text};
+    margin: 0 0 2px;
+  }
+
+  span {
+    font-size: 0.8rem;
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+`;
+
+const AccordionChevron = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.04)'};
+  flex-shrink: 0;
+
+  svg {
+    font-size: 1.25rem;
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+`;
+
+const AccordionBody = styled(motion.div)`
+  overflow: hidden;
+`;
+
+const PendingGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  padding: 20px 0 0;
+`;
+
+const PendingItem = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.02)' : theme.colors.surface};
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: ${({ $color }) => $color || '#6366f1'}40;
+    background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(99, 102, 241, 0.03)'};
+    transform: translateX(4px);
+  }
+`;
+
+const PendingIconBox = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: ${({ $color }) => $color || '#6366f1'}15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    font-size: 1.1rem;
+    color: ${({ $color }) => $color || '#6366f1'};
+  }
+`;
+
+const PendingInfo = styled.div`
+  flex: 1;
+  min-width: 0;
+
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 650;
+    color: ${({ theme }) => theme.colors.text};
+    margin: 0 0 2px;
+  }
+
+  span {
+    font-size: 0.75rem;
+    color: ${({ theme }) => theme.colors.textSecondary};
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+`;
+
+const PendingBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(245, 158, 11, 0.12);
+  color: #F59E0B;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  flex-shrink: 0;
+  white-space: nowrap;
+
+  svg {
+    font-size: 0.7rem;
+  }
+`;
+
 // ── Helper ─────────────────────────────────
 const platformLabel = (p) => {
   switch (p) {
@@ -925,8 +1092,8 @@ const platformLabel = (p) => {
 export default function AppPortfolioPage() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [lightboxImage, setLightboxImage] = useState(null);
+  const [pendingOpen, setPendingOpen] = useState(false);
 
-  // Close lightbox on Escape key
   const closeLightbox = useCallback(() => setLightboxImage(null), []);
   useEffect(() => {
     const handleKey = (e) => { if (e.key === 'Escape') closeLightbox(); };
@@ -940,9 +1107,12 @@ export default function AppPortfolioPage() {
     };
   }, [lightboxImage, closeLightbox]);
 
-  const filteredApps = activeFilter === 'all'
+  const allFiltered = activeFilter === 'all'
     ? apps
     : apps.filter(app => app.platforms.includes(activeFilter));
+
+  const filteredApps = allFiltered.filter(app => app.status !== 'Pending');
+  const pendingApps = allFiltered.filter(app => app.status === 'Pending');
 
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     { name: 'Home', url: 'https://opticalautomation.com' },
@@ -961,13 +1131,7 @@ export default function AppPortfolioPage() {
       {/* Hero */}
       <HeroSection>
         <HeroContent>
-          <HeroBadge
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <FiSmartphone /> Mobile Applications
-          </HeroBadge>
+          {/* Hero badge removed per request */}
 
           <HeroTitle
             initial={{ opacity: 0, y: 30 }}
@@ -982,8 +1146,7 @@ export default function AppPortfolioPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Explore our collection of native iOS and Android applications built with SwiftUI
-            and ReactNative cross-platform technologies.
+            Explore our collection of Websites and Mobile Apps.
           </HeroSubtitle>
 
           <StatsBar
@@ -992,7 +1155,11 @@ export default function AppPortfolioPage() {
             transition={{ duration: 0.6, delay: 0.45 }}
           >
             <StatItem>
-              <div className="value">{apps.length}+</div>
+              <div className="value">8</div>
+              <div className="label">Websites</div>
+            </StatItem>
+            <StatItem>
+              <div className="value">8+</div>
               <div className="label">Mobile Apps</div>
             </StatItem>
             <StatItem>
@@ -1037,17 +1204,6 @@ export default function AppPortfolioPage() {
             </FilterButton>
           ))}
         </FilterBar>
-
-        {/* Section Title Badge */}
-        <SectionBadgeWrapper>
-          <SectionBadge
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <FiSmartphone /> Mobile Applications
-          </SectionBadge>
-        </SectionBadgeWrapper>
 
         {/* App Grid */}
         <AnimatePresence mode="wait">
@@ -1137,6 +1293,66 @@ export default function AppPortfolioPage() {
             )}
           </AppGrid>
         </AnimatePresence>
+
+        {/* Pending Development Accordion */}
+        {pendingApps.length > 0 && (
+          <AccordionSection>
+            <AccordionHeader
+              onClick={() => setPendingOpen(prev => !prev)}
+              whileTap={{ scale: 0.995 }}
+            >
+              <AccordionLeft>
+                <AccordionIconBox>
+                  <FiClock />
+                </AccordionIconBox>
+                <AccordionTitle>
+                  <h3>Pending Development</h3>
+                  <span>{pendingApps.length} app{pendingApps.length !== 1 ? 's' : ''} in progress</span>
+                </AccordionTitle>
+              </AccordionLeft>
+              <AccordionChevron
+                animate={{ rotate: pendingOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <FiChevronDown />
+              </AccordionChevron>
+            </AccordionHeader>
+
+            <AnimatePresence initial={false}>
+              {pendingOpen && (
+                <AccordionBody
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  <PendingGrid>
+                    {pendingApps.map((app, index) => (
+                      <PendingItem
+                        key={app.id}
+                        $color={app.color}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.04, duration: 0.3 }}
+                      >
+                        <PendingIconBox $color={app.color}>
+                          <app.icon />
+                        </PendingIconBox>
+                        <PendingInfo>
+                          <h4>{app.name}</h4>
+                          <span>{app.subtitle}</span>
+                        </PendingInfo>
+                        <PendingBadge>
+                          <FiClock /> Pending
+                        </PendingBadge>
+                      </PendingItem>
+                    ))}
+                  </PendingGrid>
+                </AccordionBody>
+              )}
+            </AnimatePresence>
+          </AccordionSection>
+        )}
       </ContentSection>
 
       {/* CTA */}

@@ -347,23 +347,6 @@ export default function LearnSkills365Page() {
                     })}
                 </ActivitiesGrid>
 
-                <SoftwareSection>
-                    <SectionTitle>Integrated Software Titles</SectionTitle>
-                    <SoftwareGrid>
-                        {Object.entries(integratedSoftware).map(([category, items]) => (
-                            <CategoryGroup key={category}>
-                                <CategoryTitle>{category}</CategoryTitle>
-                                <CategoryItemsList>
-                                    {items.map((title) => (
-                                        <SoftwareItem key={title}>
-                                            <FiCheck /> {title}
-                                        </SoftwareItem>
-                                    ))}
-                                </CategoryItemsList>
-                            </CategoryGroup>
-                        ))}
-                    </SoftwareGrid>
-                </SoftwareSection>
             </Container>
         </PageWrapper>
     );
