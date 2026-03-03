@@ -1117,7 +1117,7 @@ export default function AppPortfolioPage() {
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     { name: 'Home', url: 'https://opticalautomation.com' },
     { name: 'Portfolio', url: 'https://opticalautomation.com/portfolio' },
-    { name: 'App Portfolio', url: 'https://opticalautomation.com/app-portfolio' }
+    { name: 'Software Product Portfolio', url: 'https://opticalautomation.com/app-portfolio' }
   ]);
 
   return (
@@ -1138,7 +1138,7 @@ export default function AppPortfolioPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            App Portfolio
+            Software Product Portfolio
           </HeroTitle>
 
           <HeroSubtitle
@@ -1184,7 +1184,7 @@ export default function AppPortfolioPage() {
         <span>/</span>
         <Link href="/portfolio">Portfolio</Link>
         <span>/</span>
-        <span className="current">App Portfolio</span>
+        <span className="current">Software Product Portfolio</span>
       </BreadcrumbContainer>
 
       {/* Main Content */}
