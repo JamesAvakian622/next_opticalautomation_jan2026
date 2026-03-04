@@ -45,7 +45,15 @@ export async function POST(request) {
             );
         }
 
-        // Generate JWT token
+        const now = new Date().toISOString();
+        await usersCollection.updateOne(
+            { _id: user._id },
+            {
+                $inc: { loginCount: 1 },
+                $set: { lastLoginAt: now }
+            }
+        );
+
         const token = jwt.sign(
             {
                 userId: user._id.toString(),
@@ -56,8 +64,9 @@ export async function POST(request) {
             { expiresIn: '7d' }
         );
 
-        // Return success with user data (without password)
         const { password: _, ...userWithoutPassword } = user;
+        userWithoutPassword.loginCount = (user.loginCount || 0) + 1;
+        userWithoutPassword.lastLoginAt = now;
 
         const response = NextResponse.json(
             {

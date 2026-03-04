@@ -64,6 +64,14 @@ const apps = [
     name: 'Optical Automation',
     subtitle: 'Web & Mobile Suite',
     description: 'Full-featured native SwiftUI app with 5-tab navigation (Home, DeskView, Portfolio, Subscribe, More), dark mode, "Information At The Speed Of Light" tagline, subscription plans (Free & Pro $9.99/mo), native portfolio browser with Next.JS/MERN/SwiftUI/Android tabs, integrated WebKit views, and contact form.',
+    websiteScreenshots: [
+      { src: '/imgs/website-screenshops/optical-1.png', label: 'Website Home' },
+      { src: '/imgs/website-screenshops/optical-2.png', label: 'Portfolio' }
+    ],
+    websiteScreenshots: [
+      { src: '/imgs/website-screenshops/optical-1.png', label: 'Website Home' },
+      { src: '/imgs/website-screenshops/optical-2.png', label: 'Portfolio' }
+    ],
     icon: FiGlobe,
     color: '#6366F1',
     platforms: ['ios'],
@@ -276,6 +284,55 @@ const apps = [
     website: 'https://mydeskview.com'
   }
 ];
+
+const appGroups = [
+  {
+    id: 'featured-websites',
+    title: 'Featured Websites',
+    icon: FiGlobe,
+    color: '#6366F1',
+    appIds: ['optical-automation', 'mydeskview', 'technology-and-times', 'americatoday250', 'learnskills365']
+  },
+  {
+    id: 'personal-creative',
+    title: 'Personal & Creative',
+    icon: FiUser,
+    color: '#8B5CF6',
+    appIds: ['james-avakian', 'snowy-christmas', 'photoalbums']
+  },
+  {
+    id: 'business-finance',
+    title: 'Business & Finance',
+    icon: FiTrendingUp,
+    color: '#10B981',
+    appIds: ['accessmoney', 'ai-trading', 'bistrorestaurant']
+  },
+  {
+    id: 'entertainment-leisure',
+    title: 'Entertainment & Leisure',
+    icon: FiMusic,
+    color: '#EC4899',
+    appIds: ['corvettequiz', 'gooddaymusic', 'oscartracker', 'cruisefinder']
+  },
+  {
+    id: 'productivity-health',
+    title: 'Productivity & Health',
+    icon: FiLayout,
+    color: '#F59E0B',
+    appIds: ['taskmanager', 'fitnesstracker', 'mydatebook']
+  }
+];
+
+function groupAppsByCategory(appList) {
+  return appGroups
+    .map(group => ({
+      ...group,
+      apps: group.appIds
+        .map(id => appList.find(a => a.id === id))
+        .filter(Boolean)
+    }))
+    .filter(group => group.apps.length > 0);
+}
 
 // ── Styled Components ─────────────────────────────────────
 const PageContainer = styled.div`
@@ -574,9 +631,9 @@ const StatusBadge = styled.span`
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  background: ${({ $status }) => $status === 'Pending' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(16, 185, 129, 0.15)'};
+  color: ${({ $status }) => $status === 'Pending' ? '#F59E0B' : '#34d399'};
+  border: 1px solid ${({ $status }) => $status === 'Pending' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(16, 185, 129, 0.25)'};
   flex-shrink: 0;
   margin-top: 4px;
 
@@ -585,7 +642,7 @@ const StatusBadge = styled.span`
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #34d399;
+    background: ${({ $status }) => $status === 'Pending' ? '#F59E0B' : '#34d399'};
   }
 `;
 
@@ -913,6 +970,97 @@ const EmptyState = styled(motion.div)`
   }
 `;
 
+// ── Group Accordion Components ────────────────
+const GroupAccordionWrap = styled.div`
+  margin-bottom: 16px;
+`;
+
+const GroupAccordionBtn = styled(motion.button)`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 28px;
+  border-radius: 16px;
+  border: 1px solid ${({ $color, theme }) => theme.mode === 'dark' ? `${$color}33` : `${$color}40`};
+  background: ${({ $color, theme }) => theme.mode === 'dark'
+    ? `linear-gradient(135deg, ${$color}14, ${$color}0a)`
+    : `linear-gradient(135deg, ${$color}0f, ${$color}08)`};
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: ${({ $color }) => `${$color}66`};
+    background: ${({ $color, theme }) => theme.mode === 'dark'
+      ? `linear-gradient(135deg, ${$color}1f, ${$color}14)`
+      : `linear-gradient(135deg, ${$color}1a, ${$color}10)`};
+  }
+`;
+
+const GroupAccordionIcon = styled.div`
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: ${({ $color }) => `${$color}22`};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    font-size: 1.25rem;
+    color: ${({ $color }) => $color};
+  }
+`;
+
+const GroupAccordionTitleBlock = styled.div`
+  flex: 1;
+  text-align: left;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.text};
+    margin: 0 0 2px;
+  }
+
+  span {
+    font-size: 0.8rem;
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+`;
+
+const GroupAccordionChevron = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.04)'};
+  flex-shrink: 0;
+
+  svg {
+    font-size: 1.25rem;
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+`;
+
+const GroupAccordionBody = styled(motion.div)`
+  overflow: hidden;
+`;
+
+const GroupAppGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 24px;
+  padding: 20px 0 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 // ── Accordion Components ──────────────────────
 const AccordionSection = styled.div`
   margin-top: 48px;
@@ -1092,7 +1240,11 @@ const platformLabel = (p) => {
 export default function AppPortfolioPage() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [lightboxImage, setLightboxImage] = useState(null);
-  const [pendingOpen, setPendingOpen] = useState(false);
+  const [openGroups, setOpenGroups] = useState({});
+
+  const toggleGroup = (groupKey) => {
+    setOpenGroups(prev => ({ ...prev, [groupKey]: !prev[groupKey] }));
+  };
 
   const closeLightbox = useCallback(() => setLightboxImage(null), []);
   useEffect(() => {
@@ -1111,8 +1263,6 @@ export default function AppPortfolioPage() {
     ? apps
     : apps.filter(app => app.platforms.includes(activeFilter));
 
-  const filteredApps = allFiltered.filter(app => app.status !== 'Pending');
-  const pendingApps = allFiltered.filter(app => app.status === 'Pending');
 
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     { name: 'Home', url: 'https://opticalautomation.com' },
@@ -1205,16 +1355,16 @@ export default function AppPortfolioPage() {
           ))}
         </FilterBar>
 
-        {/* App Grid */}
+        {/* Grouped Accordions */}
         <AnimatePresence mode="wait">
-          <AppGrid
+          <motion.div
             key={activeFilter}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
           >
-            {filteredApps.length === 0 ? (
+            {groupAppsByCategory(allFiltered).length === 0 ? (
               <EmptyState
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -1225,134 +1375,112 @@ export default function AppPortfolioPage() {
                 <p>Android applications are coming soon. Stay tuned for updates as we expand to the Android platform.</p>
               </EmptyState>
             ) : (
-              filteredApps.map((app, index) => (
-                <AppCard
-                  key={app.id}
-                  $color={app.color}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.06 }}
-                >
-                  <CardHeader>
-                    <AppIconBox $color={app.color}>
-                      <app.icon />
-                    </AppIconBox>
-
-                    <AppInfo>
-                      <AppName>{app.name}</AppName>
-                      <AppSubtitle $color={app.color}>{app.subtitle}</AppSubtitle>
-                    </AppInfo>
-
-                    <StatusBadge>{app.status}</StatusBadge>
-                  </CardHeader>
-
-                  <AppDescription>{app.description}</AppDescription>
-
-                  {app.screenshots && app.screenshots.length > 0 && (
-                    <ScreenshotGallery>
-                      {app.screenshots.map((shot) => (
-                        <ScreenshotItem key={shot.label} onClick={() => setLightboxImage({ src: shot.src, label: `${app.name} — ${shot.label}` })}>
-                          <img src={shot.src} alt={`${app.name} — ${shot.label}`} loading="lazy" />
-                          <span>{shot.label}</span>
-                        </ScreenshotItem>
-                      ))}
-                    </ScreenshotGallery>
-                  )}
-
-                  <PlatformTags>
-                    {app.platforms.map(p => (
-                      <PlatformTag key={p} $platform={p}>
-                        <FiSmartphone size={10} />
-                        {platformLabel(p)}
-                      </PlatformTag>
-                    ))}
-                  </PlatformTags>
-
-                  <FeatureList>
-                    {app.features.map(f => (
-                      <FeatureChip key={f}>{f}</FeatureChip>
-                    ))}
-                  </FeatureList>
-
-                  <CardActions $color={app.color}>
-                    {app.website.startsWith('/') ? (
-                      <Link href={app.website} className="primary">
-                        <FiExternalLink size={14} /> Visit
-                      </Link>
-                    ) : (
-                      <a href={app.website} className="primary" target="_blank" rel="noopener noreferrer">
-                        <FiExternalLink size={14} /> Visit
-                      </a>
-                    )}
-                    <Link href="/portfolio" className="secondary">
-                      <FiCode size={14} /> Details
-                    </Link>
-                  </CardActions>
-                </AppCard>
-              ))
-            )}
-          </AppGrid>
-        </AnimatePresence>
-
-        {/* Pending Development Accordion */}
-        {pendingApps.length > 0 && (
-          <AccordionSection>
-            <AccordionHeader
-              onClick={() => setPendingOpen(prev => !prev)}
-              whileTap={{ scale: 0.995 }}
-            >
-              <AccordionLeft>
-                <AccordionIconBox>
-                  <FiClock />
-                </AccordionIconBox>
-                <AccordionTitle>
-                  <h3>Pending Development</h3>
-                  <span>{pendingApps.length} app{pendingApps.length !== 1 ? 's' : ''} in progress</span>
-                </AccordionTitle>
-              </AccordionLeft>
-              <AccordionChevron
-                animate={{ rotate: pendingOpen ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <FiChevronDown />
-              </AccordionChevron>
-            </AccordionHeader>
-
-            <AnimatePresence initial={false}>
-              {pendingOpen && (
-                <AccordionBody
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                >
-                  <PendingGrid>
-                    {pendingApps.map((app, index) => (
-                      <PendingItem
-                        key={app.id}
-                        $color={app.color}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.04, duration: 0.3 }}
+              groupAppsByCategory(allFiltered).map((group) => {
+                const groupKey = `${activeFilter}-${group.id}`;
+                return (
+                  <GroupAccordionWrap key={group.id}>
+                    <GroupAccordionBtn
+                      $color={group.color}
+                      onClick={() => toggleGroup(groupKey)}
+                      whileTap={{ scale: 0.995 }}
+                    >
+                      <GroupAccordionIcon $color={group.color}>
+                        <group.icon />
+                      </GroupAccordionIcon>
+                      <GroupAccordionTitleBlock>
+                        <h3>{group.title}</h3>
+                        <span>{group.apps.length} title{group.apps.length !== 1 ? 's' : ''}</span>
+                      </GroupAccordionTitleBlock>
+                      <GroupAccordionChevron
+                        animate={{ rotate: openGroups[groupKey] ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
                       >
-                        <PendingIconBox $color={app.color}>
-                          <app.icon />
-                        </PendingIconBox>
-                        <PendingInfo>
-                          <h4>{app.name}</h4>
-                          <span>{app.subtitle}</span>
-                        </PendingInfo>
-                        <PendingBadge>
-                          <FiClock /> Pending
-                        </PendingBadge>
-                      </PendingItem>
-                    ))}
-                  </PendingGrid>
-                </AccordionBody>
-              )}
-            </AnimatePresence>
-          </AccordionSection>
-        )}
+                        <FiChevronDown />
+                      </GroupAccordionChevron>
+                    </GroupAccordionBtn>
+
+                    <AnimatePresence initial={false}>
+                      {openGroups[groupKey] && (
+                        <GroupAccordionBody
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                        >
+                          <GroupAppGrid>
+                            {group.apps.map((app, index) => (
+                              <AppCard
+                                key={app.id}
+                                $color={app.color}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3, delay: index * 0.06 }}
+                              >
+                                <CardHeader>
+                                  <AppIconBox $color={app.color}>
+                                    <app.icon />
+                                  </AppIconBox>
+                                  <AppInfo>
+                                    <AppName>{app.name}</AppName>
+                                    <AppSubtitle $color={app.color}>{app.subtitle}</AppSubtitle>
+                                  </AppInfo>
+                                  <StatusBadge $status={app.status}>{app.status}</StatusBadge>
+                                </CardHeader>
+
+                                <AppDescription>{app.description}</AppDescription>
+
+                                {app.screenshots && app.screenshots.length > 0 && (
+                                  <ScreenshotGallery>
+                                    {app.screenshots.map((shot) => (
+                                      <ScreenshotItem key={shot.label} onClick={() => setLightboxImage({ src: shot.src, label: `${app.name} — ${shot.label}` })}>
+                                        <img src={shot.src} alt={`${app.name} — ${shot.label}`} loading="lazy" />
+                                        <span>{shot.label}</span>
+                                      </ScreenshotItem>
+                                    ))}
+                                  </ScreenshotGallery>
+                                )}
+
+                                <PlatformTags>
+                                  {app.platforms.map(p => (
+                                    <PlatformTag key={p} $platform={p}>
+                                      <FiSmartphone size={10} />
+                                      {platformLabel(p)}
+                                    </PlatformTag>
+                                  ))}
+                                </PlatformTags>
+
+                                <FeatureList>
+                                  {app.features.map(f => (
+                                    <FeatureChip key={f}>{f}</FeatureChip>
+                                  ))}
+                                </FeatureList>
+
+                                <CardActions $color={app.color}>
+                                  {app.website.startsWith('/') ? (
+                                    <Link href={app.website} className="primary">
+                                      <FiExternalLink size={14} /> Visit
+                                    </Link>
+                                  ) : (
+                                    <a href={app.website} className="primary" target="_blank" rel="noopener noreferrer">
+                                      <FiExternalLink size={14} /> Visit
+                                    </a>
+                                  )}
+                                  <Link href="/portfolio" className="secondary">
+                                    <FiCode size={14} /> Details
+                                  </Link>
+                                </CardActions>
+                              </AppCard>
+                            ))}
+                          </GroupAppGrid>
+                        </GroupAccordionBody>
+                      )}
+                    </AnimatePresence>
+                  </GroupAccordionWrap>
+                );
+              })
+            )}
+          </motion.div>
+        </AnimatePresence>
       </ContentSection>
 
       {/* CTA */}

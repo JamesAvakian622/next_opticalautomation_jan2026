@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import {
     FiGlobe,
@@ -22,7 +22,9 @@ import {
     FiMessageSquare,
     FiDollarSign,
     FiBriefcase,
-    FiLayout
+    FiLayout,
+    FiChevronDown,
+    FiCode
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -261,16 +263,25 @@ const VisitLink = styled.a`
 
 const CategorySection = styled.section`
     scroll-margin-top: 100px;
-    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+    margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-const CategoryHeader = styled.div`
+const AccordionButton = styled(motion.button)`
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
-    padding-bottom: ${({ theme }) => theme.spacing.md};
-    border-bottom: 2px solid ${({ theme }) => theme.colors.border};
+    padding: 18px 24px;
+    border-radius: ${({ theme }) => theme.borderRadius.xl};
+    border: 1px solid ${({ theme }) => theme.colors.border};
+    background: ${({ theme }) => theme.colors.surface};
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: ${({ $color }) => $color || '#6366f1'}60;
+        background: ${({ $color }) => `${$color || '#6366f1'}08`};
+    }
 `;
 
 const CategoryIconBox = styled.div`
@@ -290,9 +301,10 @@ const CategoryIconBox = styled.div`
 `;
 
 const CategoryTitle = styled.h2`
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: ${({ theme }) => theme.colors.text};
     margin: 0;
+    text-align: left;
 `;
 
 const CategoryCount = styled.span`
@@ -304,10 +316,31 @@ const CategoryCount = styled.span`
     font-weight: 600;
 `;
 
+const AccordionChevron = styled(motion.div)`
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
+
+    svg {
+        font-size: 1.2rem;
+        color: ${({ theme }) => theme.colors.textSecondary};
+    }
+`;
+
+const AccordionBody = styled(motion.div)`
+    overflow: hidden;
+`;
+
 const CategoryGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: ${({ theme }) => theme.spacing.lg};
+    padding-top: ${({ theme }) => theme.spacing.lg};
 
     @media(max-width: 400px) {
         grid-template-columns: 1fr;
@@ -327,94 +360,29 @@ const NextJsSectionTitle = styled.h2`
 const NextJsSectionSubtitle = styled.p`
     text-align: center;
     color: ${({ theme }) => theme.colors.textSecondary};
-    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+    margin-bottom: ${({ theme }) => theme.spacing.xl};
     font-size: 1rem;
 `;
 
-const products = [
+const allCategories = [
     {
-        name: 'AmericaToday250',
-        url: 'https://nextjs-america250-feb2026.vercel.app',
-        description: 'American history arranged in decades, featuring Colonial America, Presidential Records, and Today in Government.',
+        id: 'live-websites',
+        title: 'Live Websites',
+        icon: FiGlobe,
         color: '#06B6D4',
-        active: true,
-        features: ['History Since George Washington', 'The Civil War', 'Government Current Day'],
+        products: [
+            { name: 'AmericaToday250', url: 'https://nextjs-america250-feb2026.vercel.app', description: 'American history arranged in decades, featuring Colonial America, Presidential Records, and Today in Government.', color: '#06B6D4', features: ['History Since George Washington', 'The Civil War', 'Government Current Day'] },
+            { name: 'Technology And Times', url: 'https://nextjs-technologyandtimes.vercel.app', description: 'Technology Life and Time resources, companies, and products with timelines.', color: '#06B6D4', features: ['Technology Timeline', 'Company Histories', 'Product Launches', 'Historical Insights'] },
+            { name: 'Client Portal', url: 'www.JamesAvakian.com', description: 'Secure client portal for project management, file sharing, and communication.', color: '#10B981', features: ['Project Tracking', 'File Sharing', 'Real-time Chat', 'Invoice Management'] },
+            { name: 'DocumentHub', url: 'documenthubaws.netlify.app', description: 'AWS-powered document management system for viewing and accessing PDF documents.', color: '#F59E0B', features: ['PDF Viewer', 'AWS Storage', 'Document Search', 'Quick Access'] },
+            { name: 'LearnSkills365', url: 'www.LearnSkills365.com', description: 'Educational resources, courses, and tutorials for web development.', color: '#06B6D4', features: ['Video Courses', 'Interactive Labs', 'Certifications', 'Community'] },
+            { name: 'OlympicsTracker', url: 'https://nextjs-olympics.vercel.app', description: 'Educational resources, olympics history, and event record for physical athletes.', color: '#06B6D4', features: ['Historic Country Win', 'International Medal History', 'Event Search', 'Quick Access'] },
+            { name: 'Snowy Christmas', url: 'https://nextjs-snowychristmas.vercel.app', description: 'Writing, Poems, Songs, and Literature resource for the holiday season.', color: '#06B6D4', features: ['Poetry', 'Songs', 'Literature', 'Holiday Themes'] },
+            { name: 'AmericanCars', url: 'https://nextjs-americancars2026-k48l.vercel.app', description: 'Comprehensive resource for American car history, models, and industry insights.', color: '#06B6D4', features: ['Car Models', 'Industry History', 'Technological Innovations', 'Classic Cars'] },
+            { name: 'Apple M Processors', url: 'https://nextjs-academyawardtracker.vercel.app', description: 'Current and Future Apple Computer M Compuer Micrporocessors.', color: '#06B6D4', features: ['Apple M Processors', 'Future Tech', 'Performance Benchmarks', 'Developer Resources'] },
+            { name: 'Fitness Tracker', url: 'https://nextjs-fitnesstracker.vercel.app', description: 'Track workouts, nutrition, and health metrics for a healthier lifestyle.', color: '#06B6D4', features: ['Workout Logging', 'Nutrition Tracking', 'Health Metrics', 'Progress Reports'] },
+        ]
     },
-    {
-        name: 'Technology And Times',
-        url: 'https://nextjs-technologyandtimes.vercel.app',
-        description: 'Technology Life and Time resources, companies, and products with timelines.',
-        color: '#06B6D4',
-        active: true,
-        features: ['Technology Timeline', 'Company Histories', 'Product Launches', 'Historical Insights']
-    },
-    {
-        name: 'Client Portal',
-        url: 'www.JamesAvakian.com',
-        description: 'Secure client portal for project management, file sharing, and communication.',
-        color: '#10B981',
-        active: true,
-        features: ['Project Tracking', 'File Sharing', 'Real-time Chat', 'Invoice Management']
-    },
-    {
-        name: 'DocumentHub',
-        url: 'documenthubaws.netlify.app',
-        description: 'AWS-powered document management system for viewing and accessing PDF documents.',
-        color: '#F59E0B',
-        active: true,
-        features: ['PDF Viewer', 'AWS Storage', 'Document Search', 'Quick Access']
-    },
-    {
-        name: 'LearnSkills365',
-        url: 'www.LearnSkills365.com',
-        description: 'Educational resources, courses, and tutorials for web development.',
-        color: '#06B6D4',
-        active: true,
-        features: ['Video Courses', 'Interactive Labs', 'Certifications', 'Community']
-    },
-    {
-        name: 'OlympicsTracker',
-        url: 'https://nextjs-olympics.vercel.app',
-        description: 'Educational resources, olympics history, and event record for physical athletes.',
-        color: '#06B6D4',
-        active: true,
-        features: ['Historic Country Win', 'International Medal History', 'Event Search', 'Quick Access'],
-    },
-    {
-        name: 'Snowy Christmas',
-        url: 'https://nextjs-snowychristmas.vercel.app',
-        description: 'Writing, Poems, Songs, and Literature resource for the holiday season.',
-        color: '#06B6D4',
-        active: true,
-        features: ['Poetry', 'Songs', 'Literature', 'Holiday Themes']
-    },
-    {
-        name: 'AmericanCars',
-        url: 'https://nextjs-americancars2026-k48l.vercel.app',
-        description: 'Comprehensive resource for American car history, models, and industry insights.',
-        color: '#06B6D4',
-        active: true,
-        features: ['Car Models', 'Industry History', 'Technological Innovations', 'Classic Cars']
-    },
-    {
-        name: 'Apple M Processors',
-        url: 'https://nextjs-academyawardtracker.vercel.app',
-        description: 'Current and Future Apple Computer M Compuer Micrporocessors.',
-        color: '#06B6D4',
-        active: true,
-        features: ['Apple M Processors', 'Future Tech', 'Performance Benchmarks', 'Developer Resources']
-    },
-    {
-        name: 'Fitness Tracker',
-        url: 'https://nextjs-fitnesstracker.vercel.app',
-        description: 'Track workouts, nutrition, and health metrics for a healthier lifestyle.',
-        color: '#06B6D4',
-        active: true,
-        features: ['Workout Logging', 'Nutrition Tracking', 'Health Metrics', 'Progress Reports']
-    }
-];
-
-const nextJsCategories = [
     {
         id: 'business-finance',
         title: 'Business & Finance',
@@ -484,14 +452,23 @@ const nextJsCategories = [
 
 export default function ProductsPage() {
     const [favorites, setFavorites] = useState([]);
+    const [openCategories, setOpenCategories] = useState({});
+
+    const toggleCategory = (id) => {
+        setOpenCategories(prev => ({ ...prev, [id]: !prev[id] }));
+    };
 
     useEffect(() => {
         const hash = window.location.hash.replace('#', '');
         if (hash) {
+            const matchingCat = allCategories.find(c => c.id === hash);
+            if (matchingCat) {
+                setOpenCategories(prev => ({ ...prev, [hash]: true }));
+            }
             setTimeout(() => {
                 const el = document.getElementById(hash);
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 150);
+            }, 200);
         }
     }, []);
 
@@ -572,100 +549,75 @@ export default function ProductsPage() {
                     </Subtitle>
                 </HeroSection>
 
-                {favorites.length > 0 && (
-                    <PrintFavoritesButton onClick={printFavorites}>
-                        <FiPrinter /> Print {favorites.length} Favorite{favorites.length > 1 ? 's' : ''} as PDF
-                    </PrintFavoritesButton>
-                )}
-
-                <ProductsGrid>
-                    {products.map((product, index) => (
-                        <ProductCard
-                            key={product.url}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                        >
-                            <ProductHeader>
-                                <ProductIcon $color={product.color}>
-                                    <FiGlobe />
-                                </ProductIcon>
-                                <HeaderActions>
-                                    <FavoriteButton
-                                        $favorited={favorites.includes(product.url)}
-                                        onClick={() => toggleFavorite(product.url)}
-                                        title={favorites.includes(product.url) ? 'Remove from favorites' : 'Add to favorites'}
-                                    >
-                                        <FiHeart />
-                                    </FavoriteButton>
-                                    <StatusBadge $active={product.active}>
-                                        {product.active ? 'Active' : 'Coming Soon'}
-                                    </StatusBadge>
-                                </HeaderActions>
-                            </ProductHeader>
-                            <ProductName>{product.name}</ProductName>
-                            <ProductUrl>{product.url}</ProductUrl>
-                            <ProductDescription>{product.description}</ProductDescription>
-                            <FeaturesList>
-                                {product.features.map((feature) => (
-                                    <FeatureItem key={feature}>
-                                        <FiCheck /> {feature}
-                                    </FeatureItem>
-                                ))}
-                            </FeaturesList>
-                            {product.active && (
-                                <VisitLink
-                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Visit Site <FiExternalLink />
-                                </VisitLink>
-                            )}
-                        </ProductCard>
-                    ))}
-                </ProductsGrid>
-
-                <NextJsSectionTitle>Next.js Products</NextJsSectionTitle>
-                <NextJsSectionSubtitle>
-                    Software titles built with Next.js across Business, Education, Entertainment, Productivity, Communication, and Health
-                </NextJsSectionSubtitle>
-
-                {nextJsCategories.map((category) => (
+                {allCategories.map((category) => (
                     <CategorySection key={category.id} id={category.id}>
-                        <CategoryHeader>
+                        <AccordionButton
+                            $color={category.color}
+                            onClick={() => toggleCategory(category.id)}
+                            whileTap={{ scale: 0.995 }}
+                        >
                             <CategoryIconBox $color={category.color}>
                                 <category.icon />
                             </CategoryIconBox>
                             <CategoryTitle>{category.title}</CategoryTitle>
                             <CategoryCount>{category.products.length} title{category.products.length !== 1 ? 's' : ''}</CategoryCount>
-                        </CategoryHeader>
-                        <CategoryGrid>
-                            {category.products.map((product, index) => (
-                                <ProductCard
-                                    key={product.name}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.08 }}
+                            <AccordionChevron
+                                animate={{ rotate: openCategories[category.id] ? 180 : 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <FiChevronDown />
+                            </AccordionChevron>
+                        </AccordionButton>
+
+                        <AnimatePresence initial={false}>
+                            {openCategories[category.id] && (
+                                <AccordionBody
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                                 >
-                                    <ProductHeader>
-                                        <ProductIcon $color={product.color}>
-                                            <category.icon />
-                                        </ProductIcon>
-                                        <StatusBadge $active={true}>Next.js</StatusBadge>
-                                    </ProductHeader>
-                                    <ProductName>{product.name}</ProductName>
-                                    <ProductDescription>{product.description}</ProductDescription>
-                                    <FeaturesList>
-                                        {product.features.map((feature) => (
-                                            <FeatureItem key={feature}>
-                                                <FiCheck /> {feature}
-                                            </FeatureItem>
+                                    <CategoryGrid>
+                                        {category.products.map((product, index) => (
+                                            <ProductCard
+                                                key={product.name}
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{ delay: index * 0.08 }}
+                                            >
+                                                <ProductHeader>
+                                                    <ProductIcon $color={product.color}>
+                                                        <category.icon />
+                                                    </ProductIcon>
+                                                    <StatusBadge $active={true}>
+                                                        {product.url ? 'Active' : 'Next.js'}
+                                                    </StatusBadge>
+                                                </ProductHeader>
+                                                <ProductName>{product.name}</ProductName>
+                                                {product.url && <ProductUrl>{product.url}</ProductUrl>}
+                                                <ProductDescription>{product.description}</ProductDescription>
+                                                <FeaturesList>
+                                                    {product.features.map((feature) => (
+                                                        <FeatureItem key={feature}>
+                                                            <FiCheck /> {feature}
+                                                        </FeatureItem>
+                                                    ))}
+                                                </FeaturesList>
+                                                {product.url && (
+                                                    <VisitLink
+                                                        href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        Visit Site <FiExternalLink />
+                                                    </VisitLink>
+                                                )}
+                                            </ProductCard>
                                         ))}
-                                    </FeaturesList>
-                                </ProductCard>
-                            ))}
-                        </CategoryGrid>
+                                    </CategoryGrid>
+                                </AccordionBody>
+                            )}
+                        </AnimatePresence>
                     </CategorySection>
                 ))}
             </Container>

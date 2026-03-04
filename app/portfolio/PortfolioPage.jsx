@@ -37,7 +37,9 @@ import {
   FiDollarSign,
   FiTerminal,
   FiAward,
-  FiCheck
+  FiCheck,
+  FiChevronDown,
+  FiBriefcase
 } from 'react-icons/fi';
 
 // Tab Categories Data
@@ -323,6 +325,53 @@ const tabCategories = [
   }
 ];
 
+const categoryGroups = [
+  {
+    id: 'featured-websites',
+    title: 'Featured Websites',
+    icon: FiGlobe,
+    color: '#6366F1',
+    matchCategories: ['Web & Mobile Suite', 'Desktop Productivity Suite', 'Educational Platform', 'Software Titles For Sale', 'SwiftUI Mobile App', 'Android Mobile App']
+  },
+  {
+    id: 'business-finance',
+    title: 'Business & Finance',
+    icon: FiBriefcase,
+    color: '#10B981',
+    matchCategories: ['Business & Finance']
+  },
+  {
+    id: 'education-learning',
+    title: 'Education & Learning',
+    icon: FiBook,
+    color: '#F59E0B',
+    matchCategories: ['Education & Learning']
+  },
+  {
+    id: 'entertainment-leisure',
+    title: 'Entertainment & Leisure',
+    icon: FiMusic,
+    color: '#EC4899',
+    matchCategories: ['Entertainment & Leisure']
+  },
+  {
+    id: 'productivity-communication-health',
+    title: 'Productivity, Communication & Health',
+    icon: FiLayers,
+    color: '#8B5CF6',
+    matchCategories: ['Personal Productivity', 'Communication & Social', 'Health']
+  }
+];
+
+function groupProjectsByCategory(projects) {
+  return categoryGroups
+    .map(group => ({
+      ...group,
+      projects: projects.filter(p => group.matchCategories.includes(p.category))
+    }))
+    .filter(group => group.projects.length > 0);
+}
+
 // Tab Styled Components
 const TabSection = styled.section`
   padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.lg};
@@ -410,17 +459,9 @@ const TabContentWrapper = styled.div`
 `;
 
 const TabContent = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: ${({ theme }) => theme.spacing.lg};
-  
-  @media (max-width: 1100px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @media (max-width: 700px) {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.md};
 `;
 
 const TabProjectCard = styled(motion.div)`
@@ -562,6 +603,97 @@ const CategoryBadge = styled.div`
   }
 `;
 
+const GroupAccordion = styled.div`
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  overflow: hidden;
+  background: ${({ theme }) => theme.colors.surface};
+  transition: border-color 0.3s ease;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.primary}40;
+  }
+`;
+
+const GroupAccordionHeader = styled.button`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.md};
+  width: 100%;
+  padding: ${({ theme }) => theme.spacing.lg} ${({ theme }) => theme.spacing.xl};
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.backgroundAlt};
+  }
+`;
+
+const GroupIconBox = styled.div`
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${props => props.$color || '#6366F1'};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  flex-shrink: 0;
+
+  svg {
+    font-size: 1.25rem;
+    color: white;
+  }
+`;
+
+const GroupTitle = styled.span`
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.text};
+  flex: 1;
+`;
+
+const GroupCount = styled.span`
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  background: ${({ theme }) => theme.colors.backgroundAlt};
+  padding: 4px 12px;
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+`;
+
+const GroupChevron = styled(motion.span)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.textSecondary};
+
+  svg {
+    font-size: 1.25rem;
+  }
+`;
+
+const GroupAccordionBody = styled(motion.div)`
+  overflow: hidden;
+`;
+
+const GroupGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${({ theme }) => theme.spacing.lg};
+  padding: 0 ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.xl};
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 const PageWrapper = styled.div`
   min-height: calc(100vh - 70px);
 `;
@@ -640,11 +772,44 @@ const Subtitle = styled(motion.p)`
   font-size: 1.375rem;
   color: rgba(255, 255, 255, 0.9);
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0 auto 0;
   line-height: 1.7;
 
   @media (max-width: 768px) {
     font-size: 1.125rem;
+  }
+`;
+
+const StatsBar = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+
+  @media (max-width: 600px) {
+    gap: 24px;
+  }
+`;
+
+const StatItem = styled.div`
+  text-align: center;
+
+  .value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1, #9460fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
   }
 `;
 
@@ -955,8 +1120,13 @@ const itemVariants = {
 
 export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState('react-nextjs');
+  const [openGroups, setOpenGroups] = useState({});
 
   const activeCategory = tabCategories.find(cat => cat.id === activeTab);
+
+  const toggleGroup = (groupKey) => {
+    setOpenGroups(prev => ({ ...prev, [groupKey]: !prev[groupKey] }));
+  };
 
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     { name: 'Home', path: '/' },
@@ -991,13 +1161,20 @@ export default function PortfolioPage() {
         const matchingProject = cat.projects.find(p => p.id === hash);
         if (matchingProject) {
           setActiveTab(cat.id);
-          // Scroll to project after tab switch and render
+          const groups = groupProjectsByCategory(cat.projects);
+          const matchingGroup = groups.find(g => g.projects.some(p => p.id === hash));
+          if (matchingGroup) {
+            setOpenGroups(prev => ({
+              ...prev,
+              [`${cat.id}-${matchingGroup.id}`]: true
+            }));
+          }
           setTimeout(() => {
             const projectElement = document.getElementById(hash);
             if (projectElement) {
               projectElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-          }, 100);
+          }, 200);
           return;
         }
       }
@@ -1073,6 +1250,32 @@ export default function PortfolioPage() {
             Explore our latest projects showcasing innovative web solutions,
             from Search Engine Optimized, eCommerce platforms to enterprise information technology applications.
           </Subtitle>
+          <StatsBar
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+          >
+            <StatItem>
+              <div className="value">8</div>
+              <div className="label">Websites</div>
+            </StatItem>
+            <StatItem>
+              <div className="value">8+</div>
+              <div className="label">Mobile Apps</div>
+            </StatItem>
+            <StatItem>
+              <div className="value">2</div>
+              <div className="label">Platforms</div>
+            </StatItem>
+            <StatItem>
+              <div className="value">6</div>
+              <div className="label">Categories</div>
+            </StatItem>
+            <StatItem>
+              <div className="value">100+</div>
+              <div className="label">Features</div>
+            </StatItem>
+          </StatsBar>
         </HeroContent>
       </HeroSection>
 
@@ -1111,35 +1314,70 @@ export default function PortfolioPage() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                {activeCategory.projects.map((project, index) => (
-                  <TabProjectCard
-                    key={project.id}
-                    id={project.id}
-                    $accentColor={project.color}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.08, duration: 0.4 }}
-                  >
-                    <CategoryBadge $color={project.color}>
-                      <activeCategory.icon />
-                      {activeCategory.label}
-                    </CategoryBadge>
-                    <TabCardIcon $color={project.color}>
-                      <project.icon />
-                    </TabCardIcon>
-                    <TabCardTitle>{project.title}</TabCardTitle>
-                    <TabCardCategory>{project.category}</TabCardCategory>
-                    <TabCardDescription>{project.description}</TabCardDescription>
-                    <TabCardLink
-                      href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      $color={project.color}
-                    >
-                      <FiExternalLink /> View Project
-                    </TabCardLink>
-                  </TabProjectCard>
-                ))}
+                {groupProjectsByCategory(activeCategory.projects).map((group) => {
+                  const groupKey = `${activeCategory.id}-${group.id}`;
+                  return (
+                    <GroupAccordion key={group.id}>
+                      <GroupAccordionHeader onClick={() => toggleGroup(groupKey)}>
+                        <GroupIconBox $color={group.color}>
+                          <group.icon />
+                        </GroupIconBox>
+                        <GroupTitle>{group.title}</GroupTitle>
+                        <GroupCount>
+                          {group.projects.length} title{group.projects.length !== 1 ? 's' : ''}
+                        </GroupCount>
+                        <GroupChevron
+                          animate={{ rotate: openGroups[groupKey] ? 180 : 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <FiChevronDown />
+                        </GroupChevron>
+                      </GroupAccordionHeader>
+                      <AnimatePresence initial={false}>
+                        {openGroups[groupKey] && (
+                          <GroupAccordionBody
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                          >
+                            <GroupGrid>
+                              {group.projects.map((project, index) => (
+                                <TabProjectCard
+                                  key={project.id}
+                                  id={project.id}
+                                  $accentColor={project.color}
+                                  initial={{ opacity: 0, y: 20 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: index * 0.06, duration: 0.3 }}
+                                >
+                                  <CategoryBadge $color={project.color}>
+                                    <activeCategory.icon />
+                                    {activeCategory.label}
+                                  </CategoryBadge>
+                                  <TabCardIcon $color={project.color}>
+                                    <project.icon />
+                                  </TabCardIcon>
+                                  <TabCardTitle>{project.title}</TabCardTitle>
+                                  <TabCardCategory>{project.category}</TabCardCategory>
+                                  <TabCardDescription>{project.description}</TabCardDescription>
+                                  <TabCardLink
+                                    href="https://6961af51fdbe659fc8f241fa--illustrious-baklava-da0cd7.netlify.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    $color={project.color}
+                                  >
+                                    <FiExternalLink /> View Project
+                                  </TabCardLink>
+                                </TabProjectCard>
+                              ))}
+                            </GroupGrid>
+                          </GroupAccordionBody>
+                        )}
+                      </AnimatePresence>
+                    </GroupAccordion>
+                  );
+                })}
               </TabContent>
             )}
           </AnimatePresence>

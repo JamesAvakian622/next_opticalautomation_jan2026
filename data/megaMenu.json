@@ -103,12 +103,6 @@
             "desc": "Advanced UI frameworks"
           },
           {
-            "href": "/tech#reactnative",
-            "label": "ReactNative",
-            "icon": "FiSmartphone",
-            "desc": "Mobile app development"
-          },
-          {
             "href": "/tech#python",
             "label": "Python",
             "icon": "FiTerminal",
@@ -155,12 +149,6 @@
             "desc": "Server runtime"
           },
           {
-            "href": "/tech#nodejs",
-            "label": "Express",
-            "icon": "FiServer",
-            "desc": "Web framework"
-          },
-          {
             "href": "/tech#mongodb",
             "label": "MERN / MongoDB",
             "icon": "FiDatabase",
@@ -182,12 +170,6 @@
             "label": "SwiftUI",
             "icon": "FiSmartphone",
             "desc": "iOS development"
-          },
-          {
-            "href": "/tech#reactnative",
-            "label": "ReactNative",
-            "icon": "FiSmartphone",
-            "desc": "Cross-platform apps"
           }
         ]
       },

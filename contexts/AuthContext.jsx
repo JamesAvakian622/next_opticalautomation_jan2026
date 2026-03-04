@@ -74,12 +74,13 @@ export function AuthProvider({ children }) {
                     clientId: data.user.clientId,
                     role: data.user.role || 'user',
                     subscriptionTier: data.user.subscriptionTier,
+                    loginCount: data.user.loginCount || 1,
+                    lastLoginAt: data.user.lastLoginAt || new Date().toISOString(),
                     loginAt: new Date().toISOString()
                 };
                 setUser(userData);
                 localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(userData));
                 localStorage.setItem('token', data.token);
-                // Also set cookie on client-side so middleware can read it
                 document.cookie = `token=${data.token}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
                 return { success: true, user: userData, token: data.token };
             }
@@ -116,12 +117,13 @@ export function AuthProvider({ children }) {
                     clientId: data.user.clientId,
                     role: data.user.role || 'user',
                     subscriptionTier: data.user.subscriptionTier,
+                    loginCount: data.user.loginCount || 1,
+                    lastLoginAt: data.user.lastLoginAt || new Date().toISOString(),
                     loginAt: new Date().toISOString()
                 };
                 setUser(userData);
                 localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(userData));
                 localStorage.setItem('token', data.token);
-                // Also set cookie on client-side so middleware can read it
                 document.cookie = `token=${data.token}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
                 return { success: true, user: userData, token: data.token };
             }

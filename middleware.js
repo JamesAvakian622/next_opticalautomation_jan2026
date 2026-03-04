@@ -36,6 +36,7 @@ const publicRoutes = [
     '/questions',
     '/onboarding',
     '/api/onboarding',
+    '/app-portfolio',
 ];
 
 function isPublicRoute(pathname) {

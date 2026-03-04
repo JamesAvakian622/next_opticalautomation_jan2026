@@ -1067,7 +1067,7 @@ export default function DeskViewPage() {
                         MyDeskView Series
                     </Title>
                     <Subtitle>
-                        King Dual - Dashboard Website And App Shared Data System
+                        Shared MongoDB Database Website And Mobile Apps
                     </Subtitle>
 
                     <ScreenshotWithButton style={{ justifyContent: 'center', margin: '2rem 0', maxWidth: '1200px' }}>

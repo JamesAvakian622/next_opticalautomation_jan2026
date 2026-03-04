@@ -41,7 +41,7 @@ export async function POST(request) {
         // Generate clientId
         const clientId = `CLIENT-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`.toUpperCase();
 
-        // Create new user
+        const now = new Date().toISOString();
         const newUser = {
             email: email.toLowerCase(),
             password: hashedPassword,
@@ -49,8 +49,10 @@ export async function POST(request) {
             clientId,
             role: 'user',
             subscriptionTier: 'free',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
+            loginCount: 1,
+            lastLoginAt: now,
+            createdAt: now,
+            updatedAt: now
         };
 
         const result = await usersCollection.insertOne(newUser);
