@@ -43,9 +43,54 @@ const Container = styled.div`
     margin: 0 auto;
 `;
 
-const HeroSection = styled.div`
+const HeroSection = styled.section`
+    position: relative;
     text-align: center;
-    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+    margin-top: -70px;
+    padding: 130px 20px 60px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-bottom: ${({ theme }) => theme.spacing.xl};
+    overflow: hidden;
+    background: ${({ theme }) => theme.mode === 'dark'
+        ? 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)'
+        : 'linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 50%, #ddd6fe 100%)'};
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: ${({ theme }) => theme.mode === 'dark'
+        ? 'radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(148, 96, 250, 0.2) 0%, transparent 60%)'
+        : 'radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(148, 96, 250, 0.1) 0%, transparent 60%)'};
+        pointer-events: none;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+        top: -80px;
+        right: -80px;
+        animation: floatOrb 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes floatOrb {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-25px, 25px); }
+    }
+
+    @media (max-width: 768px) {
+        padding: 110px 16px 50px;
+    }
 `;
 
 
@@ -64,10 +109,17 @@ flex - shrink: 0;
 }
 `;
 
+const HeroContentWrapper = styled.div`
+    position: relative;
+    z-index: 2;
+`;
+
 const Title = styled(motion.h1)`
     font-size: 3rem;
     margin-bottom: ${({ theme }) => theme.spacing.md};
-    background: ${({ theme }) => theme.colors.gradient};
+    background: ${({ theme }) => theme.mode === 'dark'
+        ? 'linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #c084fc 100%)'
+        : 'linear-gradient(135deg, #1e1b4b 0%, #4f46e5 50%, #7c3aed 100%)'};
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -81,10 +133,10 @@ const Title = styled(motion.h1)`
 `;
 
 const Subtitle = styled.p`
-color: ${({ theme }) => theme.colors.textSecondary};
-font-size: 1.5rem;
-max-width: 600px;
-margin: 0 auto;
+    color: ${({ theme }) => theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.75)' : 'rgba(30, 27, 75, 0.75)'};
+    font-size: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
 `;
 
 const IntroSection = styled(motion.section)`
@@ -1049,57 +1101,59 @@ export default function DeskViewPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <Container>
-                <HeroSection>
-                    <Title
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                    >
-                        <LogoWrapper>
-                            <Image
-                                src="/opauto.png"
-                                alt="Optical Automation"
-                                fill
-                                style={{ objectFit: 'contain' }}
-                                priority
-                            />
-                        </LogoWrapper>
-                        MyDeskView Series
-                    </Title>
-                    <Subtitle>
-                        Shared MongoDB Database Website And Mobile Apps
-                    </Subtitle>
-
-                    <ScreenshotWithButton style={{ justifyContent: 'center', margin: '2rem 0', maxWidth: '1200px' }}>
-                        <div style={{
-                            flex: 1,
-                            borderRadius: '12px',
-                            overflow: 'hidden',
-                            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                            cursor: 'pointer'
-                        }}
-                            onClick={() => setFullScreenSrc('/mypersonalorganizer_dashboard.png')}
+            <HeroSection>
+                <HeroContentWrapper>
+                        <Title
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
                         >
-                            <Image
-                                src="/mypersonalorganizer_dashboard.png"
-                                alt="MyDeskView Dashboard Screenshot"
-                                width={1200}
-                                height={700}
-                                style={{
-                                    display: 'block',
-                                    objectFit: 'contain',
-                                    borderRadius: '12px',
-                                    width: '100%',
-                                    height: 'auto'
-                                }}
-                            />
-                        </div>
-                        <FullScreenBtn onClick={() => setFullScreenSrc('/mypersonalorganizer_dashboard.png')}>
-                            <FiMaximize2 size={16} />
-                            Full Screen
-                        </FullScreenBtn>
-                    </ScreenshotWithButton>
-                </HeroSection>
+                            <LogoWrapper>
+                                <Image
+                                    src="/opauto.png"
+                                    alt="Optical Automation"
+                                    fill
+                                    style={{ objectFit: 'contain' }}
+                                    priority
+                                />
+                            </LogoWrapper>
+                            MyDeskView Series
+                        </Title>
+                        <Subtitle>
+                            A Shared Database Website And Mobile App System
+                        </Subtitle>
+                </HeroContentWrapper>
+            </HeroSection>
+
+            <Container>
+                <ScreenshotWithButton style={{ justifyContent: 'center', margin: '2rem 0', maxWidth: '1200px' }}>
+                    <div style={{
+                        flex: 1,
+                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                        cursor: 'pointer'
+                    }}
+                        onClick={() => setFullScreenSrc('/mypersonalorganizer_dashboard.png')}
+                    >
+                        <Image
+                            src="/mypersonalorganizer_dashboard.png"
+                            alt="MyDeskView Dashboard Screenshot"
+                            width={1200}
+                            height={700}
+                            style={{
+                                display: 'block',
+                                objectFit: 'contain',
+                                borderRadius: '12px',
+                                width: '100%',
+                                height: 'auto'
+                            }}
+                        />
+                    </div>
+                    <FullScreenBtn onClick={() => setFullScreenSrc('/mypersonalorganizer_dashboard.png')}>
+                        <FiMaximize2 size={16} />
+                        Full Screen
+                    </FullScreenBtn>
+                </ScreenshotWithButton>
 
                 <IntroSection initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
 

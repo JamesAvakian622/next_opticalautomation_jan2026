@@ -44,7 +44,8 @@ import {
     FiUsers,
     FiZap,
     FiTerminal,
-    FiVideo
+    FiVideo,
+    FiFlag
 } from 'react-icons/fi';
 import { useUser, useClerk } from '@clerk/nextjs';
 import { useTheme } from './ThemeProvider';
@@ -62,7 +63,7 @@ const iconMap = {
     FiCode, FiDatabase, FiSmartphone, FiServer, FiLayers, FiLayout,
     FiShoppingCart, FiTruck, FiDollarSign, FiBook, FiSettings, FiMail,
     FiHelpCircle, FiShield, FiAward, FiTrendingUp, FiPackage,
-    FiBarChart2, FiCalendar, FiUsers, FiZap, FiTerminal, FiVideo
+    FiBarChart2, FiCalendar, FiUsers, FiZap, FiTerminal, FiVideo, FiFlag
 };
 
 // Process menu data to include actual icon components

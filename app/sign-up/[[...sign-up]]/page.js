@@ -6,7 +6,7 @@ export default function SignUpPage() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            minHeight: 'calc(100vh - 70px)',
+            minHeight: '100vh',
             padding: '40px 20px',
         }}>
             <SignUp

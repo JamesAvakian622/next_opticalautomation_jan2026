@@ -206,12 +206,16 @@
             "desc": "Dashboard Information"
           },
           {
-            "href": "https://documenthubaws.netlify.app/",
-            "label": "DocumentHub",
-            "icon": "FiFileText",
-            "desc": "AWS Document Viewer",
-            "external": true,
-            "requiresAuth": true
+            "href": "/apps/americatoday250",
+            "label": "AmericaToday250",
+            "icon": "FiFlag",
+            "desc": "Our country history"
+          },
+          {
+            "href": "/apps/technology-and-times",
+            "label": "TechnologyAndTimes",
+            "icon": "FiCpu",
+            "desc": "Life technology today"
           }
         ]
       },
@@ -283,6 +287,14 @@
             "label": "Scheduling",
             "icon": "FiCalendar",
             "desc": "Booking systems"
+          },
+          {
+            "href": "https://documenthubaws.netlify.app/",
+            "label": "DocumentHub",
+            "icon": "FiFileText",
+            "desc": "AWS Document Viewer",
+            "external": true,
+            "requiresAuth": true
           }
         ]
       },

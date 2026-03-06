@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { generateBreadcrumbJsonLd } from '@/lib/metadata';
 import {
   FiSmartphone,
@@ -343,7 +344,8 @@ const PageContainer = styled.div`
 
 const HeroSection = styled.section`
   position: relative;
-  padding: 100px 20px 70px;
+  margin-top: 24px;
+  padding: 94px 20px 90px;
   text-align: center;
   overflow: hidden;
   background: ${({ theme }) => theme.mode === 'dark'
@@ -408,17 +410,36 @@ const HeroBadge = styled(motion.div)`
   }
 `;
 
+const HeroLogo = styled.div`
+  width: 56px;
+  height: 56px;
+  position: relative;
+  flex-shrink: 0;
+  @media (max-width: 768px) {
+    width: 44px;
+    height: 44px;
+  }
+`;
+
 const HeroTitle = styled(motion.h1)`
   font-size: clamp(2.2rem, 5vw, 3.5rem);
   font-weight: 800;
-  margin-bottom: 18px;
+  margin: 0 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  line-height: 1.15;
+`;
+
+const HeroTitleText = styled.span`
   background: ${({ theme }) => theme.mode === 'dark'
     ? 'linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #c084fc 100%)'
     : 'linear-gradient(135deg, #1e1b4b 0%, #4f46e5 50%, #7c3aed 100%)'};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.15;
 `;
 
 const HeroSubtitle = styled(motion.p)`
@@ -1288,7 +1309,10 @@ export default function AppPortfolioPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            Software Product Portfolio
+            <HeroLogo>
+              <Image src="/opauto.png" alt="Optical Automation" fill style={{ objectFit: 'contain' }} />
+            </HeroLogo>
+            <HeroTitleText>Software Product Portfolio</HeroTitleText>
           </HeroTitle>
 
           <HeroSubtitle

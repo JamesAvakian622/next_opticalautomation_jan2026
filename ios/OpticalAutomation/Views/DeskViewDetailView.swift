@@ -49,7 +49,7 @@ struct DeskViewDetailView: View {
                     Text("MyDeskView Series")
                         .font(.title2.weight(.bold))
                     
-                    Text("Shared MongoDB Database Website And Mobile Apps")
+                    Text("A Shared Database Website And Mobile App System")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)

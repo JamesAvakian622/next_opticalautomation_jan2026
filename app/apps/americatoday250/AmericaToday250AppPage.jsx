@@ -32,27 +32,18 @@ export default function AmericaToday250AppPage() {
           <FiArrowLeft /> Back to App Portfolio
         </BackLink>
         <HeroContent>
-          <MobileAppsBadge
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <FiSmartphone /> Mobile Applications
-          </MobileAppsBadge>
-          <AppIconLarge
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
-          >
-            🇺🇸
-          </AppIconLarge>
-          <AppTitle
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            AmericaToday250
-          </AppTitle>
+          <HeroTitleRow>
+            <HeroLogo>
+              <Image src="/opauto.png" alt="Optical Automation" fill style={{ objectFit: 'contain' }} />
+            </HeroLogo>
+            <AppTitle
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              AmericaToday250
+            </AppTitle>
+          </HeroTitleRow>
           <AppTagline
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -60,15 +51,6 @@ export default function AmericaToday250AppPage() {
           >
             250 Years of American History — From Washington to Today
           </AppTagline>
-          <BadgeRow
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            <Badge color="#DC2626"><FiSmartphone size={12} /> iOS</Badge>
-            <Badge color="#10b981"><FiStar size={12} /> SwiftUI</Badge>
-            <Badge color="#f59e0b">Live</Badge>
-          </BadgeRow>
         </HeroContent>
       </HeroSection>
 
@@ -149,21 +131,55 @@ const PageContainer = styled.div`
 
 const HeroSection = styled.section`
   position: relative;
-  padding: 100px 20px 60px;
+  margin-top: 24px;
+  padding: 94px 20px 80px;
   text-align: center;
+  overflow: hidden;
   background: ${({ theme }) => theme.mode === 'dark'
-    ? 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #3b0e0e 100%)'
-    : 'linear-gradient(135deg, #fca5a5 0%, #f87171 50%, #fca5a5 100%)'};
+    ? 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)'
+    : 'linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 50%, #ddd6fe 100%)'};
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${({ theme }) => theme.mode === 'dark'
+    ? 'radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.25) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(148, 96, 250, 0.2) 0%, transparent 60%)'
+    : 'radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(148, 96, 250, 0.1) 0%, transparent 60%)'};
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+    top: -80px;
+    right: -80px;
+    animation: floatOrb 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes floatOrb {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-25px, 25px); }
+  }
 `;
 
 const BackLink = styled(Link)`
   position: absolute;
   top: 24px;
   left: 24px;
+  z-index: 10;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: ${({ theme }) => theme.mode === 'dark' ? '#fca5a5' : '#b91c1c'};
+  color: ${({ theme }) => theme.mode === 'dark' ? '#a5b4fc' : '#4f46e5'};
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -172,8 +188,30 @@ const BackLink = styled(Link)`
 `;
 
 const HeroContent = styled.div`
+  position: relative;
+  z-index: 2;
   max-width: 600px;
   margin: 0 auto;
+`;
+
+const HeroTitleRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+`;
+
+const HeroLogo = styled.div`
+  width: 56px;
+  height: 56px;
+  position: relative;
+  flex-shrink: 0;
+  @media (max-width: 768px) {
+    width: 44px;
+    height: 44px;
+  }
 `;
 
 const MobileAppsBadge = styled(motion.div)`
