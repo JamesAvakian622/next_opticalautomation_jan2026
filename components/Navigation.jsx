@@ -46,9 +46,9 @@ import {
     FiTerminal,
     FiVideo
 } from 'react-icons/fi';
+import { useUser, useClerk } from '@clerk/nextjs';
 import { useTheme } from './ThemeProvider';
 import { useFavorites } from '@/contexts/FavoritesContext';
-import { useAuth } from '@/contexts/AuthContext';
 
 import WhoisLookup from './WhoisLookup';
 
@@ -507,8 +507,11 @@ export default function Navigation() {
     const [mobileActiveMenu, setMobileActiveMenu] = useState(null);
     const { isDark, toggleTheme } = useTheme();
     const { favorites } = useFavorites();
-    const { user, isAuthenticated } = useAuth();
+    const { user, isSignedIn } = useUser();
+    const { signOut } = useClerk();
     const router = useRouter();
+    const isAuthenticated = !!isSignedIn;
+    const isAdmin = user?.primaryEmailAddress?.emailAddress?.toLowerCase() === 'software@opticalautomation.com';
     const navRef = useRef(null);
 
     // Handle scroll
@@ -550,7 +553,7 @@ export default function Navigation() {
             e.preventDefault();
             setActiveMenu(null);
             setMobileMenuOpen(false);
-            router.push(`/login?redirect=${encodeURIComponent(link.href)}`);
+            router.push(`/sign-in?redirect_url=${encodeURIComponent(link.href)}`);
         } else {
             setActiveMenu(null);
             setMobileMenuOpen(false);
@@ -581,7 +584,7 @@ export default function Navigation() {
                         </SimpleNavLink>
 
                         {Object.entries(megaMenuData)
-                            .filter(([_, menu]) => !menu.isAdminOnly || (isAuthenticated && user?.role === 'admin'))
+                            .filter(([_, menu]) => !menu.isAdminOnly || (isAuthenticated && isAdmin))
                             .map(([key, menu]) => (
                                 <NavItem key={key}>
                                     {menu.directLink ? (
@@ -639,10 +642,10 @@ export default function Navigation() {
 
                         <UserButton
                             as={Link}
-                            href={isAuthenticated ? '/profile' : '/login'}
+                            href={isAuthenticated ? '/profile' : '/sign-in'}
                             $isLoggedIn={isAuthenticated}
-                            title={isAuthenticated ? user?.name : 'Login'}
-                            aria-label={isAuthenticated ? 'Profile' : 'Login'}
+                            title={isAuthenticated ? (user?.fullName || 'Profile') : 'Sign In'}
+                            aria-label={isAuthenticated ? 'Profile' : 'Sign In'}
                             onClick={() => setActiveMenu(null)}
                         >
                             {isAuthenticated ? <FiUser /> : <FiLogIn />}
@@ -760,7 +763,7 @@ export default function Navigation() {
                             </MobileNavLink>
 
                             {Object.entries(megaMenuData)
-                                .filter(([_, menu]) => !menu.isAdminOnly || (isAuthenticated && user?.role === 'admin'))
+                                .filter(([_, menu]) => !menu.isAdminOnly || (isAuthenticated && isAdmin))
                                 .map(([key, menu]) => (
                                     <MobileNavItem key={key}>
                                         <MobileNavButton
@@ -819,11 +822,11 @@ export default function Navigation() {
                             </MobileNavLink>
 
                             <MobileNavLink
-                                href={isAuthenticated ? '/profile' : '/login'}
+                                href={isAuthenticated ? '/profile' : '/sign-in'}
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 {isAuthenticated ? <FiUser /> : <FiLogIn />}
-                                {isAuthenticated ? user?.name : 'Login / Register'}
+                                {isAuthenticated ? (user?.fullName || 'Profile') : 'Sign In'}
                             </MobileNavLink>
                         </MobileNavLinks>
                     </MobileMenu>

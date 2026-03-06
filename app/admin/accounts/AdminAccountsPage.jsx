@@ -19,7 +19,7 @@ import {
     FiChevronRight,
     FiArrowUpRight
 } from 'react-icons/fi';
-import { useAuth } from '@/contexts/AuthContext';
+import { useUser } from '@clerk/nextjs';
 
 const PageWrapper = styled.div`
     min-height: calc(100vh - 70px);
@@ -370,7 +370,12 @@ const demoUsers = [
 ];
 
 export default function AdminAccountsPage() {
-    const { user: currentUser } = useAuth();
+    const { user: clerkUser } = useUser();
+    const currentUser = clerkUser ? {
+        name: clerkUser.fullName || '',
+        email: clerkUser.primaryEmailAddress?.emailAddress || '',
+        role: clerkUser.primaryEmailAddress?.emailAddress?.toLowerCase() === 'software@opticalautomation.com' ? 'admin' : 'user',
+    } : null;
     const [searchTerm, setSearchTerm] = useState('');
     const [users, setUsers] = useState(demoUsers);
 

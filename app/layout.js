@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
 import ClientLayout from './ClientLayout';
 import {
     generatePageMetadata,
@@ -54,7 +55,9 @@ export default function RootLayout({ children }) {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppJsonLd) }}
                 />
 
-                <ClientLayout>{children}</ClientLayout>
+                <ClerkProvider>
+                    <ClientLayout>{children}</ClientLayout>
+                </ClerkProvider>
             </body>
         </html>
     );

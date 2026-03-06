@@ -11,31 +11,30 @@ import JsonLd from '@/components/JsonLd';
 import CookieConsent from '@/components/CookieConsent';
 import PageLogger from '@/components/PageLogger';
 import SplashScreen from '@/components/SplashScreen';
+import ActivityTracker from '@/components/ActivityTracker';
 import { FavoritesProvider } from '@/contexts/FavoritesContext';
-import { AuthProvider } from '@/contexts/AuthContext';
 
 export default function ClientLayout({ children }) {
     return (
         <HelmetProvider>
             <StyledComponentsRegistry>
-                <AuthProvider>
-                    <FavoritesProvider>
-                        <ThemeProvider>
-                            <GlobalStyles />
-                            <SplashScreen />
-                            <PageLogger />
-                            <JsonLd type="organization" />
-                            <JsonLd type="website" />
-                            <Navigation />
-                            <main style={{ paddingTop: '70px' }}>
-                                <Breadcrumbs />
-                                {children}
-                            </main>
-                            <Footer />
-                            <CookieConsent />
-                        </ThemeProvider>
-                    </FavoritesProvider>
-                </AuthProvider>
+                <FavoritesProvider>
+                    <ThemeProvider>
+                        <GlobalStyles />
+                        <SplashScreen />
+                        <ActivityTracker />
+                        <PageLogger />
+                        <JsonLd type="organization" />
+                        <JsonLd type="website" />
+                        <Navigation />
+                        <main style={{ paddingTop: '70px' }}>
+                            <Breadcrumbs />
+                            {children}
+                        </main>
+                        <Footer />
+                        <CookieConsent />
+                    </ThemeProvider>
+                </FavoritesProvider>
             </StyledComponentsRegistry>
         </HelmetProvider>
     );

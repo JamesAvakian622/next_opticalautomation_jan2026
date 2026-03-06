@@ -25,7 +25,7 @@ import {
     FiPackage,
     FiCheck
 } from 'react-icons/fi';
-import { useAuth } from '@/contexts/AuthContext';
+import { useUser, useClerk } from '@clerk/nextjs';
 
 const PageWrapper = styled.div`
     min-height: calc(100vh - 70px);
@@ -334,7 +334,18 @@ const products = [
 ];
 
 export default function AccountsPage() {
-    const { user, isAuthenticated, isLoading, logout, updateProfile } = useAuth();
+    const { user: clerkUser, isSignedIn, isLoaded } = useUser();
+    const { signOut } = useClerk();
+    const isAuthenticated = !!isSignedIn;
+    const isLoading = !isLoaded;
+    const user = clerkUser ? {
+        name: clerkUser.fullName || '',
+        email: clerkUser.primaryEmailAddress?.emailAddress || '',
+        role: clerkUser.primaryEmailAddress?.emailAddress?.toLowerCase() === 'software@opticalautomation.com' ? 'admin' : 'user',
+        createdAt: clerkUser.createdAt,
+    } : null;
+    const logout = () => signOut();
+    const updateProfile = () => {};
     const router = useRouter();
     const [activeTab, setActiveTab] = useState('summary');
 
