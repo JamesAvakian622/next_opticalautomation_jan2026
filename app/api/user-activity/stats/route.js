@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { MongoClient } from 'mongodb';
 
+export const dynamic = 'force-dynamic';
+
 const uri = process.env.MONGODB_URI;
 const ADMIN_EMAIL = 'software@opticalautomation.com';
 

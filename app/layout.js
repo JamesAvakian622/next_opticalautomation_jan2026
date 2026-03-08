@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import ClientLayout from './ClientLayout';
+import ClientLayoutNoClerk from './ClientLayoutNoClerk';
 import {
     generatePageMetadata,
     generateOrganizationJsonLd,
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
     const websiteJsonLd = generateWebsiteJsonLd();
     const professionalServiceJsonLd = generateLocalBusinessJsonLd();
     const softwareAppJsonLd = generateSoftwareApplicationJsonLd();
+    const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
     return (
         <html lang="en" className={inter.variable}>
@@ -55,9 +57,13 @@ export default function RootLayout({ children }) {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppJsonLd) }}
                 />
 
-                <ClerkProvider>
-                    <ClientLayout>{children}</ClientLayout>
-                </ClerkProvider>
+                {clerkPublishableKey ? (
+                    <ClerkProvider publishableKey={clerkPublishableKey}>
+                        <ClientLayout>{children}</ClientLayout>
+                    </ClerkProvider>
+                ) : (
+                    <ClientLayoutNoClerk>{children}</ClientLayoutNoClerk>
+                )}
             </body>
         </html>
     );

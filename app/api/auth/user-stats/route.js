@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
 import jwt from 'jsonwebtoken';
 
+export const dynamic = 'force-dynamic';
+
 const uri = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET || 'opauto-jwt-secret-key-2026-secure';
 
