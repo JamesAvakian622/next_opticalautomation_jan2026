@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import ClientLayout from './ClientLayout';
 import ClientLayoutNoClerk from './ClientLayoutNoClerk';
+import ClerkLayoutErrorBoundary from '@/components/ClerkLayoutErrorBoundary';
 import {
     generatePageMetadata,
     generateOrganizationJsonLd,
@@ -59,7 +60,9 @@ export default function RootLayout({ children }) {
 
                 {clerkPublishableKey ? (
                     <ClerkProvider publishableKey={clerkPublishableKey}>
-                        <ClientLayout>{children}</ClientLayout>
+                        <ClerkLayoutErrorBoundary fallbackChildren={children}>
+                            <ClientLayout>{children}</ClientLayout>
+                        </ClerkLayoutErrorBoundary>
                     </ClerkProvider>
                 ) : (
                     <ClientLayoutNoClerk>{children}</ClientLayoutNoClerk>

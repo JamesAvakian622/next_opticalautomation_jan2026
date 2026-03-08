@@ -55,7 +55,15 @@ export default function ClientLayout({ children }) {
                                 <CookieConsent />
                             </>
                         ) : (
-                            <main>{children}</main>
+                            <>
+                                <Navigation />
+                                <main style={{ paddingTop: '70px' }}>
+                                    <Breadcrumbs />
+                                    {children}
+                                </main>
+                                <Footer />
+                                <CookieConsent />
+                            </>
                         )}
                     </ThemeProvider>
                 </FavoritesProvider>
