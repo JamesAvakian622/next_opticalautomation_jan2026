@@ -111,12 +111,27 @@ const GradientText = styled.span`
     background-clip: text;
 `;
 
+const HeroTagline = styled(motion.p)`
+    font-size: 1.35rem;
+    color: ${({ theme }) => theme.colors.text};
+    margin: 0 0 ${({ theme }) => theme.spacing.md};
+    line-height: 1.5;
+    font-style: italic;
+    text-align: center;
+    max-width: 100%;
+
+    @media (max-width: 768px) {
+        font-size: 1.1rem;
+    }
+`;
+
 const HeroSubtitle = styled(motion.p)`
     font-size: 1.25rem;
     color: ${({ theme }) => theme.colors.textSecondary};
     max-width: 900px;
     margin: 0 0 ${({ theme }) => theme.spacing.xl};
     line-height: 1.7;
+    text-align: center;
 
     @media (max-width: 768px) {
         font-size: 1rem;
@@ -525,6 +540,14 @@ export default function HomePage() {
                             <GradientText>Optical Automation</GradientText>
                         </HeroTitle>
                     </HeroHeader>
+
+                    <HeroTagline
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.25 }}
+                    >
+                        We Offer App and Website Shared Database Data Software Systems!
+                    </HeroTagline>
 
                     <HeroSubtitle
                         initial={{ opacity: 0, y: 20 }}

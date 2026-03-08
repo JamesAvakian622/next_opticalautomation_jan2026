@@ -501,18 +501,29 @@ const MobileMenuDivider = styled.div`
     margin: ${({ theme }) => theme.spacing.lg} 0;
 `;
 
-export default function Navigation() {
+/**
+ * Public nav with megamenu when Clerk is not available (e.g. ClientLayoutNoClerk on Vercel).
+ * Uses same UI as Navigation but with isAuthenticated=false so no Clerk hooks are needed.
+ */
+export function PublicNavigation() {
+    return (
+        <NavigationView
+            isAuthenticated={false}
+            isAdmin={false}
+            user={null}
+            signOut={() => {}}
+        />
+    );
+}
+
+function NavigationView({ isAuthenticated, isAdmin, user, signOut }) {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeMenu, setActiveMenu] = useState(null);
     const [mobileActiveMenu, setMobileActiveMenu] = useState(null);
     const { isDark, toggleTheme } = useTheme();
     const { favorites } = useFavorites();
-    const { user, isSignedIn } = useUser();
-    const { signOut } = useClerk();
     const router = useRouter();
-    const isAuthenticated = !!isSignedIn;
-    const isAdmin = user?.primaryEmailAddress?.emailAddress?.toLowerCase() === 'software@opticalautomation.com';
     const navRef = useRef(null);
 
     // Handle scroll
@@ -834,5 +845,19 @@ export default function Navigation() {
                 )}
             </AnimatePresence>
         </>
+    );
+}
+
+export default function Navigation() {
+    const { user, isSignedIn } = useUser();
+    const { signOut } = useClerk();
+    const isAdmin = user?.primaryEmailAddress?.emailAddress?.toLowerCase() === 'software@opticalautomation.com';
+    return (
+        <NavigationView
+            isAuthenticated={!!isSignedIn}
+            isAdmin={!!isAdmin}
+            user={user}
+            signOut={signOut}
+        />
     );
 }
