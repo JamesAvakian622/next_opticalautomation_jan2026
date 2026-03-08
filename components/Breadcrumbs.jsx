@@ -102,7 +102,10 @@ const routeLabels = {
   'login': 'Login',
   'profile': 'Profile',
   'domains': 'Domains',
-  'portfolio': 'Portfolio'
+  'portfolio': 'Portfolio',
+  'deskview': 'MyDeskView',
+  'americatoday250': 'AmericaToday250',
+  'technology-and-times': 'Technology And Times'
 };
 
 const Breadcrumbs = () => {

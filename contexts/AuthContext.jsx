@@ -18,8 +18,8 @@ const DEFAULT_USERS = [
     },
     {
         id: '2',
-        email: 'user@opticalautomation.com',
-        password: 'user123',
+        email: 'Software@opticalautomation.com',
+        password: 'as34gh90',
         name: 'Demo User',
         role: 'user'
     }

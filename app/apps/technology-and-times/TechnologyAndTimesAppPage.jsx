@@ -1,13 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiArrowLeft, FiSmartphone, FiStar, FiCpu, FiMonitor, FiHome, FiTruck, FiUsers, FiGlobe, FiMoon, FiSettings, FiMail, FiRss, FiSearch } from 'react-icons/fi';
+import { FiArrowLeft, FiSmartphone, FiStar, FiCpu, FiMonitor, FiHome, FiTruck, FiUsers, FiGlobe, FiMoon, FiSettings, FiMail, FiRss, FiSearch, FiX } from 'react-icons/fi';
 
 export default function TechnologyAndTimesAppPage() {
+    const [fullScreenSrc, setFullScreenSrc] = useState(null);
     const screens = [
         {
             title: 'Home',
@@ -175,6 +176,42 @@ export default function TechnologyAndTimesAppPage() {
                 </HeroContent>
             </HeroSection>
 
+            <WebsiteSection>
+                <SectionTitle
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25 }}
+                >
+                    Technology And Times website
+                </SectionTitle>
+                <WebsiteImageClickWrapper onClick={() => setFullScreenSrc('/technology-and-times-website.png')}>
+                    <WebsiteImageWrapper>
+                        <Image
+                            src="/technology-and-times-website.png"
+                            alt="Technology And Times website"
+                            width={1920}
+                            height={1080}
+                            style={{ width: '100%', height: 'auto', display: 'block' }}
+                            sizes="(max-width: 1200px) 100vw, 1200px"
+                        />
+                    </WebsiteImageWrapper>
+                    <WebsiteImageHint>Click to view full size</WebsiteImageHint>
+                </WebsiteImageClickWrapper>
+            </WebsiteSection>
+
+            <IntroSection>
+                <IntroHeading>🧭 TechnologyAndTimes</IntroHeading>
+                <IntroParagraph>
+                    TechnologyAndTimes is a modern exploration of how innovation reshapes the rhythm of everyday life. It examines the evolving relationship between people and the tools they create, tracing how breakthroughs in computing, communication, and automation influence culture, work, and identity. At its heart, the concept recognizes that technology doesn't simply change what we do—it changes how we think, connect, and imagine the future.
+                </IntroParagraph>
+                <IntroParagraph>
+                    The project brings together analysis, storytelling, and forward‑looking commentary to make sense of rapid digital transformation. It highlights the tension between convenience and complexity, showing how new technologies can empower individuals while also introducing fresh challenges. Through essays, interviews, and curated insights, TechnologyAndTimes captures the pulse of a world where innovation moves faster than tradition can adapt.
+                </IntroParagraph>
+                <IntroParagraph>
+                    Ultimately, TechnologyAndTimes serves as both a lens and a compass. It helps readers understand the forces shaping the present while encouraging them to consider the long‑term implications of emerging trends. By blending historical context with contemporary observation, it invites audiences to think critically about the technologies they embrace and the kind of future they want to build.
+                </IntroParagraph>
+            </IntroSection>
+
             <ScreensSection>
                 <SectionTitle
                     initial={{ opacity: 0, y: 20 }}
@@ -233,6 +270,32 @@ export default function TechnologyAndTimesAppPage() {
                     <FiArrowLeft /> Back to Portfolio
                 </CTAButton>
             </CTASection>
+
+            <AnimatePresence>
+                {fullScreenSrc && (
+                    <FullScreenOverlay
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={() => setFullScreenSrc(null)}
+                    >
+                        <FullScreenCloseBtn onClick={(e) => { e.stopPropagation(); setFullScreenSrc(null); }}>
+                            <FiX size={24} />
+                        </FullScreenCloseBtn>
+                        <FullScreenImageContainer
+                            initial={{ scale: 0.95, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            transition={{ duration: 0.25 }}
+                            onClick={() => setFullScreenSrc(null)}
+                        >
+                            <img src={fullScreenSrc} alt="Full screen view" />
+                        </FullScreenImageContainer>
+                        <FullScreenHint>Click anywhere outside to close</FullScreenHint>
+                    </FullScreenOverlay>
+                )}
+            </AnimatePresence>
         </PageContainer>
     );
 }
@@ -396,6 +459,133 @@ const Badge = styled.span`
   background: ${({ color }) => color}20;
   color: ${({ color }) => color};
   border: 1px solid ${({ color }) => color}30;
+`;
+
+const IntroSection = styled.section`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+`;
+
+const IntroHeading = styled.h2`
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: 1.25rem;
+  text-align: center;
+`;
+
+const IntroParagraph = styled.p`
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  margin-bottom: 1.25rem;
+  text-align: left;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const WebsiteSection = styled.section`
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 0 60px;
+`;
+
+const WebsiteImageClickWrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px ${({ theme }) => theme.colors.shadow};
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
+  }
+`;
+
+const WebsiteImageWrapper = styled.div`
+  width: 100%;
+  line-height: 0;
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: middle;
+  }
+`;
+
+const WebsiteImageHint = styled.div`
+  text-align: center;
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  padding: 8px 0 0;
+`;
+
+const FullScreenOverlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  cursor: pointer;
+`;
+
+const FullScreenCloseBtn = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10000;
+
+  &:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.1);
+  }
+`;
+
+const FullScreenImageContainer = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+`;
+
+const FullScreenHint = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  pointer-events: none;
 `;
 
 const ScreensSection = styled.section`

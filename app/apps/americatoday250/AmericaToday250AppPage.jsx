@@ -1,13 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiArrowLeft, FiSmartphone, FiStar, FiBook, FiClock, FiMap, FiUsers, FiSearch, FiMoon, FiSettings, FiGlobe, FiMail, FiFlag } from 'react-icons/fi';
+import { FiArrowLeft, FiSmartphone, FiStar, FiBook, FiClock, FiMap, FiUsers, FiSearch, FiMoon, FiSettings, FiGlobe, FiMail, FiFlag, FiX } from 'react-icons/fi';
 
 export default function AmericaToday250AppPage() {
+  const [fullScreenSrc, setFullScreenSrc] = useState(null);
   const screenshots = [
     { src: '/america_home.png', label: 'Home' },
     { src: '/america_chapters.png', label: 'Chapters' },
@@ -53,6 +54,42 @@ export default function AmericaToday250AppPage() {
           </AppTagline>
         </HeroContent>
       </HeroSection>
+
+      <WebsiteSection>
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+        >
+          AmericaToday250 website
+        </SectionTitle>
+        <WebsiteImageClickWrapper onClick={() => setFullScreenSrc('/americatoday250-website.png')}>
+          <WebsiteImageWrapper>
+            <Image
+              src="/americatoday250-website.png"
+              alt="AmericaToday250 website landing page"
+              width={1920}
+              height={1080}
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+              sizes="(max-width: 1200px) 100vw, 1200px"
+            />
+          </WebsiteImageWrapper>
+          <WebsiteImageHint>Click to view full size</WebsiteImageHint>
+        </WebsiteImageClickWrapper>
+      </WebsiteSection>
+
+      <IntroSection>
+        <IntroHeading>🇺🇸 AmericaToday250</IntroHeading>
+        <IntroParagraph>
+          AmericaToday250 is a forward‑looking cultural initiative designed to reflect on the United States as it approaches its 250th anniversary. It blends history, innovation, and civic imagination to explore how the nation's past shapes its present and how today's choices will influence the next century. At its core, the project invites people to examine the country's defining ideals—freedom, opportunity, and pluralism—and consider how those values have evolved across generations.
+        </IntroParagraph>
+        <IntroParagraph>
+          The initiative also serves as a platform for storytelling. Through multimedia exhibitions, digital archives, and community‑driven narratives, AmericaToday250 highlights the voices that have often been overlooked in traditional histories. It brings together artists, educators, scientists, and everyday citizens to create a mosaic of perspectives, showing the country not as a single story but as a dynamic, sometimes contradictory, always evolving tapestry.
+        </IntroParagraph>
+        <IntroParagraph>
+          Ultimately, AmericaToday250 is both a celebration and a challenge. It celebrates the resilience and creativity that have shaped the nation, while challenging Americans to confront unresolved tensions and imagine a more inclusive future. By encouraging reflection, dialogue, and participation, the project aims to make the 250th anniversary not just a commemoration of the past but a catalyst for the next chapter of American life.
+        </IntroParagraph>
+      </IntroSection>
 
       <ScreensSection>
         <SectionTitle
@@ -117,6 +154,32 @@ export default function AmericaToday250AppPage() {
           <FiArrowLeft /> Back to Portfolio
         </CTAButton>
       </CTASection>
+
+      <AnimatePresence>
+        {fullScreenSrc && (
+          <FullScreenOverlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setFullScreenSrc(null)}
+          >
+            <FullScreenCloseBtn onClick={(e) => { e.stopPropagation(); setFullScreenSrc(null); }}>
+              <FiX size={24} />
+            </FullScreenCloseBtn>
+            <FullScreenImageContainer
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setFullScreenSrc(null)}
+            >
+              <img src={fullScreenSrc} alt="Full screen view" />
+            </FullScreenImageContainer>
+            <FullScreenHint>Click anywhere outside to close</FullScreenHint>
+          </FullScreenOverlay>
+        )}
+      </AnimatePresence>
     </PageContainer>
   );
 }
@@ -280,6 +343,133 @@ const Badge = styled.span`
   background: ${({ color }) => color}20;
   color: ${({ color }) => color};
   border: 1px solid ${({ color }) => color}30;
+`;
+
+const WebsiteSection = styled.section`
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 0 60px;
+`;
+
+const WebsiteImageClickWrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px ${({ theme }) => theme.colors.shadow};
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
+  }
+`;
+
+const WebsiteImageWrapper = styled.div`
+  width: 100%;
+  line-height: 0;
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: middle;
+  }
+`;
+
+const WebsiteImageHint = styled.div`
+  text-align: center;
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  padding: 8px 0 0;
+`;
+
+const FullScreenOverlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  cursor: pointer;
+`;
+
+const FullScreenCloseBtn = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10000;
+
+  &:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.1);
+  }
+`;
+
+const FullScreenImageContainer = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+`;
+
+const FullScreenHint = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  pointer-events: none;
+`;
+
+const IntroSection = styled.section`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+`;
+
+const IntroHeading = styled.h2`
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: 1.25rem;
+  text-align: center;
+`;
+
+const IntroParagraph = styled.p`
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  margin-bottom: 1.25rem;
+  text-align: left;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const ScreensSection = styled.section`
