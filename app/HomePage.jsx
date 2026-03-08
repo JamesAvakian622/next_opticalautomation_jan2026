@@ -18,7 +18,8 @@ import {
     FiGrid,
     FiCpu,
     FiGlobe,
-    FiFileText
+    FiFileText,
+    FiDollarSign
 } from 'react-icons/fi';
 
 const PageWrapper = styled.div`
@@ -131,7 +132,7 @@ const HeroSubtitle = styled(motion.p)`
     max-width: 900px;
     margin: 0 0 ${({ theme }) => theme.spacing.xl};
     line-height: 1.7;
-    text-align: center;
+    text-align: left;
 
     @media (max-width: 768px) {
         font-size: 1rem;
@@ -194,13 +195,17 @@ const SectionContainer = styled.div`
 `;
 
 const SectionHeader = styled.div`
-    text-align: left;
+    text-align: center;
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const SectionTitle = styled(motion.h2)`
     font-size: 2.5rem;
     margin-bottom: ${({ theme }) => theme.spacing.md};
+    text-align: center;
 
     @media (max-width: 768px) {
         font-size: 2rem;
@@ -210,8 +215,10 @@ const SectionTitle = styled(motion.h2)`
 const SectionSubtitle = styled.p`
     color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 1.125rem;
-    max-width: 600px;
+    max-width: 900px;
     margin: 0;
+    line-height: 1.7;
+    text-align: left;
 `;
 
 const FeaturesGrid = styled.div`
@@ -267,10 +274,27 @@ const QuickLinksSection = styled.section`
     padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.lg};
 `;
 
+const QuickLinksBlock = styled.div`
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-left: ${({ theme }) => theme.spacing.xl};
+    padding-right: ${({ theme }) => theme.spacing.xl};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
 const QuickLinksGrid = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: ${({ theme }) => theme.spacing.lg};
+    width: 100%;
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 500px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
 const QuickLinkCard = styled(motion(Link))`
@@ -508,6 +532,12 @@ const quickLinks = [
         icon: FiShield,
         title: 'Password Reset',
         description: 'Recover your account'
+    },
+    {
+        href: '/pricing',
+        icon: FiDollarSign,
+        title: 'Pricing',
+        description: 'Plans & packages'
     }
 ];
 
@@ -586,7 +616,7 @@ export default function HomePage() {
                             What We Offer
                         </SectionTitle>
                         <SectionSubtitle>
-                            From concept to deployment, we provide modern Agentic AI and SEO Optimized comprehensive website information technology development deployment services.
+                            We provide MongoDB database solutions and full-stack development for web and mobile software applications. We develop your project from concept to deployment with application data sharing. Our services prioritize a convenient user experience, featuring visually intuitive automation to ensure seamless usability across app and website. With Agentic AI integration and SEO optimization, we build digital products that are as easy to use and discoverable making them powerful information technology solutions for our customers.
                         </SectionSubtitle>
                     </SectionHeader>
 
@@ -651,7 +681,7 @@ export default function HomePage() {
             </StatsSection>
 
             <QuickLinksSection>
-                <SectionContainer>
+                <QuickLinksBlock>
                     <SectionHeader>
                         <SectionTitle
                             initial={{ opacity: 0, y: 20 }}
@@ -668,6 +698,7 @@ export default function HomePage() {
                     <QuickLinksGrid>
                         {quickLinks.map((link, index) => (
                             <QuickLinkCard
+                                className="quick-link-card"
                                 key={link.href}
                                 href={link.href}
                                 initial={{ opacity: 0, x: -20 }}
@@ -688,7 +719,7 @@ export default function HomePage() {
                             </QuickLinkCard>
                         ))}
                     </QuickLinksGrid>
-                </SectionContainer>
+                </QuickLinksBlock>
             </QuickLinksSection>
             <InfoCards />
 

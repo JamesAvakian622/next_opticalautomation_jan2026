@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { titleToSlug } from '@/lib/softwareData';
+import { siteConfig } from '@/lib/metadata';
 import {
     FiGlobe,
     FiExternalLink,
@@ -1079,12 +1080,12 @@ export default function DeskViewPage() {
             {
                 '@type': 'PropertyValue',
                 name: 'SOC2 Compliance',
-                value: 'SOC2 Type II compliant — Security, Availability, Processing Integrity, Confidentiality, and Privacy controls verified.'
+                value: siteConfig.compliance.soc2Extended
             },
             {
                 '@type': 'PropertyValue',
                 name: 'ISO 8601 Compliance',
-                value: 'All date and time values conform to ISO 8601 international standard format (YYYY-MM-DDTHH:MM:SSZ).'
+                value: siteConfig.compliance.iso8601
             },
             {
                 '@type': 'PropertyValue',

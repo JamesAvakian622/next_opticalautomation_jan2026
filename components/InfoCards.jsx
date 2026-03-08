@@ -50,6 +50,10 @@ const SectionSubtitle = styled.p`
   font-size: 1.25rem;
   max-width: 800px;
   margin: 0 auto;
+  white-space: nowrap;
+  @media (max-width: 700px) {
+    white-space: normal;
+  }
 `;
 
 const InfoGrid = styled.div`

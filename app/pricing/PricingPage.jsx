@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { siteConfig } from '@/lib/metadata';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -524,7 +525,7 @@ export default function PricingPage() {
         '@context': 'https://schema.org',
         '@type': 'Product',
         name: 'Optical Automation Product Marketing Solutions',
-        description: 'Professional web development, mobile app development, and ready-made software solutions. SOC2 and ISO 8601 compliant.',
+        description: siteConfig.description,
         url: 'https://opticalautomation.com/pricing',
         brand: {
             '@type': 'Organization',
@@ -547,12 +548,12 @@ export default function PricingPage() {
             {
                 '@type': 'PropertyValue',
                 name: 'SOC2 Compliance',
-                value: 'SOC2 Type II compliant — Security, Availability, Processing Integrity, Confidentiality, and Privacy controls verified for all delivered solutions.'
+                value: siteConfig.compliance.soc2Extended
             },
             {
                 '@type': 'PropertyValue',
                 name: 'ISO 8601 Compliance',
-                value: 'All date and time values conform to ISO 8601 international standard format (YYYY-MM-DDTHH:MM:SSZ).'
+                value: siteConfig.compliance.iso8601
             }
         ]
     };
@@ -764,8 +765,8 @@ export default function PricingPage() {
                                 <ServiceIcon>
                                     <FiShield />
                                 </ServiceIcon>
-                                <ServiceTitle>SOC2 & ISO8601 Compliance</ServiceTitle>
-                                <ServiceDesc>Standard SOC2 and ISO8601 compliance applied to every application</ServiceDesc>
+                                <ServiceTitle>SOC2 Type II & ISO 8601 Compliance</ServiceTitle>
+                                <ServiceDesc>SOC2 Type II and ISO 8601 compliance applied to every application</ServiceDesc>
                             </ServiceItem>
                         </ServicesGrid>
                     </ServicesSection>

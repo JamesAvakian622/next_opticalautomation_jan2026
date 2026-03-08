@@ -327,7 +327,7 @@ export default function Footer() {
               </LogoImage>
             </LogoLink>
             <BrandDescription>
-              Software app applications as Websites, Mobile Apps, and Database were developed by Agentic AI access for high performance, fast display, and efficient access with SEO Optimization, SOC2, and ISO8601 compliance.
+              Software app applications as Websites, Mobile Apps, and Database were developed by Agentic AI access for high performance, fast display, and efficient access with SEO Optimization, SOC2 Type II, and ISO 8601 compliance.
             </BrandDescription>
           </BrandSection>
 

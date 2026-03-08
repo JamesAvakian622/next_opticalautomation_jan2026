@@ -952,7 +952,7 @@ export default function DomainsPage() {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
         name: 'Optical Automation Domain Portfolio',
-        description: 'Comprehensive collection of premium web domains across technology, automotive, business, and lifestyle categories. All websites utilize SEO optimization by JSON Structured Data JSON-LD.',
+        description: 'Comprehensive collection of premium web domains across technology, automotive, business, and lifestyle categories. All websites utilize SEO optimization with JSON/JSON-LD structured data and are SOC2 Type II and ISO 8601 compliant.',
         numberOfItems: domains.length,
         itemListElement: domains.map((domain, index) => ({
             '@type': 'ListItem',
