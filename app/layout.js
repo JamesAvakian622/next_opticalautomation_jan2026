@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import ClientLayout from './ClientLayout';
 import ClientLayoutNoClerk from './ClientLayoutNoClerk';
 import ClerkLayoutErrorBoundary from '@/components/ClerkLayoutErrorBoundary';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import {
     generatePageMetadata,
     generateOrganizationJsonLd,
@@ -67,6 +68,7 @@ export default function RootLayout({ children }) {
                 ) : (
                     <ClientLayoutNoClerk>{children}</ClientLayoutNoClerk>
                 )}
+                <SpeedInsights />
             </body>
         </html>
     );
