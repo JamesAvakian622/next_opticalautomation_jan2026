@@ -6,11 +6,10 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import {
     FiBook,
-    FiGamepad,
+    FiGrid,
     FiCheckSquare,
-    FiBrain,
     FiBookOpen,
-    FiKeyboard,
+    FiType,
     FiCircle,
     FiAward,
     FiTrendingUp
@@ -133,7 +132,7 @@ const activities = [
         id: 'games',
         title: 'Educational Games',
         description: 'Engage with interactive games designed to make learning enjoyable and effective. Perfect for all ages and skill levels.',
-        icon: FiGamepad,
+        icon: FiGrid,
         color: '#8B5CF6',
         href: '/learning#games'
     },
@@ -149,7 +148,7 @@ const activities = [
         id: 'memory',
         title: 'Memory Games',
         description: 'Improve your memory and cognitive skills with fun memory exercises and challenges designed to boost retention.',
-        icon: FiBrain,
+        icon: FiBook,
         color: '#F59E0B',
         href: '/learning#memory'
     },
@@ -165,7 +164,7 @@ const activities = [
         id: 'typing',
         title: 'Typing Practice',
         description: 'Master touch typing with interactive lessons and exercises. Improve your speed and accuracy progressively.',
-        icon: FiKeyboard,
+        icon: FiType,
         color: '#EC4899',
         href: '/learning#typing'
     },
