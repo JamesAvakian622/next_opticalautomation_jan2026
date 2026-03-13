@@ -25,6 +25,7 @@
 		1A0000021 /* SelectSoftwareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000001E /* SelectSoftwareView.swift */; };
 		1A0000022 /* PricingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000001F /* PricingView.swift */; };
 		1A0000023 /* ProductVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000024 /* ProductVideosView.swift */; };
+		D245F2FA2F64820A00A8240D /* generate-icons.sh in Resources */ = {isa = PBXBuildFile; fileRef = D245F2F92F64820A00A8240D /* generate-icons.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +46,9 @@
 		1A000001D /* LearnSkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnSkillsView.swift; sourceTree = "<group>"; };
 		1A000001E /* SelectSoftwareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSoftwareView.swift; sourceTree = "<group>"; };
 		1A000001F /* PricingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingView.swift; sourceTree = "<group>"; };
-		1A0000024 /* ProductVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVideosView.swift; sourceTree = "<group>"; };
 		1A0000020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1A0000024 /* ProductVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVideosView.swift; sourceTree = "<group>"; };
+		D245F2F92F64820A00A8240D /* generate-icons.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "generate-icons.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				1A0000011 /* ContentView.swift */,
 				1A0000070 /* Views */,
 				1A0000020 /* Assets.xcassets */,
+				D245F2F92F64820A00A8240D /* generate-icons.sh */,
 			);
 			path = OpticalAutomation;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D245F2FA2F64820A00A8240D /* generate-icons.sh in Resources */,
 				1A0000006 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
