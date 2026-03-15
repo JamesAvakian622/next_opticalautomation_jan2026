@@ -1,12 +1,23 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { FiArrowLeft, FiSmartphone, FiGlobe, FiStar, FiCheck, FiMonitor, FiMoon, FiCreditCard, FiLayout, FiMail, FiShoppingBag } from 'react-icons/fi';
 
 export default function OpticalAutomationAppPage() {
+  const [selectedWebsiteImage, setSelectedWebsiteImage] = useState(null);
+
+  const websiteScreens = [
+    { title: 'Technbologist', image: '/working_on_tablet_laptop.png' },
+    { title: 'Meetings', image: '/team_meeting_devices.png' },
+    { title: 'Portfolio', image: '/website_tech_times.png' },
+    { title: 'Technology', image: '/agentic_ai_diagram.png' },
+    { title: 'Product Videos', image: '/modern_office_discussion.png' },
+    { title: 'Site Map', image: '/creative_workspace_monitor.png' }
+  ];
+
   const screens = [
     {
       title: 'Home',
@@ -141,20 +152,6 @@ export default function OpticalAutomationAppPage() {
           <FiArrowLeft /> Back to App Portfolio
         </BackLink>
         <HeroContent>
-          <MobileAppsBadge
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <FiSmartphone /> Mobile Applications
-          </MobileAppsBadge>
-          <AppIconLarge
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
-          >
-            🌐
-          </AppIconLarge>
           <AppTitle
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -180,6 +177,43 @@ export default function OpticalAutomationAppPage() {
           </BadgeRow>
         </HeroContent>
       </HeroSection>
+
+      <ScreensSection>
+        <SectionTitle
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          Website
+        </SectionTitle>
+        <WebsiteGrid>
+          {websiteScreens.map((screen, i) => (
+            <WebsiteCard
+              key={screen.title}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 + i * 0.06 }}
+              onClick={() => setSelectedWebsiteImage(screen)}
+            >
+              <WebsiteImage src={screen.image} alt={`${screen.title} website screenshot`} />
+              <WebsiteLabel>{screen.title}</WebsiteLabel>
+            </WebsiteCard>
+          ))}
+        </WebsiteGrid>
+
+        {selectedWebsiteImage && (
+          <WebsiteImageOverlay onClick={() => setSelectedWebsiteImage(null)}>
+            <WebsiteImageModal onClick={(e) => e.stopPropagation()}>
+              <WebsiteModalImage
+                src={selectedWebsiteImage.image}
+                alt={`${selectedWebsiteImage.title} website screenshot enlarged`}
+                onClick={() => setSelectedWebsiteImage(null)}
+              />
+              <WebsiteModalLabel>{selectedWebsiteImage.title}</WebsiteModalLabel>
+            </WebsiteImageModal>
+          </WebsiteImageOverlay>
+        )}
+      </ScreensSection>
 
       <ScreensSection>
         <SectionTitle
@@ -280,35 +314,6 @@ const HeroContent = styled.div`
   margin: 0 auto;
 `;
 
-const MobileAppsBadge = styled(motion.div)`
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: ${({ theme }) => theme.mode === 'dark'
-    ? 'rgba(99, 102, 241, 0.12)'
-    : 'rgba(99, 102, 241, 0.10)'};
-  border: 1px solid ${({ theme }) => theme.mode === 'dark'
-    ? 'rgba(99, 102, 241, 0.3)'
-    : 'rgba(99, 102, 241, 0.25)'};
-  border-radius: 50px;
-  padding: 10px 28px;
-  margin-bottom: 20px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.mode === 'dark' ? '#a5b4fc' : '#4f46e5'};
-  backdrop-filter: blur(10px);
-
-  svg {
-    color: ${({ theme }) => theme.mode === 'dark' ? '#818cf8' : '#6366f1'};
-    font-size: 1.1rem;
-  }
-`;
-
-const AppIconLarge = styled(motion.div)`
-  font-size: 4rem;
-  margin-bottom: 16px;
-`;
-
 const AppTitle = styled(motion.h1)`
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
@@ -367,6 +372,73 @@ const ScreensGrid = styled.div`
   gap: 28px;
   justify-content: center;
   flex-wrap: wrap;
+`;
+
+const WebsiteGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+`;
+
+const WebsiteCard = styled(motion.div)`
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background: ${({ theme }) => theme.mode === 'dark' ? '#141427' : '#ffffff'};
+  box-shadow: 0 12px 30px ${({ theme }) => theme.colors.shadow};
+  cursor: zoom-in;
+`;
+
+const WebsiteImage = styled.img`
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: ${({ theme }) => theme.mode === 'dark' ? '#111827' : '#f1f5f9'};
+`;
+
+const WebsiteLabel = styled.div`
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
+  padding: 10px 12px 12px;
+`;
+
+const WebsiteImageOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 20px;
+`;
+
+const WebsiteImageModal = styled.div`
+  width: min(80vw, 1200px);
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const WebsiteModalImage = styled.img`
+  width: 100%;
+  height: auto;
+  max-height: calc(80vh - 48px);
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: zoom-out;
+`;
+
+const WebsiteModalLabel = styled.div`
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #f8fafc;
 `;
 
 const PhoneFrame = styled(motion.div)`
