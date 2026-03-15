@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "skills": [
+    {
+      "name": "react-best-practices",
+      "displayName": "React Best Practices",
+      "description": "React and Next.js performance optimization guidelines from Vercel Engineering. Use when writing new React components, implementing data fetching, or optimizing bundle size and load times.",
+      "category": "performance",
+      "tags": ["react", "nextjs", "performance", "optimization", "bundle-size"],
+      "package": "react-best-practices.zip",
+      "size": "2.8KB",
+      "rules": 40,
+      "priority": "critical"
+    },
+    {
+      "name": "web-design-guidelines",
+      "displayName": "Web Design Guidelines",
+      "description": "Review UI code for Vercel Web Interface Guidelines compliance. Use when asked to review UI, check accessibility, audit design, or check site against best practices.",
+      "category": "design",
+      "tags": ["accessibility", "ui", "ux", "design", "a11y", "wcag"],
+      "package": "web-design-guidelines.zip",
+      "size": "4.0KB",
+      "rules": 100,
+      "priority": "high"
+    },
+    {
+      "name": "react-native-guidelines",
+      "displayName": "React Native Guidelines",
+      "description": "React Native best practices optimized for AI agents. Use when building React Native or Expo apps, optimizing mobile performance, or implementing animations and gestures.",
+      "category": "mobile",
+      "tags": ["react-native", "expo", "mobile", "ios", "android", "performance"],
+      "package": "react-native-guidelines.zip",
+      "size": "2.4KB",
+      "rules": 16,
+      "priority": "high"
+    },
+    {
+      "name": "composition-patterns",
+      "displayName": "Composition Patterns",
+      "description": "React composition patterns that scale. Use when refactoring components with many boolean props, building reusable component libraries, or designing flexible APIs.",
+      "category": "architecture",
+      "tags": ["react", "patterns", "composition", "api-design", "components"],
+      "package": "composition-patterns.zip",
+      "size": "2.4KB",
+      "rules": 4,
+      "priority": "medium"
+    },
+    {
+      "name": "vercel-deploy-claimable",
+      "displayName": "Vercel Deploy (Claimable)",
+      "description": "Deploy applications and websites to Vercel instantly. Use when asked to deploy app, push to production, or deploy and get a link.",
+      "category": "deployment",
+      "tags": ["vercel", "deployment", "hosting", "ci-cd"],
+      "package": "vercel-deploy-claimable.zip",
+      "size": "2.8KB",
+      "hasScripts": true,
+      "priority": "medium"
+    }
+  ],
+  "installation": {
+    "claude-code": "cp -r skills/{skill-name} ~/.claude/skills/",
+    "claude-ai": "Add the skill to project knowledge or paste SKILL.md contents into the conversation."
+  },
+  "usage": {
+    "automatic": "Skills are automatically available once installed. The agent will use them when relevant tasks are detected.",
+    "manual": "Reference skills by name in your prompts or let the agent detect when to use them based on context."
+  }
+}
