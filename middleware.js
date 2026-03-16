@@ -2,9 +2,13 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import { resolveTenant } from './lib/resolve-tenant.js';
 
+// ONLY these routes are accessible without authentication
 const isPublicRoute = createRouteMatcher([
+    '/login(.*)',
+    '/register(.*)',
     '/sign-in(.*)',
     '/sign-up(.*)',
+    '/api/auth/(.*)',
 ]);
 
 function applyTenantHeaders(request) {
@@ -29,6 +33,7 @@ const hasClerkKey = typeof process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY === 'st
 
 const middleware = hasClerkKey
     ? clerkMiddleware(async (auth, request) => {
+        // Protect ALL routes except public ones
         if (!isPublicRoute(request)) {
             await auth.protect();
         }
