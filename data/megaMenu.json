@@ -25,12 +25,7 @@
             "icon": "FiSmartphone",
             "desc": "iOS applications"
           },
-          {
-            "href": "/tech#reactnative",
-            "label": "React Native",
-            "icon": "FiSmartphone",
-            "desc": "Mobile solutions"
-          },
+ 
           {
             "href": "/tech#python",
             "label": "Python",

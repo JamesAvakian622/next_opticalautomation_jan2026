@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
                 <link rel="icon" href="/opauto.ico" type="image/x-icon" />
                 <link rel="icon" href="/opauto.png" type="image/png" />
                 <link rel="apple-touch-icon" href="/opauto.png" />
-                <link rel="canonical" href="https://opticalautomation.com" />
+                <link rel="canonical" href="https://www.OpticalAutomation.com" />
             </head>
             <body>
                 <script

@@ -124,6 +124,31 @@ const HeroTagline = styled(motion.p)`
     @media (max-width: 768px) {
         font-size: 1.1rem;
     }
+
+    &.extra-spacing {
+        margin-bottom: ${({ theme }) => theme.spacing.xxl};
+        max-width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+
+        @media (max-width: 768px) {
+            max-width: 100%;
+        }
+    }
+`;
+
+const HeroTaglineSmall = styled(motion.p)`
+    font-size: 1rem;
+    color: ${({ theme }) => theme.colors.textSecondary};
+    margin: 0 0 ${({ theme }) => theme.spacing.md};
+    line-height: 1.5;
+    font-style: italic;
+    text-align: center;
+    max-width: 100%;
+
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+    }
 `;
 
 const HeroSubtitle = styled(motion.p)`
@@ -576,7 +601,7 @@ export default function HomePage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.25 }}
                     >
-                        We Offer App and Website Shared Database Data Software Systems!
+                        We Produce App and Website Shared Database Applications!
                     </HeroTagline>
 
                     <HeroSubtitle
@@ -589,6 +614,18 @@ export default function HomePage() {
                         and Full Stack website, database, and mobile app performance as a system of all files.
                         We transform your ideas into powerful digital experiences with our talent and experience.
                     </HeroSubtitle>
+
+                    <HeroTagline
+                        className="extra-spacing"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.35 }}
+                    >
+                        "When You Use Software, Mobile Apps Or Websites, ever forget which App or Website has the Information. With Our Software always know your Information Is stored !"
+                        <br />
+                        <br />
+                        James Avakian, Lead Developer, Optical Automation.
+                    </HeroTagline>
 
                     <HeroButtons
                         initial={{ opacity: 0, y: 20 }}

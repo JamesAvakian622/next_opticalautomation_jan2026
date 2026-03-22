@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { useUser, useClerk } from '@clerk/nextjs';
 import { useRouter, usePathname } from 'next/navigation';
-import { HelmetProvider } from 'react-helmet-async';
 import StyledComponentsRegistry from './registry';
 import ThemeProvider from '@/components/ThemeProvider';
 import GlobalStyles from '@/components/GlobalStyles';
@@ -52,61 +51,55 @@ export default function ClientLayout({ children }) {
     // Show nothing while checking authentication
     if (!isLoaded) {
         return (
-            <HelmetProvider>
-                <StyledComponentsRegistry>
-                    <ThemeProvider>
-                        <GlobalStyles />
-                        <div style={{ 
-                            display: 'flex', 
-                            justifyContent: 'center', 
-                            alignItems: 'center', 
-                            height: '100vh',
-                            fontSize: '1.2rem',
-                            color: '#6366f1'
-                        }}>
-                            Loading...
-                        </div>
-                    </ThemeProvider>
-                </StyledComponentsRegistry>
-            </HelmetProvider>
+            <StyledComponentsRegistry>
+                <ThemeProvider>
+                    <GlobalStyles />
+                    <div style={{ 
+                        display: 'flex', 
+                        justifyContent: 'center', 
+                        alignItems: 'center', 
+                        height: '100vh',
+                        fontSize: '1.2rem',
+                        color: '#6366f1'
+                    }}>
+                        Loading...
+                    </div>
+                </ThemeProvider>
+            </StyledComponentsRegistry>
         );
     }
 
     // Only render full layout if signed in
     if (!isSignedIn) {
         return (
-            <HelmetProvider>
-                <StyledComponentsRegistry>
-                    <ThemeProvider>
-                        <GlobalStyles />
-                        {children}
-                    </ThemeProvider>
-                </StyledComponentsRegistry>
-            </HelmetProvider>
+            <StyledComponentsRegistry>
+                <ThemeProvider>
+                    <GlobalStyles />
+                    {children}
+                </ThemeProvider>
+            </StyledComponentsRegistry>
         );
     }
 
     return (
-        <HelmetProvider>
-            <StyledComponentsRegistry>
-                <FavoritesProvider>
-                    <ThemeProvider>
-                        <GlobalStyles />
-                        <SplashScreen />
-                        <ActivityTracker />
-                        <PageLogger />
-                        <JsonLd type="organization" />
-                        <JsonLd type="website" />
-                        <Navigation />
-                        <main style={{ paddingTop: '70px' }}>
-                            <Breadcrumbs />
-                            {children}
-                        </main>
-                        <Footer />
-                        <CookieConsent />
-                    </ThemeProvider>
-                </FavoritesProvider>
-            </StyledComponentsRegistry>
-        </HelmetProvider>
+        <StyledComponentsRegistry>
+            <FavoritesProvider>
+                <ThemeProvider>
+                    <GlobalStyles />
+                    <SplashScreen />
+                    <ActivityTracker />
+                    <PageLogger />
+                    <JsonLd type="organization" />
+                    <JsonLd type="website" />
+                    <Navigation />
+                    <main style={{ paddingTop: '70px' }}>
+                        <Breadcrumbs />
+                        {children}
+                    </main>
+                    <Footer />
+                    <CookieConsent />
+                </ThemeProvider>
+            </FavoritesProvider>
+        </StyledComponentsRegistry>
     );
 }

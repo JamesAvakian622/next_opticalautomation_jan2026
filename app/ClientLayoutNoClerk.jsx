@@ -1,6 +1,5 @@
 'use client';
 
-import { HelmetProvider } from 'react-helmet-async';
 import StyledComponentsRegistry from './registry';
 import ThemeProvider from '@/components/ThemeProvider';
 import GlobalStyles from '@/components/GlobalStyles';
@@ -16,21 +15,19 @@ import { FavoritesProvider } from '@/contexts/FavoritesContext';
  */
 export default function ClientLayoutNoClerk({ children }) {
     return (
-        <HelmetProvider>
-            <StyledComponentsRegistry>
-                <FavoritesProvider>
-                    <ThemeProvider>
-                        <GlobalStyles />
-                        <PublicNavigation />
-                        <main style={{ paddingTop: '70px' }}>
-                            <Breadcrumbs />
-                            {children}
-                        </main>
-                        <Footer />
-                        <CookieConsent />
-                    </ThemeProvider>
-                </FavoritesProvider>
-            </StyledComponentsRegistry>
-        </HelmetProvider>
+        <StyledComponentsRegistry>
+            <FavoritesProvider>
+                <ThemeProvider>
+                    <GlobalStyles />
+                    <PublicNavigation />
+                    <main style={{ paddingTop: '70px' }}>
+                        <Breadcrumbs />
+                        {children}
+                    </main>
+                    <Footer />
+                    <CookieConsent />
+                </ThemeProvider>
+            </FavoritesProvider>
+        </StyledComponentsRegistry>
     );
 }
