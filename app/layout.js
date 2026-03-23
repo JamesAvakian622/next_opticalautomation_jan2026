@@ -11,6 +11,7 @@ import {
     generateLocalBusinessJsonLd,
     generateSoftwareApplicationJsonLd
 } from '@/lib/metadata';
+import './globals.css';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -34,14 +35,14 @@ export default function RootLayout({ children }) {
     const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
     return (
-        <html lang="en" className={inter.variable}>
+        <html lang="en" className={inter.variable} suppressHydrationWarning>
             <head>
                 <link rel="icon" href="/opauto.ico" type="image/x-icon" />
                 <link rel="icon" href="/opauto.png" type="image/png" />
                 <link rel="apple-touch-icon" href="/opauto.png" />
                 <link rel="canonical" href="https://www.OpticalAutomation.com" />
             </head>
-            <body>
+            <body className="font-sans antialiased">
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
