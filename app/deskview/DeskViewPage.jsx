@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { titleToSlug } from '@/lib/softwareData';
-import { siteConfig } from '@/lib/metadata';
+import { siteConfig, getComplianceSchemaProperties } from '@/lib/metadata';
 import {
     FiGlobe,
     FiExternalLink,
@@ -1077,16 +1077,7 @@ export default function DeskViewPage() {
         datePublished: '2026-01-01T00:00:00-08:00',
         dateModified: new Date().toISOString(),
         additionalProperty: [
-            {
-                '@type': 'PropertyValue',
-                name: 'Security approach',
-                value: siteConfig.compliance.securityApproachExtended
-            },
-            {
-                '@type': 'PropertyValue',
-                name: 'ISO 8601 date and time format',
-                value: siteConfig.compliance.iso8601
-            },
+            ...getComplianceSchemaProperties(),
             {
                 '@type': 'PropertyValue',
                 name: 'Integrated Applications',

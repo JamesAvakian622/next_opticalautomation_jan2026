@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import ClientLayout from './ClientLayout';
 import ClientLayoutNoClerk from './ClientLayoutNoClerk';
+import ForceSignOutOnFirstLoad from './ForceSignOutOnFirstLoad';
 import RouteJsonLd from './RouteJsonLd';
 import ClerkLayoutErrorBoundary from '@/components/ClerkLayoutErrorBoundary';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -65,6 +66,7 @@ export default function RootLayout({ children }) {
 
                 {hasClerk ? (
                     <ClerkProvider publishableKey={clerkPublishableKey}>
+                        <ForceSignOutOnFirstLoad />
                         <RouteJsonLd />
                         <ClerkLayoutErrorBoundary fallbackChildren={children}>
                             <ClientLayout>{children}</ClientLayout>

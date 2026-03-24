@@ -327,7 +327,7 @@ export default function Footer() {
               </LogoImage>
             </LogoLink>
             <BrandDescription>
-              Software app applications as Websites, Mobile Apps, and Database were developed by Agentic AI access for high performance, fast display, and efficient access with SEO optimization, practical security controls, and ISO 8601 date and time formatting where applicable.
+              Software as websites, mobile apps, and databases is built for performance and SEO, with engineering aligned to SOC 2 trust criteria themes, CASA-style cloud application security, SOC 3 reporting context when relevant, and ISO 8601 / RFC 3339 timestamps where applicable.
             </BrandDescription>
           </BrandSection>
 

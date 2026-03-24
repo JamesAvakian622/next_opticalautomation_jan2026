@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { siteConfig } from '@/lib/metadata';
+import { siteConfig, getComplianceSchemaProperties } from '@/lib/metadata';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -544,18 +544,7 @@ export default function PricingPage() {
             }))
         ),
         dateModified: new Date().toISOString(),
-        additionalProperty: [
-            {
-                '@type': 'PropertyValue',
-                name: 'Security approach',
-                value: siteConfig.compliance.securityApproachExtended
-            },
-            {
-                '@type': 'PropertyValue',
-                name: 'ISO 8601 date and time format',
-                value: siteConfig.compliance.iso8601
-            }
-        ]
+        additionalProperty: getComplianceSchemaProperties()
     };
 
     return (
@@ -765,8 +754,8 @@ export default function PricingPage() {
                                 <ServiceIcon>
                                     <FiShield />
                                 </ServiceIcon>
-                                <ServiceTitle>Security practices & ISO 8601 dates</ServiceTitle>
-                                <ServiceDesc>Authentication, access control, encryption in transit, and ISO 8601 timestamps where applicable — without claiming third-party SOC 2 Type II or CASA certification unless we publish it.</ServiceDesc>
+                                <ServiceTitle>SOC 2, CASA, SOC 3 & ISO 8601 alignment</ServiceTitle>
+                                <ServiceDesc>Production controls mapped to Trust Services Criteria (SOC 2), CASA-style cloud application security, SOC 3 reporting context when applicable, and ISO 8601 / RFC 3339 timestamps—attestations only when independently published.</ServiceDesc>
                             </ServiceItem>
                         </ServicesGrid>
                     </ServicesSection>
