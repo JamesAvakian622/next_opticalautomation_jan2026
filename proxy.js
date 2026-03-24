@@ -8,7 +8,7 @@ const isPublicRoute = createRouteMatcher([
     '/register(.*)',
     '/sign-in(.*)',
     '/sign-up(.*)',
-    '/api/auth/(.*)',
+    '/api/auth/(.*)'
 ]);
 
 function applyTenantHeaders(request) {
@@ -23,15 +23,15 @@ function applyTenantHeaders(request) {
     return NextResponse.next();
 }
 
-/** When Clerk key is missing (e.g. Vercel build without env), skip Clerk to avoid MIDDLEWARE_INVOCATION_FAILED. */
-function plainMiddleware(request) {
+/** When Clerk key is missing (e.g. build without env), skip Clerk to avoid invocation failure. */
+function plainProxy(request) {
     return applyTenantHeaders(request);
 }
 
 const hasClerkKey = typeof process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY === 'string' &&
     process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.length > 0;
 
-const middleware = hasClerkKey
+const proxy = hasClerkKey
     ? clerkMiddleware(async (auth, request) => {
         // Protect ALL routes except public ones
         if (!isPublicRoute(request)) {
@@ -39,13 +39,13 @@ const middleware = hasClerkKey
         }
         return applyTenantHeaders(request);
     })
-    : plainMiddleware;
+    : plainProxy;
 
-export default middleware;
+export default proxy;
 
 export const config = {
     matcher: [
         '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-        '/(api|trpc)(.*)',
-    ],
+        '/(api|trpc)(.*)'
+    ]
 };

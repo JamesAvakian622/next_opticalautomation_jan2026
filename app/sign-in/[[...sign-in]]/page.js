@@ -1,4 +1,13 @@
 import { SignIn } from '@clerk/nextjs';
+import { generatePageMetadata } from '@/lib/metadata';
+
+export const metadata = generatePageMetadata(
+    'login',
+    'Sign in to Optical Automation to access your account and applications.',
+    null,
+    ['sign in', 'authentication'],
+    '/sign-in'
+);
 
 export default function SignInPage() {
     return (

@@ -11,7 +11,10 @@ import {
     generateSoftwareApplicationJsonLd,
     generateArticleJsonLd,
     generateProductJsonLd,
-    generatePersonJsonLd
+    generatePersonJsonLd,
+    generateVideoJsonLd,
+    generateTechArticleJsonLd,
+    generateEventJsonLd
 } from '@/lib/metadata';
 
 export default function JsonLd({ type = 'organization', data }) {

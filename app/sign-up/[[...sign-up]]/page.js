@@ -1,4 +1,13 @@
 import { SignUp } from '@clerk/nextjs';
+import { generatePageMetadata } from '@/lib/metadata';
+
+export const metadata = generatePageMetadata(
+    'register',
+    'Create your Optical Automation account to start using your applications.',
+    null,
+    ['sign up', 'register', 'create account'],
+    '/sign-up'
+);
 
 export default function SignUpPage() {
     return (

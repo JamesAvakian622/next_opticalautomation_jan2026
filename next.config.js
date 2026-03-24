@@ -13,6 +13,12 @@ const nextConfig = {
             }
         ],
         unoptimized: true
+    },
+    async redirects() {
+        return [
+            { source: '/terms', destination: '/terms-of-use', permanent: true },
+            { source: '/privacy', destination: '/privacy-policy', permanent: true }
+        ];
     }
 };
 
