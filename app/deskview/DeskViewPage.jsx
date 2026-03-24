@@ -1079,12 +1079,12 @@ export default function DeskViewPage() {
         additionalProperty: [
             {
                 '@type': 'PropertyValue',
-                name: 'SOC2 Compliance',
-                value: siteConfig.compliance.soc2Extended
+                name: 'Security approach',
+                value: siteConfig.compliance.securityApproachExtended
             },
             {
                 '@type': 'PropertyValue',
-                name: 'ISO 8601 Compliance',
+                name: 'ISO 8601 date and time format',
                 value: siteConfig.compliance.iso8601
             },
             {

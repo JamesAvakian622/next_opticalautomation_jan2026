@@ -54,8 +54,8 @@ const tabCategories = [
         id: 'optical-automation',
         title: 'Optical Automation',
         category: 'Web & Mobile Suite',
-        description: 'MERN Stack and SwiftUI application featuring Megamenu navigation, SEO optimized metadata-driven content, SOC2 Type II and ISO 8601 compliant metatags, and AI-powered insights.',
-        detailedDescription: 'Optical Automation is a comprehensive Web & Mobile Suite built with MERN Stack and SwiftUI. Features include an advanced Megamenu navigation system, SEO optimized pages with metadata-driven content management, SOC2 Type II and ISO 8601 compliant metatags for enterprise security, and AI-powered insights for enhanced user experience.',
+        description: 'MERN Stack and SwiftUI application featuring Megamenu navigation, SEO optimized metadata-driven content, structured metadata and security-minded defaults, and AI-powered insights.',
+        detailedDescription: 'Optical Automation is a comprehensive Web & Mobile Suite built with MERN Stack and SwiftUI. Features include an advanced Megamenu navigation system, SEO optimized pages with metadata-driven content management, security-conscious practices and ISO 8601 timestamps where applicable, and AI-powered insights for enhanced user experience.',
         icon: FiGlobe,
         color: '#6366F1',
         website: 'https://opticalautomation.com'
@@ -181,8 +181,8 @@ const tabCategories = [
         id: 'mern-optical-automation',
         title: 'Optical Automation',
         category: 'Web & Mobile Suite',
-        description: 'MERN Stack and SwiftUI application featuring Megamenu navigation, SEO optimized metadata-driven content, SOC2 Type II and ISO 8601 compliant metatags, and AI-powered insights.',
-        detailedDescription: 'Optical Automation is a comprehensive Web & Mobile Suite built with MERN Stack and SwiftUI. Features include an advanced Megamenu navigation system, SEO optimized pages with metadata-driven content management, SOC2 Type II and ISO 8601 compliant metatags for enterprise security, and AI-powered insights for enhanced user experience.',
+        description: 'MERN Stack and SwiftUI application featuring Megamenu navigation, SEO optimized metadata-driven content, structured metadata and security-minded defaults, and AI-powered insights.',
+        detailedDescription: 'Optical Automation is a comprehensive Web & Mobile Suite built with MERN Stack and SwiftUI. Features include an advanced Megamenu navigation system, SEO optimized pages with metadata-driven content management, security-conscious practices and ISO 8601 timestamps where applicable, and AI-powered insights for enhanced user experience.',
         icon: FiGlobe,
         color: '#68A063',
         website: 'https://opticalautomation.com'

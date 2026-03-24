@@ -12,12 +12,20 @@ export async function generateMetadata({ params }) {
     const { slug } = await params;
     const software = softwareData[slug];
 
+    const slugPath = `/deskview/software/${slug}`;
+
     if (!software) {
-        return generatePageMetadata('deskview', 'Software not found');
+        return generatePageMetadata('deskview', 'Software not found', null, [], slugPath);
     }
 
     return {
-        ...generatePageMetadata('deskview', `${software.title} - ${software.category}`),
+        ...generatePageMetadata(
+            'deskview',
+            `${software.title} - ${software.category}`,
+            software.description,
+            [],
+            slugPath
+        ),
         title: `${software.title} | Optical Automation`,
         description: software.description
     };

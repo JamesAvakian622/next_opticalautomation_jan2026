@@ -1,13 +1,16 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import { resolveTenant } from './lib/resolve-tenant.js';
+import { hasClerkPublishableKey, validateClerkEnvForProduction } from './lib/clerk-env.js';
 
-// ONLY these routes are accessible without authentication
+// Only these routes skip auth.protect() (keep this list intentional and small).
 const isPublicRoute = createRouteMatcher([
     '/login(.*)',
     '/register(.*)',
     '/sign-in(.*)',
     '/sign-up(.*)',
+    '/forgot-password(.*)',
+    '/reset-password(.*)',
     '/api/auth/(.*)'
 ]);
 
@@ -28,8 +31,8 @@ function plainProxy(request) {
     return applyTenantHeaders(request);
 }
 
-const hasClerkKey = typeof process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY === 'string' &&
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.length > 0;
+validateClerkEnvForProduction();
+const hasClerkKey = hasClerkPublishableKey();
 
 const proxy = hasClerkKey
     ? clerkMiddleware(async (auth, request) => {

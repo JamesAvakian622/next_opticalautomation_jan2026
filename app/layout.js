@@ -2,10 +2,10 @@ import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import ClientLayout from './ClientLayout';
 import ClientLayoutNoClerk from './ClientLayoutNoClerk';
-import ForceSignOutOnFirstLoad from './ForceSignOutOnFirstLoad';
 import RouteJsonLd from './RouteJsonLd';
 import ClerkLayoutErrorBoundary from '@/components/ClerkLayoutErrorBoundary';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { hasClerkPublishableKey, validateClerkEnvForProduction } from '@/lib/clerk-env';
 import {
     generatePageMetadata,
     generateOrganizationJsonLd,
@@ -29,11 +29,14 @@ export const viewport = {
 };
 
 export default function RootLayout({ children }) {
+    validateClerkEnvForProduction();
+
     const organizationJsonLd = generateOrganizationJsonLd();
     const websiteJsonLd = generateWebsiteJsonLd();
     const professionalServiceJsonLd = generateLocalBusinessJsonLd();
     const softwareAppJsonLd = generateSoftwareApplicationJsonLd();
     const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+    const hasClerk = hasClerkPublishableKey();
 
     return (
         <html lang="en" className={inter.variable}>
@@ -41,7 +44,6 @@ export default function RootLayout({ children }) {
                 <link rel="icon" href="/opauto.ico" type="image/x-icon" />
                 <link rel="icon" href="/opauto.png" type="image/png" />
                 <link rel="apple-touch-icon" href="/opauto.png" />
-                <link rel="canonical" href="https://www.OpticalAutomation.com" />
             </head>
             <body>
                 <script
@@ -61,9 +63,8 @@ export default function RootLayout({ children }) {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppJsonLd) }}
                 />
 
-                {clerkPublishableKey ? (
+                {hasClerk ? (
                     <ClerkProvider publishableKey={clerkPublishableKey}>
-                        <ForceSignOutOnFirstLoad />
                         <RouteJsonLd />
                         <ClerkLayoutErrorBoundary fallbackChildren={children}>
                             <ClientLayout>{children}</ClientLayout>

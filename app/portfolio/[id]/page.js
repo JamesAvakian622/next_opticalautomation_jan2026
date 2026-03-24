@@ -1,4 +1,5 @@
 import ProjectDetailPage from './ProjectDetailPage';
+import { generatePageMetadata } from '@/lib/metadata';
 
 // Required for static export - pre-render all portfolio project pages
 export async function generateStaticParams() {
@@ -27,6 +28,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
+    const { id } = await params;
     const projectTitles = {
         'e-commerce-platform': 'E-Commerce Platform',
         'task-management': 'Task Management App',
@@ -50,11 +52,11 @@ export async function generateMetadata({ params }) {
         'restaurant-pos': 'Restaurant POS'
     };
 
-    const title = projectTitles[params.id] || 'Project Details';
+    const title = projectTitles[id] || 'Project Details';
+    const desc = `Learn more about our ${title} project - features, technology stack, and live demo.`;
 
     return {
-        title: `${title} | Portfolio | Optical Automation`,
-        description: `Learn more about our ${title} project - features, technology stack, and live demo.`
+        ...generatePageMetadata('portfolio', `${title} | Portfolio | Optical Automation`, desc, [], `/portfolio/${id}`)
     };
 }
 

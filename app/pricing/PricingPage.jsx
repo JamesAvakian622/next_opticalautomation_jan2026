@@ -547,12 +547,12 @@ export default function PricingPage() {
         additionalProperty: [
             {
                 '@type': 'PropertyValue',
-                name: 'SOC2 Compliance',
-                value: siteConfig.compliance.soc2Extended
+                name: 'Security approach',
+                value: siteConfig.compliance.securityApproachExtended
             },
             {
                 '@type': 'PropertyValue',
-                name: 'ISO 8601 Compliance',
+                name: 'ISO 8601 date and time format',
                 value: siteConfig.compliance.iso8601
             }
         ]
@@ -765,8 +765,8 @@ export default function PricingPage() {
                                 <ServiceIcon>
                                     <FiShield />
                                 </ServiceIcon>
-                                <ServiceTitle>SOC2 Type II & ISO 8601 Compliance</ServiceTitle>
-                                <ServiceDesc>SOC2 Type II and ISO 8601 compliance applied to every application</ServiceDesc>
+                                <ServiceTitle>Security practices & ISO 8601 dates</ServiceTitle>
+                                <ServiceDesc>Authentication, access control, encryption in transit, and ISO 8601 timestamps where applicable — without claiming third-party SOC 2 Type II or CASA certification unless we publish it.</ServiceDesc>
                             </ServiceItem>
                         </ServicesGrid>
                     </ServicesSection>

@@ -1,30 +1,33 @@
 #!/bin/bash
-# Script to add Clerk environment variables to Vercel
+# Safe Clerk env setup for Vercel.
+# Requires:
+#   CLERK_PROD_PUBLISHABLE_KEY=pk_live_...
+#   CLERK_PROD_SECRET_KEY=sk_live_...
 
-echo "Adding Clerk environment variables to Vercel..."
+set -euo pipefail
 
-vercel env add NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY production preview development << EOF
-pk_test_dmFsaWQtbWFsYW11dGUtODEuY2xlcmsuYWNjb3VudHMuZGV2JA
-EOF
+if [[ -z "${CLERK_PROD_PUBLISHABLE_KEY:-}" || -z "${CLERK_PROD_SECRET_KEY:-}" ]]; then
+  echo "Missing required env vars."
+  echo "Set CLERK_PROD_PUBLISHABLE_KEY (pk_live_...) and CLERK_PROD_SECRET_KEY (sk_live_...)."
+  exit 1
+fi
 
-vercel env add CLERK_SECRET_KEY production preview development << EOF
-sk_test_aUbMi8kgGMu0YUM40wpjAhOu8OCBjAQJAvrlEtc31c
-EOF
+if [[ "${CLERK_PROD_PUBLISHABLE_KEY}" != pk_live_* || "${CLERK_PROD_SECRET_KEY}" != sk_live_* ]]; then
+  echo "Production keys must be live keys (pk_live_... / sk_live_...)."
+  exit 1
+fi
 
-vercel env add NEXT_PUBLIC_CLERK_SIGN_IN_URL production preview development << EOF
-/login
-EOF
+echo "Setting Clerk PRODUCTION env vars in Vercel..."
 
-vercel env add NEXT_PUBLIC_CLERK_SIGN_UP_URL production preview development << EOF
-/register
-EOF
+vercel env rm NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY production --yes >/dev/null 2>&1 || true
+vercel env rm CLERK_SECRET_KEY production --yes >/dev/null 2>&1 || true
 
-vercel env add NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL production preview development << EOF
-/select-software
-EOF
+vercel env add NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY production <<< "${CLERK_PROD_PUBLISHABLE_KEY}"
+vercel env add CLERK_SECRET_KEY production <<< "${CLERK_PROD_SECRET_KEY}"
 
-vercel env add NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL production preview development << EOF
-/select-software
-EOF
+vercel env add NEXT_PUBLIC_CLERK_SIGN_IN_URL production <<< "/sign-in"
+vercel env add NEXT_PUBLIC_CLERK_SIGN_UP_URL production <<< "/sign-up"
+vercel env add NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL production <<< "/"
+vercel env add NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL production <<< "/"
 
-echo "Done! Now redeploy with: vercel --prod"
+echo "Done. Deploy production with: vercel --prod"

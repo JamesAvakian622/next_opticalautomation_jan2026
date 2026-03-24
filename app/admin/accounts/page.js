@@ -1,8 +1,12 @@
 import AdminAccountsPage from './AdminAccountsPage';
+import { generatePageMetadata } from '@/lib/metadata';
 
 export const metadata = {
-    title: 'Admin Accounts | Optical Automation',
-    description: 'Manage platform users and subscriptions.',
+    ...generatePageMetadata(
+        'admin-accounts',
+        'Admin Accounts | Optical Automation',
+        'Manage platform users and subscriptions.'
+    )
 };
 
 export default function Page() {

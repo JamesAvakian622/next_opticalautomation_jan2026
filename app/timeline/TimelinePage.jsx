@@ -687,7 +687,7 @@ export default function TimelinePage() {
                         >
                             <h4>Compliance Standards</h4>
                             <ul>
-                                <li><strong>SOC2 Type II</strong> — 45,000+ certified companies</li>
+                                <li><strong>SOC 2 examinations</strong> — Widely used trust framework for service providers</li>
                                 <li><strong>ISO 8601</strong> — Universal date/time standard</li>
                                 <li><strong>GDPR</strong> — 1.2 million+ compliant sites</li>
                                 <li><strong>WCAG</strong> — Growing accessibility adoption</li>
@@ -732,7 +732,7 @@ export default function TimelinePage() {
                         <h3>The Digital Economy is Growing Exponentially</h3>
                         <p>
                             With over 28 million developers creating solutions using modern frameworks like Next.js, React, and SwiftUI,
-                            the software industry continues to expand. SOC2 Type II compliance and ISO 8601 standards ensure security and
+                            the software industry continues to expand. Strong security practices and standards such as ISO 8601 support
                             interoperability across global platforms, while SEO optimization drives discoverability for billions of users.
                         </p>
                     </StatHighlight>

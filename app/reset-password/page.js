@@ -1,8 +1,14 @@
 import ResetPasswordPage from './ResetPasswordPage';
+import { generatePageMetadata } from '@/lib/metadata';
 
 export const metadata = {
-    title: 'Reset Password | Optical Automation',
-    description: 'Set a new password for your Optical Automation account.',
+    ...generatePageMetadata(
+        'login',
+        'Set new password | Optical Automation',
+        'Set a new password for your Optical Automation account.',
+        ['password reset', 'new password'],
+        '/reset-password'
+    )
 };
 
 export default function Page() {
