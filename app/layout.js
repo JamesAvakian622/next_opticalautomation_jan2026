@@ -66,7 +66,6 @@ export default function RootLayout({ children }) {
 
                 {hasClerk ? (
                     <ClerkProvider publishableKey={clerkPublishableKey}>
-                        <ForceSignOutOnFirstLoad />
                         <RouteJsonLd />
                         <ClerkLayoutErrorBoundary fallbackChildren={children}>
                             <ClientLayout>{children}</ClientLayout>

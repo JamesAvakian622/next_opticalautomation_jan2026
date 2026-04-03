@@ -8,6 +8,14 @@ import { FiArrowLeft, FiSmartphone, FiStar, FiCheck, FiMonitor, FiLayout, FiGrid
 
 export default function MyDeskViewAppPage() {
   const [fullScreenIndex, setFullScreenIndex] = useState(null);
+  const [activeTab, setActiveTab] = useState('websites');
+  const [selectedWebsiteImage, setSelectedWebsiteImage] = useState(null);
+
+  const websiteScreens = [
+    { title: 'Desktop View', image: '/desk_view0.png' },
+    { title: 'Dashboard', image: '/desk_view1.png' }
+  ];
+
   const screens = [
     {
       title: 'Dashboard',
@@ -188,6 +196,70 @@ export default function MyDeskViewAppPage() {
         </HeroContent>
       </HeroSection>
 
+      <TabsSection>
+        <TabsContainer>
+          <TabButton
+            $active={activeTab === 'websites'}
+            onClick={() => setActiveTab('websites')}
+          >
+            Websites
+          </TabButton>
+          <TabButton
+            $active={activeTab === 'ios'}
+            onClick={() => setActiveTab('ios')}
+          >
+            iOS
+          </TabButton>
+          <TabButton
+            $active={activeTab === 'android'}
+            onClick={() => setActiveTab('android')}
+          >
+            Android
+          </TabButton>
+        </TabsContainer>
+      </TabsSection>
+
+      {activeTab === 'websites' && (
+        <ScreensSection>
+          <SectionTitle
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            Website
+          </SectionTitle>
+          
+          <FullSizeImageContainer>
+            <FullSizeImage src="/desk_view0.png" alt="Desktop View website screenshot" />
+            <ImageCaption>Desktop View</ImageCaption>
+          </FullSizeImageContainer>
+
+          <WebsiteDescription>
+            <DescriptionParagraph>
+              MyDeskView serves as your comprehensive dashboard for managing all aspects of your daily workflow. This powerful application brings together your most important information, tasks, and tools in one centralized location, allowing you to maintain focus and productivity throughout your day. With its intuitive interface and customizable widgets, you can tailor your workspace to match your unique needs and preferences.
+            </DescriptionParagraph>
+            <DescriptionParagraph>
+              The application features real-time updates and notifications, ensuring you never miss important deadlines or appointments. Whether you're tracking project milestones, monitoring team progress, or managing your personal schedule, MyDeskView provides the visibility and control you need to stay on top of everything. The dashboard adapts to your workflow, learning from your usage patterns to surface the most relevant information when you need it most.
+            </DescriptionParagraph>
+            <DescriptionParagraph>
+              Software integrated inside MyDeskView allows users enjoy built-in apps creating a practical ecosystem for your digital workspace. From calendar synchronization to task management integration, the platform works harmoniously with the applications you already use. This eliminates the need to switch between multiple windows and applications, streamlining your workflow and reducing context-switching overhead.
+            </DescriptionParagraph>
+            <DescriptionParagraph>
+              Built with performance and reliability in mind, MyDeskView ensures your data is always accessible and secure. The application employs industry-standard encryption and follows best practices for data protection, giving you peace of mind while you focus on what matters most. Whether you're working from the office, home, or on the go, MyDeskView provides a consistent and reliable experience across all your devices.
+            </DescriptionParagraph>
+            <DescriptionParagraph>
+              Built with a long time waiting for technology, since 1983 we have been using computers and always wanted multi-tasking. Back then we always wanted windows and slowly we got them. Now fifty years later we have so many websites windows, photos, movies, and youtube videos we need organization. We also have apps and add an address here and an Internet there and are scattered. Here comes the right stuff, MyDeskView and the MyPersonalOrganizer.com One window has a hundred integrated app applications with co-owned shared database we also have app applications. In the near future have have a MyPersonalOrganizer – Photo Albums and YouTube videos. Also MyBusinessOrganizer and more. Visit MyDeskView to see what is coming up!
+            </DescriptionParagraph>
+          </WebsiteDescription>
+
+          <FullSizeImageContainer>
+            <FullSizeImage src="/desk_view1.png" alt="Dashboard website screenshot" />
+            <ImageCaption>Dashboard</ImageCaption>
+          </FullSizeImageContainer>
+        </ScreensSection>
+      )}
+
+      {(activeTab === 'ios' || activeTab === 'android') && (
       <ScreensSection>
         <SectionTitle
           initial={{ opacity: 0, y: 20 }}
@@ -248,6 +320,7 @@ export default function MyDeskViewAppPage() {
           )}
         </AnimatePresence>
       </ScreensSection>
+      )}
 
       <FeaturesSection>
         <SectionTitle
@@ -275,8 +348,8 @@ export default function MyDeskViewAppPage() {
       </FeaturesSection>
 
       <CTASection>
-        <CTATitle>Built with SwiftUI</CTATitle>
-        <CTADesc>Native iOS experience with premium design and performance.</CTADesc>
+        <CTATitle>Built with React.js, Next.js, and MongoDB</CTATitle>
+        <CTADesc>A shared database website and mobile app system.</CTADesc>
         <CTAButton href="/app-portfolio">
           <FiArrowLeft /> Back to Portfolio
         </CTAButton>
@@ -650,6 +723,81 @@ const CTAButton = styled(Link)`
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(14, 165, 233, 0.3);
   }
+`;
+
+const TabsSection = styled.section`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 20px;
+`;
+
+const TabsContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const TabButton = styled.button`
+  padding: 12px 32px;
+  border-radius: 12px;
+  border: 1px solid ${({ $active, theme }) => $active ? '#0EA5E9' : theme.colors.border};
+  background: ${({ $active, theme }) => $active
+    ? 'linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(14, 165, 233, 0.15))'
+    : theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)'};
+  color: ${({ $active, theme }) => $active ? '#0EA5E9' : theme.colors.textSecondary};
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #0EA5E9;
+    color: #0EA5E9;
+    background: rgba(14, 165, 233, 0.12);
+    transform: translateY(-1px);
+  }
+`;
+
+const WebsiteDescription = styled.div`
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+`;
+
+const DescriptionParagraph = styled.p`
+  font-size: 1rem;
+  line-height: 1.8;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  margin-bottom: 20px;
+  text-align: left;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const FullSizeImageContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+`;
+
+const FullSizeImage = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  box-shadow: 0 12px 40px ${({ theme }) => theme.colors.shadow};
+  display: block;
+`;
+
+const ImageCaption = styled.div`
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
+  margin-top: 12px;
 `;
 
 // ── Mock Phone UI Components ──────────────────

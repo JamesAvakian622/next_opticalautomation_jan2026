@@ -36,9 +36,21 @@ const hasClerkKey = hasClerkPublishableKey();
 
 const proxy = hasClerkKey
     ? clerkMiddleware(async (auth, request) => {
+        const url = new URL(request.url);
+        
         // Protect ALL routes except public ones
         if (!isPublicRoute(request)) {
             await auth.protect();
+            
+            // After successful auth, set a cookie to allow through ClientLayout once
+            const response = applyTenantHeaders(request);
+            response.cookies.set('opauto_active_session', '1', {
+                path: '/',
+                maxAge: 300, // 5 minutes
+                httpOnly: false,
+                sameSite: 'lax'
+            });
+            return response;
         }
         return applyTenantHeaders(request);
     })

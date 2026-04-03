@@ -22,31 +22,33 @@ export default function ClientLayout({ children }) {
     const router = useRouter();
     const pathname = usePathname();
 
-    // Redirect to login if not authenticated
+    // Redirect to login if not authenticated, and force sign-out on every visit
     useEffect(() => {
-        if (!isLoaded) return; // Wait for Clerk to load
+        if (!isLoaded) return;
         
         const publicPaths = ['/login', '/register', '/sign-in', '/sign-up'];
         const isPublicPath = publicPaths.some(path => pathname?.startsWith(path));
         
         if (!isSignedIn && !isPublicPath) {
             router.push('/login');
+            return;
+        }
+
+        // Force sign-out on every visit unless user just signed in
+        if (isSignedIn && !isPublicPath) {
+            const allowed = document.cookie.includes('opauto_active_session=1');
+            console.log('[ClientLayout] Signed in, cookie check:', allowed, 'cookies:', document.cookie);
+            if (allowed) {
+                document.cookie = 'opauto_active_session=; path=/; max-age=0';
+                console.log('[ClientLayout] Cookie found, allowing through');
+            } else {
+                console.log('[ClientLayout] No cookie, forcing sign-out');
+                signOut({ redirectUrl: '/sign-in' });
+            }
         }
     }, [isSignedIn, isLoaded, pathname, router]);
 
-    // Sign out on page leave
-    useEffect(() => {
-        if (!isSignedIn || !signOut) return;
-        const handleLeave = () => {
-            signOut();
-        };
-        window.addEventListener('beforeunload', handleLeave);
-        window.addEventListener('pagehide', handleLeave);
-        return () => {
-            window.removeEventListener('beforeunload', handleLeave);
-            window.removeEventListener('pagehide', handleLeave);
-        };
-    }, [isSignedIn, signOut]);
+
 
     // Show nothing while checking authentication
     if (!isLoaded) {

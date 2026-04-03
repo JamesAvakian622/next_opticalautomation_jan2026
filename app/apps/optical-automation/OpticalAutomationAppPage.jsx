@@ -15,7 +15,12 @@ export default function OpticalAutomationAppPage() {
     { title: 'Portfolio', image: '/website_tech_times.png' },
     { title: 'Technology', image: '/agentic_ai_diagram.png' },
     { title: 'Product Videos', image: '/modern_office_discussion.png' },
-    { title: 'Site Map', image: '/creative_workspace_monitor.png' }
+    { title: 'Site Map', image: '/creative_workspace_monitor.png' },
+    { title: 'Menu Bar', image: '/menu_bar.png' },
+    { title: 'Websites', image: '/websites.png' },
+    { title: 'Mobile Apps', image: '/mobile_apps.png' },
+    { title: 'Access', image: '/access.png' },
+    { title: 'Pricing', image: '/pricing.png' }
   ];
 
   const screens = [
@@ -44,7 +49,7 @@ export default function OpticalAutomationAppPage() {
             <FiCreditCard style={{ color: '#ec4899' }} />
             <div><strong>Subscribe</strong><br /><small>Pro $9.99/mo</small></div>
           </MockCard>
-          <MockTabBar active={0} tabs={['Home', 'DeskView', 'Portfolio', 'Subscribe', 'More']} />
+          <MockTabBar $active={0} tabs={['Home', 'DeskView', 'Portfolio', 'Subscribe', 'More']} />
         </>
       )
     },
@@ -57,7 +62,7 @@ export default function OpticalAutomationAppPage() {
             <span style={{ fontSize: '0.7rem', opacity: 0.6 }}>Portfolio</span>
           </MockNav>
           <MockSectionTitle>📁 Web Portfolio</MockSectionTitle>
-          <MockTabs tabs={['Next.JS', 'MERN', 'SwiftUI', 'Android']} active={0} />
+          <MockTabs tabs={['Next.JS', 'MERN', 'SwiftUI', 'Android']} $active={0} />
           <MockProjectCard color="#6366f1">
             <strong>Optical Automation</strong>
             <small>Next.js • Full Stack</small>
@@ -70,7 +75,7 @@ export default function OpticalAutomationAppPage() {
             <strong>Learn Skills 365</strong>
             <small>Next.js • Education</small>
           </MockProjectCard>
-          <MockTabBar active={2} tabs={['Home', 'DeskView', 'Portfolio', 'Subscribe', 'More']} />
+          <MockTabBar $active={2} tabs={['Home', 'DeskView', 'Portfolio', 'Subscribe', 'More']} />
         </>
       )
     },
@@ -100,7 +105,7 @@ export default function OpticalAutomationAppPage() {
               <li><FiCheck size={12} /> Priority Support</li>
             </ul>
           </MockPlanCard>
-          <MockTabBar active={3} tabs={['Home', 'DeskView', 'Portfolio', 'Subscribe', 'More']} />
+          <MockTabBar $active={3} tabs={['Home', 'DeskView', 'Portfolio', 'Subscribe', 'More']} />
         </>
       )
     },
@@ -130,7 +135,7 @@ export default function OpticalAutomationAppPage() {
             <small>Version 1.0 • © 2026</small>
             <small>Optical Automation, LLC</small>
           </MockAbout>
-          <MockTabBar active={4} tabs={['Home', 'DeskView', 'Portfolio', 'Subscribe', 'More']} />
+          <MockTabBar $active={4} tabs={['Home', 'DeskView', 'Portfolio', 'Subscribe', 'More']} />
         </>
       )
     }
@@ -387,6 +392,24 @@ const WebsiteCard = styled(motion.div)`
   background: ${({ theme }) => theme.mode === 'dark' ? '#141427' : '#ffffff'};
   box-shadow: 0 12px 30px ${({ theme }) => theme.colors.shadow};
   cursor: zoom-in;
+  position: relative;
+
+  &:hover::after {
+    content: 'Click to Open / Click to Close Image';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+  }
 `;
 
 const WebsiteImage = styled.img`
@@ -613,10 +636,10 @@ const MockCard = styled.div`
   svg { font-size: 1.1rem; }
 `;
 
-const MockTabBar = ({ tabs, active }) => (
+const MockTabBar = ({ tabs, $active }) => (
   <MockTabBarContainer>
     {tabs.map((t, i) => (
-      <MockTab key={t} $active={i === active}>{t}</MockTab>
+      <MockTab key={t} $active={i === $active}>{t}</MockTab>
     ))}
   </MockTabBarContainer>
 );
@@ -646,10 +669,10 @@ const MockSectionTitle = styled.div`
   color: ${({ theme }) => theme.colors.text};
 `;
 
-const MockTabs = ({ tabs, active }) => (
+const MockTabs = ({ tabs, $active }) => (
   <MockTabsContainer>
     {tabs.map((t, i) => (
-      <MockFilterTab key={t} $active={i === active}>{t}</MockFilterTab>
+      <MockFilterTab key={t} $active={i === $active}>{t}</MockFilterTab>
     ))}
   </MockTabsContainer>
 );
